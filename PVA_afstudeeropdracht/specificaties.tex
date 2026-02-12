@@ -1,0 +1,31 @@
+\section{Specificaties}
+
+
+
+
+\begin{table}[htbp]
+    \centering
+    \caption{Specificaties en Eisen}
+    \label{tab:specificaties}
+    \begin{tabular}{|p{4cm}|p{10cm}|}
+        \hline
+        \textbf{Specificatie} & \textbf{Onderbouwing / Eis} \\
+        \hline \hline
+        Snelheid & Het systeem moet snelheden tot minstens 80 km/u accuraat registreren. Dit dekt de topsnelheid in de paardensport inclusief een veiligheidsmarge van 10\%. \\
+        \hline
+        Nauwkeurigheid (Open Veld) & De toevoeging van sensor fusion mag de baseline RTK-precisie (typisch $<5$ cm) niet negatief beïnvloeden. \\
+        \hline
+        Dimensionaliteit & Kijkend naar de projectafbakening beperkt de analyse en positiebepaling zich strikt tot het 2D vlak (Horizontale $X, Y$ positie en Heading). \\
+        \hline
+        Foutdetectie & Het systeem moet 'False Fixed' oplossingen detecteren. Een afwijking tussen de GNSS-meting en de IMU-voorspelling van meer dan 15 cm (binnen één tijdstap) moet gemarkeerd worden als onbetrouwbaar. Idealiter in de enkele centimeters. \\
+        \hline
+        Update Frequentie & Het huidige systeemstandaard bedraagt 500 ms waarbij het gewenst is van het systeem dat de output minimaal binnen deze tijd moet plaatsvinden. \\
+        \hline
+        Verwerkingssnelheid & De dataverwerking moet real-time plaatsvinden. De berekeningstijd per stap moet korter zijn dan het sample interval om vertraging te voorkomen. \\
+        \hline
+        Communicatie Protocol & Output zal gelijk moeten zijn aan het X2 Link protocol van MYLAPS. \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage

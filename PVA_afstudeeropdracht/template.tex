@@ -1,0 +1,47 @@
+\documentclass[10pt,a4paper, twoside]{article} %type document
+\usepackage{graphicx, float}                  %voor images
+\graphicspath{{images/}}                      %locatie images
+\usepackage{titlesec}              
+\usepackage{wrapfig}
+\usepackage{listings}
+\usepackage{comment}
+\usepackage{hyperref} 
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}  
+\usepackage{textcomp}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=4.5cm]{geometry} %borders
+\usepackage{booktabs}  % Voor mooie lijnen in de tabel
+\usepackage[table]{xcolor}  % maakt mogelijk om kleur in tabellen toe te voegen
+\definecolor{mygreen}{rgb}{0.0, 0.5, 0.0}  % Definieer de kleur groen
+\usepackage{url}  %om verwijzingen te maken in bronnen
+\usepackage[utf8]{inputenc}
+\usepackage[backend=biber]{biblatex}  % bron type
+\usepackage{pdfpages}   % 
+\usepackage{gensymb}
+\usepackage{amsmath}
+\addbibresource{references.bib}       %locatie van bronnen
+
+%noindent
+\setlength\parindent{0pt}
+
+%borders
+\setlength{\headheight}{79.91502pt}   
+\titleformat{\section}[block]{\Large\bfseries\filcenter}{\thesection.}{.5em}{}
+\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{.5em}{}
+
+% Logo above page
+\pagestyle{fancy}
+
+%logo's boven 
+\fancyhf{}
+\fancyhead[LE,RO]{\includegraphics[width=.4\textwidth]{logos/HvA Internationaal.jpg}}
+\fancyfoot[LE,RO]{\thepage}
+\setlength{\headsep}{20pt}
+
+% Convert to Dutch
+\renewcommand{\contentsname}{Inhoudsopgave}
+\renewcommand{\refname}{Bronnen}
+\renewcommand{\figurename}{Figuur}
+\renewcommand{\tablename}{Tabel}
+

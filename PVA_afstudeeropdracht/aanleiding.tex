@@ -1,0 +1,58 @@
+\section{Projectaanleiding}
+
+MYLAPS is een wereldwijde marktleider in het ontwikkelen van automatische tijdwaarnemingsapparatuur en live analyse voor sportevenementen. Oorspronkelijk lag de focus op het vastleggen van de finishtijd, maar vanwege de verschuiving in de marktbehoefte wordt real-time tracking steeds meer benadrukt. \\
+
+Specifiek voor de paardensport (horse racing) heeft MYLAPS momenteel een proof of concept ontwikkeld. Dit systeem maakt gebruik van de eerder beschreven RKT GNSS-technologie en is in theorie in staat om posities tot op enkele centimeters nauwkeurig te bepalen. Deze nauwkeurigheid moet echter gegarandeerd worden en eventueel opgevangen worden bij foutieve of missende data. \\
+
+Het huidige systeem vertrouwt momenteel volledig op de meldingen van de GNSS chip zelf. In de praktijk is echter niet met 100\% zekerheid te zeggen of deze data daadwerkelijk klopt. Verschillende factoren kunnen namelijk invloed hebben op de data. Kijk bijvoorbeeld naar snelle bewegingen van het paard of tijdelijk signaalverlies waardoor er gaten in de data ontstaan. \\
+
+De wens vanuit MYLAPS is daarom om een validatie mechanisme te ontwikkelen dat de RTK GNSS metingen controleert en aanvult. Het doel is om Sensor Fusion toe te passen, waarbij de positiemetingen van de GNSS module worden gecombineerd met data van andere sensoren, met name een Inertial Measurement Unit (IMU). Door de bewegingsdata (versnelling en rotatie) van het paard te koppelen aan de positiedata, moet het inzichtelijk worden wanneer de GNSS data afwijkt of onbetrouwbaar is. Dit biedt bovendien de mogelijkheid om tijdens signaalverlies de positie te blijven schatten. \\
+
+In dit project wordt onderzocht hoe een IMU, en eventueel aanvullende sensoren, geïntegreerd kunnen worden om de dataintegriteit van het systeem te garanderen.
+
+
+
+\newpage
+
+
+\section{Probleemdefinitie}
+In dit hoofdstuk worden de kernproblemen. de doelstellingen van het project en de centrale onderzoeksvragen uiteengezet. Deze vormen samen het fundament voor het verdere ontwerp en onderzoeksproces.
+
+\subsection{Probleemstelling}
+Binnen de topsport is professionele analyse een essentieel onderdeel. Hierbij is het continue bepalen van de positie met hoge nauwkeurigheid noodzakelijk. Om een accuraat beeld te geven, is een precisie tot op enkele centimeters vereist. Om dit te bereiken beschikt MYLAPS momenteel over een Proof of Concept die gebruikmaakt van RTK GNSS. In ideale, open omgevingen voldoet deze techniek aan de gestelde eisen. In de praktijk vinden races echter vaak plaats in omgevingen met diverse obstakels, zoals tribunes, bomen en gebouwen. Hierbij wordt voornamelijk gekeken naar de paardensport. \\
+
+Zoals eerder beschreven in de aanleiding, is de betrouwbaarheid van het huidige systeem in deze omgevingen onvoldoende verzekerd. Hoewel er metingen plaatsvinden die op centimeter nauwkeurig zijn, is het onduidelijk of deze data daadwerkelijk klopt. Door signaalblokkades en reflecties (multipath) kunnen verschillende faalmechanismen ontstaan die de robuustheid van het systeem aantasten. Dit resulteert in signaalverlies of foutieve metingen. Door reflecties kan het systeem bijvoorbeeld onterecht concluderen dat de positie accuraat is (een zogeheten 'False Fixed' oplossing), terwijl dit niet het geval is. \\
+
+Het kernprobleem voor MYLAPS is dat er momenteel geen mechanisme is om deze fouten autonoom te detecteren of te corrigeren. De ontvanger vertrouwt volledig op de binnenkomende satellietdata. Doordat er geen extern validatiemiddel aanwezig is, kan de data integriteit niet worden gegarandeerd.
+
+
+\subsection{Doelstelling}
+Het doel van dit project is het realiseren van een robuuste methode voor positiebepaling die de betrouwbaarheid van het huidige trackingsysteem garandeert. Omdat de huidige techniek kwetsbaar kan zijn in omgevingen met obstakels, richt dit project zich op het ontwikkelen van een systeem dat gebruikmaakt van sensor fusion. Hierbij wordt de bestaande satellietdata gecombineerd met gegevens van de IMU om de continuïteit van de metingen te garanderen. Aan de ene kant zal het project een onderzoekscomponent omvatten, waarin bepaald wordt hoe sensor data gecombineerd kan worden en welke limitaties zich hierin bevinden. Anderzijds zal het een ontwerpopdracht betreffen waarbij deze inzichten worden gebruikt in een functioneel ontwerp. Dit systeem moet in staat zijn om autonoom de integriteit van de data te controleren, zodat signaalverstoringen (zoals reflecties) worden herkend en signaalverliezen worden opgevangen. \\
+
+Het eindresultaat is een gevalideerd 'Proof of Concept' dat aantoont dat de nauwkeurigheid en stabiliteit van de tracking hiermee verbeterd is. Op lange termijn wordt er naar gestreefd dat deze methode geïmplementeerd kan worden in de toekomstige generatie hardware van MYLAPS.
+
+
+\subsection{Vraagstelling}
+Uit de context en doelstellingen van MYLAPS is het duidelijk dat de betrouwbaarheid van de positiebepaling naar voren komt. Hierom zal deze centrale hoofdvraag gedurende het ontwerptraject centraal staan: 
+
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, title=Hoofdvraag]
+\textit{"Hoe kan een sensor fusion systeem, waarbij RTK GNSS en IMU centraal staan, worden geïmplementeerd om de betrouwbaarheid van de positiebepaling te waarborgen?"}
+\end{tcolorbox}
+
+Om deze hoofdvraag te beantwoorden en het ontwerptraject te structureren, is het onderzoek opgesplitst in specifieke deelonderwerpen. Hiervoor zijn de volgende deelvragen geformuleerd:
+
+\begin{itemize}
+    \item Welke specifieke omgevingsfactoren en obstakels in de paardensport veroorzaken de grootste verstoringen (zoals multipath en   signaalblokkades) in het huidige GNSS-signaal?
+    \item Welke sensor-fusion methodieken en filtertechnieken zijn, op basis van literatuuronderzoek, het meest geschikt om GNSS-fouten te corrigeren in een dynamische omgeving?
+    \item Hoe kunnen de specifieke bewegingspatronen van paarden en IMU-data worden ingezet om onterecht goedgekeurde data autonoom te detecteren?
+    \item Wat is de invloed van de sensorplaatsing en de toegestane vertraging op de betrouwbaarheid en verwerking van de positiedata?
+    \item In hoeverre verbetert het ontwikkelde prototype de data integriteit ten opzichte van het huidige systeem in een gecontroleerde testopstelling?
+\end{itemize}
+
+
+
+
+
+
+\newpage
