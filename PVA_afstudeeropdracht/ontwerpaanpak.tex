@@ -1,6 +1,39 @@
+% !TeX root = main.tex
+
 \section{Onderzoeksopzet}
+Op basis van de vastgelegde specificaties en instructies wordt in korte, logische stappen naar een werkend systeem toegewerkt. Eerst wordt de basis vastgelegd waarbij zowel het plan als de eisen centraal staan. Vervolgens worden keuzes onderbouwd door middel van theorie en literatuur. Daarna wordt zowel de haalbaarheid aangetoond en het ontwerp uitgewerkt tot een Proof of Concept. Deze zal dan ook stapsgewijs worden getest om het geheel te valideren. Door dit stappenplan aan te houden kan tijdig onduidelijkheden voorkomen worden.
+
+\subsection{Stappenplan}
+
+\begin{enumerate}
+    \item \textbf{Plan van aanpak afronden:} In deze fase wordt het plan van aanpak definitief gemaakt. Het doel (verbetering van nauwkeurigheid in ingewikkelde omgevingen) en de scope (bestaande hardware, 2D-analyse) worden verzekerd. 
+    \item \textbf{Specificaties en Validatiecriteria:} De eisen worden vertaald naar meetbare parameters. Hier worden de eisen en doelen uiteengezet om zo tot een toetsbare criteria te komen. Denk aan maximale afwijking, snelheid en verwerkingssnelheid.
+    \item \textbf{Theoretische verdieping:} Hierbij wordt gericht onderzoek naar literatuurstudie verricht. Denk hierbij aan foutieve invloeden op het GNSS signaal, implementaties van filters voor data (Kalman Filter) en eventuele extra sensoren. Vervolg keuzes zullen dan ook gebaseerd zijn op dit onderzoek. Hiernaast zal de werking van het huidige systeem duidelijk in kaart gebracht worden.
+    \item \textbf{Verkrijgen van data en praktijk testen:} Om verbeteringen in het systeem duidelijk aan te kunnen tonen zal in eerste instantie nulmetingen verricht worden. Denk hierbij aan ideale situaties (open veld), ingewikkelde omgevingen (veel objecten) en dynamische bewegingen. Hiermee worden de prestaties van het huidige systeem zo veel als mogelijk in kaart gebracht. 
+    \item \textbf{Ontwerp en prototype:} De werking van de IMU wordt hier gerealiseerd. Data wordt hieruit verkregen en gesynchroniseerd met de data van GNSS. Stapsgewijs wordt hier een filter voor opgebouwd om zo de voorspelling van de IMU en de correcties van de GNSS correct te combineren. Dit zal resulteren in een prototype waarbij zijn data met die van de nulmeting wordt vergeleken. 
+    \item \textbf{Optimalisatie en Tuning:} Wanneer de globale werking van het prototype gerealiseerd is, kan er nauwkeuriger gekeken worden naar het optimaliseren van het systeem. In deze fase wordt het Kalman Filter (of eventueel een ander filter) iteratief afgesteld. Hier worden de parameters gekalibreerd op basis van de afwijking van de GNSS ontvanger. Hiernaast zal gekeken worden naar het accuraat vaststellen van foute metingen.
+    \item \textbf{Validatie en Analyse:} het systeem zal uitgebreid getest worden in vergelijkbare situaties als tijdens de nulmetingen. Hierbij zal aangetoond worden dat het systeem een aanzienlijke nuttige bijdrage heeft gegeven aan het huidige systeem. 
+\end{enumerate}
+
+Kijkend naar het stappenplan zal de voortgang voornamelijk bepaald worden aan de hand van de verkregen data. Hierbij is stap vier een belangrijk beslismoment aangezien onbruikbare data een foutieve meetopstelling kan betekenen. Dit zal namelijk de basis vormen voor de rest van het project.
+
+\newpage
 
 
+\section{Validatie}
+Het doel van het valideren is om aan te tonen dat het systeem de positienauwkeurigheid verbetert ten opzichte van standalone GNSS.
+De validatie zal zich voornamelijk richten op de verwerking van data en de robuustheid van de software. Hardwarematige tests (extra sensoren) vallen buiten de scope, tenzij de tijd het toelaat.
+
+
+Afhankelijk van de tijd en eventuele toevoeging van andere sensoren zal er nog een hardwarematige validatie plaatsvinden.
+
+\subsection{Aanpak}
+De validatie vindt plaats door middel van veld testen gevolgd door data analyse. Verschillende datasets worden opgenomen in verschillende praktijkomstandigheden. De data wordt vervolgens door het algoritme gehaald om zo de resultaten te kunnen vergelijken met de ruwe data. Bij alle beproevingen wordt een bondig testrapport opgeleverd met opstelling, parameters en resultaten.
+
+\subsection{Beproevingen}
+Synchronisatie is cruciaal bij het combineren van de twee verschillende sensoren (IMU en GNSS). Er zal dan ook getoetst worden of de tijdstempels van de versnellingsdata en locatiedata voldoende gelijklopen om verwerkt te kunnen worden. Hiernaast zal normaliter de data live weergegeven worden waardoor de continuïteit van de data noodzakelijk is. Er wordt geverifieerd of er geen grote gaten aan data ontstaan die het filter kunnen verstoren. \\
+
+Om de nauwkeurigheid en robuustheid te controleren zal een vast traject doorlopen worden voor zowel ideale als niet ideale omstandigheden. Denk hierbij aan het testen in zowel een open veld als omgevingen met obstakels. Hierbij zal in ideale omstandigheden verwacht worden dat het systeem minimaal zo accuraat bedraagt als het originele systeem. Hiernaast zullen afwijkende resultaten gedetecteerd worden. 
 
 
 \newpage

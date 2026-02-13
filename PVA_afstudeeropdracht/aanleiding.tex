@@ -1,8 +1,10 @@
+% !TeX root = main.tex
+
 \section{Projectaanleiding}
 
 MYLAPS is een wereldwijde marktleider in het ontwikkelen van automatische tijdwaarnemingsapparatuur en live analyse voor sportevenementen. Oorspronkelijk lag de focus op het vastleggen van de finishtijd, maar vanwege de verschuiving in de marktbehoefte wordt real-time tracking steeds meer benadrukt. \\
 
-Specifiek voor de paardensport (horse racing) heeft MYLAPS momenteel een proof of concept ontwikkeld. Dit systeem maakt gebruik van de eerder beschreven RKT GNSS-technologie en is in theorie in staat om posities tot op enkele centimeters nauwkeurig te bepalen. Deze nauwkeurigheid moet echter gegarandeerd worden en eventueel opgevangen worden bij foutieve of missende data. \\
+Specifiek voor de paardensport (horse racing) heeft MYLAPS momenteel een proof of concept ontwikkeld. Dit systeem maakt gebruik van de eerder beschreven RTK GNSS-technologie en is in theorie in staat om posities tot op enkele centimeters nauwkeurig te bepalen. Deze nauwkeurigheid moet echter gegarandeerd worden en eventueel opgevangen worden bij foutieve of missende data. \\
 
 Het huidige systeem vertrouwt momenteel volledig op de meldingen van de GNSS chip zelf. In de praktijk is echter niet met 100\% zekerheid te zeggen of deze data daadwerkelijk klopt. Verschillende factoren kunnen namelijk invloed hebben op de data. Kijk bijvoorbeeld naar snelle bewegingen van het paard of tijdelijk signaalverlies waardoor er gaten in de data ontstaan. \\
 
@@ -16,7 +18,7 @@ In dit project wordt onderzocht hoe een IMU, en eventueel aanvullende sensoren, 
 
 
 \section{Probleemdefinitie}
-In dit hoofdstuk worden de kernproblemen. de doelstellingen van het project en de centrale onderzoeksvragen uiteengezet. Deze vormen samen het fundament voor het verdere ontwerp en onderzoeksproces.
+In dit hoofdstuk worden de kernproblemen, de doelstellingen van het project en de centrale onderzoeksvragen uiteengezet. Deze vormen samen het fundament voor het verdere ontwerp en onderzoeksproces.
 
 \subsection{Probleemstelling}
 Binnen de topsport is professionele analyse een essentieel onderdeel. Hierbij is het continue bepalen van de positie met hoge nauwkeurigheid noodzakelijk. Om een accuraat beeld te geven, is een precisie tot op enkele centimeters vereist. Om dit te bereiken beschikt MYLAPS momenteel over een Proof of Concept die gebruikmaakt van RTK GNSS. In ideale, open omgevingen voldoet deze techniek aan de gestelde eisen. In de praktijk vinden races echter vaak plaats in omgevingen met diverse obstakels, zoals tribunes, bomen en gebouwen. Hierbij wordt voornamelijk gekeken naar de paardensport. \\
