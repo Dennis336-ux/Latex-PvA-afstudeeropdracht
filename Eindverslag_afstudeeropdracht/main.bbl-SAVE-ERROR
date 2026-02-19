@@ -19,23 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
-    \entry{stmicro_asm330lhh}{manual}{}{}
-      \list{organization}{1}{%
-        {STMicroelectronics}%
-      }
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{labeltitlesource}{title}
-      \field{note}{Datasheet}
-      \field{title}{ASM330LHH: Automotive 6-axis inertial module: 3D accelerometer and 3D gyroscope}
-      \field{year}{2021}
-      \verb{urlraw}
-      \verb https://www.st.com/en/mems-and-sensors/asm330lhh.html
-      \endverb
-      \verb{url}
-      \verb https://www.st.com/en/mems-and-sensors/asm330lhh.html
-      \endverb
-    \endentry
     \entry{gpsgeometer_rtk}{online}{}{}
       \name{author}{1}{}{%
         {{hash=42ed88ab4e883769e419f782ccfd6e4b}{%
@@ -267,29 +250,6 @@
       \verb{url}
       \verb https://globalgpssystems.com/gnss/gnss-constellations-how-they-work-and-how-they-improve-gps/
       \endverb
-    \endentry
-    \entry{jockeyclub_racehorses}{misc}{}{}
-      \name{author}{1}{}{%
-        {{hash=eb5560ec2430dee90e3323dc840a443e}{%
-           family={{The Jockey Club}},
-           familyi={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{eb5560ec2430dee90e3323dc840a443e}
-      \strng{fullhash}{eb5560ec2430dee90e3323dc840a443e}
-      \strng{fullhashraw}{eb5560ec2430dee90e3323dc840a443e}
-      \strng{bibnamehash}{eb5560ec2430dee90e3323dc840a443e}
-      \strng{authorbibnamehash}{eb5560ec2430dee90e3323dc840a443e}
-      \strng{authornamehash}{eb5560ec2430dee90e3323dc840a443e}
-      \strng{authorfullhash}{eb5560ec2430dee90e3323dc840a443e}
-      \strng{authorfullhashraw}{eb5560ec2430dee90e3323dc840a443e}
-      \field{sortinit}{T}
-      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.thejockeyclub.co.uk/the-racing/racing-explained/how-fast-are-racehorses/}}
-      \field{note}{Geraadpleegd op 16 februari 2026}
-      \field{title}{How Fast Are Racehorses? | Racing Explained}
-      \field{year}{n.d.}
     \endentry
     \entry{valente2020accuracy}{article}{}{}
       \name{author}{4}{}{%

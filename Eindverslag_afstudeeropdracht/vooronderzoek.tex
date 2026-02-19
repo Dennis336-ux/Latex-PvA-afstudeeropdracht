@@ -1,0 +1,22 @@
+% !TeX root = main.tex
+
+\section{Vooronderzoek}
+
+\subsection{Testopstelling programmeren van het bord}
+Voor de eindgebruiker is het systeem ontworpen om draadloos firmware door middel van Over The Air (OTA) updates te sturen. Tijdens het ontwikkel process is dit echter een onpraktische methode. Het is namelijk relatief traag en biedt geen mogelijkheid om te debuggen (denk aan het instellen van breakpoints of het uitlezen van variabelen). Hierom wordt tijdens het ontwikkelen gebruikgemaakt van een SEGGER J-link debug probe \cite{microchip-tseg-jlink}. \\ 
+
+Hoewel de J-Link standaard een 20 pins JTAG connector ter beschikking heeft, maakt de microcontroller op het printplaat gebruik van de Serial Wire Debug (SWD) interface. SWD is ontworpen voor ARM processoren en vereist minder verbindingen dan JTAG. Uit de documentatie van het bord blijkt dat er slechts 4 pinnen nodig zijn om software te flashen: 
+
+\begin{itemize}
+    \item VTref (Voltage Reference): Dit meet het spanningsniveau van de microcontroller, zodat de datasingalen hierop afgestemd kunnen worden.
+    \item GND (Ground)
+    \item SWDIO (Serial Wire Debug I/O): Dit is een bidirectionele pin bedoeld voor de data overdracht.
+    \item SWCLK (Serial Wire Clock): Dit levert het kloksignaal om de commnicatie te synchroniseren.
+\end{itemize}
+
+Aangezien er geen debug header ter beschikking is op het bord, worden deze vier signalen toegankelijk door specifieke test pads op de PCB. Voor de ontwikkelopstelling zijn hier tijdelijk draden aan gesoldeerd die direct in verbinding staan met de J-Link. \\
+
+
+
+
+\newpage
