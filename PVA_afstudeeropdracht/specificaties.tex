@@ -4,42 +4,42 @@
 Op basis van de probleemstelling en de wensen van MYLAPS zijn de belangrijkste specificaties voor het systeem vastgesteld. Het project richt zich voornamelijk op de ontwikkeling van een softwarematige Proof of Concept, waarbij de huidige hardware van MYLAPS gebruikt wordt. Als de tijd het toelaat kan gekeken worden naar de toevoeging van eventuele extra sensoren. Het systeem moet in staat zijn om de ruwe data van de RTK GNSS receiver en de IMU uit te lezen en te verwerken. Aangezien de focus ligt op de paardensport, moet het systeem snelheden tot minstens 80 km/u accuraat kunnen registreren. Volgens The Jockey Club \cite{jockeyclub_racehorses} bedraagt de hoogst gemeten snelheid in de paardensport tot wel 70,76 km/u. De gespecificeerde snelheid houdt dus rekening met de topsnelheid van racepaarden inclusief een veiligheidsmarge. Om de complexiteit binnen de gestelde projecttijd realistisch te houden, zal de positiebepaling zich beperken tot het 2D vlak (horizontale X en Y coördinaten). Hoogtemetingen vallen buiten de scope, aangezien deze voor baansporten minder relevant zijn. \\
 
 
-Een belangrijke eis is het behoud van de nauwkeurigheid. In open omgevingen (zonder multipath) levert het huidige RTK systeem een nauwkeurigheid van minder dan 5 cm. De toevoeging van de IMU mag deze precisie niet negatief beïnvloeden. Het systeem zal foutieve metingen in complexe omgevingen moeten herkennen en afvangen. Een afwijking tussen de GNSS meting en de IMU voorspelling van meer dan 15 cm zal als onbetrouwbaar worden gemarkeerd. Dit is echter een grote marge en gelieve zal dit tot enkele centimeters bedragen. \\
+Een belangrijke eis is het behoud van de nauwkeurigheid. In open omgevingen (zonder multipath) levert het huidige RTK systeem een nauwkeurigheid van minder dan 5 cm. De toevoeging van de IMU mag deze precisie niet negatief beïnvloeden. Het systeem zal foutieve metingen in complexe omgevingen moeten herkennen en afvangen. Een afwijking tussen de GNSS meting en de IMU voorspelling van meer dan 15 cm zal als onbetrouwbaar worden gemarkeerd. Dit is echter een grote marge en zal idealiter tot in de enkele centimeters zijn. \\
 
+Daarnaast moet het systeem in staat zijn om tijdelijke singaalverliezen op te vangen. Wanneer de satellietverbinding volledig wegvalt, moet de IMU de route logisch doortrekken. \\
 
-Daarnaast moet het systeem in staat zijn om tijdelijke signaalverlies op te vangen. Wanneer de satellietverbinding volledig wegvalt, moet de IMU de route logisch doortrekken. Hoelang mag verbinding wegvallen? Hoe nauwkeurig moet het in die tijd zijn?   \\
-
-Omdat de metingen live bijgehouden wordt, zal er geen merkbare vertraging voor moeten komen. De verwerking van de data zal korter moeten zijn dan het interval tussen de metingen. Momenteel vinden de metingen plaats met een frequentie van 25 Hz, dus een update elke 0,04 seconden. \\
+Omdat de metingen live bijgehouden worden, zal er geen merkbare vertraging voor moeten komen. De verwerking van de data zal korter moeten zijn dan het interval tussen de metingen. Momenteel vinden de metingen plaats met een frequentie van 25 Hz, dus een update elke 0,04 seconden. \\
 
 
 Tabel \ref{tab:specificaties} geeft een overzicht van deze specificaties en dient als samenvatting van de gestelde technische eisen en randvoorwaarden voor het te ontwikkelen systeem.
 
 \begin{table}[htbp]
     \centering
-    \caption{Specificaties en Eisen}
+    \caption{Gekwantificeerde systeemspecificaties en randvoorwaarden.}
     \label{tab:specificaties}
-    \begin{tabular}{|p{4cm}|p{10cm}|}
-        \hline
-        \textbf{Specificatie} & \textbf{Onderbouwing / Eis} \\
-        \hline \hline
-        Basis & Het systeem zal gebruik maken van de gelogde data van de huidige tracking module van MYLAPS. \\
-        \hline
-        Snelheid & Het systeem moet snelheden tot minstens 80 km/u accuraat registreren. Dit dekt de topsnelheid in de paardensport inclusief een veiligheidsmarge van 10\%. \\
-        \hline
-        Nauwkeurigheid (Open Veld) & De toevoeging van sensor fusion mag de baseline RTK-precisie niet negatief beïnvloeden. Tegenwoordig wordt nauwkeurigheid van maximaal 1,4 cm gemeten binnen MYLAPS. \\
-        \hline
-        Dimensionaliteit & Kijkend naar de projectafbakening beperkt de analyse en positiebepaling zich strikt tot het 2D vlak (Horizontale $X, Y$ positie en Heading). \\
-        \hline
-        Foutdetectie & Het systeem moet 'False Fixed' oplossingen detecteren. Een afwijking tussen de GNSS meting en de IMU voorspelling van meer dan 15 cm (binnen één tijdstap) moet gemarkeerd worden als onbetrouwbaar. Dit is een vrij grote margen en gelieve zal dit minder bedragen.\\
-        \hline
-        Update Frequentie & Het huidige systeemstandaard bedraagt 25 Hz (0,04 s) waarbij het gewenst is van het systeem dat de output minimaal binnen deze tijd moet plaatsvinden. \\
-        \hline
-        Verwerkingssnelheid & De dataverwerking moet real time plaatsvinden. De berekeningstijd per stap moet korter zijn dan het sample interval om vertraging te voorkomen. \\
-        \hline
-        Communicatie Protocol & Output zal gelijk moeten zijn aan het X2 Link protocol van MYLAPS. \\
-        \hline
-        Compatibileit & De uiteindelijke datastructuur van het signaal moet compatibel zijn met het X2 Link protocol van MYLAPS. \\
-        \hline
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{@{} p{3.5cm} p{6cm} p{4cm} p{1.5cm} @{}}
+        \toprule
+        \textbf{Specificatie} & \textbf{Beschrijving} & \textbf{Eis} & \textbf{MoSCoW} \\
+        \midrule
+        \textbf{Meetbereik Snelheid} & De actuele snelheid die het systeem zonder fouten moet kunnen verwerken. & 0 tot 80 km/u & Must have \\
+        
+        \textbf{Nauwkeurigheid ideale condities} & De maximale 2D-foutmarge van het systeem in ideale condities, passend bij de RTK-baseline. & Maximaal 1,4 cm afwijking & Must have \\
+        
+        \textbf{Nauwkeurigheid bij uitval} & De maximaal toegestane positie-afwijking (drift) op het moment dat het GNSS-signaal tijdelijk wegvalt. & Maximaal 1,0 meter drift na 5 seconden uitval & Should have \\
+        
+        \textbf{Foutdetectie grens} & De harde drempelwaarde waarbij een GNSS-meting als onmogelijke sprong (bijv. multipath) wordt gezien. & 15 cm verschil per tijdstap & Must have \\
+        
+        \textbf{IMU Acceleratiebereik} & Hardware-instelling om de hoge mechanische impact van paardenhoeven zonder signaal-clipping te registreren. & Minimaal +/- 16 g & Must have \\
+        
+        \textbf{IMU Rotatiebereik} & Hardware-instelling om de onvoorspelbare, snelle rotaties van de atleet te kunnen meten. & Minimaal +/- 2000 dps & Must have \\
+        
+        \textbf{Systeemfrequentie zenden} & De snelheid waarmee het systeem nieuwe, gevalideerde positiedata uitstuurt naar de logger. & 25 Hz & Must have \\
+        
+        \textbf{Meetfrequentie IMU} & De interne snelheid waarmee de data van de IMU uitgelezen dient te worden. & Minimaal 100 Hz & Must have \\
+        
+        \textbf{Verwerkingssnelheid (Latency)} & De maximale tijd die de software nodig mag hebben om de sensorfusie over één tijdstap te berekenen. & Maximaal 10 ms per cyclus & Must have \\
+        \bottomrule
     \end{tabular}
 \end{table}
 

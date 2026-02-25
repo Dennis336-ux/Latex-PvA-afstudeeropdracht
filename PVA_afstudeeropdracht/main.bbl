@@ -26,17 +26,34 @@
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{labeltitlesource}{title}
-      \field{note}{Datasheet}
-      \field{title}{ASM330LHH: Automotive 6-axis inertial module: 3D accelerometer and 3D gyroscope}
+      \field{note}{Datasheet. [Online]. Available: https://www.st.com/en/mems-and-sensors/asm330lhh.html. Geraadpleegd op 24 februari 2026}
+      \field{title}{ASM330LHH: Automotive 6-Axis Inertial Module: 3D Accelerometer and 3D Gyroscope}
       \field{year}{2021}
-      \verb{urlraw}
-      \verb https://www.st.com/en/mems-and-sensors/asm330lhh.html
-      \endverb
-      \verb{url}
-      \verb https://www.st.com/en/mems-and-sensors/asm330lhh.html
-      \endverb
     \endentry
-    \entry{gpsgeometer_rtk}{online}{}{}
+    \entry{GNSSConstellations2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=bdc3027cb9297ec4dffa0c5fda2daceb}{%
+           family={{Global GPS Systems}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{fullhash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{fullhashraw}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{bibnamehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authorbibnamehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authornamehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authorfullhash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authorfullhashraw}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{[Online]. Available: https://globalgpssystems.com/gnss/gnss-constellations-how-they-work-and-how-they-improve-gps/}
+      \field{note}{Geraadpleegd op 9 februari 2026}
+      \field{title}{GNSS Constellations: How They Work and How They Improve GPS}
+      \field{year}{2026}
+    \endentry
+    \entry{gpsgeometer_rtk}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=42ed88ab4e883769e419f782ccfd6e4b}{%
            family={{GPS Geometer}},
@@ -54,19 +71,10 @@
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{Visited on 09-02-2026}
-      \field{title}{What is GNSS RTK and how does it work?}
-      \field{urlday}{9}
-      \field{urlmonth}{2}
-      \field{urlyear}{2026}
+      \field{howpublished}{[Online]. Available: https://gpsgeometer.com/en/blog/what-is-gnss-rtk-and-how-does-it-work}
+      \field{note}{Geraadpleegd op 9 februari 2026}
+      \field{title}{What Is GNSS RTK and How Does It Work?}
       \field{year}{2023}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://gpsgeometer.com/en/blog/what-is-gnss-rtk-and-how-does-it-work
-      \endverb
-      \verb{url}
-      \verb https://gpsgeometer.com/en/blog/what-is-gnss-rtk-and-how-does-it-work
-      \endverb
     \endentry
     \entry{gpsgov2026accuracy}{misc}{}{}
       \name{author}{1}{}{%
@@ -86,37 +94,37 @@
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.gps.gov/gps-accuracy-0}}
-      \field{note}{Visited on 09-02-2026}
+      \field{howpublished}{[Online]. Available: https://www.gps.gov/gps-accuracy-0}
+      \field{note}{Geraadpleegd op 9 februari 2026}
       \field{title}{GPS Accuracy}
       \field{year}{2026}
     \endentry
     \entry{Meng2017RobustLocalization}{article}{}{}
       \name{author}{3}{}{%
-        {{hash=c1cc90e7d20e719e815733640df40a67}{%
+        {{hash=5d7cfdf14768e19ed402154ca9e7f128}{%
            family={Meng},
            familyi={M\bibinitperiod},
-           given={Xiaoli},
+           given={X.},
            giveni={X\bibinitperiod}}}%
-        {{hash=29fa9ac4da972e0174f94c469eae902a}{%
+        {{hash=39856f0439f35f79a8eed8b12d26166c}{%
            family={Wang},
            familyi={W\bibinitperiod},
-           given={Heng},
+           given={H.},
            giveni={H\bibinitperiod}}}%
-        {{hash=e75007db7de7308818888154451135ff}{%
+        {{hash=f29effe391f71e68756a19ab272a6123}{%
            family={Liu},
            familyi={L\bibinitperiod},
-           given={Bingbing},
+           given={B.},
            giveni={B\bibinitperiod}}}%
       }
-      \strng{namehash}{6d9a46105e360aa83b9273261c8dffb5}
-      \strng{fullhash}{6d9a46105e360aa83b9273261c8dffb5}
-      \strng{fullhashraw}{6d9a46105e360aa83b9273261c8dffb5}
-      \strng{bibnamehash}{6d9a46105e360aa83b9273261c8dffb5}
-      \strng{authorbibnamehash}{6d9a46105e360aa83b9273261c8dffb5}
-      \strng{authornamehash}{6d9a46105e360aa83b9273261c8dffb5}
-      \strng{authorfullhash}{6d9a46105e360aa83b9273261c8dffb5}
-      \strng{authorfullhashraw}{6d9a46105e360aa83b9273261c8dffb5}
+      \strng{namehash}{295687a1e23385976921daa29939cf08}
+      \strng{fullhash}{295687a1e23385976921daa29939cf08}
+      \strng{fullhashraw}{295687a1e23385976921daa29939cf08}
+      \strng{bibnamehash}{295687a1e23385976921daa29939cf08}
+      \strng{authorbibnamehash}{295687a1e23385976921daa29939cf08}
+      \strng{authornamehash}{295687a1e23385976921daa29939cf08}
+      \strng{authorfullhash}{295687a1e23385976921daa29939cf08}
+      \strng{authorfullhashraw}{295687a1e23385976921daa29939cf08}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
@@ -124,25 +132,15 @@
       \field{journaltitle}{Sensors}
       \field{number}{9}
       \field{title}{A Robust Vehicle Localization Approach Based on GNSS/IMU/DMI/LiDAR Sensor Fusion for Autonomous Vehicles}
-      \field{urlday}{2}
-      \field{urlmonth}{12}
-      \field{urlyear}{2026}
       \field{volume}{17}
       \field{year}{2017}
-      \field{urldateera}{ce}
       \field{pages}{2140}
       \range{pages}{1}
       \verb{doi}
       \verb 10.3390/s17092140
       \endverb
-      \verb{urlraw}
-      \verb https://www.mdpi.com/1424-8220/17/9/2140
-      \endverb
-      \verb{url}
-      \verb https://www.mdpi.com/1424-8220/17/9/2140
-      \endverb
     \endentry
-    \entry{NovAtelGNSSerrorSources2026}{online}{}{}
+    \entry{NovAtelGNSSerrorSources2026}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=3ea7e430eeeee35d7001093aaceb259f}{%
            family={NovAtel},
@@ -161,18 +159,10 @@
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{howpublished}{[Online]. Available: https://novatel.com/an-introduction-to-gnss/gnss-error-sources}
+      \field{note}{Geraadpleegd op 12 februari 2026}
       \field{title}{Chapter 4: GNSS Error Sources}
-      \field{urlday}{2}
-      \field{urlmonth}{12}
-      \field{urlyear}{2026}
       \field{year}{2026}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://novatel.com/an-introduction-to-gnss/gnss-error-sources
-      \endverb
-      \verb{url}
-      \verb https://novatel.com/an-introduction-to-gnss/gnss-error-sources
-      \endverb
     \endentry
     \entry{novatel_computation}{misc}{}{}
       \name{author}{1}{}{%
@@ -193,17 +183,11 @@
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{howpublished}{An Introduction to GNSS}
-      \field{note}{Visited on 11-02-2026}
-      \field{title}{Step 4 — Computation: Calculating the Position}
-      \verb{urlraw}
-      \verb https://novatel.com/an-introduction-to-gnss/chapter-2-basic-gnss-concepts/step-4-computation
-      \endverb
-      \verb{url}
-      \verb https://novatel.com/an-introduction-to-gnss/chapter-2-basic-gnss-concepts/step-4-computation
-      \endverb
+      \field{howpublished}{[Online]. Available: https://novatel.com/an-introduction-to-gnss/chapter-2-basic-gnss-concepts/step-4-computation}
+      \field{note}{Geraadpleegd op 11 februari 2026}
+      \field{title}{Step 4 - Computation: Calculating the Position}
     \endentry
-    \entry{NovAtelMultipath2026}{online}{}{}
+    \entry{NovAtelMultipath2026}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=3ea7e430eeeee35d7001093aaceb259f}{%
            family={NovAtel},
@@ -222,51 +206,10 @@
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Understanding and mitigating GNSS multipath interference and error}
-      \field{urlday}{2}
-      \field{urlmonth}{10}
-      \field{urlyear}{2026}
+      \field{howpublished}{[Online]. Available: https://novatel.com/tech-talk/an-introduction-to-gnss/resources/understanding-and-mitigating-gnss-multipath-interference-and-error}
+      \field{note}{Geraadpleegd op 10 februari 2026}
+      \field{title}{Understanding and Mitigating GNSS Multipath Interference and Error}
       \field{year}{2026}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://novatel.com/tech-talk/an-introduction-to-gnss/resources/understanding-and-mitigating-gnss-multipath-interference-and-error
-      \endverb
-      \verb{url}
-      \verb https://novatel.com/tech-talk/an-introduction-to-gnss/resources/understanding-and-mitigating-gnss-multipath-interference-and-error
-      \endverb
-    \endentry
-    \entry{GNSSConstellations2026}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=61797a374dc77f3b72e25b460e400119}{%
-           family={Systems},
-           familyi={S\bibinitperiod},
-           given={Global\bibnamedelima GPS},
-           giveni={G\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
-      }
-      \strng{namehash}{61797a374dc77f3b72e25b460e400119}
-      \strng{fullhash}{61797a374dc77f3b72e25b460e400119}
-      \strng{fullhashraw}{61797a374dc77f3b72e25b460e400119}
-      \strng{bibnamehash}{61797a374dc77f3b72e25b460e400119}
-      \strng{authorbibnamehash}{61797a374dc77f3b72e25b460e400119}
-      \strng{authornamehash}{61797a374dc77f3b72e25b460e400119}
-      \strng{authorfullhash}{61797a374dc77f3b72e25b460e400119}
-      \strng{authorfullhashraw}{61797a374dc77f3b72e25b460e400119}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{GNSS Constellations: How They Work and How They Improve GPS}
-      \field{urlday}{2}
-      \field{urlmonth}{9}
-      \field{urlyear}{2026}
-      \field{year}{2026}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://globalgpssystems.com/gnss/gnss-constellations-how-they-work-and-how-they-improve-gps/
-      \endverb
-      \verb{url}
-      \verb https://globalgpssystems.com/gnss/gnss-constellations-how-they-work-and-how-they-improve-gps/
-      \endverb
     \endentry
     \entry{jockeyclub_racehorses}{misc}{}{}
       \name{author}{1}{}{%
@@ -286,45 +229,41 @@
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.thejockeyclub.co.uk/the-racing/racing-explained/how-fast-are-racehorses/}}
+      \field{howpublished}{[Online]. Available: https://www.thejockeyclub.co.uk/the-racing/racing-explained/how-fast-are-racehorses/}
       \field{note}{Geraadpleegd op 16 februari 2026}
       \field{title}{How Fast Are Racehorses? | Racing Explained}
-      \field{year}{n.d.}
     \endentry
     \entry{valente2020accuracy}{article}{}{}
       \name{author}{4}{}{%
-        {{hash=c9cbf9d19982cff3bfbdaae235b4798a}{%
+        {{hash=0c4d60e2ac164609d1bf0f86d54fc3b4}{%
            family={Valente},
            familyi={V\bibinitperiod},
-           given={Domingos\bibnamedelimb Sárvio\bibnamedelima Magalhães},
+           given={D.\bibnamedelimi S.\bibnamedelimi M.},
            giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
-        {{hash=e41d1b7ff14861b70ff9362e5e160c29}{%
+        {{hash=72cda355e6138cd563607315bd7e148e}{%
            family={Momin},
            familyi={M\bibinitperiod},
-           given={Abdul},
+           given={A.},
            giveni={A\bibinitperiod}}}%
-        {{hash=68ed6f5f1b586c8a3fcbf61d6097898c}{%
+        {{hash=e53bd5313aacc1d2a56200ba4ab48f90}{%
            family={Grift},
            familyi={G\bibinitperiod},
-           given={Tony},
+           given={T.},
            giveni={T\bibinitperiod}}}%
-        {{hash=6718bf0fff2e1fba05b9a9c5144702df}{%
+        {{hash=3cbd1768be9f750c840e1690bf240b5b}{%
            family={Hansen},
            familyi={H\bibinitperiod},
-           given={Alan},
+           given={A.},
            giveni={A\bibinitperiod}}}%
       }
-      \list{publisher}{1}{%
-        {Elsevier}%
-      }
-      \strng{namehash}{14e7c0032bc466e57cf0bb3ac7ea5d49}
-      \strng{fullhash}{59b5788805f924bf668d4f3dc51d7e57}
-      \strng{fullhashraw}{59b5788805f924bf668d4f3dc51d7e57}
-      \strng{bibnamehash}{14e7c0032bc466e57cf0bb3ac7ea5d49}
-      \strng{authorbibnamehash}{14e7c0032bc466e57cf0bb3ac7ea5d49}
-      \strng{authornamehash}{14e7c0032bc466e57cf0bb3ac7ea5d49}
-      \strng{authorfullhash}{59b5788805f924bf668d4f3dc51d7e57}
-      \strng{authorfullhashraw}{59b5788805f924bf668d4f3dc51d7e57}
+      \strng{namehash}{c3990519210916fe9ae091350d6ae802}
+      \strng{fullhash}{2586b970fb51fb2038d71304cc4a9e2c}
+      \strng{fullhashraw}{2586b970fb51fb2038d71304cc4a9e2c}
+      \strng{bibnamehash}{c3990519210916fe9ae091350d6ae802}
+      \strng{authorbibnamehash}{c3990519210916fe9ae091350d6ae802}
+      \strng{authornamehash}{c3990519210916fe9ae091350d6ae802}
+      \strng{authorfullhash}{2586b970fb51fb2038d71304cc4a9e2c}
+      \strng{authorfullhashraw}{2586b970fb51fb2038d71304cc4a9e2c}
       \field{sortinit}{V}
       \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
       \field{labelnamesource}{author}
@@ -340,34 +279,36 @@
       \endverb
     \endentry
     \entry{pmc_sensorfusion}{article}{}{}
-      \true{moreauthor}
-      \true{morelabelname}
-      \name{author}{1}{}{%
-        {{hash=1a8d46312b9827ec32ef3af3c6de6641}{%
-           family={Yuming\bibnamedelima Yin},
-           familyi={Y\bibinitperiod\bibinitdelim Y\bibinitperiod},
-           given={Mengqi\bibnamedelima Guo},
-           giveni={M\bibinitperiod\bibinitdelim G\bibinitperiod},
-           suffix={Jinhong\bibnamedelima Zhang},
-           suffixi={J\bibinitperiod\bibinitdelim Z\bibinitperiod}}}%
+      \name{author}{3}{}{%
+        {{hash=01a783820fca905cdcff203f64caa39f}{%
+           family={Yin},
+           familyi={Y\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=8afab9bdc9b292debbeb136dfd97036c}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=62e98841042349d6ef5c8c2ed88da01a}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
       }
-      \list{publisher}{1}{%
-        {MDPI}%
-      }
-      \strng{namehash}{ea4bed8a97d3181fab3ebd33c7636c4e}
-      \strng{fullhash}{ea4bed8a97d3181fab3ebd33c7636c4e}
-      \strng{fullhashraw}{ea4bed8a97d3181fab3ebd33c7636c4e}
-      \strng{bibnamehash}{ea4bed8a97d3181fab3ebd33c7636c4e}
-      \strng{authorbibnamehash}{ea4bed8a97d3181fab3ebd33c7636c4e}
-      \strng{authornamehash}{ea4bed8a97d3181fab3ebd33c7636c4e}
-      \strng{authorfullhash}{ea4bed8a97d3181fab3ebd33c7636c4e}
-      \strng{authorfullhashraw}{ea4bed8a97d3181fab3ebd33c7636c4e}
+      \strng{namehash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{fullhash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{fullhashraw}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{bibnamehash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{authorbibnamehash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{authornamehash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{authorfullhash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{authorfullhashraw}{083bbdd93c92ab67a8845c2e43d40a57}
       \field{sortinit}{Y}
       \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Sensors (Basel)}
-      \field{note}{Available via PMC}
+      \field{journaltitle}{Sensors}
       \field{title}{Sensor Fusion of GNSS and IMU Data for Robust Localization via Smoothed Error State Kalman Filter}
       \field{year}{2022}
     \endentry

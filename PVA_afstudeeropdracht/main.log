@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.1) (preloaded format=pdflatex 2026.2.12)  18 FEB 2026 13:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.1) (preloaded format=pdflatex 2026.2.12)  25 FEB 2026 10:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -974,7 +974,7 @@ LaTeX Info: Redefining \ohm on input line 4.
 Package gensymb Info: Using \textohm for \ohm on input line 4.
 Package gensymb Info: Using \textmu for \micro on input line 4.
  (titlepage.tex
-<logos/HvA Internationaal.jpg, id=93, 337.7418pt x 133.2177pt>
+<logos/HvA Internationaal.jpg, id=98, 337.7418pt x 133.2177pt>
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 9.
@@ -995,12 +995,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6--8
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 9--10
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
 
  []
 
@@ -1010,27 +1015,51 @@ Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 16.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
 [3
 
-]) (context.tex
+]) (aanleiding.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 12.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+[4]) (context.tex
 Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 27.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 24.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[4]
-<images/multipath voorbeeld.png, id=161, 272.874pt x 181.77pt>
+[5]
+<images/multipath voorbeeld.png, id=170, 272.874pt x 181.77pt>
 File: images/multipath voorbeeld.png Graphic file (type png)
 <use images/multipath voorbeeld.png>
-Package pdftex.def Info: images/multipath voorbeeld.png  used on input line 35.
+Package pdftex.def Info: images/multipath voorbeeld.png  used on input line 34.
 (pdftex.def)             Requested size: 386.95897pt x 257.79346pt.
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 58.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [5 <./images/multipath voorbeeld.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 62--63
+ [6 <./images/multipath voorbeeld.png (PNG copy)>]
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 59.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+ [7]
+Underfull \hbox (badness 10000) in paragraph at lines 63--64
 
  []
 
@@ -1053,13 +1082,42 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 78.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[6]
+[8]
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 82.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [7]) (aanleiding.tex
+ [9]) (probleemdefinitie.tex
 Underfull \hbox (badness 10000) in paragraph at lines 5--6
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+
+ []
+
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 30.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+[10]
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 36.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+ [11]) (leerdoelen.tex
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 20.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+ [12]) (specificaties.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
@@ -1078,80 +1136,122 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--12
 
  []
 
-File: logos/HvA Internationaal.jpg Graphic file (type jpg)
-<use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 17.
-(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 24--25
 
+Overfull \hbox (6.48035pt too wide) in paragraph at lines 23--24
+[]|\OT1/cmr/bx/n/10 MoSCoW| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--27
-
+Underfull \hbox (badness 10000) in paragraph at lines 25--25
+[]|\OT1/cmr/bx/n/10 Meetbereik Snel-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--33
-
- []
-
-File: logos/HvA Internationaal.jpg Graphic file (type jpg)
-<use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 50.
-(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[9]
-File: logos/HvA Internationaal.jpg Graphic file (type jpg)
-<use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 60.
-(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [10]) (leerdoelen.tex
-File: logos/HvA Internationaal.jpg Graphic file (type jpg)
-<use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 20.
-(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [11]) (specificaties.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--5
-
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+[]|\OT1/cmr/m/n/10 Must
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7--8
-
+Underfull \hbox (badness 10000) in paragraph at lines 27--27
+[]|\OT1/cmr/bx/n/10 Nauwkeurigheid
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10--11
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12--13
-
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+[]|\OT1/cmr/m/n/10 Must
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 29--29
-[]|\OT1/cmr/m/n/10 Nauwkeurigheid (Open
+[]|\OT1/cmr/m/n/10 De max-i-maal toeges-tane positie-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
+[]|\OT1/cmr/m/n/10 Should
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--32
+[]|\OT1/cmr/m/n/10 Must
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--33
+[]|\OT1/cmr/bx/n/10 IMU Ac-cel-er-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+[]|\OT1/cmr/m/n/10 Must
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--36
+[]|\OT1/cmr/m/n/10 Must
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--37
+[]|\OT1/cmr/bx/n/10 Systeemfrequentie
+ []
+
+
+Underfull \hbox (badness 4647) in paragraph at lines 37--37
+[]|\OT1/cmr/m/n/10 De snel-heid waarmee het sys-teem
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--38
+[]|\OT1/cmr/m/n/10 Must
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--39
+[]|\OT1/cmr/bx/n/10 Meetfrequentie
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--40
+[]|\OT1/cmr/m/n/10 Must
+ []
+
+
+Overfull \hbox (2.72318pt too wide) in paragraph at lines 41--41
+[]|\OT1/cmr/bx/n/10 Verwerkingssnelheid
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--42
+[]|\OT1/cmr/m/n/10 Must
  []
 
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 46.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[12]
+[13]
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 46.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [13]) (ontwerpaanpak.tex
+ [14]) (ontwerpaanpak.tex
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 20.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [14]
-Underfull \hbox (badness 10000) in paragraph at lines 34--35
+ [15]
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--36
 
  []
 
@@ -1159,38 +1259,82 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 39.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[15])
-Overfull \hbox (69.1647pt too wide) in paragraph at lines 23--23
-[]\OT1/cmr/m/n/10 Xiaoli Meng, Heng Wang, and Bing-bing Liu. ``A Ro-bust Ve-hi-cle Lo-cal-iza-tion Ap-proach Based on GNSS/IMU/DMI/LiDAR
+[16]
+Underfull \hbox (badness 1484) in paragraph at lines 60--60
+\OT1/cmr/m/n/10 huidige sys-teem. Pro-gram-meren van de data-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
+[]|\OT1/cmr/m/n/10 Werkende hard-ware &
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
+[]|\OT1/cmr/m/n/10 Geoptimaliseerd &
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
+[]|\OT1/cmr/m/n/10 Testrapporten en val-i-
  []
 
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 25.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 81.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[16] (main.aux)
+[17])
+Overfull \hbox (70.06363pt too wide) in paragraph at lines 25--25
+[]\OT1/cmr/m/n/10 GPS Ge-ome-ter. \OT1/cmr/m/it/10 What Is GNSS RTK and How Does It Work? \OT1/cmr/m/n/10 [On-line]. Avail-able: https://gpsgeometer.com/en/blog/what-
+ []
+
+
+Overfull \hbox (11.949pt too wide) in paragraph at lines 25--25
+[]\OT1/cmr/m/n/10 X. Meng, H. Wang, and B. Liu. ``A Ro-bust Ve-hi-cle Lo-cal-iza-tion Ap-proach Based on GNSS/IMU/DMI/LiDAR
+ []
+
+
+Overfull \hbox (3.57457pt too wide) in paragraph at lines 25--25
+\OT1/cmr/m/n/10 introduction-to-gnss/chapter-2-basic-gnss-concepts/step-4-computation. Ger-aad-pleegd op 11 febru-ari 2026. 
+ []
+
+
+Overfull \hbox (30.19313pt too wide) in paragraph at lines 25--25
+\OT1/cmr/m/n/10 https://novatel.com/tech-talk/an-introduction-to-gnss/resources/understanding-and-mitigating-gnss-multipath-
+ []
+
+
+Overfull \hbox (79.54718pt too wide) in paragraph at lines 25--25
+[]\OT1/cmr/m/n/10 The Jockey Club. \OT1/cmr/m/it/10 How Fast Are Race-horses? | Rac-ing Ex-plained\OT1/cmr/m/n/10 . [On-line]. Avail-able: https://www.thejockeyclub.co.uk/the-
+ []
+
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 27.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+[18] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 56FEEEB1B362DE9B6AF83CF5387C923E;2642.
+(rerunfilecheck)             Checksum: 4EFCA928A1FB7B30D79810D2DB7F74BC;2704.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34451 strings out of 467866
- 675136 string characters out of 5411549
- 1476444 words of memory out of 5000000
- 62787 multiletter control sequences out of 15000+600000
+ 34460 strings out of 467866
+ 675443 string characters out of 5411549
+ 1476602 words of memory out of 5000000
+ 62789 multiletter control sequences out of 15000+600000
  631816 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 103i,15n,121p,1330b,1552s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 103i,15n,121p,1387b,1539s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\dennis.van.den.berg\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (16 pages, 512039 bytes).
+Output written on main.pdf (18 pages, 516031 bytes).
 PDF statistics:
- 318 PDF objects out of 1000 (max. 8388607)
- 66 named destinations out of 1000 (max. 500000)
- 199 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 319 PDF objects out of 1000 (max. 8388607)
+ 70 named destinations out of 1000 (max. 500000)
+ 207 words of extra memory for PDF output out of 10000 (max. 10000000)
 
