@@ -2390,6 +2390,7 @@
     <bcf:citekey order="15" intorder="1">Meng2017RobustLocalization</bcf:citekey>
     <bcf:citekey order="16" intorder="1">NovAtelMultipath2026</bcf:citekey>
     <bcf:citekey order="17" intorder="1">jockeyclub_racehorses</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">bosch2018equimoves</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

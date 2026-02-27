@@ -30,6 +30,81 @@
       \field{title}{ASM330LHH: Automotive 6-Axis Inertial Module: 3D Accelerometer and 3D Gyroscope}
       \field{year}{2021}
     \endentry
+    \entry{bosch2018equimoves}{article}{}{}
+      \name{author}{9}{}{%
+        {{hash=b7f4c96442af56aef56f984625c931ed}{%
+           family={Bosch},
+           familyi={B\bibinitperiod},
+           given={Stephan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ed5f515bb838bd3c61e890b48a8353ff}{%
+           family={Serra\bibnamedelima Bragança},
+           familyi={S\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={Filipe},
+           giveni={F\bibinitperiod}}}%
+        {{hash=6311197cb2f934a1f8b8396a31b7e214}{%
+           family={Marin-Perianu},
+           familyi={M\bibinithyphendelim P\bibinitperiod},
+           given={Mihai},
+           giveni={M\bibinitperiod}}}%
+        {{hash=362b48dfc40fd4418a1d8fa876edb629}{%
+           family={Marin-Perianu},
+           familyi={M\bibinithyphendelim P\bibinitperiod},
+           given={Raluca},
+           giveni={R\bibinitperiod}}}%
+        {{hash=a2b94262c5c329c66621cd05c8fe3817}{%
+           family={Zwaag},
+           familyi={Z\bibinitperiod},
+           given={Berend\bibnamedelima Jan},
+           giveni={B\bibinitperiod\bibinitdelim J\bibinitperiod},
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{hash=6755461cfe32b8769e6e6738b4be476f}{%
+           family={Voskamp},
+           familyi={V\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=527ea90ec958aa23563d50189221dc0e}{%
+           family={Back},
+           familyi={B\bibinitperiod},
+           given={Willem},
+           giveni={W\bibinitperiod}}}%
+        {{hash=9e7404cec9641c0fc4e33ac52459c775}{%
+           family={Weeren},
+           familyi={W\bibinitperiod},
+           given={René},
+           giveni={R\bibinitperiod},
+           prefix={van},
+           prefixi={v\bibinitperiod}}}%
+        {{hash=11aaf2d2cb00c0bfc3eafdbcccf70929}{%
+           family={Havinga},
+           familyi={H\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{f44ee56b491fde5facb937c615d15ebb}
+      \strng{fullhash}{57216f6ffe49b2c5331028f5a0473883}
+      \strng{fullhashraw}{57216f6ffe49b2c5331028f5a0473883}
+      \strng{bibnamehash}{f44ee56b491fde5facb937c615d15ebb}
+      \strng{authorbibnamehash}{f44ee56b491fde5facb937c615d15ebb}
+      \strng{authornamehash}{f44ee56b491fde5facb937c615d15ebb}
+      \strng{authorfullhash}{57216f6ffe49b2c5331028f5a0473883}
+      \strng{authorfullhashraw}{57216f6ffe49b2c5331028f5a0473883}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sensors}
+      \field{number}{3}
+      \field{title}{EquiMoves: A Wireless Networked Inertial Measurement System for Objective Examination of Horse Gait}
+      \field{volume}{18}
+      \field{year}{2018}
+      \field{pages}{850}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/s18030850
+      \endverb
+    \endentry
     \entry{GNSSConstellations2026}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=bdc3027cb9297ec4dffa0c5fda2daceb}{%

@@ -1,17 +1,19 @@
 % !TeX root = main.tex
 
 \section{Specificaties}
-Op basis van de probleemstelling en de wensen van MYLAPS zijn de belangrijkste specificaties voor het systeem vastgesteld. Het project richt zich voornamelijk op de ontwikkeling van een softwarematige Proof of Concept, waarbij de huidige hardware van MYLAPS gebruikt wordt. Als de tijd het toelaat kan gekeken worden naar de toevoeging van eventuele extra sensoren. Het systeem moet in staat zijn om de ruwe data van de RTK GNSS receiver en de IMU uit te lezen en te verwerken. Aangezien de focus ligt op de paardensport, moet het systeem snelheden tot minstens 80 km/u accuraat kunnen registreren. Volgens The Jockey Club \cite{jockeyclub_racehorses} bedraagt de hoogst gemeten snelheid in de paardensport tot wel 70,76 km/u. De gespecificeerde snelheid houdt dus rekening met de topsnelheid van racepaarden inclusief een veiligheidsmarge. Om de complexiteit binnen de gestelde projecttijd realistisch te houden, zal de positiebepaling zich beperken tot het 2D vlak (horizontale X en Y coördinaten). Hoogtemetingen vallen buiten de scope, aangezien deze voor baansporten minder relevant zijn. \\
+Op basis van de probleemstelling en de wensen van MYLAPS zijn de belangrijkste specificaties voor het systeem vastgesteld. Het project richt zich voornamelijk op de ontwikkeling van een softwarematige Proof of Concept, waarbij de huidige hardware van MYLAPS gebruikt wordt. Als de tijd het toelaat kan gekeken worden naar de toevoeging van eventuele extra sensoren. Het systeem moet in staat zijn om de ruwe data van de RTK GNSS receiver en de IMU uit te lezen en te verwerken. Aangezien de focus ligt op de paardensport, moet het systeem snelheden tot minstens 80 km/u accuraat kunnen registreren. Volgens The Jockey Club \cite{jockeyclub_racehorses} bedraagt de hoogst gemeten snelheid in de paardensport tot wel 70,76 km/u. De gespecificeerde snelheid houdt dus rekening met de topsnelheid van racepaarden inclusief een veiligheidsmarge. Naast deze hoge snelheden zal de dynamiek van een galloperend paard een grote eis stellen aan het meetbereik van de hardware. In paragraaf 4.1 uit onderzoek van EquiMoves \cite{bosch2018equimoves} blijkt dat krachten op kunnen lopen tot 16 g of meer kijkend naar de impact van de hoef van een paard. Om te voorkomen dat clipping ontstaat zal het noodzakelijk zijn dat de IMU een bereik heeft tot deze 16 g en een hoeksnelheid van 2000 graden per seconde.
 
+Om de complexiteit binnen de gestelde projecttijd realistisch te houden, zal de positiebepaling zich beperken tot het 2D-vlak (horizontale X en Y coördinaten). Hoogtemetingen vallen buiten de scope, aangezien deze voor baansporten minder relevant zijn. \\
 
-Een belangrijke eis is het behoud van de nauwkeurigheid. In open omgevingen (zonder multipath) levert het huidige RTK systeem een nauwkeurigheid van minder dan 5 cm. De toevoeging van de IMU mag deze precisie niet negatief beïnvloeden. Het systeem zal foutieve metingen in complexe omgevingen moeten herkennen en afvangen. Een afwijking tussen de GNSS meting en de IMU voorspelling van meer dan 15 cm zal als onbetrouwbaar worden gemarkeerd. Dit is echter een grote marge en zal idealiter tot in de enkele centimeters zijn. \\
+Een belangrijke eis is het behoud van de nauwkeurigheid. In open omgevingen (zonder multipath) levert het huidige RTK systeem een nauwkeurigheid van minder dan 2 cm. De toevoeging van de IMU mag deze precisie niet negatief beïnvloeden. Het systeem zal foutieve metingen in complexe omgevingen moeten herkennen en afvangen. \\
 
-Daarnaast moet het systeem in staat zijn om tijdelijke singaalverliezen op te vangen. Wanneer de satellietverbinding volledig wegvalt, moet de IMU de route logisch doortrekken. \\
+Een afwijking tussen de GNSS meting en de IMU voorspelling van meer dan 10 cm zal als onbetrouwbaar worden gemarkeerd. Dit is echter een grote marge en zal idealiter tot in de enkele centimeters zijn. \\
+
+Daarnaast moet het systeem in staat zijn om tijdelijke signaalverliezen op te vangen. Wanneer de satellietverbinding volledig wegvalt, moet de IMU de route logisch doortrekken. \\
 
 Omdat de metingen live bijgehouden worden, zal er geen merkbare vertraging voor moeten komen. De verwerking van de data zal korter moeten zijn dan het interval tussen de metingen. Momenteel vinden de metingen plaats met een frequentie van 25 Hz, dus een update elke 0,04 seconden. \\
 
-
-Tabel \ref{tab:specificaties} geeft een overzicht van deze specificaties en dient als samenvatting van de gestelde technische eisen en randvoorwaarden voor het te ontwikkelen systeem.
+Deze specificaties zijn gebaseerd op huidige waarnemingen en kunnen gedurende het project variëren. Afhankelijk van uitgebreid onderzoek en testmomenten kan een duidelijker beeld gegeven worden over wat haalbaar is. Tabel \ref{tab:specificaties} geeft een overzicht van deze specificaties en dient als samenvatting van de gestelde technische eisen en randvoorwaarden voor het te ontwikkelen systeem.
 
 \begin{table}[htbp]
     \centering
@@ -24,21 +26,19 @@ Tabel \ref{tab:specificaties} geeft een overzicht van deze specificaties en dien
         \midrule
         \textbf{Meetbereik Snelheid} & De actuele snelheid die het systeem zonder fouten moet kunnen verwerken. & 0 tot 80 km/u & Must have \\
         
-        \textbf{Nauwkeurigheid ideale condities} & De maximale 2D-foutmarge van het systeem in ideale condities, passend bij de RTK-baseline. & Maximaal 1,4 cm afwijking & Must have \\
+        \textbf{Nauwkeurigheid ideale condities} & De maximale 2D-foutmarge van het systeem in ideale condities, passend bij de RTK-baseline. & Maximaal 1,5 cm afwijking & Must have \\
         
-        \textbf{Nauwkeurigheid bij uitval} & De maximaal toegestane positie-afwijking (drift) op het moment dat het GNSS-signaal tijdelijk wegvalt. & Maximaal 1,0 meter drift na 5 seconden uitval & Should have \\
+        \textbf{Nauwkeurigheid bij uitval} & De maximaal toegestane positie-afwijking (drift) op het moment dat het GNSS-signaal tijdelijk wegvalt. & Maximaal 10 cm afwijking na 5 seconden uitval & Should have \\
         
-        \textbf{Foutdetectie grens} & De harde drempelwaarde waarbij een GNSS-meting als onmogelijke sprong (bijv. multipath) wordt gezien. & 15 cm verschil per tijdstap & Must have \\
+        \textbf{Foutdetectie grens} & De harde drempelwaarde waarbij een GNSS meting als onmogelijke sprong (bijv. multipath) wordt gezien. & meer dan 10 cm verschil per tijdstap & Must have \\
         
-        \textbf{IMU Acceleratiebereik} & Hardware-instelling om de hoge mechanische impact van paardenhoeven zonder signaal-clipping te registreren. & Minimaal +/- 16 g & Must have \\
+        \textbf{IMU Acceleratiebereik} & Dynamisch bereik om hoge impact zonder signaal clipping te kunnen registreren & Minimaal +/- 16 g & Must have \\
         
-        \textbf{IMU Rotatiebereik} & Hardware-instelling om de onvoorspelbare, snelle rotaties van de atleet te kunnen meten. & Minimaal +/- 2000 dps & Must have \\
+        \textbf{IMU Rotatiebereik} & Bereik van rotatie om grote variaties zonder clipping te kunnen meten. & Minimaal +/- 2000 dps & Must have \\
         
         \textbf{Systeemfrequentie zenden} & De snelheid waarmee het systeem nieuwe, gevalideerde positiedata uitstuurt naar de logger. & 25 Hz & Must have \\
         
-        \textbf{Meetfrequentie IMU} & De interne snelheid waarmee de data van de IMU uitgelezen dient te worden. & Minimaal 100 Hz & Must have \\
-        
-        \textbf{Verwerkingssnelheid (Latency)} & De maximale tijd die de software nodig mag hebben om de sensorfusie over één tijdstap te berekenen. & Maximaal 10 ms per cyclus & Must have \\
+        \textbf{Verwerkingssnelheid (Latency)} & De maximale tijd die het systeem mag doen over het meten van de IMU & Maximaal 10 ms per cyclus & Must have \\
         \bottomrule
     \end{tabular}
 \end{table}

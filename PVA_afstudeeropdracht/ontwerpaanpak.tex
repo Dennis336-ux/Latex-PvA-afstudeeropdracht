@@ -1,21 +1,21 @@
 % !TeX root = main.tex
 
 \section{Ontwerpaanpak}
-Op basis van de vastgelegde specificaties en instructies wordt in korte, logische stappen naar een werkend systeem toegewerkt. Eerst wordt de basis vastgelegd waarbij zowel het plan als de eisen centraal staan. Vervolgens worden keuzes onderbouwd door middel van theorie en literatuur. Daarna wordt zowel de haalbaarheid aangetoond en het ontwerp uitgewerkt tot een Proof of Concept. Deze zal dan ook stapsgewijs worden getest om het geheel te valideren. Door dit stappenplan aan te houden kan tijdig onduidelijkheden voorkomen worden.
+Op basis van de vastgelegde specificaties en instructies wordt in korte, logische stappen naar een werkend systeem toegewerkt. Eerst wordt de basis vastgelegd waarbij zowel het plan als de eisen centraal staan. Vervolgens worden keuzes onderbouwd door middel van theorie en literatuur. Daarna wordt de haalbaarheid aangetoond en het ontwerp uitgewerkt tot een Proof of Concept. Deze zal dan ook stapsgewijs worden getest om het geheel te valideren. Door dit stappenplan aan te houden kan tijdig onduidelijkheden voorkomen worden.
 
 \subsection{Stappenplan}
 
 \begin{enumerate}
     \item \textbf{Plan van aanpak afronden:} In deze fase wordt het plan van aanpak definitief gemaakt. Het doel (verbetering van nauwkeurigheid in ingewikkelde omgevingen) en de scope (bestaande hardware, 2D-analyse) worden verzekerd. 
-    \item \textbf{Specificaties en Validatiecriteria:} De eisen worden vertaald naar meetbare parameters. Hier worden de eisen en doelen uiteengezet om zo tot een toetsbare criteria te komen. Denk aan maximale afwijking, snelheid en verwerkingssnelheid.
-    \item \textbf{Theoretische verdieping:} Hierbij wordt gericht onderzoek naar literatuurstudie verricht. Denk hierbij aan foutieve invloeden op het GNSS signaal, implementaties van filters voor data (Kalman Filter) en eventuele extra sensoren. Vervolgkeuzes zullen dan ook gebaseerd zijn op dit onderzoek. Hiernaast zal de werking van het huidige systeem duidelijk in kaart gebracht worden.
+    \item \textbf{Specificaties en Validatiecriteria:} De eisen worden vertaald naar meetbare parameters. Hier worden de eisen en doelen uiteengezet om zo tot een toetsbaar criterium te komen. Denk aan maximale afwijking, snelheid en verwerkingssnelheid.
+    \item \textbf{Theoretische verdieping:} Hierbij wordt gericht literatuuronderzoek verricht. Denk hierbij aan foutieve invloeden op het GNSS signaal, implementaties van filters voor data (Kalman Filter) en eventuele extra sensoren. Vervolgkeuzes zullen dan ook gebaseerd zijn op dit onderzoek. Hiernaast zal de werking van het huidige systeem duidelijk in kaart gebracht worden.
     \item \textbf{Verkrijgen van data en praktijk testen:} Om verbeteringen in het systeem duidelijk aan te kunnen tonen zal in eerste instantie nulmetingen verricht worden. Denk hierbij aan ideale situaties (open veld), ingewikkelde omgevingen (veel objecten) en dynamische bewegingen. Hiermee worden de prestaties van het huidige systeem zo veel als mogelijk in kaart gebracht. 
-    \item \textbf{Ontwerp en prototype:} De werking van de IMU wordt hier gerealiseerd. Data wordt hieruit verkregen en gesynchroniseerd met de data van GNSS. Stapsgewijs wordt hier een filter voor opgebouwd om zo de voorspelling van de IMU en de correcties van de GNSS correct te combineren. Dit zal resulteren in een prototype waarbij zijn data met die van de nulmeting wordt vergeleken. 
+    \item \textbf{Ontwerp en prototype:} De werking van de IMU wordt hier gerealiseerd. Gegevens wordt hieruit verkregen en gesynchroniseerd met de data van GNSS. Stapsgewijs wordt hier een filter voor opgebouwd om zo de voorspelling van de IMU en de correcties van de GNSS correct te combineren. Dit zal resulteren in een prototype waarbij zijn data met die van de nulmeting wordt vergeleken. 
     \item \textbf{Optimalisatie en Tuning:} Wanneer de globale werking van het prototype gerealiseerd is, kan er nauwkeuriger gekeken worden naar het optimaliseren van het systeem. In deze fase wordt het Kalman Filter (of eventueel een ander filter) iteratief afgesteld. Hier worden de parameters gekalibreerd op basis van de afwijking van de GNSS ontvanger. Hiernaast zal gekeken worden naar het accuraat vaststellen van foute metingen.
     \item \textbf{Validatie en Analyse:} Het systeem zal uitgebreid getest worden in vergelijkbare situaties als tijdens de nulmetingen. Hierbij zal aangetoond worden dat het systeem een aanzienlijke nuttige bijdrage heeft gegeven aan het huidige systeem. 
 \end{enumerate}
 
-Kijkend naar het stappenplan zal de voortgang voornamelijk bepaald worden aan de hand van de verkregen data. Hierbij is stap vier een belangrijk beslismoment aangezien onbruikbare data een foutieve meetopstelling kan betekenen. Dit zal namelijk de basis vormen voor de rest van het project.
+Kijkend naar het stappenplan zal de voortgang voornamelijk bepaald worden aan de hand van de verkregen data. Hierbij is stap vier een belangrijk beslismoment aangezien onbruikbare data tot een foutieve meetopstelling kan leiden. Dit zal namelijk de basis vormen voor de rest van het project.
 
 \newpage
 
@@ -24,17 +24,48 @@ Kijkend naar het stappenplan zal de voortgang voornamelijk bepaald worden aan de
 Het doel van de validatie is om aan te tonen dat het systeem de positienauwkeurigheid verbetert ten opzichte van het huidige RTK GNSS systeem. De validatie zal zich voornamelijk richten op de verwerking van data en de robuustheid van de software. Hardwarematige tests (extra sensoren) vallen buiten de scope, tenzij de tijd het toelaat. Als dit het geval is zal er nog een hardwarematige validatie plaatsvinden. 
 
 \subsection{Aanpak}
-De validatie vindt plaats door middel van veld testen gevolgd door data analyse. Verschillende datasets worden opgenomen in verschillende praktijkomstandigheden. Tijdens het project wordt tijdig een `nulmeting' uitgevoerd om zo duidelijk de huidige werking in kaart te brengen. In dit geval zal doormiddel van een voertuig het systeem een vastgelegde route afleggen omringt met gebouwen. Onder deze omstandigheden zullen reflecties en storingen regelmatig plaatsvinden dus dit is belangrijk om aan te tonen. Het systeem zal dan ook regelmatig getest worden tussendoor op vergelijkbare wijze zodat de data correct met elkaar vergeleken kan worden. Hiernaast zullen ook test op lage snelheid in open veld uitgevoerd worden. \\
+De validatie vindt plaats door middel van veld testen gevolgd door data analyse. Verschillende datasets worden opgenomen in verschillende praktijkomstandigheden. Tijdens het project wordt tijdig een `nulmeting' uitgevoerd om zo duidelijk de huidige werking in kaart te brengen. In dit geval zal door middel van een voertuig het systeem een vastgelegde route afleggen waarbij zowel het effect van een open veld als dat van een bebouwde omgeving duidelijk naar voren komt. Het systeem zal dan ook regelmatig getest worden tussendoor op vergelijkbare wijze zodat de data correct met elkaar vergeleken kan worden. Een voorbeeld van zo een testmoment is terug te zien in afbeelding \ref{fig:route_test}. Hierbij is een korte route afgelegd met vrij weinig obstakels. In figuur \ref{fig:missende_data} komt het probleem duidelijk naar voren dat datapunten missen. \\
 
-Om de uiteindelijk werking van het systeem te valideren zal gebruik gemaakt worden van het circuit op zandvoort. MYLAPS maakt vaker hier gebruik van door middel van een opstelling op één van de werkvoertuigen. Hiermee kan op gecontroleerde snelheden en een relatief open omgeving een zuivere meting uitgevoerd worden.\\
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{route_testmeting.png}
+        \caption{Route testmoment}
+        \label{fig:route_test}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{missende_datapunten.png}
+        \caption{Missende datapunten}
+        \label{fig:missende_data}
+    \end{subfigure}
+    \caption{In afbeelding a is de route die tijdens een testmoment is afgelegd uitgebeeld. Dit is gebeurd in een omgeving met vrij weinig obstakels. Afbeelding b laat zien dat er een aantal datapunten zijn weggevallen.}
+    \label{fig:testdag}
+\end{figure}
+
+Om de uiteindelijk werking van het systeem te valideren zal gebruik gemaakt worden van het circuit op Zandvoort. MYLAPS maakt vaker hier gebruik van door middel van een opstelling op één van de werkvoertuigen. Hiermee kan op gecontroleerde snelheden en een relatief open omgeving een zuivere meting uitgevoerd worden.\\
 
 Hiernaast zal gekeken worden om een officiële manege te contacteren om zo de praktijk zo veel als mogelijk na te bootsen. Bij alle testen zal een testrapport opgeleverd worden met opstelling, parameters en resultaten.
 
 
 \subsection{Beproevingen}
-Synchronisatie is cruciaal bij het combineren van de twee verschillende sensoren (IMU en GNSS). Er zal dan ook getoetst worden of de tijdstempels van de versnellingsdata en locatiedata voldoende gelijklopen om verwerkt te kunnen worden. Hiernaast zal normaliter de data live weergegeven worden waardoor de continuïteit van de data noodzakelijk is. Er wordt geverifieerd of er geen grote gaten aan data ontstaan die het filter kunnen verstoren. \\
+Tijdens de uitvoering van dit project kunnen zich verschillende risico's voordoen die de planning of het eindresultaat kunnen beïnvloeden. Om de voortgang te garanderen zijn er een aantal problemen vooraf geïdentificeerd zodat hier tijdig maatregelen tegen genomen kan worden. \\
 
-Om de nauwkeurigheid en robuustheid te controleren zal een vast traject doorlopen worden voor zowel ideale als niet ideale omstandigheden. Denk hierbij aan het testen in zowel een open veld als omgevingen met obstakels. Hierbij zal in ideale omstandigheden verwacht worden dat het systeem minimaal zo accuraat bedraagt als het originele systeem. Hiernaast zullen afwijkende resultaten gedetecteerd worden. 
+\begin{itemize}
+    \item \textbf{Wiskundige complexiteit}: Het ontwerpen van modellen en filters voor het maken van een schattingsmodel voor de data kan veel wiskunde kennis vereisen. Om dit op gang te helpen zal begonnen worden met een versimpeld model die voornamelijk lineair zal zijn. Hiernaast zal tijdig overlegd worden met de technische begeleider om te voorkomen dat het project hierop vastloopt.
+    \item \textbf{Onvoorspelbare dynamiek}: Een paard beweegt fundamenteel anders dan een voertuig zoals een auto. Tijdens het traject zullen dan ook regelmatig verticale klappen plaatsvinden en een sterk wisselende horizontale versnelling. Dit zal dan ook lastig te voorspellen zijn. Hiervoor zou eventueel stappendetectie toegevoegd kunnen worden om deze uitschieters te filteren.
+    \item \textbf{Foutieve metingen door omgeving}: Reflecties kunnen door meerdere objecten veroorzaakt worden zoals tribunes bij paardenraces. Om dit duidelijker in beeld te brengen is het nodig om regelmatig in de omgeving van soortgelijke objecten te testen.
+    \item \textbf{Oriëntatie bevestiging}: De module zal gemonteerd worden op het paard. Voor het berekenen van de verschillende krachten en oriëntatie zal rekening gehouden moeten worden met de bevestiging. In afbeelding \ref{fig:module_locatie} is een voorbeeld gegeven van waar de module zich zal bevinden op het paard. Het is dan ook belangrijk om het systeem onder verschillende oriëntaties te testen, waaronder die van het paard.
+\end{itemize}
+
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/horse_running.jpg}
+	\caption{Locatie van module op het paard}
+	\label{fig:module_locatie}
+\end{figure}
 
 \newpage
 
@@ -54,10 +85,13 @@ Om het gehele proces in kaart te brengen en een richtlijn te geven voor de te be
         \textbf{Week 1-2} & Literatuurstudie (IMU, EKF, Multipath). Analyse van de MYLAPS hardware en bestaande software. & Overzicht theorie \& hardware. \\
         \midrule
         
-        \textbf{Week 3-4} & Projectafbakening, opstellen van specificaties, afronden PvA. & Goedgekeurd PvA. \\
+        \textbf{Week 3} & Projectafbakening, opstellen van specificaties, afronden PvA. & Goedgekeurd PvA. \\
         \midrule
-        
-        \textbf{Week 5-8} & Uitvoeren van nulmetingen en analyseren van het huidige systeem. Programmeren van de data-uitlezing van de IMU. Synchroniseren van data van zowel GNSS als IMU. & Werkende hardware \& datalogger. Datasets \& Analyse. \\
+
+        \textbf{Week 4-5} & Uitvoeren van nulmetingen en analyseren van de data. Programmeren van de data-uitlezing van de IMU. & Gedeeltelijk werkende hardware. Datasets \& analyse. \\
+        \midrule
+
+        \textbf{Week 6-8} & Fine tunen van IMU data. Synchroniseren van data van zowel GNSS als IMU zodat het inzichtelijker wordt. & Werkende IMU \& nauwkeurige analyse met IMU samen. \\
         \midrule
         
         \textbf{Week 9-10} & Combineren van GNSS en IMU data door middel van een filter. & Eerste opzet van een filter. \\
@@ -66,13 +100,13 @@ Om het gehele proces in kaart te brengen en een richtlijn te geven voor de te be
         \textbf{Week 11-12} & Uitbreiden van het filter door grondig afwijkingen te simuleren. & Werkend filter. \\
         \midrule
         
-        \textbf{Week 13-14} & Testen en tunen van het algoritme om drift te meten in huidige datasets. & Geoptimaliseerd \& getuned algoritme. \\
+        \textbf{Week 13-16} & Testen en tunen van het algoritme om drift te meten in huidige datasets. Optioneel: Integreren van extra hardware sensoren (indien de tijd dit toelaat). & Geoptimaliseerd \& getuned algoritme.  \\
         \midrule
         
-        \textbf{Week 15-18} & Uitvoeren van definitieve veldtesten (Circuit Zandvoort en de manege) en analyse van de resultaten. Eventueel verbeteren van fouten. Optioneel: Integreren van extra hardware sensoren (indien de tijd dit toelaat). & Testrapporten en validatie. \\
+        \textbf{Week 17-18} & Uitvoeren van definitieve veldtesten (Circuit Zandvoort en de manege) en analyse van de resultaten. Eventueel verbeteren van fouten. & Testrapporten en validatie. \\
         \midrule
         
-        \textbf{Week 19-20} & Conclusies formuleren, gericht advies uitschrijven. Afronden van het definitieve afstudeerverslag en voorbereiden van de verdediging. & Afstudeerverslag \& Eindpresentatie. \\
+        \textbf{Week 19-20} & Afronden van het product. Conclusies formuleren, gericht advies uitschrijven. Afronden van het definitieve afstudeerverslag en voorbereiden van de verdediging. & Afstudeerverslag \& Eindpresentatie. \\
         \bottomrule
     \end{tabular}
 \end{table}

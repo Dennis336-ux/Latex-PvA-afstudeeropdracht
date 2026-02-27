@@ -19,5 +19,5 @@
 \contentsline {section}{\numberline {9}Validatie}{16}{section.9}%
 \contentsline {subsection}{\numberline {9.1}Aanpak}{16}{subsection.9.1}%
 \contentsline {subsection}{\numberline {9.2}Beproevingen}{16}{subsection.9.2}%
-\contentsline {section}{\numberline {10}Planning}{17}{section.10}%
-\contentsline {section}{Bronnen}{18}{table.caption.5}%
+\contentsline {section}{\numberline {10}Planning}{18}{section.10}%
+\contentsline {section}{Bronnen}{19}{table.caption.7}%
