@@ -1,0 +1,67 @@
+\section{implementatie}
+
+Voordat begonnen kan worden aan de implementatie zal grondig gekeken moeten worden naar het huidige systeem en hoe die werkt. Denk hierbij aan hoe de componenten in elkaar zitten, welke relevanten onderdelen het bevat en hoe de software in elkaar zit. 
+
+
+
+\subsection{Testopstelling programmeren van het bord}
+Voor de eindgebruiker is het systeem ontworpen om draadloos firmware door middel van Over The Air (OTA) updates te sturen. Tijdens het ontwikkel process is dit echter een onpraktische methode. Het is namelijk traag en biedt geen mogelijkheid om duidelijk te kunnen debuggen. Hierom wordt tijdens het ontwikkelen gebruikgemaakt van een SEGGER J-Link debug probe \cite{microchip-tseg-jlink}. \\ 
+
+Hoewel de J-Link standaard een 20 pins JTAG connector ter beschikking heeft, maakt de microcontroller op het printplaat gebruik van de Serial Wire Debug (SWD) interface. SWD is ontworpen voor ARM processoren en vereist minder verbindingen dan JTAG. Uit de documentatie van het bord blijkt dat er slechts 4 pinnen nodig zijn om software te flashen: \\
+
+
+\vspace{-0.5em}
+\noindent
+\begin{minipage}{0.6\textwidth}
+\begin{itemize}
+\setlength{\itemsep}{1.em}
+    \item VCC / Vref (Voltage Reference): Dit meet het spanningsniveau van de microcontroller, zodat de datasignalen hierop afgestemd kunnen worden.
+    \item GND (Ground)
+    \item SWDIO (Serial Wire Debug I/O): Dit is een bidirectionele pin bedoeld voor de data overdracht.
+    \item SWCLK (Serial Wire Clock): Dit levert het kloksignaal om de communicatie te synchroniseren.
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\textwidth}
+\centering
+\includegraphics[width=0.6\linewidth]{JTAG_Pinout.png}
+\captionof{figure}{Pinout van de JTAG connector \cite{microchip-tseg-jlink}}
+\label{fig:JTAG}
+\end{minipage} 
+
+\bigskip
+
+In figuur \ref{fig:JTAG} is te zien dat pinnen 1, 7, 9 en één van de GND pinnen hiervoor gebruikt kunnen worden. Aangezien er geen debug header ter beschikking is op het bord, worden deze vier signalen toegankelijk door specifieke test pads op de PCB. Voor de ontwikkelopstelling zijn hier tijdelijk draden aan gesoldeerd die direct in verbinding staan met de J-Link. \\
+
+Bij het maken van de eerste verbinding via de J-Link moet er rekening mee gehouden worden dat de microcontroller beveiligd is. Om nieuwe software te kunnen flashen en te kunnen debuggen, moet de chip volledig gewist worden, waarbij alle bestaande firmware en instellingen verloren gaan. Voor een correcte werking van het systeem is het echter noodzakelijk dat er na het wissen specifieke productiedata in het externe flash geheugen wordt teruggeplaatst. Zonder deze data in de flash zal de applicatie niet correct opstarten. \\
+
+Om de code succesvol te kunnen compileren en via de J-Link naar de microcontroller te flashen, is additionele software nodig. Omdat het project gebruikmaakt van een Linux omgeving zullen de volgende componenten geïnstalleerd worden voor een correcte omgeving: 
+
+\begin{itemize}
+    \item \textbf{Windows Subsystem for Linux (WSL2):} Dit biedt een Linux omgeving (bijvoorbeeld Ubuntu) binnen Windows. Dit is noodzakelijk voor het draaien van de huidige scripts binnen het systeem.
+    \item \textbf{USBIPD-WIN:} Aangezien WSL standaard geen directe toegang heeft tot fysieke USB poorten van de computer, wordt deze software gebruikt om de fysieke J-Link probe te verbinden met de virtuele Linux omgeving.
+    \item \textbf{J-Link Software:} Bevat de benodigde drivers en software (zoals de J-Link GDB Server en JLinkExe) binnen Linux om daadwerkelijk te kunnen communiceren met de debug probe.
+    \item \textbf{Cross-Compiler Toolchain (bijv. ARM GCC):} Omdat de code op een x86-computer wordt geschreven maar op een ARM-microcontroller moet draaien, is een cross-compiler (zoals \textit{gcc-arm-none-eabi}) nodig om de C/C++ code te vertalen naar de juiste machinecode.
+\end{itemize}
+
+
+\subsection{Uitlezen IMU}
+
+In het huidige systeem bevindt zich al een IMU waarbij de accelerometer al gedeeltelijk geïntegreerd is in de software. Hierbij wordt de ruwe data uitgelezen, echter wordt hier verder niks mee gedaan. Bovendien wordt de gyroscoop data niet uitgelezen. Kijkend naar de datasheet zijn een aantal registers hiervoor handig.
+
+\begin{itemize}
+    \item CTRL1\_XL: Dit is een configuratieregister voor de accelerometer. Doormiddel van dit register kan de output data rate (ODR), het meetbereik (full scale) en de filterinstellingen ingesteld worden.
+    \item ASM\_CTRL2\_G: Dit is het configuratieregister van de gyroscoop. Hiermee kan de ODR en het meetbereik van de gyroscoop ingesteld worden.
+    \item CTRL3\_C: Dit is een algemeen configuratieregister. Hierbij wordt de blokdata update (BDU) ingesteld om zo de waardes correct uit te lezen zonder glitches.
+    \item CTRL4\_C: Dit register bevat extra filteropties voor de gyroscoop.
+    \item CTRL6\_C
+    \item CTRL7\_G
+    \item CTRL8\_XL
+    \item STATUS\_REG
+    \item OUTX\_L\_G
+    \item OUTX\_L\_A
+\end{itemize}
+
+
+
+\newpage

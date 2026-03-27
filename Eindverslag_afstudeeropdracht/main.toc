@@ -1,7 +1,16 @@
 \contentsline {section}{\numberline {1}Voorwoord}{2}{section.1}%
 \contentsline {section}{\numberline {2}Samenvatting}{3}{section.2}%
-\contentsline {section}{\numberline {3}Inleiding}{4}{section.3}%
-\contentsline {section}{\numberline {4}Vooronderzoek}{5}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Testopstelling programmeren van het bord}{5}{subsection.4.1}%
-\contentsline {section}{\numberline {5}Specificaties}{6}{section.5}%
-\contentsline {section}{Bronnen}{7}{table.caption.2}%
+\contentsline {section}{\numberline {3}Inleiding}{5}{section.3}%
+\contentsline {section}{\numberline {4}Robuuste Lokalisatie in Complexe Omgevingen}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}GNSS}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Nauwkeurigheid via RTK}{6}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Gebreken}{6}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Sensor Fusion}{9}{section.5}%
+\contentsline {section}{\numberline {6}Specificaties}{11}{section.6}%
+\contentsline {section}{\numberline {7}ontwerp}{12}{section.7}%
+\contentsline {section}{\numberline {8}implementatie}{13}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Testopstelling programmeren van het bord}{13}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Uitlezen IMU}{14}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Resultaten en validatie}{15}{section.9}%
+\contentsline {section}{\numberline {10}Discussie}{16}{section.10}%
+\contentsline {section}{Bronnen}{17}{section.10}%

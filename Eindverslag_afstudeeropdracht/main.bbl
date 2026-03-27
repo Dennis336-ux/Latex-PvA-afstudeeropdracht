@@ -19,6 +19,127 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
+    \entry{stmicro_asm330lhh}{manual}{}{}
+      \list{organization}{1}{%
+        {STMicroelectronics}%
+      }
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{note}{Datasheet. [Online]. Available: https://www.st.com/en/mems-and-sensors/asm330lhh.html. Geraadpleegd op 24 februari 2026}
+      \field{title}{ASM330LHH: Automotive 6-Axis Inertial Module: 3D Accelerometer and 3D Gyroscope}
+      \field{year}{2021}
+    \endentry
+    \entry{GNSSConstellations2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=bdc3027cb9297ec4dffa0c5fda2daceb}{%
+           family={{Global GPS Systems}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{fullhash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{fullhashraw}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{bibnamehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authorbibnamehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authornamehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authorfullhash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authorfullhashraw}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{[Online]. Available: https://globalgpssystems.com/gnss/gnss-constellations-how-they-work-and-how-they-improve-gps/}
+      \field{note}{Geraadpleegd op 9 februari 2026}
+      \field{title}{GNSS Constellations: How They Work and How They Improve GPS}
+      \field{year}{2026}
+    \endentry
+    \entry{gpsgeometer_rtk}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=42ed88ab4e883769e419f782ccfd6e4b}{%
+           family={{GPS Geometer}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{42ed88ab4e883769e419f782ccfd6e4b}
+      \strng{fullhash}{42ed88ab4e883769e419f782ccfd6e4b}
+      \strng{fullhashraw}{42ed88ab4e883769e419f782ccfd6e4b}
+      \strng{bibnamehash}{42ed88ab4e883769e419f782ccfd6e4b}
+      \strng{authorbibnamehash}{42ed88ab4e883769e419f782ccfd6e4b}
+      \strng{authornamehash}{42ed88ab4e883769e419f782ccfd6e4b}
+      \strng{authorfullhash}{42ed88ab4e883769e419f782ccfd6e4b}
+      \strng{authorfullhashraw}{42ed88ab4e883769e419f782ccfd6e4b}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{[Online]. Available: https://gpsgeometer.com/en/blog/what-is-gnss-rtk-and-how-does-it-work}
+      \field{note}{Geraadpleegd op 9 februari 2026}
+      \field{title}{What Is GNSS RTK and How Does It Work?}
+      \field{year}{2023}
+    \endentry
+    \entry{gpsgov2026accuracy}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=96a68ae615f582c8eccd9a641f599852}{%
+           family={{GPS.gov}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{96a68ae615f582c8eccd9a641f599852}
+      \strng{fullhash}{96a68ae615f582c8eccd9a641f599852}
+      \strng{fullhashraw}{96a68ae615f582c8eccd9a641f599852}
+      \strng{bibnamehash}{96a68ae615f582c8eccd9a641f599852}
+      \strng{authorbibnamehash}{96a68ae615f582c8eccd9a641f599852}
+      \strng{authornamehash}{96a68ae615f582c8eccd9a641f599852}
+      \strng{authorfullhash}{96a68ae615f582c8eccd9a641f599852}
+      \strng{authorfullhashraw}{96a68ae615f582c8eccd9a641f599852}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{[Online]. Available: https://www.gps.gov/gps-accuracy-0}
+      \field{note}{Geraadpleegd op 9 februari 2026}
+      \field{title}{GPS Accuracy}
+      \field{year}{2026}
+    \endentry
+    \entry{Meng2017RobustLocalization}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=5d7cfdf14768e19ed402154ca9e7f128}{%
+           family={Meng},
+           familyi={M\bibinitperiod},
+           given={X.},
+           giveni={X\bibinitperiod}}}%
+        {{hash=39856f0439f35f79a8eed8b12d26166c}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=f29effe391f71e68756a19ab272a6123}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{295687a1e23385976921daa29939cf08}
+      \strng{fullhash}{295687a1e23385976921daa29939cf08}
+      \strng{fullhashraw}{295687a1e23385976921daa29939cf08}
+      \strng{bibnamehash}{295687a1e23385976921daa29939cf08}
+      \strng{authorbibnamehash}{295687a1e23385976921daa29939cf08}
+      \strng{authornamehash}{295687a1e23385976921daa29939cf08}
+      \strng{authorfullhash}{295687a1e23385976921daa29939cf08}
+      \strng{authorfullhashraw}{295687a1e23385976921daa29939cf08}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sensors}
+      \field{number}{9}
+      \field{title}{A Robust Vehicle Localization Approach Based on GNSS/IMU/DMI/LiDAR Sensor Fusion for Autonomous Vehicles}
+      \field{volume}{17}
+      \field{year}{2017}
+      \field{pages}{2140}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/s17092140
+      \endverb
+    \endentry
     \entry{microchip-tseg-jlink}{online}{}{}
       \name{author}{1}{}{%
         {{hash=ca5591180cbfb45e6d0a8fa635b35084}{%
@@ -46,6 +167,156 @@
       \verb{url}
       \verb https://www.microchip.com/en-us/development-tool/tseg-jlink
       \endverb
+    \endentry
+    \entry{NovAtelGNSSerrorSources2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3ea7e430eeeee35d7001093aaceb259f}{%
+           family={NovAtel},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{fullhash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{fullhashraw}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{bibnamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorbibnamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authornamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorfullhash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorfullhashraw}{3ea7e430eeeee35d7001093aaceb259f}
+      \field{extraname}{1}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{[Online]. Available: https://novatel.com/an-introduction-to-gnss/gnss-error-sources}
+      \field{note}{Geraadpleegd op 12 februari 2026}
+      \field{title}{Chapter 4: GNSS Error Sources}
+      \field{year}{2026}
+    \endentry
+    \entry{novatel_computation}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3ea7e430eeeee35d7001093aaceb259f}{%
+           family={NovAtel},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{fullhash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{fullhashraw}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{bibnamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorbibnamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authornamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorfullhash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorfullhashraw}{3ea7e430eeeee35d7001093aaceb259f}
+      \field{extraname}{2}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{[Online]. Available: https://novatel.com/an-introduction-to-gnss/chapter-2-basic-gnss-concepts/step-4-computation}
+      \field{note}{Geraadpleegd op 11 februari 2026}
+      \field{title}{Step 4 - Computation: Calculating the Position}
+    \endentry
+    \entry{NovAtelMultipath2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3ea7e430eeeee35d7001093aaceb259f}{%
+           family={NovAtel},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{fullhash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{fullhashraw}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{bibnamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorbibnamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authornamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorfullhash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorfullhashraw}{3ea7e430eeeee35d7001093aaceb259f}
+      \field{extraname}{3}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{[Online]. Available: https://novatel.com/tech-talk/an-introduction-to-gnss/resources/understanding-and-mitigating-gnss-multipath-interference-and-error}
+      \field{note}{Geraadpleegd op 10 februari 2026}
+      \field{title}{Understanding and Mitigating GNSS Multipath Interference and Error}
+      \field{year}{2026}
+    \endentry
+    \entry{valente2020accuracy}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=0c4d60e2ac164609d1bf0f86d54fc3b4}{%
+           family={Valente},
+           familyi={V\bibinitperiod},
+           given={D.\bibnamedelimi S.\bibnamedelimi M.},
+           giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=72cda355e6138cd563607315bd7e148e}{%
+           family={Momin},
+           familyi={M\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e53bd5313aacc1d2a56200ba4ab48f90}{%
+           family={Grift},
+           familyi={G\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3cbd1768be9f750c840e1690bf240b5b}{%
+           family={Hansen},
+           familyi={H\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{c3990519210916fe9ae091350d6ae802}
+      \strng{fullhash}{2586b970fb51fb2038d71304cc4a9e2c}
+      \strng{fullhashraw}{2586b970fb51fb2038d71304cc4a9e2c}
+      \strng{bibnamehash}{c3990519210916fe9ae091350d6ae802}
+      \strng{authorbibnamehash}{c3990519210916fe9ae091350d6ae802}
+      \strng{authornamehash}{c3990519210916fe9ae091350d6ae802}
+      \strng{authorfullhash}{2586b970fb51fb2038d71304cc4a9e2c}
+      \strng{authorfullhashraw}{2586b970fb51fb2038d71304cc4a9e2c}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computers and Electronics in Agriculture}
+      \field{title}{Accuracy and precision evaluation of two low-cost RTK global navigation satellite systems}
+      \field{volume}{168}
+      \field{year}{2020}
+      \field{pages}{105142}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.compag.2019.105142
+      \endverb
+    \endentry
+    \entry{pmc_sensorfusion}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=01a783820fca905cdcff203f64caa39f}{%
+           family={Yin},
+           familyi={Y\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=8afab9bdc9b292debbeb136dfd97036c}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=62e98841042349d6ef5c8c2ed88da01a}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{fullhash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{fullhashraw}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{bibnamehash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{authorbibnamehash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{authornamehash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{authorfullhash}{083bbdd93c92ab67a8845c2e43d40a57}
+      \strng{authorfullhashraw}{083bbdd93c92ab67a8845c2e43d40a57}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sensors}
+      \field{title}{Sensor Fusion of GNSS and IMU Data for Robust Localization via Smoothed Error State Kalman Filter}
+      \field{year}{2022}
     \endentry
   \enddatalist
 \endrefsection

@@ -1,22 +1,82 @@
 % !TeX root = main.tex
 
-\section{Vooronderzoek}
+\section{Robuuste Lokalisatie in Complexe Omgevingen}
+Binnen de wereld van competitieve sporten en evenementen, zoals marathons, wielerrondes en rallyraces, zijn nauwkeurige tijd en plaatsbepaling noodzakelijk. Tegenwoordig wordt er bij moderne analyses en live tracking verwacht dat er continu een accurate positiebepaling van de deelnemers plaatsvindt. Wedstrijden hangen namelijk vaak af van fracties van seconden en centimeters. In dit hoofdstuk wordt dan ook de nadruk gelegd op het huidige systeem en zijn beperkingen.
 
-\subsection{Testopstelling programmeren van het bord}
-Voor de eindgebruiker is het systeem ontworpen om draadloos firmware door middel van Over The Air (OTA) updates te sturen. Tijdens het ontwikkel process is dit echter een onpraktische methode. Het is namelijk relatief traag en biedt geen mogelijkheid om te debuggen (denk aan het instellen van breakpoints of het uitlezen van variabelen). Hierom wordt tijdens het ontwikkelen gebruikgemaakt van een SEGGER J-link debug probe \cite{microchip-tseg-jlink}. \\ 
 
-Hoewel de J-Link standaard een 20 pins JTAG connector ter beschikking heeft, maakt de microcontroller op het printplaat gebruik van de Serial Wire Debug (SWD) interface. SWD is ontworpen voor ARM processoren en vereist minder verbindingen dan JTAG. Uit de documentatie van het bord blijkt dat er slechts 4 pinnen nodig zijn om software te flashen: 
+\subsection{GNSS}
+
+De basis voor moderne positiebepaling wordt gevormd door Global Navigation Satellite Systems (GNSS), de overkoepelende term voor systemen zoals het Amerikaanse GPS en het Europese Galileo. Deze systemen hebben een vergelijkbare werking, maar zijn geoptimaliseerd voor de regio waarbij ze horen. Denk aan GPS voor Amerika, Galileo voor Europa, IRNSS voor India of BeiDou voor China. In de kern functioneert GNSS door middel van timing \cite{GNSSConstellations2026}. De ontvanger berekent zijn positie door de exacte reistijd van signalen tussen de satellieten en de antenne te meten. Bij lange of korte reistijd zal de positie aanzienlijk variëren. Om een betrouwbare driedimensionale positie te bepalen, is verbinding met minimaal vier satellieten vereist \cite{novatel_computation}. Dit minimum is noodzakelijk om de vier onbekende variabelen op te lossen: de breedtegraad, lengtegraad, hoogte en de tijdsafwijking van de receiver clock. Hoe meer satellieten daarbovenop worden meegenomen, hoe nauwkeuriger de uitkomst zal zijn. Aangezien de afstand direct is af te leiden uit de verstreken tijd, is nauwkeurige tijdmeting en synchronisatie noodzakelijk. \\ 
+
+Hoewel GNSS-ontvangers breed inzetbaar zijn, kent deze techniek beperkingen. Een standaard smartphone-GPS behaalt onder ideale omstandigheden een nauwkeurigheid van grofweg 4,9 meter \cite{gpsgov2026accuracy}. Voor het nauwkeurig volgen van een atleet of voertuig op een wedstrijdparcours is deze foutmarge vaak onacceptabel groot. Om dit te verhelpen wordt tegenwoordig regelmatig gebruik gemaakt van een techniek genaamd Real-Time Kinematic (RTK). Hierover wordt meer informatie geleverd in paragraaf 3.2.
+
+\subsection{Nauwkeurigheid via RTK}
+Om deze beperkingen te overkomen, wordt gebruikgemaakt van Real-Time Kinematic (RTK). Dit systeem bestaat uit twee ontvangers, namelijk een stationair `Base Station' op een bekende locatie en een mobiele `Rover Receiver' \cite{gpsgeometer_rtk}. Het basisstation berekent afwijkingen die veroorzaakt worden door clock errors en vertragingen van het satellietsignaal door de atmosfeer. Denk hierbij aan invloeden door ionen, maar ook temperatuur en luchtvochtigheid. Deze correcties worden verstuurd naar de Rover, waardoor een theoretische nauwkeurigheid van minder dan 50 mm behaald kan worden \cite{valente2020accuracy}. Deze afwijkingen en gebreken worden in de hieropvolgende paragraaf beschreven.
+
+
+\subsection{Gebreken}
+De hoge nauwkeurigheid is in de praktijk sterk afhankelijk van de omgeving. Omdat GNSS gebaseerd is op de aankomsttijd van signalen, is het systeem kwetsbaar voor signaalreflecties en blokkades \cite{NovAtelMultipath2026}. Hieronder zijn dan ook een aantal prominente fouten die relevant zijn kijkend naar GNSS:
+
+\begin{enumerate}
+	\item \textbf{Non Line of Sight (NLOS):} De directe zichtlijn naar de satelliet is geblokkeerd. Het gebruik van RTK helpt hierbij aangezien het meestal gebruik maakt van een 'base' van een zekere hoogte om zo objecten te vermijden.
+	\item \textbf{Multipath effecten:} Het signaal weerkaatst tegen een object voordat het de antenne bereikt. Hierdoor legt het signaal een langere weg af en komt het later aan. De ontvanger interpreteert deze extra reistijd onterecht als een grotere afstand tot de satelliet, wat resulteert in een positiefout. Dit is dan ook in recent onderzoek naar robuuste lokalisatie van Yuming Yin \cite{pmc_sensorfusion} aangetoond. Hieruit blijkt dat in dergelijke situaties de maximale nauwkeurigheid niet behouden kan worden.
+	\item \textbf{Satelliet klok:} De GNSS satellieten bevatten atoomklokken die zeer nauwkeurig zijn, maar toch kunnen afwijken. Een afwijking van 10 ns kan resulteren in een fout van drie meter \cite{NovAtelGNSSerrorSources2026}. Om hiervoor te compenseren kan er zeer nauwkeurige klok informatie van een Space Based Augmentation System (SBAS) of Precise Point Positioning (PPP) service provider gedownload worden. Dit bevat correcties voor deze afwijkingen die berekend worden door de SBAS of PPP. Hiernaast is het gebruiken van RTK een goede oplossing.
+	\item \textbf{Baanafwijkingen:} Naast het feit dat de klok kan afwijken, is dit ook het geval wanneer er gekeken wordt naar het traject dat de satelliet aflegt. Hierbij is RTK een goede oplossing.
+	\item \textbf{Ionospheric delay:} De ionosfeer is een laag in de atmosfeer die zich tussen de 50 en 1000 km boven aarde bevindt. De ionen die zich hierin bevinden beïnvloeden de transmissietijd van de satelliet  signalen. Aangezien deze condities in een lokaal gebied vrij gelijk zijn, zullen zowel de receiver als de base station van de RTK een vergelijkbare vertraging meemaken. Hiervoor kan dan ook gecompenseerd worden.
+	\item \textbf{Tropospheric delay:} Dit is de laag in de atmosfeer die het dichtstbij de aarde ligt. Hierbij ontstaat vertraging door verandering in temperatuur, luchtvochtigheid en druk. Ook hier kan de RTK voor compenseren aangezien deze condities vrij constant zijn in het te meten gebied.
+\end{enumerate}
+
+De multipath en NLOS effecten zijn door `Novatel' uitgebeeld zoals te zien is in figuur \ref{fig:multipath}. Bovendien zijn de afwijkingen aangetoond in tabel \ref{tab:gnss_error_sources}.
+
+
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{images/multipath voorbeeld.png}
+	\caption{In de afbeelding is het effect van zowel multipath als non line of sight in statistieken uiteengezet. De groene lijn staat voor het directe signaal, en de gele en blauwe staan voor de multipath signalen. De zwarte lijn is wat de ontvanger waarneemt \cite{NovAtelMultipath2026}}
+	\label{fig:multipath}
+\end{figure}
+
+
+\begin{table}[h]
+	\centering
+	\caption{Belangrijkste GNSS foutbronnen en hun typische foutbereik \cite{NovAtelMultipath2026}}
+	\label{tab:gnss_error_sources}
+	\begin{tabular}{l c}
+		\hline
+		\textbf{Foutbron}   & \textbf{Typisch foutbereik} \\
+		\hline
+		Multipath           & $\pm 1$ m                   \\
+		Satelliet klok      & $\pm 2$ m                   \\
+		Baanafwijkingen     & $\pm 2.5$ m                 \\
+		Ionospheric delays  & $\pm 5$ m                   \\
+		Tropospheric delays & $\pm 0.5$ m                 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Het gebruik van RTK-GNSS biedt dan ook een grote verbetering in precisie, maar kent dus alsnog meerdere gebreken. Het systeem heeft moeite met zichzelf corrigeren en zal dan ook regelmatig foutieve waarden als waarheid zien. In de topsport is garantie voor nauwkeurige data noodzakelijk. Om dit op te lossen wordt gekeken naar Sensor Fusion dat in het hieropvolgende hoofdstuk beschreven wordt.
+
+\newpage
+
+
+\section{Sensor Fusion}
+Om deze beperkingen aan te pakken, wordt voornamelijk gekeken naar de sensorfusie van de IMU, aangezien dit een van de meest prominente oplossingen is. Hoewel een IMU autonoom werkt en ongevoelig is voor signaalverlies (zoals vermeld in 2.3), bevat dit zelf ook beperkingen. IMU's zijn namelijk gevoelig voor mechanische storingen, zoals trillingen tijdens de galop van een paard. Hiernaast bevatten diverse IMU's een magnetometer waardoor magnetische velden ook invloed hebben op de resultaten. \\
+
+Binnen de huidige hardware van MYLAPS wordt momenteel gebruikgemaakt van de ASM330LHH, een 6 assige IMU \cite{stmicro_asm330lhh}. Deze sensor is uitgerust met een 3 assige accelerometer en een 3 assige gyroscoop. Door de data van deze sensoren in de tijd te integreren, kan de IMU continu een complete navigatiestatus (relatieve positie, snelheid en oriëntatie) leveren. Een 6 assige sensor mist echter een absolute referentie voor het noorden. Hierdoor is het mogelijk dat na verloop van tijd `heading drift' (een afwijking in de koers) ontstaat. Door deze beperkingen kan de IMU niet als standalone systeem gebruikt worden. Een eventuele overstap naar een 9 assige IMU, waarbij een magnetometer is toegevoegd, kan theoretisch nuttig zijn om drift te corrigeren. \\
+
+De noodzaak om deze sensoren te combineren is gebaseerd op het feit dat ze elkaar nuttig aanvullen. Waar de IMU op korte termijn zeer responsief is maar op lange termijn wegdrift, biedt GNSS juist een absolute positiebepaling. Door beide systemen te combineren, ontstaat er een robuuste oplossing. De IMU blijft de positie schatten wanneer GNSS wegvalt of onbetrouwbaar is door obstakels, terwijl de GNSS metingen worden gebruikt om de drift van de IMU te corrigeren en de fouten te beperken. \\
+
+Bij het combineren van deze twee systemen komt meer kijken dan alleen het vergelijken van de data met elkaar. Een veel voorkomend algoritme hiervoor is de Extended Kalman Filter (EKF). Dit is belangrijk aangezien bewegingsmodellen zelden lineair zijn. Het EKF algoritme lost dit op door niet lineaire systeemdynamiek lineair te maken en te benaderen rondom de huidige staatsschatting (current state estimates) \cite{Meng2017RobustLocalization}. Hiermee kan, ondanks de ruis in de metingen, toch een optimale schatting van de positie gemaakt worden. \\
+
+Naast de basisconfiguratie van GNSS en IMU, wordt in het onderzoek ook gekeken naar andere sensoren om de nauwkeurigheid te verbeteren. Bestaande methodes worden hieronder weergegeven:
 
 \begin{itemize}
-    \item VTref (Voltage Reference): Dit meet het spanningsniveau van de microcontroller, zodat de datasingalen hierop afgestemd kunnen worden.
-    \item GND (Ground)
-    \item SWDIO (Serial Wire Debug I/O): Dit is een bidirectionele pin bedoeld voor de data overdracht.
-    \item SWCLK (Serial Wire Clock): Dit levert het kloksignaal om de commnicatie te synchroniseren.
+	\item  \textbf{Magnetometer:} Tegenwoordig zijn er diverse IMU sensoren beschikbaar in zowel 6 als 9 assige varianten. Bij een 9 assige sensor is, naast de accelerometer en gyroscoop, een 3 assige magnetometer geïntegreerd. Deze extra sensor meet het magnetisch veld van de aarde om zo een absolute referentie voor het noorden te bieden. Dit lost in theorie het probleem van 'heading drift' op, echter brengt de integratie hiervan aanzienlijke risico's met zich mee. Ze zijn namelijk extreem gevoelig voor lokale magnetische interferentie die door verschillende omstandigheden veroorzaakt kan worden. Denk hierbij aan interne componenten op de printplaat van de tracker, zoals de batterij en de antenne, als de externe omgeving, zoals tribunes of hekwerken. Om deze foutbronnen te vermijden zal afgewogen moeten worden of het risico van deze magnetische storingen opweegt tegen de voordelen. Bovendien zal achterhaald moeten worden of de toevoeging hiervan daadwerkelijk nuttig is voor deze gebruiksomstandigheden.
+	\item \textbf{Odometrie (DMI/stappenteller):} Om nog eventuele fouten van de IMU te beperken, wordt vaak een Distance Measuring Instrument toegevoegd (DMI). Een belangrijk voordeel hiervan is dat dit een accurate snelheidsmeting biedt. Foutieve metingen bij stilstand kunnen dan ook genegeerd worden.
+	\item \textbf{Doppler radar:} Een Doppler radar meet de snelheid van een object door radiogolven (microgolven) te stralen naar een object en de frequentieverschuiving van het teruggekaatste signaal (het Doppler-effect) te analyseren. Door dit schuin naar de grond te stralen kan een bepaalde grondsnelheid achterhaald worden. Net zoals bij de Stappenteller is de snelheid erg van nut, echter is het realiseren in de praktijk hiervan zeer ingewikkeld. Een betrouwbare meting vereist namelijk een constante meethoek en een niet onderbroken zichtlijn naar de grond. Door de dynamische bewegingen van het paard lijkt dit vrij onrealistisch.
+	\item \textbf{LiDAR:} Het gebruik van LiDAR (Light Detection and Ranging) wordt momenteel al op diverse manieren toegepast bij autonome voertuigen. Dit maakt het mogelijk om positiefouten te corrigeren door de omgeving, zoals stoepranden of muren, nauwkeurig in kaart te brengen. De afstand tot obstakels kan hiermee berekend worden om zo drift van het systeem te compenseren \cite{Meng2017RobustLocalization}. Ook al is dit zeer accuraat, zal dit ongeschikt zijn voor deze toepassing. Ze zijn fysiek te groot en verbruiken veel energie voor een compacte tracker.
+	\item  \textbf{Vision Aided Navigation (Camera):} Een belangrijk hulpmiddel kan ook fotogrammetrie zijn. Door het gebruik van een camera kunnen objecten gedetecteerd worden en zo een absolute positie bepaald worden \cite{NovAtelMultipath2026}. Wanneer een voorwerp herkend wordt, zal de verandering in achtereenopvolgende beelden een relatieve positie verschuiving in 3D aangeven. Hier komt echter hetzelfde argument naar voren als bij de LiDAR. Het systeem is te grootschalig voor de paardensport.
 \end{itemize}
-
-Aangezien er geen debug header ter beschikking is op het bord, worden deze vier signalen toegankelijk door specifieke test pads op de PCB. Voor de ontwikkelopstelling zijn hier tijdelijk draden aan gesoldeerd die direct in verbinding staan met de J-Link. \\
-
-
 
 
 \newpage

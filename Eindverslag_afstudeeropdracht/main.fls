@@ -293,6 +293,8 @@ INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\amsma
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsbsy.sty
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsbsy.sty
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\enumitem\enumitem.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\enumitem\enumitem.sty
 INPUT .\main.aux
 INPUT .\main.aux
 INPUT main.aux
@@ -302,8 +304,6 @@ INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\context\bas
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
-INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\grfext\grfext.sty
-INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\grfext\grfext.sty
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
@@ -359,6 +359,10 @@ INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
 INPUT .\main.toc
 INPUT .\main.toc
 INPUT main.toc
@@ -390,6 +394,29 @@ INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
+INPUT .\images\multipath voorbeeld.png
+INPUT .\images\multipath voorbeeld.png
+INPUT .\images\multipath voorbeeld.png
+INPUT .\images\multipath voorbeeld.png
+INPUT .\images\multipath voorbeeld.png
+INPUT .\images\multipath voorbeeld.png
+INPUT .\images\multipath voorbeeld.png
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
 INPUT .\specificaties.tex
 INPUT .\specificaties.tex
 INPUT .\specificaties.tex
@@ -399,7 +426,42 @@ INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
+INPUT .\systeemontwerp.tex
+INPUT .\systeemontwerp.tex
+INPUT systeemontwerp.tex
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\implementatie.tex
+INPUT .\implementatie.tex
+INPUT implementatie.tex
+INPUT .\images\JTAG_Pinout.png
+INPUT .\images\JTAG_Pinout.png
+INPUT .\images\JTAG_Pinout.png
+INPUT .\images\JTAG_Pinout.png
+INPUT .\images\JTAG_Pinout.png
+INPUT .\images\JTAG_Pinout.png
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti10.tfm
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\resultaten.tex
+INPUT .\resultaten.tex
+INPUT resultaten.tex
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
@@ -424,6 +486,8 @@ INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\pub
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmti10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmti10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
