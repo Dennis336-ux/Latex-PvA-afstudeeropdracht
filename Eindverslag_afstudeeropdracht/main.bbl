@@ -30,6 +30,67 @@
       \field{title}{ASM330LHH: Automotive 6-Axis Inertial Module: 3D Accelerometer and 3D Gyroscope}
       \field{year}{2021}
     \endentry
+    \entry{bar_shalom_estimation}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=a01ea5a6fd3b000f4e53c2b816b56101}{%
+           family={Bar-Shalom},
+           familyi={B\bibinithyphendelim S\bibinitperiod},
+           given={Yaakov},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=2cca97167d316f121e8e9f74497eca15}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={X.\bibnamedelimi Rong},
+           giveni={X\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=994eb6b343bb55a0df53333ef56b95fe}{%
+           family={Kirubarajan},
+           familyi={K\bibinitperiod},
+           given={Thiagalingam},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley \& Sons}%
+      }
+      \strng{namehash}{b3b419cabbc56ab43a9fa8f0befc850d}
+      \strng{fullhash}{b3b419cabbc56ab43a9fa8f0befc850d}
+      \strng{fullhashraw}{b3b419cabbc56ab43a9fa8f0befc850d}
+      \strng{bibnamehash}{b3b419cabbc56ab43a9fa8f0befc850d}
+      \strng{authorbibnamehash}{b3b419cabbc56ab43a9fa8f0befc850d}
+      \strng{authornamehash}{b3b419cabbc56ab43a9fa8f0befc850d}
+      \strng{authorfullhash}{b3b419cabbc56ab43a9fa8f0befc850d}
+      \strng{authorfullhashraw}{b3b419cabbc56ab43a9fa8f0befc850d}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Estimation with Applications to Tracking and Navigation}
+      \field{year}{2001}
+    \endentry
+    \entry{gis_geography}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=e797f903267c55882141d3c7ca691344}{%
+           family={{GIS Geography}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{e797f903267c55882141d3c7ca691344}
+      \strng{fullhash}{e797f903267c55882141d3c7ca691344}
+      \strng{fullhashraw}{e797f903267c55882141d3c7ca691344}
+      \strng{bibnamehash}{e797f903267c55882141d3c7ca691344}
+      \strng{authorbibnamehash}{e797f903267c55882141d3c7ca691344}
+      \strng{authornamehash}{e797f903267c55882141d3c7ca691344}
+      \strng{authorfullhash}{e797f903267c55882141d3c7ca691344}
+      \strng{authorfullhashraw}{e797f903267c55882141d3c7ca691344}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online]. Available: \url{https://gisgeography.com/trilateration-triangulation-gps/}. Geraadpleegd op 7 april 2026.}
+      \field{title}{How GPS Receivers Work – Trilateration vs Triangulation}
+      \field{year}{2025}
+    \endentry
     \entry{GNSSConstellations2026}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=bdc3027cb9297ec4dffa0c5fda2daceb}{%
@@ -44,6 +105,7 @@
       \strng{authornamehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
       \strng{authorfullhash}{bdc3027cb9297ec4dffa0c5fda2daceb}
       \strng{authorfullhashraw}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \field{extraname}{1}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{labelnamesource}{author}
@@ -51,6 +113,29 @@
       \field{howpublished}{[Online]. Available: https://globalgpssystems.com/gnss/gnss-constellations-how-they-work-and-how-they-improve-gps/}
       \field{note}{Geraadpleegd op 9 februari 2026}
       \field{title}{GNSS Constellations: How They Work and How They Improve GPS}
+      \field{year}{2026}
+    \endentry
+    \entry{gps_distance}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=bdc3027cb9297ec4dffa0c5fda2daceb}{%
+           family={{Global GPS Systems}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{fullhash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{fullhashraw}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{bibnamehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authorbibnamehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authornamehash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authorfullhash}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \strng{authorfullhashraw}{bdc3027cb9297ec4dffa0c5fda2daceb}
+      \field{extraname}{2}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online]. Available: \url{https://globalgpssystems.com/gnss/how-does-a-gps-receiver-determine-the-distance-between-you-and-the-satellites/}. Geraadpleegd op 7 april 2026.}
+      \field{title}{How Does a GPS Receiver Determine the Distance Between You and the Satellites?}
       \field{year}{2026}
     \endentry
     \entry{gpsgeometer_rtk}{misc}{}{}
@@ -98,6 +183,35 @@
       \field{note}{Geraadpleegd op 9 februari 2026}
       \field{title}{GPS Accuracy}
       \field{year}{2026}
+    \endentry
+    \entry{pieterjan_complementary}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=b30848e24e0ed19bb6017464d1250ae0}{%
+           family={Maele},
+           familyi={M\bibinitperiod},
+           given={Pieter-Jan\bibnamedelima Van},
+           giveni={P\bibinithyphendelim J\bibinitperiod\bibinitdelim V\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {pieter-jan.com}%
+      }
+      \strng{namehash}{b30848e24e0ed19bb6017464d1250ae0}
+      \strng{fullhash}{b30848e24e0ed19bb6017464d1250ae0}
+      \strng{fullhashraw}{b30848e24e0ed19bb6017464d1250ae0}
+      \strng{bibnamehash}{b30848e24e0ed19bb6017464d1250ae0}
+      \strng{authorbibnamehash}{b30848e24e0ed19bb6017464d1250ae0}
+      \strng{authornamehash}{b30848e24e0ed19bb6017464d1250ae0}
+      \strng{authorfullhash}{b30848e24e0ed19bb6017464d1250ae0}
+      \strng{authorfullhashraw}{b30848e24e0ed19bb6017464d1250ae0}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online]. Available: \url{https://web.archive.org/web/20220518025559/http:/www.pieter-jan.com/node/11}. Geraadpleegd op 7 april 2026.}
+      \field{title}{Reading a IMU Without Kalman: The Complementary Filter}
+      \field{year}{2013}
     \endentry
     \entry{Meng2017RobustLocalization}{article}{}{}
       \name{author}{3}{}{%
@@ -192,6 +306,29 @@
       \field{title}{Chapter 4: GNSS Error Sources}
       \field{year}{2026}
     \endentry
+    \entry{novatel_constellations}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3ea7e430eeeee35d7001093aaceb259f}{%
+           family={{NovAtel}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{fullhash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{fullhashraw}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{bibnamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorbibnamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authornamehash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorfullhash}{3ea7e430eeeee35d7001093aaceb259f}
+      \strng{authorfullhashraw}{3ea7e430eeeee35d7001093aaceb259f}
+      \field{extraname}{2}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online]. Available: \url{https://novatel.com/an-introduction-to-gnss/gnss-constellations}. Geraadpleegd op 7 april 2026.}
+      \field{title}{GNSS Constellations - An Introduction to GNSS}
+      \field{year}{2026}
+    \endentry
     \entry{novatel_computation}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=3ea7e430eeeee35d7001093aaceb259f}{%
@@ -206,7 +343,7 @@
       \strng{authornamehash}{3ea7e430eeeee35d7001093aaceb259f}
       \strng{authorfullhash}{3ea7e430eeeee35d7001093aaceb259f}
       \strng{authorfullhashraw}{3ea7e430eeeee35d7001093aaceb259f}
-      \field{extraname}{2}
+      \field{extraname}{3}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{labelnamesource}{author}
@@ -229,7 +366,7 @@
       \strng{authornamehash}{3ea7e430eeeee35d7001093aaceb259f}
       \strng{authorfullhash}{3ea7e430eeeee35d7001093aaceb259f}
       \strng{authorfullhashraw}{3ea7e430eeeee35d7001093aaceb259f}
-      \field{extraname}{3}
+      \field{extraname}{4}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{labelnamesource}{author}
@@ -283,6 +420,40 @@
       \verb{doi}
       \verb 10.1016/j.compag.2019.105142
       \endverb
+    \endentry
+    \entry{welch_kalman}{report}{}{}
+      \name{author}{2}{}{%
+        {{hash=19eb8ef0f1cf49ad4375a0a4acc3a385}{%
+           family={Welch},
+           familyi={W\bibinitperiod},
+           given={Greg},
+           giveni={G\bibinitperiod}}}%
+        {{hash=e4f38e96180c309ad00c07afe4fbac50}{%
+           family={Bishop},
+           familyi={B\bibinitperiod},
+           given={Gary},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {University of North Carolina at Chapel Hill, Department of Computer Science}%
+      }
+      \strng{namehash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{fullhash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{fullhashraw}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{bibnamehash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{authorbibnamehash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{authornamehash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{authorfullhash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{authorfullhashraw}{124b6b88ade76463f9b17a4f14042fca}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online]. Available: \url{https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf}. Geraadpleegd op 7 april 2026.}
+      \field{number}{TR 95-041}
+      \field{title}{An Introduction to the Kalman Filter}
+      \field{type}{techreport}
+      \field{year}{1995}
     \endentry
     \entry{pmc_sensorfusion}{article}{}{}
       \name{author}{3}{}{%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.1) (preloaded format=pdflatex 2026.2.12)  24 MAR 2026 09:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.1) (preloaded format=pdflatex 2026.2.12)  7 APR 2026 16:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -847,17 +847,26 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \mathdisplay@stack=\toks51
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
+) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+\TX@col@width=\dimen320
+\TX@old@table=\dimen321
+\TX@old@col=\dimen322
+\TX@target=\dimen323
+\TX@delta=\dimen324
+\TX@cols=\count486
+\TX@ftn=\toks52
 ) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2025/02/06 v3.11 Customized lists
 \labelindent=\skip99
-\enit@outerparindent=\dimen320
-\enit@toks=\toks52
+\enit@outerparindent=\dimen325
+\enit@toks=\toks53
 \enit@inbox=\box85
-\enit@count@id=\count486
-\enitdp@description=\count487
+\enit@count@id=\count487
+\enitdp@description=\count488
 ))
-\@quotelevel=\count488
-\@quotereset=\count489
+\@quotelevel=\count489
+\@quotereset=\count490
  (main.aux)
 \openout1 = `main.aux'.
 
@@ -881,24 +890,24 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 4.
 LaTeX Font Info:    ... okay on input line 4.
  (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count490
-\scratchdimen=\dimen321
+\scratchcounter=\count491
+\scratchdimen=\dimen326
 \scratchbox=\box86
-\nofMPsegments=\count491
-\nofMParguments=\count492
-\everyMPshowfont=\toks53
-\MPscratchCnt=\count493
-\MPscratchDim=\dimen322
-\MPnumerator=\count494
-\makeMPintoPDFobject=\count495
-\everyMPtoPDFconversion=\toks54
+\nofMPsegments=\count492
+\nofMParguments=\count493
+\everyMPshowfont=\toks54
+\MPscratchCnt=\count494
+\MPscratchDim=\dimen327
+\MPnumerator=\count495
+\makeMPintoPDFobject=\count496
+\everyMPtoPDFconversion=\toks55
 ) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-\c@lstlisting=\count496
+\c@lstlisting=\count497
 Package hyperref Info: Link coloring OFF on input line 4.
  (main.out) (main.out)
 \@outlinefile=\write6
@@ -976,7 +985,7 @@ LaTeX Info: Redefining \ohm on input line 4.
 Package gensymb Info: Using \textohm for \ohm on input line 4.
 Package gensymb Info: Using \textmu for \micro on input line 4.
  (titlepage.tex
-<logos/HvA Internationaal.jpg, id=69, 337.7418pt x 133.2177pt>
+<logos/HvA Internationaal.jpg, id=109, 337.7418pt x 133.2177pt>
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 9.
@@ -1023,59 +1032,116 @@ Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 20.
 [5
 
 ]) (vooronderzoek.tex
-Underfull \hbox (badness 10000) in paragraph at lines 9--10
-
- []
-
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 24.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 27.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[6]
-<images/multipath voorbeeld.png, id=138, 272.874pt x 181.77pt>
+ [6]
+<images/trilateration.jpg, id=179, 510.40688pt x 370.38374pt>
+File: images/trilateration.jpg Graphic file (type jpg)
+<use images/trilateration.jpg>
+Package pdftex.def Info: images/trilateration.jpg  used on input line 31.
+(pdftex.def)             Requested size: 338.58632pt x 245.71432pt.
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 55.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+ [7 <./images/trilateration.jpg>]
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 64.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+ [8]
+<images/multipath voorbeeld.png, id=215, 272.874pt x 181.77pt>
 File: images/multipath voorbeeld.png Graphic file (type png)
 <use images/multipath voorbeeld.png>
-Package pdftex.def Info: images/multipath voorbeeld.png  used on input line 34.
+Package pdftex.def Info: images/multipath voorbeeld.png  used on input line 69.
 (pdftex.def)             Requested size: 386.95897pt x 257.79346pt.
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 58.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 94.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [7 <./images/multipath voorbeeld.png (PNG copy)>]
+ [9 <./images/multipath voorbeeld.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
+
+ []
+
+
+Underfull \hbox (badness 5862) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10 Snelheid $\OMS/cmsy/m/n/10 !$ \OT1/cmr/m/n/10 Posi-tie
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+\OT1/cmr/m/n/10 (enkelvoudige in-te-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10 Bias-drift, kwan-ti-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10 Absolute head-ing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10 Lokale mag-netis-che
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+\OT1/cmr/m/n/10 in-ter-fer-en-tie, fer-ro-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 125--126
+
+ []
+
+
+Underfull \vbox (badness 1270) has occurred while \output is active []
+
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 59.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 132.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [8]
-Underfull \hbox (badness 10000) in paragraph at lines 63--64
+ [10]
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--66
-
+Underfull \hbox (badness 8000) in paragraph at lines 168--168
+[]|\OT1/cmr/m/n/10 Magnetische velden (met-alen ob-
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 67--68
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 69--70
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 173.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 190--191
 
  []
 
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 78.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 206.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[9]
+[12]
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 82.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 213.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [10]) (specificaties.tex
+ [13]) (specificaties.tex
 Underfull \hbox (badness 10000) in paragraph at lines 18--18
 []|\OT1/cmr/m/n/10 Nauwkeurigheid (Open
  []
@@ -1084,7 +1150,7 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 33.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[11]) (systeemontwerp.tex
+[14]) (systeemontwerp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 2--3
 
  []
@@ -1098,7 +1164,7 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 10.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[12]) (implementatie.tex
+[15]) (implementatie.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
@@ -1113,7 +1179,7 @@ Underfull \hbox (badness 1221) in paragraph at lines 18--19
 []\OT1/cmr/m/n/10 VCC / Vref (Volt-age Ref-er-ence): Dit meet het span-
  []
 
-<images/JTAG_Pinout.png, id=184, 242.40562pt x 441.14813pt>
+<images/JTAG_Pinout.png, id=274, 242.40562pt x 441.14813pt>
 File: images/JTAG_Pinout.png Graphic file (type png)
 <use images/JTAG_Pinout.png>
 Package pdftex.def Info: images/JTAG_Pinout.png  used on input line 27.
@@ -1137,7 +1203,7 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 44.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[13 <./images/JTAG_Pinout.png>]
+[16 <./images/JTAG_Pinout.png>]
 Overfull \hbox (3.15565pt too wide) in paragraph at lines 44--45
 []\OT1/cmr/bx/n/10 Cross-Compiler Toolchain (bijv. ARM GCC): \OT1/cmr/m/n/10 Om-dat de code op een x86-computer wordt geschreven
  []
@@ -1146,17 +1212,17 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 67.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[14]) (resultaten.tex
+[17]) (resultaten.tex
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 5.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [15]
+ [18]
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 12.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [16])
+ [19])
 Overfull \hbox (70.06363pt too wide) in paragraph at lines 25--25
 []\OT1/cmr/m/n/10 GPS Ge-ome-ter. \OT1/cmr/m/it/10 What Is GNSS RTK and How Does It Work? \OT1/cmr/m/n/10 [On-line]. Avail-able: https://gpsgeometer.com/en/blog/what-
  []
@@ -1180,29 +1246,29 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 27.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[17] (main.aux)
+[20] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A6905DD7D76FC762BD19286FBFB0EF80;2029.
+(rerunfilecheck)             Checksum: 044DE18FFE1EBA96C880CE84852B4ED9;3826.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34690 strings out of 467866
- 679113 string characters out of 5411549
- 1482338 words of memory out of 5000000
- 63034 multiletter control sequences out of 15000+600000
- 631816 words of font info for 54 fonts, out of 8000000 for 9000
+ 34831 strings out of 467866
+ 682315 string characters out of 5411549
+ 1487514 words of memory out of 5000000
+ 63147 multiletter control sequences out of 15000+600000
+ 632514 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 103i,15n,121p,1401b,1539s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\dennis.van.den.berg\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (17 pages, 505590 bytes).
+ 103i,15n,121p,1323b,1539s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\dennis.van.den.berg\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (20 pages, 582473 bytes).
 PDF statistics:
- 276 PDF objects out of 1000 (max. 8388607)
- 55 named destinations out of 1000 (max. 500000)
- 156 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 383 PDF objects out of 1000 (max. 8388607)
+ 80 named destinations out of 1000 (max. 500000)
+ 241 words of extra memory for PDF output out of 10000 (max. 10000000)
 

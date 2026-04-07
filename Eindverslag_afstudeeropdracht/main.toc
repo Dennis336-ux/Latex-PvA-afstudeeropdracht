@@ -3,14 +3,24 @@
 \contentsline {section}{\numberline {3}Inleiding}{5}{section.3}%
 \contentsline {section}{\numberline {4}Robuuste Lokalisatie in Complexe Omgevingen}{6}{section.4}%
 \contentsline {subsection}{\numberline {4.1}GNSS}{6}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Nauwkeurigheid via RTK}{6}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Gebreken}{6}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Sensor Fusion}{9}{section.5}%
-\contentsline {section}{\numberline {6}Specificaties}{11}{section.6}%
-\contentsline {section}{\numberline {7}ontwerp}{12}{section.7}%
-\contentsline {section}{\numberline {8}implementatie}{13}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Testopstelling programmeren van het bord}{13}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Uitlezen IMU}{14}{subsection.8.2}%
-\contentsline {section}{\numberline {9}Resultaten en validatie}{15}{section.9}%
-\contentsline {section}{\numberline {10}Discussie}{16}{section.10}%
-\contentsline {section}{Bronnen}{17}{section.10}%
+\contentsline {subsection}{\numberline {4.2}Nauwkeurigheid via RTK}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Gebreken}{7}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Sensor Fusion}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Inertial Measurement Unit (IMU)}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Alternatieve aanvullende sensoren}{11}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Magnetometer}{11}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Odometrie en Distance Measuring Instruments}{11}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Doppler radar}{11}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}LiDAR}{11}{subsubsection.5.2.4}%
+\contentsline {subsubsection}{\numberline {5.2.5}Vision Aided Navigation (Camera)}{11}{subsubsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.3}filteralgoritmes}{12}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Complementair filter}{12}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Kalman Filter}{13}{subsubsection.5.3.2}%
+\contentsline {section}{\numberline {6}Specificaties}{14}{section.6}%
+\contentsline {section}{\numberline {7}ontwerp}{15}{section.7}%
+\contentsline {section}{\numberline {8}implementatie}{16}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Testopstelling programmeren van het bord}{16}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Uitlezen IMU}{17}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Resultaten en validatie}{18}{section.9}%
+\contentsline {section}{\numberline {10}Discussie}{19}{section.10}%
+\contentsline {section}{Bronnen}{20}{section.10}%
