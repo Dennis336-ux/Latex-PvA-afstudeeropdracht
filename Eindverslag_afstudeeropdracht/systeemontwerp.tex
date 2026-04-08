@@ -1,9 +1,23 @@
 \section{ontwerp}
-Het ontwerp van het trackingsysteem wordt benaderd vanuit een top down ontwerp. Op het hoogste niveau kan het ontwikkelde systeem beschouwd worden als een `black box'. Het systeem zet onvolmaakte en asynchrone data om in een betrouwbare positiebepaling. \\
+In dit hoofdstuk wordt het ontwerp van het sensor fusion systeem beschreven. Op basis van het vooronderzoek en de vastgestelde specificaties zijn de ontwerpkeuzes gemaakt die in dit hoofdstuk worden toegelicht. Het hoofdstuk begint met een beschrijving van de bestaande hardware van de MYLAPS RTK tracker, gevolgd door de systeemarchitectuur en tot slot het EKF-model met de bijbehorende toestandsvector en systeemmodel. Het doel van dit hoofdstuk is om de brug te slaan tussen het theoretisch kader en de uiteindelijke 
+implementatie.
 
-Aan de ingang van het systeem bevinden zich twee onafhankelijke datastromen. Eén hiervan is afkomstig uit de RTK GNSS ontvanger. Hierbij worden diverse onderdelen meegegeven waaronder locatie (breedtegraad, lengtegraad), snelheid en de nauwkeurigheid. Dit wordt gedaan op een frequentie van 25 Hz.  \\
+\subsection{Het huidige systeem}
 
-De andere datastroom is afkomstig vanuit de IMU. Deze zes assige sensor levert de lineaire versnellingen en hoeksnelheden van de module. Het systeem zal beiden datastromen verwerken en combineren.
+Het sensor fusion systeem wordt geïmplementeerd op de bestaande MYLAPS ProRTK tracker. Voordat het ontwerp van het systeem wordt beschreven, is het relevant het huidige systeem van de tracker in kaart te brengen. 
+
+De ProRTK is een compacte, herlaadbare sporttimer die draadloos communiceert met de MYLAPS-infrastructuur via het X2 Link protocol. Het apparaat is ontworpen voor gebruik in veeleisende sportomgevingen en combineert een RTK GNSS-ontvanger met een inertiale meeteenheid op één printplaat. \\
+
+De voor dit project relevante hardwarecomponenten zijn weergegeven in Tabel~\ref{tab:hardware}. Het is belangrijk te vermelden dat niet allecomponenten op het bord direct relevant zijn voor het sensor fusion systeem. Zo zijn de draadloze communicatiemodules en de batterijbeheercircuits buiten beschouwing gelaten. De focus ligt op de componenten die direct betrokken zijn bij de verwerking en communicatie van sensordata. \\
+
+% Tabel hier invoegen
+
+Een belangrijk architecturaal gegeven is dat de IMU, de seriële flash en de CAN-controller alle drie op dezelfde SPI-bus zijn aangesloten. De nRF52 beschikt over een SPI-peripheral die slechts één apparaat tegelijk kan aansturen. Dit betekent dat elk apparaat een eigen Chip Select (CS) pin heeft, en dat de bus tussen transacties opnieuw geconfigureerd moet worden als de klokpolariteit of -snelheid verschilt per apparaat. Dit heeft implicaties voor de timing van SPI-transacties en vormt een potentiële 
+bron van problemen, wat later in de implementatie van belang zal zijn. \\
+
+De u-blox F9P is een hoogwaardige multi-band, multi-constellation GNSS-ontvanger die ondersteuning biedt voor GPS, Galileo, GLONASS en BeiDou tegelijkertijd. De ontvanger is geconfigureerd om RTK-correcties te ontvangen via het RTCM-protocol, waardoor centimeterprecisie bereikbaar is bij een goede satellietgeometrie. Een bijzonder kenmerk van de F9P is het NAV-COV bericht, dat naast de standaard positiemeting ook de volledige 2×2 positiecovariantiematrix rapporteert. Dit is een waardevolle informatiebron voor de EKF, omdat het de richtingsafhankelijke GPS-meetonzekerheid nauwkeurig beschrijft in plaats van een enkele isotrope nauwkeurigheidsschatting. \\
+
+De ASM330LHH is een automotive-grade 6-assige IMU van STMicroelectronics, bestaande uit een 3-assige accelerometer en een 3-assige gyroscoop. Het automotive-grade kwalificatie betekent dat de sensor is ontworpen en getest voor gebruik in omgevingen met hoge mechanische belasting, trillingen en temperatuurschommelingen — eigenschappen die ook relevant zijn voor een tracker op een galoperend paard. De sensor levert data op een frequentie van 200 Hz, wat aanzienlijk hoger is dan de 10 Hz van de GNSS-ontvanger. Dit frequentieverschil is een fundamentele drijfveer achter de keuze voor een predictor-corrector architectuur in het EKF.
 
 
 

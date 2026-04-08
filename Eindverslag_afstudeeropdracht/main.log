@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.1) (preloaded format=pdflatex 2026.2.12)  7 APR 2026 16:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.1) (preloaded format=pdflatex 2026.2.12)  8 APR 2026 16:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -864,9 +864,53 @@ Package: enumitem 2025/02/06 v3.11 Customized lists
 \enit@inbox=\box85
 \enit@count@id=\count487
 \enitdp@description=\count488
-))
-\@quotelevel=\count489
-\@quotereset=\count490
+) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/latex/pgfplots\pgfplots.sty (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.revision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
+ (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.code.tex (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotscore.code.tex
+\t@pgfplots@toka=\toks54
+\t@pgfplots@tokb=\toks55
+\t@pgfplots@tokc=\toks56
+\pgfplots@tmpa=\dimen326
+\c@pgfplots@coordindex=\count489
+\c@pgfplots@scanlineindex=\count490
+ (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\pgfplotssysgeneric.code.tex)) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\pgfplotslibrary.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/oldpgfcompatib\pgfplotsoldpgfsupp_loader.code.tex (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryfpu.code.tex)
+Package pgfplots: loading complementary utilities for your pgf version...
+\t@pgf@toka=\toks57
+\t@pgf@tokb=\toks58
+\t@pgf@tokc=\toks59
+(C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/oldpgfcompatib\pgfplotsoldpgfsupp_pgfutil-common-lists.tex)) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotsutil.code.tex (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsliststructure.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsliststructureext.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsarray.code.tex
+\c@pgfplotsarray@tmp=\count491
+) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsmatrix.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/numtable\pgfplotstableshared.code.tex
+\c@pgfplotstable@counta=\count492
+\t@pgfplotstable@a=\toks60
+) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsdeque.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotsbinary.code.tex (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotsbinary.data.code.tex)) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotsutil.verb.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\pgflibrarypgfplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count493
+ (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\pgflibrarypgfplots.surfshading.pgfsys-pdftex.def))) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotscolormap.code.tex (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotscolor.code.tex)) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsstackedplots.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsplothandlers.code.tex (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsmeshplothandler.code.tex (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsmeshplotimage.code.tex))) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.scaling.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotscoordprocessing.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.errorbars.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.markers.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsticks.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.paths.code.tex) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.code.tex (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen327
+\pgfdecoratedremainingdistance=\dimen328
+\pgfdecoratedinputsegmentcompleteddistance=\dimen329
+\pgfdecoratedinputsegmentremainingdistance=\dimen330
+\pgf@decorate@distancetomove=\dimen331
+\pgf@decorate@repeatstate=\count494
+\pgfdecorationsegmentamplitude=\dimen332
+\pgfdecorationsegmentlength=\dimen333
+)
+\tikz@lib@dec@box=\box86
+) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.pathmorphing.code.tex (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/decorations\pgflibrarydecorations.pathmorphing.code.tex)) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.pathreplacing.code.tex (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/decorations\pgflibrarydecorations.pathreplacing.code.tex)) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\tikzlibrarypgfplots.contourlua.code.tex)
+\pgfplots@numplots=\count495
+\pgfplots@xmin@reg=\dimen334
+\pgfplots@xmax@reg=\dimen335
+\pgfplots@ymin@reg=\dimen336
+\pgfplots@ymax@reg=\dimen337
+\pgfplots@zmin@reg=\dimen338
+\pgfplots@zmax@reg=\dimen339
+) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))))
+\@quotelevel=\count496
+\@quotereset=\count497
  (main.aux)
 \openout1 = `main.aux'.
 
@@ -890,24 +934,24 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 4.
 LaTeX Font Info:    ... okay on input line 4.
  (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count491
-\scratchdimen=\dimen326
-\scratchbox=\box86
-\nofMPsegments=\count492
-\nofMParguments=\count493
-\everyMPshowfont=\toks54
-\MPscratchCnt=\count494
-\MPscratchDim=\dimen327
-\MPnumerator=\count495
-\makeMPintoPDFobject=\count496
-\everyMPtoPDFconversion=\toks55
+\scratchcounter=\count498
+\scratchdimen=\dimen340
+\scratchbox=\box87
+\nofMPsegments=\count499
+\nofMParguments=\count500
+\everyMPshowfont=\toks61
+\MPscratchCnt=\count501
+\MPscratchDim=\dimen341
+\MPnumerator=\count502
+\makeMPintoPDFobject=\count503
+\everyMPtoPDFconversion=\toks62
 ) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-\c@lstlisting=\count497
+\c@lstlisting=\count504
 Package hyperref Info: Link coloring OFF on input line 4.
  (main.out) (main.out)
 \@outlinefile=\write6
@@ -984,8 +1028,13 @@ Package gensymb Info: Using text companion symbols for \degree, \celsius and \pe
 LaTeX Info: Redefining \ohm on input line 4.
 Package gensymb Info: Using \textohm for \ohm on input line 4.
 Package gensymb Info: Using \textmu for \micro on input line 4.
- (titlepage.tex
-<logos/HvA Internationaal.jpg, id=109, 337.7418pt x 133.2177pt>
+
+
+Package pgfplots Warning: running in backwards compatibility mode (unsuitable tick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into your preamble.
+ on input line 4.
+
+(titlepage.tex
+<logos/HvA Internationaal.jpg, id=121, 337.7418pt x 133.2177pt>
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 9.
@@ -1037,7 +1086,7 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 27.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
  [6]
-<images/trilateration.jpg, id=179, 510.40688pt x 370.38374pt>
+<images/trilateration.jpg, id=194, 510.40688pt x 370.38374pt>
 File: images/trilateration.jpg Graphic file (type jpg)
 <use images/trilateration.jpg>
 Package pdftex.def Info: images/trilateration.jpg  used on input line 31.
@@ -1052,7 +1101,7 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 64.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
  [8]
-<images/multipath voorbeeld.png, id=215, 272.874pt x 181.77pt>
+<images/multipath voorbeeld.png, id=229, 272.874pt x 181.77pt>
 File: images/multipath voorbeeld.png Graphic file (type png)
 <use images/multipath voorbeeld.png>
 Package pdftex.def Info: images/multipath voorbeeld.png  used on input line 69.
@@ -1107,7 +1156,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--126
  []
 
 
-Underfull \vbox (badness 1270) has occurred while \output is active []
+Underfull \vbox (badness 1371) has occurred while \output is active []
 
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
@@ -1134,14 +1183,56 @@ Underfull \hbox (badness 10000) in paragraph at lines 190--191
 
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 206.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 204.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
 [12]
+<images/kalman_filter.png, id=270, 532.99126pt x 247.92625pt>
+File: images/kalman_filter.png Graphic file (type png)
+<use images/kalman_filter.png>
+Package pdftex.def Info: images/kalman_filter.png  used on input line 208.
+(pdftex.def)             Requested size: 386.95897pt x 180.00484pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--215
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 216--217
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--224
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 213.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 263.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [13]) (specificaties.tex
+[13 <./images/kalman_filter.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 277--278
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--285
+
+ []
+
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 289.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+[14]
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 333.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+ [15]) (specificaties.tex
 Underfull \hbox (badness 10000) in paragraph at lines 18--18
 []|\OT1/cmr/m/n/10 Nauwkeurigheid (Open
  []
@@ -1150,21 +1241,39 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 33.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[14]) (systeemontwerp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 2--3
+[16]) (systeemontwerp.tex
+Overfull \hbox (4.10843pt too wide) in paragraph at lines 9--10
+[]\OT1/cmr/m/n/10 De ProRTK is een com-pacte, her-laad-bare sport-timer die draad-loos com-mu-niceert met de MYLAPS-infrastructuur
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4--5
+LaTeX Warning: Reference `tab:hardware' on page 17 undefined on input line 11.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--17
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
 
  []
 
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 10.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 24.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[15]) (implementatie.tex
+[17]) (implementatie.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
@@ -1179,7 +1288,7 @@ Underfull \hbox (badness 1221) in paragraph at lines 18--19
 []\OT1/cmr/m/n/10 VCC / Vref (Volt-age Ref-er-ence): Dit meet het span-
  []
 
-<images/JTAG_Pinout.png, id=274, 242.40562pt x 441.14813pt>
+<images/JTAG_Pinout.png, id=321, 242.40562pt x 441.14813pt>
 File: images/JTAG_Pinout.png Graphic file (type png)
 <use images/JTAG_Pinout.png>
 Package pdftex.def Info: images/JTAG_Pinout.png  used on input line 27.
@@ -1203,7 +1312,7 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 44.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[16 <./images/JTAG_Pinout.png>]
+[18 <./images/JTAG_Pinout.png>]
 Overfull \hbox (3.15565pt too wide) in paragraph at lines 44--45
 []\OT1/cmr/bx/n/10 Cross-Compiler Toolchain (bijv. ARM GCC): \OT1/cmr/m/n/10 Om-dat de code op een x86-computer wordt geschreven
  []
@@ -1212,17 +1321,17 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 67.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[17]) (resultaten.tex
+[19]) (resultaten.tex
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 5.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [18]
+ [20]
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 12.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
- [19])
+ [21])
 Overfull \hbox (70.06363pt too wide) in paragraph at lines 25--25
 []\OT1/cmr/m/n/10 GPS Ge-ome-ter. \OT1/cmr/m/it/10 What Is GNSS RTK and How Does It Work? \OT1/cmr/m/n/10 [On-line]. Avail-able: https://gpsgeometer.com/en/blog/what-
  []
@@ -1244,31 +1353,40 @@ Overfull \hbox (30.19313pt too wide) in paragraph at lines 25--25
 
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 25.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+[22]
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 27.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-[20] (main.aux)
+ [23] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 044DE18FFE1EBA96C880CE84852B4ED9;3826.
+(rerunfilecheck)             Checksum: 51D6FA717EDE6AA7BB941F99F38AF007;4540.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34831 strings out of 467866
- 682315 string characters out of 5411549
- 1487514 words of memory out of 5000000
- 63147 multiletter control sequences out of 15000+600000
- 632514 words of font info for 56 fonts, out of 8000000 for 9000
+ 45399 strings out of 467866
+ 1039838 string characters out of 5411549
+ 1922977 words of memory out of 5000000
+ 73553 multiletter control sequences out of 15000+600000
+ 637087 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 103i,15n,121p,1323b,1539s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\dennis.van.den.berg\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (20 pages, 582473 bytes).
+ 103i,19n,121p,1323b,2282s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\dennis.van.den.berg\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (23 pages, 713661 bytes).
 PDF statistics:
- 383 PDF objects out of 1000 (max. 8388607)
- 80 named destinations out of 1000 (max. 500000)
- 241 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 473 PDF objects out of 1000 (max. 8388607)
+ 93 named destinations out of 1000 (max. 500000)
+ 270 words of extra memory for PDF output out of 10000 (max. 10000000)
 

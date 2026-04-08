@@ -69,6 +69,31 @@
       \field{title}{Estimation with Applications to Tracking and Navigation}
       \field{year}{2001}
     \endentry
+    \entry{boers_particle_filter}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=9c8eca8cd56918e766a37590aa57ee2b}{%
+           family={Boers},
+           familyi={B\bibinitperiod},
+           given={Yvo},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c8eca8cd56918e766a37590aa57ee2b}
+      \strng{fullhash}{9c8eca8cd56918e766a37590aa57ee2b}
+      \strng{fullhashraw}{9c8eca8cd56918e766a37590aa57ee2b}
+      \strng{bibnamehash}{9c8eca8cd56918e766a37590aa57ee2b}
+      \strng{authorbibnamehash}{9c8eca8cd56918e766a37590aa57ee2b}
+      \strng{authornamehash}{9c8eca8cd56918e766a37590aa57ee2b}
+      \strng{authorfullhash}{9c8eca8cd56918e766a37590aa57ee2b}
+      \strng{authorfullhashraw}{9c8eca8cd56918e766a37590aa57ee2b}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Universiteit Twente (Kwadrant)}
+      \field{note}{[Online]. Available: \url{https://www.utwente.nl/nl/eemcs/kwadrant/artikelen/tw/artikel_pf_itw-yvo\%20boers.pdf}. Geraadpleegd op 8 april 2026.}
+      \field{title}{Particle Filters en Niet-Lineair Schatten}
+      \field{year}{2011}
+    \endentry
     \entry{gis_geography}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=e797f903267c55882141d3c7ca691344}{%
@@ -420,6 +445,64 @@
       \verb{doi}
       \verb 10.1016/j.compag.2019.105142
       \endverb
+    \endentry
+    \entry{vectornav_ekf}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=a3b6c23e8a9e207d82a0e0e10118bbb8}{%
+           family={{VectorNav Technologies}},
+           familyi={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{a3b6c23e8a9e207d82a0e0e10118bbb8}
+      \strng{fullhash}{a3b6c23e8a9e207d82a0e0e10118bbb8}
+      \strng{fullhashraw}{a3b6c23e8a9e207d82a0e0e10118bbb8}
+      \strng{bibnamehash}{a3b6c23e8a9e207d82a0e0e10118bbb8}
+      \strng{authorbibnamehash}{a3b6c23e8a9e207d82a0e0e10118bbb8}
+      \strng{authornamehash}{a3b6c23e8a9e207d82a0e0e10118bbb8}
+      \strng{authorfullhash}{a3b6c23e8a9e207d82a0e0e10118bbb8}
+      \strng{authorfullhashraw}{a3b6c23e8a9e207d82a0e0e10118bbb8}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{VectorNav Inertial Navigation Primer}
+      \field{note}{[Online]. Available: \url{https://www.vectornav.com/resources/ inertial-navigation-primer/math-fundamentals/math-nonlinearkalman}. Geraadpleegd op 8 april 2026.}
+      \field{title}{Nonlinear Kalman Filter}
+      \field{year}{2024}
+    \endentry
+    \entry{wan_merwe_ukf}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=9ec325b9eaac64f2d134d7235d8dea55}{%
+           family={Wan},
+           familyi={W\bibinitperiod},
+           given={Eric\bibnamedelima A.},
+           giveni={E\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=23aa2772a25be06a07f9d03dc7fdd13d}{%
+           family={Merwe},
+           familyi={M\bibinitperiod},
+           given={Rudolph\bibnamedelima Van},
+           giveni={R\bibinitperiod\bibinitdelim V\bibinitperiod},
+           prefix={der},
+           prefixi={d\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Lake Louise, AB, Canada}%
+      }
+      \strng{namehash}{668521f7a0ea2af6ba00914ce729fffa}
+      \strng{fullhash}{668521f7a0ea2af6ba00914ce729fffa}
+      \strng{fullhashraw}{668521f7a0ea2af6ba00914ce729fffa}
+      \strng{bibnamehash}{668521f7a0ea2af6ba00914ce729fffa}
+      \strng{authorbibnamehash}{668521f7a0ea2af6ba00914ce729fffa}
+      \strng{authornamehash}{668521f7a0ea2af6ba00914ce729fffa}
+      \strng{authorfullhash}{668521f7a0ea2af6ba00914ce729fffa}
+      \strng{authorfullhashraw}{668521f7a0ea2af6ba00914ce729fffa}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the IEEE Symposium Adaptive Systems for Signal Processing, Communications, and Control (AS-SPCC)}
+      \field{note}{[Online]. Available: \url{https://groups.seas.harvard.edu/courses/cs281/papers/unscented.pdf}. Geraadpleegd op 8 april 2026.}
+      \field{title}{The Unscented Kalman Filter for Nonlinear Estimation}
+      \field{year}{2000}
     \endentry
     \entry{welch_kalman}{report}{}{}
       \name{author}{2}{}{%

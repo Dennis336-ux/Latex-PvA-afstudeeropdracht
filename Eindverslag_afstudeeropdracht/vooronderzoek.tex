@@ -200,13 +200,133 @@ Een veelgebruikte toepassing van het complementaire filter is echter de combinat
 Een typische waarde voor $\alpha$ is 0.95 tot 0.99, waardoor de gyroscoop de oriëntatie bepaalt bij snelle bewegingen en de accelerometer de langetermijndrift corrigeert. Voor GPS/IMU-fusie waarbij de onzekerheden sterk variëren in de tijd is echter een adaptief filter nodig. 
 
 \subsubsection{Kalman Filter}
-
-Het Kalman Filter (KF), geïntroduceerd door Rudolf Kálmán in 1960, is een optimale lineaire schatter die de a posteriori-schatting van een systeemtoestand bepaalt op basis van een reeks ruisbevattende metingen \cite{welch_kalman}. Het filter minimaliseert de gemiddelde kwadratische fout (Mean Squared Error, MSE) van de toestandsschatting door de meetonzekerheid (R-matrix) en de procesruismatrix (Q-matrix) optimaal te wegen.
-Het Kalman Filter werkt in twee alternerende stappen. In de predictiestap wordt de toestand vooruitberekend op basis van het systeemmodel; de covariantiematrix P groeit, wat de toenemende onzekerheid weerspiegelt. In de updatestap wordt bij binnenkomst van een nieuwe meting de voorspelling gecorrigeerd; P krimpt in de richting van de meting. Het filter convergeert naar een optimale balans waarbij de Kalman gain K aangeeft hoeveel gewicht aan de meting versus de modelvoorspelling wordt toegekend.
+Het kalman Filter (KF), in 1960 bedacht door Rudolf Kálmán, is een wiskundig algoritme dat de werkelijke toestand van een systeem berekent, zelfs als de sensormetingen ruis of omgevingsnauwkeurigheden bevatten \cite{welch_kalman}. Waar een complementair filter met vaste wegingen werkt, is het Kalman Filter dynamisch. Het berekent continu de optimale balans door de meetonzekerheid van de sensoren (bevindt zich in de $R$-matrix) en de onzekerheid van het eigen rekenmodel (de process noise, vastgelegd in de $Q$-matrix) tegen elkaar af te wegen.
 
 
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{images/kalman_filter.png}
+	\caption{In de afbeelding is de globale werking van een kalman filter schematisch weergegeven. Hierbij wordt de gehele cyclus elke tijdsstap doorlopen.}
+	\label{fig:kalman_schematic}
+\end{figure}
 
-Het klassieke Kalman Filter is echter beperkt tot lineaire systemen. De navigatievergelijkingen voor een rijdend of galoperend object zijn niet-lineair: de positieverandering hangt af van het cosinus en de sinus van de heading, wat inherent niet-lineair is. Dit maakt het standaard Kalman Filter ongeschikt als directe toepassing.
+
+Zoals in afbeelding \ref{fig:kalman_schematic} te zien is functioneert het algoritme in een cyclus. Hierbij staan twee stappen centraal: de voorspelling stap en de updatestap. Het filter voorspelt de nieuwe positie en oriëntatie op basis van het systeemmodel (in dit project de integratie van de IMU data). Omdat de IMU na verloop van tijd drift opbouwt, neemt de onzekerheid van deze schatting tijdens het voorspellen toe. In de wiskunde van het filter wordt dit aangetoond met een covariantiematrix $P$ die groter wordt. \\
+
+De updatestap is afhankelijk van een nieuwe absolute meting die binnenkomt, in dit geval de RTK GNSS data. Hiermee wordt de voorspelling gecorrigeerd. Het filter berekent hiervoor de Kalman Gain ($K$). Deze factor bepaalt dynamisch hoeveel gewicht er aan de nieuwe GNSS-meting wordt toegekend ten opzichte van de IMU-voorspelling. Na deze correctie neemt de onzekerheid weer af en krimpt matrix $P$. \\
+
+Hoewel het filter zeer effectief is, kent het een belangrijke beperking. Het filter is uitsluitend ontworpen voor lineaire systemen. Het bepalen van de positie en het navigeren zijn echter niet lineair. De heading wordt namelijk mede bepaald door de sinus en cosinus van de koers. 
+
+
+\subsubsection{Extended Kalman Filter (EKF)}
+
+Om de beperkingen van het standaard Kalman Filter op te lossen, is het Extended Kalman Filter (EKF) ontwikkeld. Het standaard Kalman Filter gaat er namelijk vanuit dat het systeem zich lineair gedraagt. In de praktijk is dit zelden het geval. De positieverandering van een rijdend object hangt bijvoorbeeld af van de rijrichting (heading), en die koppeling verloopt via sinus en cosinus functies. Zo is de voorwaartse verplaatsing in de oostrichting gelijk aan $v \cdot \cos(\theta) \cdot \Delta t$, waarbij $\theta$ de rijrichting is. Een kleine verandering in $\theta$ heeft een heel ander effect afhankelijk van de huidige waarde van $\theta$. Dit maakt het niet lineair. \\
+
+Het EKF lost dit op door het niet lineaire model op elk moment lokaal te lineariseren \cite{vectornav_ekf}. Dit betekent dat het filter de werkelijkheid niet globaal vereenvoudigt, maar op elk tijdstip opnieuw een lokale benadering maakt rond de huidige toestandsschatting. Dit principe is vergelijkbaar met het inzoomen op een gebogen lijn zoals uitgebeeld in figuur \ref{fig:ekf_linearisatie}. Lokaal zal het lijken op een rechte lijn. 
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm, height=6cm,
+    xlabel={Toestandsschatting $\hat{x}$},
+    ylabel={$f(\hat{x})$},
+    xmin=-0.5, xmax=7,
+    ymin=-1.8, ymax=1.8,
+    axis lines=center,
+    legend style={at={(0.98,0.98)}, anchor=north east, font=\small},
+    grid=both,
+    grid style={line width=0.2pt, draw=gray!30},
+]
+\addplot[blue, thick, domain=0:6.5, samples=100]
+    {sin(deg(x))};
+\addlegendentry{Niet-lineaire $f(x)$}
+
+\addplot[red, thick, dashed, domain=0.5:3.5]
+    {cos(deg(2))*(x - 2) + sin(deg(2))};
+\addlegendentry{Raaklijn EKF (helling = $f'(\hat{x}_k)$)}
+
+\addplot[black, mark=*, mark size=3pt]
+    coordinates {(2, {sin(deg(2))})};
+\node[above right, font=\small] at (axis cs:2,{sin(deg(2))})
+    {$\hat{x}_k$};
+\end{axis}
+\end{tikzpicture}
+
+\vspace{0.5cm}
+\caption{Het kernprincipe van het Extended Kalman Filter in één dimensie. De niet-lineaire functie $f(x)$ (blauw) wordt op elk tijdstip lokaal benaderd door een raaklyn (rood gestippeld) in het huidige schattingspunt $\hat{x}_k$. De helling van die raaklyn is gelijk aan de afgeleide $f'(\hat{x}_k)$. Het standaard Kalman Filter veronderstelt dat het systeem altijd globaal lineair is; het EKF herberekent deze lokale benadering bij elke tijdstap opnieuw \cite{bar_shalom_estimation}.}
+\label{fig:ekf_linearisatie}
+\end{figure}
+
+In meerdere dimensies tegelijk wordt dit gedaan met behulp van een zogenoemde Jacobiaan matrix. Dit is een tabel van alle partiële afgeleiden die beschrijft hoe elke toestandsvariabele (positie, snelheid, richting) de andere beïnvloedt bij een kleine verandering. 
+Een partiële afgeleide is in essentie dezelfde helling als hierboven beschreven, maar dan berekend voor één variabele tegelijk terwijl de rest constant wordt gehouden. Voor een systeem met drie toestandsvariabelen $x$, $v$ en $\theta$ ziet de Jacobiaan-matrix $F$ er schematisch uit zoals beschreven in formule \ref{eq:jacobiaan}.
+
+\begin{equation}
+F = \frac{\partial f}{\partial \mathbf{x}} =
+\begin{bmatrix}
+\frac{\partial f_x}{\partial x} & \frac{\partial f_x}{\partial v} & 
+\frac{\partial f_x}{\partial \theta} \\[6pt]
+\frac{\partial f_v}{\partial x} & \frac{\partial f_v}{\partial v} & 
+\frac{\partial f_v}{\partial \theta} \\[6pt]
+\frac{\partial f_\theta}{\partial x} & \frac{\partial f_\theta}{\partial v} & 
+\frac{\partial f_\theta}{\partial \theta}
+\end{bmatrix}
+\label{eq:jacobiaan}
+\end{equation}
+
+Elke rij beschrijft hoe één variabele verandert als gevolg van een kleine verandering in elk van de variabelen. De Jacobiaan is maakt dus gebruik van meer dimensies om dezelfde raaklijn te beschrijven uit figuur \ref{fig:ekf_linearisatie}. Het EKF herberekent deze matrix bij elke tijdstap opnieuw op basis van de toestandsschatting op dat moment. Vervolgens kunnen de kalman vergelijkingen toegepast worden. \\
+
+Deze aanpak maakt het EKF een zeer geschikte toepassing voor positiebepaling. Deze methode heeft echter een belangrijke randvoorwaarde. Het filter benaderd de werkelijkheid, waardoor er altijd een minuscule afwijking ontstaat. Zolang de toestandsschatting dicht bij de werkelijkheid blijft, is deze fout verwaarloosbaar klein. 
+
+
+\subsubsection{Unscented Kalman Filter (UKF) en Particle Filter}
+Het Unscented Kalman Filter (UKF) lost het linearisatieprobleem van het EKF 
+op een andere manier op. Het UKF kiest namelijk een klein aantal geplaatste meetpunten rondom de huidige schatting en die heten ook wel de sigma punten \cite{wan_merwe_ukf}. Deze punten worden één voor één door de niet lineaire functie gestuurd. Hieruit wordt vervolgens de nieuwe toestandsschatting berekend. Het nadeel is dat het UKF rekenkundig zwaarder is dan het EKF, omdat alle sigma-punten afzonderlijk worden verwerkt \cite{bar_shalom_estimation}. \\
+
+Het Particle Filter gaat nog een stap verder. In plaats van een klein aantal sigma punten gebruikt het 
+honderden tot duizenden willekeurig verspreide deeltjes om de onzekerheid in de toestandsschatting te beschrijven \cite{boers_particle_filter}. Elk deeltje stelt een mogelijke toestand voor en krijgt een gewicht op basis van hoe goed het overeenkomt met de meting. Het Particle Filter is daarmee een algemene aanpak en maakt geen aannames over de vorm van de ruis. Het grote nadeel is de enorme rekenkracht die vereist is. Tabel \ref{tab:filteralgoritmen} geeft een overzicht van alle besproken algoritmes.
+
+\newpage
+
+
+\begin{table}[htbp]
+    \centering
+    \caption{Beschrijving van filteralgoritmen voor sensor fusion, gerangschikt 
+    naar complexiteit en toepassingsgebied}
+    \label{tab:filteralgoritmen}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\textwidth}{|l|X|l|l|X|}
+        \hline
+        \rowcolor{green!20}
+        \textbf{Filtertype} & 
+        \textbf{Lineariteit} & 
+        \textbf{Rekencomplexiteit} & 
+        \textbf{Toepassing} \\ \hline
+        Complementair filter & 
+        Ja & 
+        Zeer laag & 
+        Eenvoudige IMU attitude \\ \hline
+        Kalman Filter (KF) & 
+        Ja & 
+        Laag & 
+        Lineaire systemen \\ \hline
+        Extended Kalman Filter & 
+        Nee (lin. benadering) & 
+        Laag -- Gemiddeld & 
+        GPS/IMU navigatie \\ \hline
+        Unscented Kalman Filter & 
+        Nee (exactere benadering) & 
+        Gemiddeld & 
+        Hoge nauwkeurigheid \\ \hline
+        Particle Filter & 
+        Nee (exact) & 
+        Hoog & 
+        Niet-Gaussische systemen \\ \hline
+    \end{tabularx}
+\end{table}
+
+
+
 
 
 

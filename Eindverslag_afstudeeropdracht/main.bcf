@@ -2376,27 +2376,27 @@
     <bcf:citekey order="1" intorder="1">GNSSConstellations2026</bcf:citekey>
     <bcf:citekey order="2" intorder="1">gps_distance</bcf:citekey>
     <bcf:citekey order="3" intorder="1">novatel_constellations</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">novatel_constellations</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">novatel_computation</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">gis_geography</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">gis_geography</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">gpsgov2026accuracy</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">gpsgeometer_rtk</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">valente2020accuracy</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">NovAtelMultipath2026</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">pmc_sensorfusion</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">NovAtelGNSSerrorSources2026</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">NovAtelMultipath2026</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">NovAtelMultipath2026</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">NovAtelMultipath2026</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">novatel_computation</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">gis_geography</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">gpsgov2026accuracy</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">gpsgeometer_rtk</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">valente2020accuracy</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">NovAtelMultipath2026</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">pmc_sensorfusion</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">NovAtelGNSSerrorSources2026</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">NovAtelMultipath2026</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">NovAtelMultipath2026</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">stmicro_asm330lhh</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">bar_shalom_estimation</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">Meng2017RobustLocalization</bcf:citekey>
     <bcf:citekey order="17" intorder="1">NovAtelMultipath2026</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">stmicro_asm330lhh</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">bar_shalom_estimation</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">Meng2017RobustLocalization</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">NovAtelMultipath2026</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">pieterjan_complementary</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">welch_kalman</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">microchip-tseg-jlink</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">pieterjan_complementary</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">welch_kalman</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">vectornav_ekf</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">bar_shalom_estimation</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">wan_merwe_ukf</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">bar_shalom_estimation</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">boers_particle_filter</bcf:citekey>
     <bcf:citekey order="25" intorder="1">microchip-tseg-jlink</bcf:citekey>
     <bcf:citekey order="26" intorder="1">microchip-tseg-jlink</bcf:citekey>
   </bcf:section>
