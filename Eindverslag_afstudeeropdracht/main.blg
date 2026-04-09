@@ -1,15 +1,18 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'main.blg'
-[131] biber-MSWIN64:342> INFO - === 
-[182] Biber.pm:421> INFO - Reading 'main.bcf'
-[332] Biber.pm:1002> INFO - Found 20 citekeys in bib section 0
-[351] Biber.pm:4487> INFO - Processing section 0
-[366] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
-[448] bibtex.pm:1713> INFO - LaTeX decoding ...
-[473] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
-[643] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[643] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[643] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
-[643] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
-[673] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[686] bbl.pm:779> INFO - Output to main.bbl
+[282] biber-MSWIN64:342> INFO - === 
+[390] Biber.pm:421> INFO - Reading 'main.bcf'
+[564] Biber.pm:1002> INFO - Found 22 citekeys in bib section 0
+[582] Biber.pm:4487> INFO - Processing section 0
+[597] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
+[693] bibtex.pm:1713> INFO - LaTeX decoding ...
+[721] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[889] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[889] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[890] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[890] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[916] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[929] bbl.pm:779> INFO - Output to main.bbl
+[930] Biber.pm:132> WARN - I didn't find a database entry for 'novatel_multipath' (section 0)
+[930] Biber.pm:132> WARN - I didn't find a database entry for 'ublox_interface' (section 0)
+[930] Biber.pm:134> INFO - WARNINGS: 2

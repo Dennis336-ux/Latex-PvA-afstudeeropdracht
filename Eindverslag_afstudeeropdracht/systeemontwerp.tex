@@ -4,21 +4,225 @@ implementatie.
 
 \subsection{Het huidige systeem}
 
-Het sensor fusion systeem wordt geïmplementeerd op de bestaande MYLAPS ProRTK tracker. Voordat het ontwerp van het systeem wordt beschreven, is het relevant het huidige systeem van de tracker in kaart te brengen. 
+Het sensor fusion systeem wordt geïmplementeerd op de bestaande MYLAPS ProRTK tracker. Voordat het ontwerp van het systeem wordt beschreven, is het relevant het huidige systeem van de tracker in kaart te brengen. De ProRTK is een compacte, herlaadbare sporttimer die draadloos communiceert met de MYLAPS server via het X2 Link protocol. Het apparaat combineert een RTK GNSS-ontvanger met een IMU op één printplaat. De voor dit project relevante hardwarecomponenten zijn weergegeven in tabel \ref{tab:hardware}.
 
-De ProRTK is een compacte, herlaadbare sporttimer die draadloos communiceert met de MYLAPS-infrastructuur via het X2 Link protocol. Het apparaat is ontworpen voor gebruik in veeleisende sportomgevingen en combineert een RTK GNSS-ontvanger met een inertiale meeteenheid op één printplaat. \\
+\begin{table}[htbp]
+    \centering
+    \caption{Relevante hardwarecomponenten van de MYLAPS ProRTK tracker.}
+    \label{tab:hardware}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\textwidth}{|l|X|X|}
+        \hline
+        \rowcolor{green!20}
+        \textbf{Component} & \textbf{Type} & \textbf{Functie} \\ \hline
+        Microcontroller &
+        Nordic Semiconductor nRF52, ARM Cortex-M4F &
+        Verwerkt alle data en draait het gehele systeem \\ \hline
+        GNSS-ontvanger &
+        u-blox X20P RTK ontvanger &
+        Levert RTK positie en bijbehorende data (bijvoorbeeld snelheid) op 25 Hz 
+        via UART \\ \hline
+        IMU &
+        STMicroelectronics ASM330LHH, 6-assig &
+        Levert versnelling en hoeksnelheid op 200 Hz 
+        via SPI \\ \hline
+        Seriële flash &
+        Externe NOR-flash &
+        Opslag van logs en instellingen, gedeelde SPI-bus \\ \hline
+        CAN-controller &
+        CAN-bus interface &
+        Communicatie met timinginfrastructuur, 
+        gedeelde SPI-bus \\ \hline
+    \end{tabularx}
+\end{table}
 
-De voor dit project relevante hardwarecomponenten zijn weergegeven in Tabel~\ref{tab:hardware}. Het is belangrijk te vermelden dat niet allecomponenten op het bord direct relevant zijn voor het sensor fusion systeem. Zo zijn de draadloze communicatiemodules en de batterijbeheercircuits buiten beschouwing gelaten. De focus ligt op de componenten die direct betrokken zijn bij de verwerking en communicatie van sensordata. \\
 
-% Tabel hier invoegen
+De nRF52 beschikt over een hardware floating-point unit (FPU), wat relevant is voor de EKF-implementatie omdat de matrixberekeningen 
+gebruikmaken van drijvende-kommaberekeningen.
 
-Een belangrijk architecturaal gegeven is dat de IMU, de seriële flash en de CAN-controller alle drie op dezelfde SPI-bus zijn aangesloten. De nRF52 beschikt over een SPI-peripheral die slechts één apparaat tegelijk kan aansturen. Dit betekent dat elk apparaat een eigen Chip Select (CS) pin heeft, en dat de bus tussen transacties opnieuw geconfigureerd moet worden als de klokpolariteit of -snelheid verschilt per apparaat. Dit heeft implicaties voor de timing van SPI-transacties en vormt een potentiële 
-bron van problemen, wat later in de implementatie van belang zal zijn. \\
+De GNSS-ontvanger ondersteunt meerdere satelietconstellaties tegelijkertijd en is geconfigureerd om RTK-correcties te ontvangen, waardoor centimeterprecisie bereikbaar is bij een goede satellietgeometrie. Naast de standaard positiemeting levert de ontvanger ook de volledige $2 \times 2$ positiecovariantiematrix via het NAV-COV bericht. Dit is een waardevolle informatiebron voor de EKF, omdat het de richtingsafhankelijke GPS-meetonzekerheid nauwkeurig weergeeft.
 
-De u-blox F9P is een hoogwaardige multi-band, multi-constellation GNSS-ontvanger die ondersteuning biedt voor GPS, Galileo, GLONASS en BeiDou tegelijkertijd. De ontvanger is geconfigureerd om RTK-correcties te ontvangen via het RTCM-protocol, waardoor centimeterprecisie bereikbaar is bij een goede satellietgeometrie. Een bijzonder kenmerk van de F9P is het NAV-COV bericht, dat naast de standaard positiemeting ook de volledige 2×2 positiecovariantiematrix rapporteert. Dit is een waardevolle informatiebron voor de EKF, omdat het de richtingsafhankelijke GPS-meetonzekerheid nauwkeurig beschrijft in plaats van een enkele isotrope nauwkeurigheidsschatting. \\
+De ASM330LHH is een automotive-grade 6-assige IMU bestaande uit een 3-assige accelerometer en een 3-assige gyroscoop \cite{stmicro_asm330lhh}. De sensor levert data op 200 Hz, wat aanzienlijk hoger is dan de 25 Hz van de GNSS-ontvanger. Dit frequentieverschil is een belangrijke reden voor de keuze van een predictor-corrector aanpak in het EKF.
 
-De ASM330LHH is een automotive-grade 6-assige IMU van STMicroelectronics, bestaande uit een 3-assige accelerometer en een 3-assige gyroscoop. Het automotive-grade kwalificatie betekent dat de sensor is ontworpen en getest voor gebruik in omgevingen met hoge mechanische belasting, trillingen en temperatuurschommelingen — eigenschappen die ook relevant zijn voor een tracker op een galoperend paard. De sensor levert data op een frequentie van 200 Hz, wat aanzienlijk hoger is dan de 10 Hz van de GNSS-ontvanger. Dit frequentieverschil is een fundamentele drijfveer achter de keuze voor een predictor-corrector architectuur in het EKF.
+Een relevant architecturaal gegeven is dat de IMU, de seriële flash en de CAN-controller op dezelfde SPI-bus zijn aangesloten. Dit heeft gevolgen voor de timing van de IMU-uitlezing en vormt een potentiële bron van problemen die in de implementatie verder wordt besproken.
 
+\newpage
+
+\subsection{Black box}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    block/.style={rectangle, draw, rounded corners=4pt,
+              minimum width=3cm, minimum height=1.2cm,
+              text centered, align=center,
+              fill=blue!10, font=\small},
+    smallblock/.style={rectangle, draw, rounded corners=3pt,
+              minimum width=2.2cm, minimum height=0.9cm,
+              text centered, align=center,
+              fill=orange!15, font=\footnotesize},
+    decision/.style={diamond, draw, fill=yellow!20,
+              minimum width=2.5cm, minimum height=1cm,
+              text centered, align=center,
+              font=\footnotesize, aspect=2},
+    arrow/.style={->, thick, >=stealth}
+]
+    \node[block, minimum width=2.5cm] (gps)  at (0, 1.5)
+        {RTK GNSS\\u-blox X20P\\{\footnotesize 25 Hz}};
+    \node[block, minimum width=2.5cm] (imu)  at (0, -1.5)
+        {IMU\\ASM330LHH\\{\footnotesize 200 Hz}};
+    \node[block, minimum width=3.5cm, minimum height=3.5cm,
+          fill=green!10] (sf) at (5, 0)
+        {Sensor Fusion\\Systeem\\{\footnotesize nRF52}};
+    \node[block, minimum width=2.5cm] (out) at (10, 0)
+        {Positieschatting\\{\footnotesize X2 Link output}};
+
+    \draw[arrow] (gps.east) -- node[above, font=\footnotesize]
+        {positie, snelheid} (sf.west |- gps.east);
+    \draw[arrow] (imu.east) -- node[below, font=\footnotesize]
+        {accel, gyro} (sf.west |- imu.east);
+    \draw[arrow] (sf.east) -- node[above, font=\footnotesize]
+        {x, y, v, $\theta$} (out.west);
+\end{tikzpicture}
+\caption{\textbf{Niveau 1 -- Blackbox overzicht:} het sensor fusion systeem
+ontvangt twee asynchrone datastromen en levert één betrouwbare
+positieschatting via het X2 Link protocol.}
+\label{fig:blackbox}
+\end{figure}
+
+
+\subsection{Interne architectuur}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    block/.style={rectangle, draw, rounded corners=3pt,
+                  minimum width=2.8cm, minimum height=1cm,
+                  text centered, align=center,
+                  fill=blue!10, font=\small},
+    smallblock/.style={rectangle, draw, rounded corners=3pt,
+                  minimum width=2.2cm, minimum height=0.9cm,
+                  text centered, align=center,
+                  fill=orange!15, font=\footnotesize},
+    arrow/.style={->, thick, >=stealth}
+]
+    \node[block] (gps) at (0, 3)
+        {u-blox\\{\footnotesize NAV-PVT / NAV-COV}};
+    \node[block] (imu) at (0, -1)
+        {ASM330LHH\\{\footnotesize Accel + Gyro}};
+
+    \node[smallblock] (parser) at (4.5, 3)
+        {UBX Parser\\{\footnotesize checksum, offsets}};
+    \node[smallblock] (cal)    at (4.5, -1)
+        {Kalibratie \&\\Remapping};
+    \node[smallblock] (zupt)   at (4.5, -3)
+        {Stilstand-\\detectie (ZUPT)};
+
+    \node[block, minimum width=3.2cm, minimum height=7.5cm,
+        fill=green!10] (ekf) at (9, 0)
+        {Extended\\Kalman Filter\\[6pt]
+        {\footnotesize predictiestap 200 Hz}\\[2pt]
+        {\footnotesize updatestap 25 Hz}\\[2pt]
+        {\footnotesize NIS-check}};
+
+    \node[block] (out) at (13.5, 0)
+        {X2 Link\\Output};
+
+    % GPS naar parser
+    \draw[arrow] (gps) -- (parser);
+
+    % IMU naar kalibratie en ZUPT
+    \draw[arrow] (imu) -- (cal);
+    \draw[arrow] (imu) |- (zupt);
+
+    % Parser naar EKF: horizontale lijn op hoogte van parser
+    \draw[arrow] (parser.east) --
+        node[above, font=\tiny] {r\_ee, r\_nn, r\_en}
+        (ekf.west |- parser.east);
+
+    % Kalibratie naar EKF: horizontale lijn op hoogte van cal
+    \draw[arrow] (cal.east) --
+        node[above, font=\tiny] {flat\_x, $\omega_z$}
+        (ekf.west |- cal.east);
+
+    % ZUPT naar EKF: horizontale lijn op hoogte van zupt
+    \draw[arrow] (zupt.east) --
+        node[below, font=\tiny] {stilstand?}
+        (ekf.west |- zupt.east);
+
+    % EKF naar output
+    \draw[arrow] (ekf) -- (out);
+
+\end{tikzpicture}
+\caption{\textbf{Niveau 2 -- Interne architectuur:} de twee datastromen worden
+voorverwerkt voordat zij de EKF bereiken. De EKF voert op 200 Hz
+de predictiestap uit en op 25 Hz de updatestap met NIS-check.}
+\label{fig:architectuur}
+\end{figure}
+
+\newpage
+
+
+\subsection{EKF dataflow}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    block/.style={rectangle, draw, rounded corners=3pt,
+                  minimum width=3.5cm, minimum height=1cm,
+                  text centered, align=center,
+                  fill=blue!10, font=\small},
+    blockgreen/.style={rectangle, draw, rounded corners=3pt,
+                  minimum width=3.5cm, minimum height=1cm,
+                  text centered, align=center,
+                  fill=green!10, font=\small},
+    blockyellow/.style={rectangle, draw, rounded corners=3pt,
+                  minimum width=3.5cm, minimum height=1cm,
+                  text centered, align=center,
+                  fill=yellow!20, font=\small},
+    arrow/.style={->, thick, >=stealth}
+]
+    % Initialisatie
+    \node[blockyellow] (init) at (0, 0)
+        {Initialisatie\\{\footnotesize Eerste RTK Fixed fix}};
+
+    % Predictiestap
+    \node[blockgreen] (pred) at (5, 0)
+        {Predictiestap\\{\footnotesize IMU @ 200 Hz (5 ms)}};
+
+    % GPS check
+    \node[block] (gps) at (10, 0)
+        {GPS beschikbaar?\\{\footnotesize elke 40 ms}};
+
+    % Updatestap
+    \node[blockgreen] (upd) at (10, -2.5)
+        {Updatestap\\{\footnotesize GPS @ 25 Hz}};
+
+    % Uitvoer
+    \node[blockgreen] (out) at (5, -2.5)
+        {Toestandsschatting\\
+         {\footnotesize $[x,\, y,\, v,\, \theta,\, b_a,\, b_g]^T$}};
+
+    % Pijlen
+    \draw[arrow] (init) -- node[above, font=\footnotesize]
+        {eenmalig} (pred);
+    \draw[arrow] (pred) -- node[above, font=\footnotesize]
+        {wachten} (gps);
+    \draw[arrow] (gps)  -- node[right, font=\footnotesize]
+        {ja} (upd);
+    \draw[arrow] (gps.north) -- ++(0, 1)
+        -- node[above, font=\footnotesize] {nee, blijf predicteren}
+        ++(-5, 0) -- (pred.north);
+    \draw[arrow] (upd)  -- (out);
+    \draw[arrow] (out)  -- (pred);
+
+\end{tikzpicture}
+\caption{Flowchart van het algoritme na een eenmalige initialisatie
+bij de eerste RTK Fixed fix draait de predictiestap continu op 200 Hz.
+Elke 40 ms wordt een GPS-meting verwerkt in de updatestap waarna
+de toestandsschatting wordt bijgewerkt.}
+\label{fig:ekf_flow}
+\end{figure}
 
 
 \newpage

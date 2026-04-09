@@ -21,9 +21,12 @@
 \contentsline {section}{\numberline {6}Specificaties}{16}{section.6}%
 \contentsline {section}{\numberline {7}ontwerp}{17}{section.7}%
 \contentsline {subsection}{\numberline {7.1}Het huidige systeem}{17}{subsection.7.1}%
-\contentsline {section}{\numberline {8}implementatie}{18}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Testopstelling programmeren van het bord}{18}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Uitlezen IMU}{19}{subsection.8.2}%
-\contentsline {section}{\numberline {9}Resultaten en validatie}{20}{section.9}%
-\contentsline {section}{\numberline {10}Discussie}{21}{section.10}%
-\contentsline {section}{Bronnen}{22}{section.10}%
+\contentsline {subsection}{\numberline {7.2}Black box}{18}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Interne architectuur}{18}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}EKF dataflow}{19}{subsection.7.4}%
+\contentsline {section}{\numberline {8}implementatie}{20}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Testopstelling programmeren van het bord}{20}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Uitlezen IMU}{21}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Resultaten en validatie}{22}{section.9}%
+\contentsline {section}{\numberline {10}Discussie}{23}{section.10}%
+\contentsline {section}{Bronnen}{24}{section.10}%

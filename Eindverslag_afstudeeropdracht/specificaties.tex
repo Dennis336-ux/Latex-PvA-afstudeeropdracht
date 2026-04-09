@@ -7,27 +7,80 @@
 
 \begin{table}[htbp]
     \centering
-    \caption{Specificaties en Eisen}
+    \caption{Specificaties en eisen van het sensor fusion systeem.}
     \label{tab:specificaties}
-    \begin{tabular}{|p{4cm}|p{10cm}|}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\textwidth}{|l|l|X|}
         \hline
-        \textbf{Specificatie} & \textbf{Onderbouwing / Eis} \\
-        \hline \hline
-        Snelheid & Het systeem moet snelheden tot minstens 80 km/u accuraat registreren. Dit dekt de topsnelheid in de paardensport inclusief een veiligheidsmarge van 10\%. \\
-        \hline
-        Nauwkeurigheid (Open Veld) & De toevoeging van sensor fusion mag de baseline RTK-precisie (typisch $<5$ cm) niet negatief beïnvloeden. \\
-        \hline
-        Dimensionaliteit & Kijkend naar de projectafbakening beperkt de analyse en positiebepaling zich strikt tot het 2D vlak (Horizontale $X, Y$ positie en Heading). \\
-        \hline
-        Foutdetectie & Het systeem moet 'False Fixed' oplossingen detecteren. Een afwijking tussen de GNSS-meting en de IMU-voorspelling van meer dan 15 cm (binnen één tijdstap) moet gemarkeerd worden als onbetrouwbaar. Idealiter in de enkele centimeters. \\
-        \hline
-        Update Frequentie & Het huidige systeemstandaard bedraagt 500 ms waarbij het gewenst is van het systeem dat de output minimaal binnen deze tijd moet plaatsvinden. \\
-        \hline
-        Verwerkingssnelheid & De dataverwerking moet real-time plaatsvinden. De berekeningstijd per stap moet korter zijn dan het sample interval om vertraging te voorkomen. \\
-        \hline
-        Communicatie Protocol & Output zal gelijk moeten zijn aan het X2 Link protocol van MYLAPS. \\
-        \hline
-    \end{tabular}
+        \rowcolor{green!20}
+        \textbf{Specificatie} & \textbf{Waarde} & \textbf{Onderbouwing} \\ \hline
+
+        Maximale snelheid &
+        $\geq$ 80 km/u &
+        Topsnelheid wedstrijdpaard $\approx$ 65--70 km/u, 
+        10\% veiligheidsmarge \\ \hline
+
+        Positienauwkeurigheid (RTK Fixed) &
+        $\leq$ 5 cm (1-sigma) &
+        Baseline RTK-precisie mag niet verslechteren 
+        door sensor fusion \\ \hline
+
+        Foutdetectiedrempel &
+        $\leq$ 15 cm per tijdstap &
+        Gebaseerd op typische multipath-positiefout 
+        van $\pm$1 m \cite{novatel_multipath} \\ \hline
+
+        NIS-drempelwaarde &
+        9{,}21 (--) &
+        Chi-kwadraat, 2 vrijheidsgraden, 
+        99\% betrouwbaarheid \cite{bar_shalom_estimation} \\ \hline
+
+        Maximale output-latency &
+        $\leq$ 500 ms &
+        Huidige MYLAPS X2 Link systeemstandaard \\ \hline
+
+        IMU-updatefrequentie &
+        200 Hz &
+        ASM330LHH geconfigureerd op 208 Hz ODR \cite{stmicro_asm330lhh} \\ \hline
+
+        GNSS-updatefrequentie &
+        10 Hz &
+        U-blox F9P geconfigureerd op 10 Hz \cite{ublox_interface} \\ \hline
+
+        EKF predictiestap &
+        5 ms &
+        Aangestuurd door IMU-timer (1/200 Hz) \\ \hline
+
+        EKF updatestap &
+        40 ms &
+        Aangestuurd door GPS-frequentie (1/10 Hz) \\ \hline
+
+        Maximale versnelling &
+        $\leq$ 4 g &
+        ASM330LHH meetbereik ingesteld op $\pm$4 g \cite{stmicro_asm330lhh} \\ \hline
+
+        Maximale hoeksnelheid &
+        $\leq$ 500 DPS &
+        ASM330LHH meetbereik ingesteld op $\pm$500 DPS \cite{stmicro_asm330lhh} \\ \hline
+
+        Accel-bias clamp &
+        $\pm$ 2{,}0 m/s² &
+        Voorkomt divergentie bij langdurige GPS-uitval \\ \hline
+
+        Gyro-bias clamp &
+        $\pm$ 0{,}5 rad/s &
+        Realistische grens op basis van 
+        ASM330LHH specificaties \cite{stmicro_asm330lhh} \\ \hline
+
+        Dimensionaliteit &
+        2D vlak &
+        Projectafbakening; parcours is nagenoeg vlak \\ \hline
+
+        Communicatieprotocol &
+        X2 Link &
+        Integratie in bestaande MYLAPS-infrastructuur \\ \hline
+
+    \end{tabularx}
 \end{table}
 
 \newpage

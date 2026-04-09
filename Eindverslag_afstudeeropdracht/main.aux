@@ -93,24 +93,51 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.4}Unscented Kalman Filter (UKF) en Particle Filter}{14}{subsubsection.5.3.4}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Beschrijving van filteralgoritmen voor sensor fusion, gerangschikt naar complexiteit en toepassingsgebied}}{15}{table.caption.10}\protected@file@percent }
 \newlabel{tab:filteralgoritmen}{{5}{15}{Beschrijving van filteralgoritmen voor sensor fusion, gerangschikt naar complexiteit en toepassingsgebied}{table.caption.10}{}}
+\abx@aux@cite{0}{novatel_multipath}
+\abx@aux@segm{0}{0}{novatel_multipath}
+\abx@aux@cite{0}{bar_shalom_estimation}
+\abx@aux@segm{0}{0}{bar_shalom_estimation}
+\abx@aux@cite{0}{stmicro_asm330lhh}
+\abx@aux@segm{0}{0}{stmicro_asm330lhh}
+\abx@aux@cite{0}{ublox_interface}
+\abx@aux@segm{0}{0}{ublox_interface}
+\abx@aux@cite{0}{stmicro_asm330lhh}
+\abx@aux@segm{0}{0}{stmicro_asm330lhh}
+\abx@aux@cite{0}{stmicro_asm330lhh}
+\abx@aux@segm{0}{0}{stmicro_asm330lhh}
+\abx@aux@cite{0}{stmicro_asm330lhh}
+\abx@aux@segm{0}{0}{stmicro_asm330lhh}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Specificaties}{16}{section.6}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Specificaties en Eisen}}{16}{table.caption.11}\protected@file@percent }
-\newlabel{tab:specificaties}{{6}{16}{Specificaties en Eisen}{table.caption.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Specificaties en eisen van het sensor fusion systeem.}}{16}{table.caption.11}\protected@file@percent }
+\newlabel{tab:specificaties}{{6}{16}{Specificaties en eisen van het sensor fusion systeem}{table.caption.11}{}}
+\abx@aux@cite{0}{stmicro_asm330lhh}
+\abx@aux@segm{0}{0}{stmicro_asm330lhh}
 \@writefile{toc}{\contentsline {section}{\numberline {7}ontwerp}{17}{section.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Het huidige systeem}{17}{subsection.7.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Relevante hardwarecomponenten van de MYLAPS ProRTK tracker.}}{17}{table.caption.12}\protected@file@percent }
+\newlabel{tab:hardware}{{7}{17}{Relevante hardwarecomponenten van de MYLAPS ProRTK tracker}{table.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Black box}{18}{subsection.7.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \textbf  {Niveau 1 -- Blackbox overzicht:} het sensor fusion systeem ontvangt twee asynchrone datastromen en levert één betrouwbare positieschatting via het X2 Link protocol.}}{18}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:blackbox}{{5}{18}{\textbf {Niveau 1 -- Blackbox overzicht:} het sensor fusion systeem ontvangt twee asynchrone datastromen en levert één betrouwbare positieschatting via het X2 Link protocol}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Interne architectuur}{18}{subsection.7.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces \textbf  {Niveau 2 -- Interne architectuur:} de twee datastromen worden voorverwerkt voordat zij de EKF bereiken. De EKF voert op 200 Hz de predictiestap uit en op 25 Hz de updatestap met NIS-check.}}{18}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:architectuur}{{6}{18}{\textbf {Niveau 2 -- Interne architectuur:} de twee datastromen worden voorverwerkt voordat zij de EKF bereiken. De EKF voert op 200 Hz de predictiestap uit en op 25 Hz de updatestap met NIS-check}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}EKF dataflow}{19}{subsection.7.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Flowchart van het algoritme na een eenmalige initialisatie bij de eerste RTK Fixed fix draait de predictiestap continu op 200 Hz. Elke 40 ms wordt een GPS-meting verwerkt in de updatestap waarna de toestandsschatting wordt bijgewerkt.}}{19}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:ekf_flow}{{7}{19}{Flowchart van het algoritme na een eenmalige initialisatie bij de eerste RTK Fixed fix draait de predictiestap continu op 200 Hz. Elke 40 ms wordt een GPS-meting verwerkt in de updatestap waarna de toestandsschatting wordt bijgewerkt}{figure.caption.15}{}}
 \abx@aux@cite{0}{microchip-tseg-jlink}
 \abx@aux@segm{0}{0}{microchip-tseg-jlink}
 \abx@aux@cite{0}{microchip-tseg-jlink}
 \abx@aux@segm{0}{0}{microchip-tseg-jlink}
-\@writefile{toc}{\contentsline {section}{\numberline {8}implementatie}{18}{section.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Testopstelling programmeren van het bord}{18}{subsection.8.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Pinout van de JTAG connector \blx@tocontentsinit {0}\cite {microchip-tseg-jlink}}}{18}{figure.5}\protected@file@percent }
-\newlabel{fig:JTAG}{{5}{18}{Pinout van de JTAG connector \cite {microchip-tseg-jlink}}{figure.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Uitlezen IMU}{19}{subsection.8.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Resultaten en validatie}{20}{section.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10}Discussie}{21}{section.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{Bronnen}{22}{section.10}\protected@file@percent }
-\abx@aux@read@bbl@mdfivesum{13BE83666E00C4B3D759A96E191F03DB}
+\@writefile{toc}{\contentsline {section}{\numberline {8}implementatie}{20}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Testopstelling programmeren van het bord}{20}{subsection.8.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Pinout van de JTAG connector \blx@tocontentsinit {0}\cite {microchip-tseg-jlink}}}{20}{figure.8}\protected@file@percent }
+\newlabel{fig:JTAG}{{8}{20}{Pinout van de JTAG connector \cite {microchip-tseg-jlink}}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Uitlezen IMU}{21}{subsection.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Resultaten en validatie}{22}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Discussie}{23}{section.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Bronnen}{24}{section.10}\protected@file@percent }
+\abx@aux@read@bbl@mdfivesum{FBA591523F85B69AAF3844D576C45075}
 \abx@aux@defaultrefcontext{0}{stmicro_asm330lhh}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{bar_shalom_estimation}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{boers_particle_filter}{nty/global//global/global/global}
@@ -131,4 +158,4 @@
 \abx@aux@defaultrefcontext{0}{wan_merwe_ukf}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{welch_kalman}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{pmc_sensorfusion}{nty/global//global/global/global}
-\gdef \@abspage@last{23}
+\gdef \@abspage@last{25}
