@@ -94,6 +94,69 @@
       \field{title}{Particle Filters en Niet-Lineair Schatten}
       \field{year}{2011}
     \endentry
+    \entry{Fan2025Influence}{article}{}{}
+      \name{author}{7}{}{%
+        {{hash=b3e4233a9e57279108abf114a277bfcf}{%
+           family={Fan},
+           familyi={F\bibinitperiod},
+           given={Bingfei},
+           giveni={B\bibinitperiod}}}%
+        {{hash=6c5587b4024d81f3c81effb805919c93}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Luobin},
+           giveni={L\bibinitperiod}}}%
+        {{hash=1d2493f359cc5237cd3d273d2a30fd28}{%
+           family={Cai},
+           familyi={C\bibinitperiod},
+           given={Shibo},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a3169f475b6f0540928a151f1dca639e}{%
+           family={Du},
+           familyi={D\bibinitperiod},
+           given={Mingyu},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b9ea953e38962ea62150af4914b3a85b}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Tao},
+           giveni={T\bibinitperiod}}}%
+        {{hash=d499c9d17ee9dfe40e260759f0349d8c}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Qingguo},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=5e2fc7d1300dcfaec3f1172589fcc7b8}{%
+           family={Shull},
+           familyi={S\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{473839514d5c582b54bedddfef3797f8}
+      \strng{fullhash}{5aceb268a70cf8ead0301fffc3aa360e}
+      \strng{fullhashraw}{5aceb268a70cf8ead0301fffc3aa360e}
+      \strng{bibnamehash}{473839514d5c582b54bedddfef3797f8}
+      \strng{authorbibnamehash}{473839514d5c582b54bedddfef3797f8}
+      \strng{authornamehash}{473839514d5c582b54bedddfef3797f8}
+      \strng{authorfullhash}{5aceb268a70cf8ead0301fffc3aa360e}
+      \strng{authorfullhashraw}{5aceb268a70cf8ead0301fffc3aa360e}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sensors}
+      \field{month}{3}
+      \field{note}{PMCID: PMC11991382}
+      \field{number}{7}
+      \field{title}{Influence of Sampling Rate on Wearable IMU Orientation Estimation Accuracy for Human Movement Analysis}
+      \field{volume}{25}
+      \field{year}{2025}
+      \field{pages}{1976}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/s25071976
+      \endverb
+    \endentry
     \entry{gis_geography}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=e797f903267c55882141d3c7ca691344}{%
@@ -208,6 +271,34 @@
       \field{note}{Geraadpleegd op 9 februari 2026}
       \field{title}{GPS Accuracy}
       \field{year}{2026}
+    \endentry
+    \entry{InertiaEquineGait}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=675a9da8c81069ac137463c58177fa37}{%
+           family={{Inertia Technology}},
+           familyi={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{675a9da8c81069ac137463c58177fa37}
+      \strng{fullhash}{675a9da8c81069ac137463c58177fa37}
+      \strng{fullhashraw}{675a9da8c81069ac137463c58177fa37}
+      \strng{bibnamehash}{675a9da8c81069ac137463c58177fa37}
+      \strng{authorbibnamehash}{675a9da8c81069ac137463c58177fa37}
+      \strng{authornamehash}{675a9da8c81069ac137463c58177fa37}
+      \strng{authorfullhash}{675a9da8c81069ac137463c58177fa37}
+      \strng{authorfullhashraw}{675a9da8c81069ac137463c58177fa37}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Geraadpleegd op 22 mei 2024}
+      \field{title}{Wireless Equine Gait Analysis}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://inertia-technology.com/usecase/wireless-equine-gait-analysis/
+      \endverb
+      \verb{url}
+      \verb https://inertia-technology.com/usecase/wireless-equine-gait-analysis/
+      \endverb
     \endentry
     \entry{pieterjan_complementary}{misc}{}{}
       \name{author}{1}{}{%
@@ -401,6 +492,92 @@
       \field{title}{Understanding and Mitigating GNSS Multipath Interference and Error}
       \field{year}{2026}
     \endentry
+    \entry{ofstandard2024}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=58a18e2176348285d512817b16d9c849}{%
+           family={{OfStandard}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{58a18e2176348285d512817b16d9c849}
+      \strng{fullhash}{58a18e2176348285d512817b16d9c849}
+      \strng{fullhashraw}{58a18e2176348285d512817b16d9c849}
+      \strng{bibnamehash}{58a18e2176348285d512817b16d9c849}
+      \strng{authorbibnamehash}{58a18e2176348285d512817b16d9c849}
+      \strng{authornamehash}{58a18e2176348285d512817b16d9c849}
+      \strng{authorfullhash}{58a18e2176348285d512817b16d9c849}
+      \strng{authorfullhashraw}{58a18e2176348285d512817b16d9c849}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Guide to Horse Racing Track Dimensions \& Standards}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://ofstandard.com/general/standard-dimensions-of-horse-racing-track
+      \endverb
+      \verb{url}
+      \verb https://ofstandard.com/general/standard-dimensions-of-horse-racing-track
+      \endverb
+    \endentry
+    \entry{segger_rtt}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=4397897de0152d3d5099a9dc7f054d5d}{%
+           family={{SEGGER Microcontroller GmbH}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{4397897de0152d3d5099a9dc7f054d5d}
+      \strng{fullhash}{4397897de0152d3d5099a9dc7f054d5d}
+      \strng{fullhashraw}{4397897de0152d3d5099a9dc7f054d5d}
+      \strng{bibnamehash}{4397897de0152d3d5099a9dc7f054d5d}
+      \strng{authorbibnamehash}{4397897de0152d3d5099a9dc7f054d5d}
+      \strng{authornamehash}{4397897de0152d3d5099a9dc7f054d5d}
+      \strng{authorfullhash}{4397897de0152d3d5099a9dc7f054d5d}
+      \strng{authorfullhashraw}{4397897de0152d3d5099a9dc7f054d5d}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{[Online]}
+      \field{note}{Available: \url{https://www.segger.com/products/debug-probes/j-link/technology/about-real-time-transfer/}. Geraadpleegd op 10 april 2026.}
+      \field{title}{About Real Time Transfer (RTT)}
+      \field{year}{2026}
+    \endentry
+    \entry{ST_AN5296}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=c38884ab3cf908c2798725960369391b}{%
+           family={{STMicroelectronics}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {STMicroelectronics}%
+      }
+      \strng{namehash}{c38884ab3cf908c2798725960369391b}
+      \strng{fullhash}{c38884ab3cf908c2798725960369391b}
+      \strng{fullhashraw}{c38884ab3cf908c2798725960369391b}
+      \strng{bibnamehash}{c38884ab3cf908c2798725960369391b}
+      \strng{authorbibnamehash}{c38884ab3cf908c2798725960369391b}
+      \strng{authornamehash}{c38884ab3cf908c2798725960369391b}
+      \strng{authorfullhash}{c38884ab3cf908c2798725960369391b}
+      \strng{authorfullhashraw}{c38884ab3cf908c2798725960369391b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{9}
+      \field{note}{Rev 1}
+      \field{title}{AN5296: ASM330LHH automotive inertial module digital 3-axis accelerometer and digital 3-axis gyroscope}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://www.st.com/resource/en/application_note/an5296-asm330lhh-automotive-inertial-module-digital-3axis-accelerometer-and-digital-3axis-gyroscope-stmicroelectronics.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.st.com/resource/en/application_note/an5296-asm330lhh-automotive-inertial-module-digital-3axis-accelerometer-and-digital-3axis-gyroscope-stmicroelectronics.pdf
+      \endverb
+    \endentry
     \entry{valente2020accuracy}{article}{}{}
       \name{author}{4}{}{%
         {{hash=0c4d60e2ac164609d1bf0f86d54fc3b4}{%
@@ -537,6 +714,44 @@
       \field{title}{An Introduction to the Kalman Filter}
       \field{type}{techreport}
       \field{year}{1995}
+    \endentry
+    \entry{witte2006effect}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=eb8fefddbf4141003760348a14ac7a48}{%
+           family={Witte},
+           familyi={W\bibinitperiod},
+           given={T.\bibnamedelimi H.},
+           giveni={T\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=4117e2ade2898c9a270f88b7d213f073}{%
+           family={Hirst},
+           familyi={H\bibinitperiod},
+           given={C.\bibnamedelimi V.},
+           giveni={C\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=cececd4bdb3728f4cf70f18ea235db52}{%
+           family={Wilson},
+           familyi={W\bibinitperiod},
+           given={A.\bibnamedelimi M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{b6d8daf4156866e8c5444ec89cd2852b}
+      \strng{fullhash}{b6d8daf4156866e8c5444ec89cd2852b}
+      \strng{fullhashraw}{b6d8daf4156866e8c5444ec89cd2852b}
+      \strng{bibnamehash}{b6d8daf4156866e8c5444ec89cd2852b}
+      \strng{authorbibnamehash}{b6d8daf4156866e8c5444ec89cd2852b}
+      \strng{authornamehash}{b6d8daf4156866e8c5444ec89cd2852b}
+      \strng{authorfullhash}{b6d8daf4156866e8c5444ec89cd2852b}
+      \strng{authorfullhashraw}{b6d8daf4156866e8c5444ec89cd2852b}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Experimental Biology}
+      \field{note}{Geraadpleegd op 22 mei 2024}
+      \field{title}{Effect of speed on stride parameters in racehorses at gallop in field conditions}
+      \field{year}{2006}
+      \verb{doi}
+      \verb 10.1242/jeb.02511
+      \endverb
     \endentry
     \entry{pmc_sensorfusion}{article}{}{}
       \name{author}{3}{}{%

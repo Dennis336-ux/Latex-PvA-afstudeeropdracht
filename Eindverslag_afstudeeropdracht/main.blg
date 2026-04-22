@@ -1,18 +1,20 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
-[0] Config.pm:331> INFO - Logfile is 'main.blg'
-[282] biber-MSWIN64:342> INFO - === 
-[390] Biber.pm:421> INFO - Reading 'main.bcf'
-[564] Biber.pm:1002> INFO - Found 22 citekeys in bib section 0
-[582] Biber.pm:4487> INFO - Processing section 0
-[597] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
-[693] bibtex.pm:1713> INFO - LaTeX decoding ...
-[721] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
-[889] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[889] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[890] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
-[890] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
-[916] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[929] bbl.pm:779> INFO - Output to main.bbl
-[930] Biber.pm:132> WARN - I didn't find a database entry for 'novatel_multipath' (section 0)
-[930] Biber.pm:132> WARN - I didn't find a database entry for 'ublox_interface' (section 0)
-[930] Biber.pm:134> INFO - WARNINGS: 2
+[1] Config.pm:331> INFO - Logfile is 'main.blg'
+[219] biber-MSWIN64:342> INFO - === 
+[334] Biber.pm:421> INFO - Reading 'main.bcf'
+[591] Biber.pm:1002> INFO - Found 28 citekeys in bib section 0
+[626] Biber.pm:4487> INFO - Processing section 0
+[643] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
+[794] bibtex.pm:1713> INFO - LaTeX decoding ...
+[840] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[1050] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1050] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1050] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[1050] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[1088] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[1104] bbl.pm:779> INFO - Output to main.bbl
+[1106] Biber.pm:132> WARN - legacy month field 'mar' in entry 'Fan2025Influence' is not an integer - this will probably not sort properly.
+[1107] Biber.pm:132> WARN - legacy month field 'sep' in entry 'ST_AN5296' is not an integer - this will probably not sort properly.
+[1107] Biber.pm:132> WARN - I didn't find a database entry for 'novatel_multipath' (section 0)
+[1107] Biber.pm:132> WARN - I didn't find a database entry for 'ublox_interface' (section 0)
+[1108] Biber.pm:134> INFO - WARNINGS: 4

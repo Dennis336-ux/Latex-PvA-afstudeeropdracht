@@ -1,6 +1,6 @@
 \section{ontwerp}
 In dit hoofdstuk wordt het ontwerp van het sensor fusion systeem beschreven. Op basis van het vooronderzoek en de vastgestelde specificaties zijn de ontwerpkeuzes gemaakt die in dit hoofdstuk worden toegelicht. Het hoofdstuk begint met een beschrijving van de bestaande hardware van de MYLAPS RTK tracker, gevolgd door de systeemarchitectuur en tot slot het EKF-model met de bijbehorende toestandsvector en systeemmodel. Het doel van dit hoofdstuk is om de brug te slaan tussen het theoretisch kader en de uiteindelijke 
-implementatie.
+implementatie. \todo[inline]{Inleiding aanpassen}
 
 \subsection{Het huidige systeem}
 
@@ -42,7 +42,7 @@ gebruikmaken van drijvende-kommaberekeningen.
 
 De GNSS-ontvanger ondersteunt meerdere satelietconstellaties tegelijkertijd en is geconfigureerd om RTK-correcties te ontvangen, waardoor centimeterprecisie bereikbaar is bij een goede satellietgeometrie. Naast de standaard positiemeting levert de ontvanger ook de volledige $2 \times 2$ positiecovariantiematrix via het NAV-COV bericht. Dit is een waardevolle informatiebron voor de EKF, omdat het de richtingsafhankelijke GPS-meetonzekerheid nauwkeurig weergeeft.
 
-De ASM330LHH is een automotive-grade 6-assige IMU bestaande uit een 3-assige accelerometer en een 3-assige gyroscoop \cite{stmicro_asm330lhh}. De sensor levert data op 200 Hz, wat aanzienlijk hoger is dan de 25 Hz van de GNSS-ontvanger. Dit frequentieverschil is een belangrijke reden voor de keuze van een predictor-corrector aanpak in het EKF.
+De ASM330LHH is een automotive-grade 6-assige IMU bestaande uit een 3-assige accelerometer en een 3-assige gyroscoop \cite{stmicro_asm330lhh}. De sensor kan data leveren op aanzienlijk hogere frequenties dan de 25 Hz van de GNSS ontvanger. Dit frequentieverschil is een belangrijke reden voor de keuze van een predictor-corrector aanpak in het EKF.
 
 Een relevant architecturaal gegeven is dat de IMU, de seriële flash en de CAN-controller op dezelfde SPI-bus zijn aangesloten. Dit heeft gevolgen voor de timing van de IMU-uitlezing en vormt een potentiële bron van problemen die in de implementatie verder wordt besproken.
 

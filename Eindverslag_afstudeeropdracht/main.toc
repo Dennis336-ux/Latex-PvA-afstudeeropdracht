@@ -25,8 +25,18 @@
 \contentsline {subsection}{\numberline {7.3}Interne architectuur}{18}{subsection.7.3}%
 \contentsline {subsection}{\numberline {7.4}EKF dataflow}{19}{subsection.7.4}%
 \contentsline {section}{\numberline {8}implementatie}{20}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Testopstelling programmeren van het bord}{20}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Uitlezen IMU}{21}{subsection.8.2}%
-\contentsline {section}{\numberline {9}Resultaten en validatie}{22}{section.9}%
-\contentsline {section}{\numberline {10}Discussie}{23}{section.10}%
-\contentsline {section}{Bronnen}{24}{section.10}%
+\contentsline {subsection}{\numberline {8.1}Ontwikkelomgeving en testopstelling}{20}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}IMU integratie}{21}{subsection.8.2}%
+\contentsline {paragraph}{Accelerometerbereik: $\pm $4 g}{21}{paragraph*.18}%
+\contentsline {paragraph}{Gyroscoopbereik: $\pm $500 DPS}{21}{paragraph*.19}%
+\contentsline {paragraph}{Outputfrequentie (ODR): 208 Hz}{22}{paragraph*.21}%
+\contentsline {paragraph}{Bandbreedte laagdoorlaatfilter: 50 Hz}{22}{paragraph*.22}%
+\contentsline {paragraph}{Block Data Update (BDU)}{22}{paragraph*.23}%
+\contentsline {paragraph}{Gyroscoop LPF1}{23}{paragraph*.24}%
+\contentsline {subsubsection}{\numberline {8.2.1}Registerconfiguratie}{23}{subsubsection.8.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2}Gyroscooop kalibratie}{23}{subsubsection.8.2.2}%
+\contentsline {subsubsection}{\numberline {8.2.3}SPI-busprobleem bij de IMU-uitlezing}{25}{subsubsection.8.2.3}%
+\contentsline {subsection}{\numberline {8.3}Extended Kalman Filter}{25}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Resultaten en validatie}{26}{section.9}%
+\contentsline {section}{\numberline {10}Discussie}{27}{section.10}%
+\contentsline {section}{Bronnen}{28}{section.10}%

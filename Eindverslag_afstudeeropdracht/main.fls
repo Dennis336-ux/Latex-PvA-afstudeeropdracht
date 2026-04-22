@@ -293,6 +293,14 @@ INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\amsma
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsbsy.sty
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsbsy.sty
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\todonotes\todonotes.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\todonotes\todonotes.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\xkeyval\xkeyval.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\xkeyval\xkeyval.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\generic\xkeyval\xkeyval.tex
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\generic\xkeyval\xkvutils.tex
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarypositioning.code.tex
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarypositioning.code.tex
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\tools\tabularx.sty
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\tools\tabularx.sty
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\enumitem\enumitem.sty
@@ -362,8 +370,6 @@ INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\generic\pgf
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\generic\pgf\libraries\pgflibraryarrows.meta.code.tex
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\generic\pgf\libraries\pgflibraryarrows.meta.code.tex
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\generic\pgf\libraries\pgflibraryarrows.meta.code.tex
-INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarypositioning.code.tex
-INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarypositioning.code.tex
 INPUT .\main.aux
 INPUT .\main.aux
 INPUT main.aux
@@ -583,6 +589,55 @@ INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\images\racetrack_gyro.png
+INPUT .\images\racetrack_gyro.png
+INPUT .\images\racetrack_gyro.png
+INPUT .\images\racetrack_gyro.png
+INPUT .\images\racetrack_gyro.png
+INPUT .\images\racetrack_gyro.png
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\images\sensorwaardes_origineel.png
+INPUT .\images\sensorwaardes_origineel.png
+INPUT .\images\sensorwaardes_origineel.png
+INPUT .\images\sensorwaardes_origineel.png
+INPUT .\images\sensorwaardes_origineel.png
+INPUT .\images\sensorwaardes_origineel.png
+INPUT .\images\sensorwaardes_filter.png
+INPUT .\images\sensorwaardes_filter.png
+INPUT .\images\sensorwaardes_filter.png
+INPUT .\images\sensorwaardes_filter.png
+INPUT .\images\sensorwaardes_filter.png
+INPUT .\images\sensorwaardes_filter.png
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\logos\HvA Internationaal.jpg
+INPUT .\images\sensorwaardes_kalibraties.png
+INPUT .\images\sensorwaardes_kalibraties.png
+INPUT .\images\sensorwaardes_kalibraties.png
+INPUT .\images\sensorwaardes_kalibraties.png
+INPUT .\images\sensorwaardes_kalibraties.png
+INPUT .\images\sensorwaardes_kalibraties.png
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.sty
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt8.tfm
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmitt10.tfm
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
@@ -598,7 +653,6 @@ INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
-INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
 INPUT .\logos\HvA Internationaal.jpg
@@ -624,6 +678,8 @@ INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\pub
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmcsc10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmitt10.pfb
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmitt10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi5.pfb
@@ -656,3 +712,5 @@ INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\pub
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmti10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
 INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt8.pfb
+INPUT C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt8.pfb
