@@ -1,6 +1,6 @@
 \section{implementatie}
 
-Dit hoofdstuk beschrijft de technische implementatie van het sensor fusion systeem op de RTk hardware. De implementatie is opgebouwd uit de volgende onderdelen
+Dit hoofdstuk beschrijft de technische implementatie van het sensor fusion systeem op de RTK hardware. De implementatie is opgebouwd uit de volgende onderdelen
 
 De implementatie is stapsgewijs opgebouwd: eerst de ontwikkelomgeving en debuginfrastructuur, vervolgens de IMU-integratie inclusief een opgetreden SPI-busprobleem, daarna de u-blox integratie en het EKF zelf, en tot slot de stilstanddetectie en het faultsimulatiemechanisme. \todo[inline]{Inleiding aanpassen. Alle onderdelen toevoegen als er meer bijkomen}
 
@@ -198,7 +198,14 @@ Zoals te zien in de afbeelding, hebben MEMS gyroscopen (Micro-Electro-Mechanical
 
 \subsubsection{SPI-busprobleem bij de IMU-uitlezing}
  
-Bij langere testmomenten bleek dat de sensordata sporadisch incorrect was. De uitgelezen waardes bevatten uitschieters die niet overeenkwamen met de werkelijke situatie. De pieken waren consistent en werden vrijwel altijd veroorzaakt op momenten dat andere apparaten ook gebruik maakten van de SPI-bus. Op de tracker delen de IMU, de seriële flash en de CAN-controller dezelfde SPI-bus. Dit betekent dat alle drie de apparaten via dezelfde datalijn (MOSI/MISO) en kloklijnen communiceren met de microcontroller. \\
+Bij langere testmomenten bleek dat de sensordata sporadisch incorrect was. De uitgelezen waardes bevatten uitschieters die niet overeenkwamen met de werkelijke situatie. Dit is duidelijk te zien in figuur \ref{fig:imu_pieken} De pieken waren consistent en werden vrijwel altijd veroorzaakt op momenten dat andere apparaten ook gebruik maakten van de SPI-bus. Op de tracker delen de IMU, de seriële flash en de CAN-controller dezelfde SPI-bus. Dit betekent dat alle drie de apparaten via dezelfde datalijn (MOSI/MISO) en kloklijnen communiceren met de microcontroller. \\
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{imu_pieken.png}
+    \caption{Willekeurige grote pieken in de gyroscoop data. Dit zijn resultaten op een stilstaande tafel}
+    \label{fig:imu_pieken}
+\end{figure}
 
 Het probleem ontstaat doordat elk apparaat op de SPI-bus een eigen Chip Select (CS) pin heeft waarmee de microcontroller aangeeft met welk apparaat hij wil communiceren. Als de CS-pin van de IMU laag is, luistert de IMU naar alle data op de bus en hiermee dus ook data die bestemd is voor de flash of de CAN-controller. Wanneer de CS-pin van de IMU niet correct hoog werd gezet na een transactie, of wanneer een andere transactie startte terwijl de IMU nog actief was, kon de IMU incorrecte data vertonen. \\
 
@@ -210,20 +217,278 @@ spi_xfer(config->spi, &xfer);     // voer transactie uit
 gpio_pin_set(config->cs_pin);     // CS hoog: deselecteer IMU
 \end{lstlisting}
 
+Aanvullend vereist de ASM330LHH een korte dummy-transactie voordat de eerste daadwerkelijke communicatie plaatsvindt. Dit heeft te maken met de fundamentele werking van het SPI-protocol: SPI is een uitwisselingsprotocol waarbij de master en slave tegelijkertijd data uitwisselen. Op het moment dat de CS-pin laag wordt getrokken en de eerste byte verstuurd wordt, stuurt de sensor gelijktijdig een byte terug — maar omdat de sensor op dat moment nog niet weet welk register gelezen wordt, is die teruggestuurde byte betekenisloos. Door eerst een dummy-byte van 0xFF te sturen wordt deze onbruikbare teruggestuurde byte bewust weggegooid, zodat de sensor en de microcontroller daarna in een gedefinieerde begintoestand verkeren voor de echte communicatie:
 
-
-Aanvullend vereist de ASM330LHH een korte dummy-transactie voordat de eerste daadwerkelijke communicatie plaatsvindt. Dit heeft te maken met de interne initialisatiestatus van de SPI-interface van de sensor: direct na het laag trekken van de CS-pin kan de interne state machine van de sensor nog niet klaar zijn om data te ontvangen. Door eerst een dummy-byte van 0xFF te sturen wordt de interface in een bekende beginstatus gezet:
-
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 uint8_t dummy_tx = 0xFF;
 spi_xfer(config->spi, &dummy_xfer);
 nrf_delay_us(1);
-\end{verbatim}
+\end{lstlisting}
 
 Na het toepassen van deze beide aanpassingen verdwenen de sporadische uitschieters 
 volledig uit de sensordata.
 
-
 \subsection{Extended Kalman Filter}
+
+Om de data van de IMU te combineren met dat van de GNSS data wordt gebruik gemaakt van een extended kalman filter. Aangezien het systeem niet lineair is, is dit de meest geschikte manier van combineren. Dit filter maakt gebruik van de prediction-update structuur. Deze prediction stap wordt elke 5 ms uitgevoerd op basis van IMU data en de update stap wordt uitgevoerd zodra een nieuwe GNSSS meting beschikbaar is (25 Hz). De onderdelen van dit filter zullen hieropvolgend uitgelicht worden.
+
+
+\subsubsection{Complementary filter voor attitude}
+
+Voordat de IMU-data het EKF binnenkomt, wordt de ruwe accelerometerdata en gyroscoopdata eerst verwerkt door een complementary filter. Dit filter bepaalt de hellingshoek van de tracker, wat nodig is om de juiste rijversnelling uit de sensordata te halen. \\
+
+Een accelerometer meet namelijk niet alleen de rijversnelling, maar ook de zwaartekracht. Een accelerometer die stilstaat op een tafel meet een versnelling van 1 g, ook wel de zwaartekracht. Zolang de tracker perfect horizontaal ligt, valt die zwaartekracht volledig op de Z-as van de sensor en heeft dit geen invloed op de X-as. Maar als de tracker licht gekanteld is gemonteerd, valt de zwaartekracht niet meer puur op de Z-as. Een deel ervan lekt dan door naar de X-as, waardoor de sensor een constante versnelling op die as meet terwijl het voertuig stilstaat. Het filter zou dit onjuist als rijversnelling interpreteren. \\
+
+Om dit te corrigeren wordt ten eerste bepaald hoe de tracker gekanteld is. Een sensor heeft drie assen en kan om elk van die assen draaien. De kanteling naar voren of achteren wordt de \textit{pitch} genoemd en de kanteling naar links of rechts de \textit{roll}. Samen beschrijven pitch en roll hoe de tracker in de ruimte staat ten opzichte van het horizontale vlak. \\
+
+Het complementary filter bepaalt deze hoeken door de gyroscoop en de accelerometer te combineren. De gyroscoop meet hoeksnelheden en kan door die te integreren over de tijd bijhouden hoeveel de tracker is gekanteld. Dit werkt goed voor snelle bewegingen, maar door kleine meetfouten die zich opstapelen raakt de schatting over langere tijd langzaam uit koers. De accelerometer heeft dit probleem niet aangezien deze bij stilstand altijd precies in de richting wijst van de zwaartekracht. Dit biedt een absolute referentie voor de hellingshoek. Het nadeel is dat de accelerometer gevoelig is voor trillingen tijdens het rijden, waardoor die referentie bij beweging minder betrouwbaar is. Door beide sensoren samen te gebruiken worden hun zwaktes gecompenseerd. De gyroscoop zorgt voor een snelle en vloeiende respons en de accelerometer corrigeert de langzame drift. In formule \ref{eq:complementary} is dit uiteengezet.
+
+\begin{equation}
+    \theta_{\text{pitch}} = 0{,}98 \cdot \left(\theta_{\text{pitch, prev}} + 
+    \omega_{\text{pitch}} \cdot \Delta t\right) + 0{,}02 \cdot 
+    \arctan\!\left(\frac{-a_x}{\sqrt{a_y^2 + a_z^2}}\right) \cdot \frac{180}{\pi}
+    \label{eq:complementary}
+\end{equation}
+
+Hierbij is $\omega_{\text{pitch}}$ de gemeten hoeksnelheid, zijn $a_x$, $a_y$ en $a_z$ de gemeten versnellingen op de drie assen en is $\Delta t$ de tijdstap. De coëfficiënt 0{,}98 bepaalt hoeveel gewicht de gyroscoop krijgt ten opzichte van de accelerometer. Hetzelfde wordt ook berekend voor de rollhoek. \\
+
+Zodra de hoeken bekend zijn vanuit het complementary filter, worden ze ingezet om de eerder genoemde zwaartekracht wiskundig weg te rekenen. Om de voorwaartse rijversnelling te bepalen, moet de versnellingsvector $\mathbf{a}^b = [a_x, a_y, a_z]^T$ uit het gekantelde assenstelsel van de tracker worden teruggedraaid naar het horizontale referentievlak. Dit wordt gedaan met behulp van Euler-rotatiematrices. Zoals beschreven in de applicatienotitie \textit{Tilt Sensing Using a Three-Axis Accelerometer} van NXP Semiconductors \cite{nxp2013}, wordt de rotatie om de $x$-as (Roll, $\phi_r$) en de $y$-as (Pitch, $\theta_p$) gedefinieerd door de volgende twee matrices:
+
+\begin{equation}
+R_x(\phi_r) = \begin{bmatrix} 
+1 & 0 & 0 \\ 
+0 & \cos\phi_r & \sin\phi_r \\ 
+0 & -\sin\phi_r & \cos\phi_r 
+\end{bmatrix}, \quad
+R_y(\theta_p) = \begin{bmatrix} 
+\cos\theta_p & 0 & -\sin\theta_p \\ 
+0 & 1 & 0 \\ 
+\sin\theta_p & 0 & \cos\theta_p 
+\end{bmatrix}
+\end{equation}
+
+De totale transformatie naar het horizontale vlak wordt verkregen door de ruwe sensordata te vermenigvuldigen met deze matrices, zoals weergegeven in formule \ref{eq:horizontaal}.
+
+\begin{equation}
+    \mathbf{a}_{\text{horizontaal}} = R_y(\theta_p) \cdot R_x(\phi_r) \cdot \mathbf{a}^b
+    \label{eq:horizontaal}
+\end{equation}
+
+De berekening voor de voorwaartse as ($x$-component) wordt in twee stappen uiteengezet.
+
+\paragraph{Stap 1: De roll rotatie ($R_x$)}
+Eerst wordt de roll matrix vermenigvuldigd met de sensordata. Omdat dit een draaiing om de $x$-as betreft, blijft de $x$-waarde zelf onveranderd, maar mixen de $y$- en $z$-waarden met elkaar. Dit zorgt voor een tussenvector $\mathbf{v}'$ zoals te zien in formule \ref{eq:roll_matrix}
+
+\begin{equation}
+    \mathbf{v}' = R_x(\phi_r) \cdot \begin{bmatrix} a_x \\ a_y \\ a_z \end{bmatrix} = \begin{bmatrix} a_x \\ a_y \cos\phi_r + a_z \sin\phi_r \\ -a_y \sin\phi_r + a_z \cos\phi_r \end{bmatrix}
+    \label{eq:roll_matrix}
+\end{equation}
+
+\paragraph{Stap 2: De pitch rotatie ($R_y$)}
+Vervolgens wordt de pitch matrix toegepast op deze nieuwe tussenvector $\mathbf{v}'$. Aangezien alleen de voorwaartse as (longitudinale) belangrijk is, hoeft alleen de bovenste rij van matrix $R_y$ gebruikt te worden. De bovenste rij is $[\cos\theta_p, 0, -\sin\theta_p]$. Vermenigvuldigen met de tussenvector geeft formule \ref{eq:pitch_matrix}.
+
+\begin{equation}
+    a_{\text{long}} = (\cos\theta_p \cdot v'_x) + (0 \cdot v'_y) - (\sin\theta_p \cdot v'_z)
+    \label{eq:pitch_matrix}
+\end{equation}
+
+Vervolgens worden de bekende waarden uit de tussenvector $\mathbf{v}'$ in deze vergelijking gesubstitueert. Hieruit volgt formule \ref{eq:matrix} en \ref{eq:accel_correctie}.
+
+\begin{equation}
+    a_{\text{long}} = a_x \cos\theta_p - \sin\theta_p (-a_y \sin\phi_r + a_z \cos\phi_r)
+    \label{eq:matrix}
+\end{equation}
+
+\begin{equation}
+    a_{\text{long}} = a_x \cdot \cos\theta_p + a_y \cdot \sin\phi_r \cdot \sin\theta_p - a_z \cdot \cos\phi_r \cdot \sin\theta_p
+    \label{eq:accel_correctie}
+\end{equation}
+
+In deze vergelijking compenseren de termen met $a_y$ en $a_z$ voor het deel van de zwaartekracht dat door de hellingshoek in de meting van de $x$-as is gelekt. De nauwkeurigheid van deze compensatie is echter afhankelijk van de kwaliteit van de hoekschatting uit het complementary filter. Omdat het filter de pitch en roll benadert op basis van een gyroscoop met lichte drift en een accelerometer die gevoelig is voor trillingen, bevat $a_{\text{long}}$ nog een kleine resterende zwaartekracht. Hierdoor bevat het systeem een kleine versnellingsfout. De uitkomst $a_{\text{long}}$ zal als invoer worden meegegeven aan het EKF. Deze theorie is softwarematig toegepast en dit is hieronder weergegeven. \\
+
+\begin{lstlisting}[language=C, label=lst:gravity_comp]
+// Omrekenen naar radialen
+float pitch_rad = ((float)current_attitude.pitch_x100 / 100.0f) * ((float)M_PI / 180.0f);
+float roll_rad  = ((float)current_attitude.roll_x100  / 100.0f) * ((float)M_PI / 180.0f);
+
+// Berekening van longitudinale versnelling
+float flat_x = (raw_ax * cosf(pitch_rad)) +
+               (raw_ay * sinf(roll_rad) * sinf(pitch_rad)) -
+               (raw_az * cosf(roll_rad) * sinf(pitch_rad));
+\end{lstlisting}
+
+
+\subsubsection{State vector}
+
+Om het filter op te bouwen moeten de grootheden van het systeem bijgehouden worden. Dit wordt bereikt door middel van de state vector. Dit is een lijst van alle variabelen die het filter op elk tijdstip schat. In dit geval bestaat de state vector uit zes elementen.
+ 
+\begin{equation}
+    \mathbf{x} = \begin{bmatrix} X & Y & v & \theta & b_a & b_g \end{bmatrix}^T
+    \label{eq:toestandsvector}
+\end{equation}
+ 
+Hierbij zijn $X$ en $Y$ de positie in meters in het lokale coördinatenstelsel, $v$ de rijsnelheid in m/s, $\theta$ de heading (kijkrichting) in radialen, $b_a$ de accelerometerbias in m/s² en $b_g$ de gyroscoop-bias in rad/s. De positie, snelheid en heading zijn de grootheden die gebruikt worden voor de route bepaling. De bias termen zorgen ervoor dat het filter de sensorfouten kan schatten tijdens gebruikt. \\
+ 
+Het filter wordt geïnitialiseerd zodra de eerste RTK fix plaatsvindt. Op dat moment wordt de positie op het nulpunt gezet, de snelheid op de gemeten GNSS snelheid, de heading op de GNSS heading en de biassen op nul.
+ 
+\todo[inline]{Tabel toestandsvector invullen met eenheden en initiële waarden.}
+ 
+ 
+\subsubsection{Motion model en Jacobian matrix}
+
+Na het definiëren van de state vector, moet het filter weten hoe de toestand verandert over de tijd. Dit wordt ook wel het motion model genoemd. Dit model beschrijft welke waarde elke grootheid naar verwachting heeft na elk tijdstap, op basis van de IMU metingen. \\
+ 
+Hiervoor wordt een zogenaamd unicycle-model gebruikt. Dit is een eenvoudig maar effectief rijmodel dat ervan uitgaat dat het object vooruit beweegt met snelheid $v$ in de richting $\theta$ en draait met een hoeksnelheid $\dot{\theta}$. Zijwaartse slip wordt niet gemodelleerd. De zes bewegingsvergelijkingen zijn:
+ 
+\begin{align}
+    X_{k+1}      &= X_k + v_k \cdot \cos(\theta_k) \cdot \Delta t \label{eq:fx} \\
+    Y_{k+1}      &= Y_k + v_k \cdot \sin(\theta_k) \cdot \Delta t \label{eq:fy} \\
+    v_{k+1}      &= v_k + (a_{\text{meas}} - b_{a,k}) \cdot \Delta t \label{eq:fv} \\
+    \theta_{k+1} &= \theta_k + (\omega_{\text{meas}} - b_{g,k}) \cdot \Delta t \label{eq:ftheta} \\
+    b_{a,k+1}    &= b_{a,k} \label{eq:fba} \\
+    b_{g,k+1}    &= b_{g,k} \label{eq:fbg}
+\end{align}
+ 
+De eerste twee vergelijkingen (\ref{eq:fx} en \ref{eq:fy}) beschrijven hoe de positie verandert op basis van de huidige snelheid en rijrichting. Vergelijking \ref{eq:fv} werkt de snelheid bij op basis van de gemeten versnelling, gecorrigeerd voor de geschatte accelerometerbias. Vergelijking \ref{eq:ftheta} werkt de heading bij op basis van de gemeten yaw-rate, gecorrigeerd voor de gyroscoop-bias. De laatste twee vergelijkingen (\ref{eq:fba} en \ref{eq:fbg}) beschrijven dat de biassen worden verondersteld constant te blijven over één tijdstap. De procesruis in de $Q$-matrix zorgt er echter voor dat het filter kleine langzame veranderingen in de bias toch kan bijhouden.
+ 
+Naast de toestand zelf houdt het EKF ook bij hoe zeker het is over die schatting. Dit wordt de covariantiematrix $P$ genoemd: een $6 \times 6$ matrix waarbij elk element aangeeft hoe sterk twee toestandsgrootheden samen onzeker zijn. Een grote waarde op de diagonaal betekent dat het filter weinig vertrouwen heeft in de bijbehorende toestandsgrootheid.
+ 
+Omdat vergelijkingen \ref{eq:fx} en \ref{eq:fy} niet-lineair zijn in $\theta$ — ze bevatten een sinus en cosinus — kan de covariantiematrix niet rechtstreeks worden bijgewerkt. Het EKF lineariseert het bewegingsmodel via de Jacobiaan $F$: de matrix van alle partiële afgeleiden van het bewegingsmodel naar de toestandsgrootheden. Simpel gezegd beschrijft $F$ hoe een kleine verandering in één toestandsgrootheid doorwerkt op alle andere grootheden na één tijdstap. De Jacobiaan wordt op elk tijdstip opnieuw berekend rondom de huidige schatting:
+ 
+\begin{equation}
+F = \begin{bmatrix}
+1 & 0 & \cos\theta \cdot \Delta t & -v \sin\theta \cdot \Delta t & 0 & 0 \\
+0 & 1 & \sin\theta \cdot \Delta t &  v \cos\theta \cdot \Delta t & 0 & 0 \\
+0 & 0 & 1 & 0 & -\Delta t & 0 \\
+0 & 0 & 0 & 1 & 0 & -\Delta t \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1
+\end{bmatrix}
+\label{eq:jacobiaan_F}
+\end{equation}
+ 
+Met de Jacobiaan wordt de covariantiematrix $P$ in de predictiestap bijgewerkt. De term $F_k \cdot P_k \cdot F_k^T$ geeft aan hoe de huidige onzekerheid doorwerkt na één tijdstap. De procesruismatrix $Q$ wordt opgeteld om te modelleren dat het bewegingsmodel nooit perfect is:
+ 
+\begin{equation}
+    P_{k+1}^- = F_k \cdot P_k \cdot F_k^T + Q
+    \label{eq:P_predict}
+\end{equation}
+ 
+Om te voorkomen dat $P$ door accumulerende afrondingsfouten in zwevendekommagetallen asymmetrisch wordt, wat de filterstabiliteit kan ondermijnen, wordt na elke stap een symmetrisatie uitgevoerd:
+ 
+\begin{equation}
+    P \leftarrow \frac{P + P^T}{2}
+    \label{eq:symmetrisatie}
+\end{equation}
+ 
+Na de predictiestap wordt ook de heading-wraparound toegepast. De heading wordt bijgehouden als hoek in radialen waarbij de gyroscoop-integratie de waarde onbeperkt kan laten oplopen of dalen als het systeem meerdere rondjes rijdt. Dit geeft problemen in de updatestap: als de EKF denkt dat de heading $7\pi$ is terwijl de GNSS $\pi$ meet, berekent het filter een enorme correctie terwijl de werkelijke fout nul is. Dit wordt voorkomen door de heading na elke stap terug te vouwen naar het bereik $[-\pi, +\pi]$:
+ 
+\begin{verbatim}
+while (s_status[3][0] >  M_PI) s_status[3][0] -= 2.0f * M_PI;
+while (s_status[3][0] < -M_PI) s_status[3][0] += 2.0f * M_PI;
+\end{verbatim}
+ 
+ 
+\subsubsection{Meetmodel en Kalman update}
+ 
+De predictiestap werkt de schatting bij op basis van het bewegingsmodel. Zodra een nieuwe GNSS-meting binnenkomt wordt de schatting gecorrigeerd op basis van het verschil tussen wat het filter verwachtte en wat de GNSS daadwerkelijk meet. Dit is de updatestap.
+ 
+De GNSS-ontvanger levert elke 40 ms een positiemeting in het lokale ENU-stelsel. Niet alle zes toestandsgrootheden worden direct gemeten — alleen de positie $X$ en $Y$ zijn direct zichtbaar in de GNSS-data. Het meetmodel $H$ beschrijft welke toestandsgrootheden worden gemeten. Het is een $2 \times 6$ matrix die aangeeft dat de meting alleen de eerste twee elementen van de toestandsvector betreft:
+ 
+\begin{equation}
+    H = \begin{bmatrix}
+        1 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 & 0
+    \end{bmatrix}
+    \label{eq:H}
+\end{equation}
+ 
+Het verschil tussen de gemeten positie en de voorspelde positie wordt de innovatie $\mathbf{y}$ genoemd. Dit is het signaal dat het filter gebruikt om zijn schatting bij te sturen:
+ 
+\begin{equation}
+    \mathbf{y} = \mathbf{z} - H \cdot \mathbf{x}^-
+    \label{eq:innovatie}
+\end{equation}
+ 
+De innovatiecovariantie $S$ geeft aan hoe groot de verwachte spreiding van de innovatie is. Dit is de som van de onzekerheid in de voorspelling en de onzekerheid in de meting:
+ 
+\begin{equation}
+    S = H \cdot P^- \cdot H^T + R
+    \label{eq:S}
+\end{equation}
+ 
+De Kalman gain $K$ bepaalt vervolgens hoeveel gewicht de meting krijgt ten opzichte van de predictiestap. Als de GNSS-meting erg nauwkeurig is (kleine $R$) is $K$ groot en wordt de meting sterk gevolgd. Als de GNSS-onzekerheid groot is zoals bij Lk=0, is $K$ klein en vertrouwt het filter meer op zijn eigen bewegingsmodel:
+ 
+\begin{equation}
+    K = P^- \cdot H^T \cdot S^{-1}
+    \label{eq:kalman_gain}
+\end{equation}
+ 
+Met de Kalman gain wordt de toestandsschatting gecorrigeerd:
+ 
+\begin{equation}
+    \mathbf{x}^+ = \mathbf{x}^- + K \cdot \mathbf{y}
+    \label{eq:update}
+\end{equation}
+ 
+Tot slot wordt de covariantiematrix bijgewerkt om te reflecteren dat de onzekerheid na de update kleiner is. Dit gebeurt in de zogenaamde Joseph-vorm, die wiskundig equivalent is aan de standaard formulering maar numeriek stabieler is en garandeert dat $P$ positief semidefiniet blijft ook bij afrondingsfouten:
+ 
+\begin{equation}
+    P^+ = (I - K H) \cdot P^- \cdot (I - K H)^T + K \cdot R \cdot K^T
+    \label{eq:joseph}
+\end{equation}
+ 
+ 
+\subsubsection{NIS-gebaseerde metingrejectie}
+ 
+Een GNSS-ontvanger kan soms een sterk afwijkende positie rapporteren door bijvoorbeeld multipath of een tijdelijke False Fixed situatie. Als het filter zo'n meting klakkeloos verwerkt, kan de positieschatting in één stap meters verspringen. Om dit te voorkomen wordt elke meting vooraf getoetst op statistische plausibiliteit via de Normalized Innovation Squared.
+ 
+De NIS meet hoe verrassend de binnenkomende meting is gegeven de huidige onzekerheid van het filter. Een grote NIS betekent dat de meting ver buiten de verwachte spreiding valt. De berekening is:
+ 
+\begin{equation}
+    \text{NIS} = \mathbf{y}^T \cdot S^{-1} \cdot \mathbf{y}
+    \label{eq:NIS}
+\end{equation}
+ 
+Als het filter goed gekalibreerd is, volgt de NIS een chi-kwadraatverdeling met twee vrijheidsgraden — één voor elke gemeten dimensie. Bij een betrouwbaarheidsniveau van 99\% bedraagt de drempelwaarde $\chi^2_{2,\,0{,}99} = 9{,}210$. Elke meting met een hogere NIS wordt als statistisch onwaarschijnlijk beschouwd en verworpen, waarna de predictiestap gewoon doorgaat zonder correctie:
+ 
+\begin{verbatim}
+if (nis > 9.210f) {
+    return;
+}
+\end{verbatim}
+ 
+Bij verwerping groeit $P$ via de volgende predictiestap verder, waardoor de Kalman gain bij de eerstvolgende betrouwbare meting groter wordt en het filter sneller kan corrigeren. Naast zijn functie als uitschuiverdetectie is de NIS ook een diagnosemiddel voor de filterafstemming. Als de gemiddelde NIS structureel boven 2 ligt worden metingen vaker dan verwacht als onwaarschijnlijk bestempeld, wat duidt op te kleine ruismatrices. Als de gemiddelde NIS structureel onder 2 ligt vertrouwt het filter de metingen te sterk, wat duidt op te grote ruismatrices.
+ 
+ 
+\subsubsection{Stilstanddetectie (Zero Velocity Update)}
+ 
+Wanneer het systeem stilstaat maar de IMU blijft kleine versnellingsfouten meten, loopt de geschatte snelheid langzaam op terwijl die in werkelijkheid nul is. De Zero Velocity Update lost dit op door bij gedetecteerde stilstand een extra correctiestap uit te voeren die de snelheidsschatting terugtrekt naar nul. Dit werkt via dezelfde Kalman-mechanisme als de GNSS-update, maar in plaats van een positiemeting wordt een pseudo-meting van $v = 0$ gebruikt. De innovatie is simpelweg het verschil tussen de verwachte stilstand en de geschatte snelheid:
+ 
+\begin{equation}
+    \text{innovatie} = 0 - v_{\text{geschat}}
+    \label{eq:zupt_innovatie}
+\end{equation}
+ 
+De bijbehorende Kalman gain wordt alleen berekend voor de snelheidsrij van $P$, zodat alleen de snelheid en de indirect gekoppelde grootheden worden bijgestuurd en de positieschatting onaangetast blijft:
+ 
+\begin{verbatim}
+float innov = 0.0f - s_status[2][0];
+float S     = s_P[2][2] + zupt_R;
+for (int i = 0; i < 6; i++)
+    K[i] = s_P[i][2] / S;
+\end{verbatim}
+ 
+Een bijkomend voordeel is dat de biassen tijdens stilstand sneller convergeren. Omdat het filter bij stilstand zekerheid heeft over zowel de positie (via GNSS) als de snelheid (via ZUPT), kan het de resterende afwijkingen volledig toeschrijven aan de sensorbiassen en die daarmee nauwkeuriger bijschatten.
+ 
+De stilstanddetectie is gebaseerd op een variantieanalyse over een schuivend venster van 32 IMU-samples, wat bij 200 Hz overeenkomt met een venster van 160 ms. Per venster worden de variantie en het gemiddelde berekend voor alle zes IMU-kanalen. Het systeem wordt pas als stilstaand beschouwd wanneer aan de volgende drie voorwaarden tegelijkertijd wordt voldaan:
+ 
+\begin{enumerate}
+    \item De variantie van de accelerometer is op alle drie assen kleiner dan de ingestelde drempelwaarde. Dit filtert kleine trillingen eruit die ook bij stilstand aanwezig zijn.
+    \item De variantie van de gyroscoop is op alle drie assen kleiner dan de ingestelde drempelwaarde.
+    \item De absolute waarde van het gemiddelde gyroscoopsignaal is op alle drie assen kleiner dan een absolute drempel. Deze voorwaarde voorkomt dat rechtdoor rijden met weinig variatie — waarbij de variantie laag is maar het systeem wel degelijk beweegt — als stilstand wordt geïnterpreteerd.
+\end{enumerate}
+ 
+Om valse activering te voorkomen zijn twee hysterese-timers geïmplementeerd. Stilstand wordt pas bevestigd na 1000 ms aaneengesloten stilstanddetectie, terwijl beweging al na 150 ms wordt herkend. Dit asymmetrische ontwerp zorgt ervoor dat een korte stilstaande periode zoals stoppen voor een obstakel niet direct als stilstand wordt geregistreerd, maar dat hervatting van de beweging snel wordt gedetecteerd.
 
 \newpage

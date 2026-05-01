@@ -188,11 +188,51 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces De offset van de gyroscoop waardes zijn van de metingen afgetrokken}}{25}{figure.caption.29}\protected@file@percent }
 \newlabel{fig:sensorwaardes_kalibratie}{{12}{25}{De offset van de gyroscoop waardes zijn van de metingen afgetrokken}{figure.caption.29}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {8.2.3}SPI-busprobleem bij de IMU-uitlezing}{25}{subsubsection.8.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Extended Kalman Filter}{25}{subsection.8.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Resultaten en validatie}{26}{section.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10}Discussie}{27}{section.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{Bronnen}{28}{section.10}\protected@file@percent }
-\abx@aux@read@bbl@mdfivesum{FD5C21F988ABD920CB2219AB7814A7C6}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Willekeurige grote pieken in de gyroscoop data. Dit zijn resultaten op een stilstaande tafel}}{25}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:imu_pieken}{{13}{25}{Willekeurige grote pieken in de gyroscoop data. Dit zijn resultaten op een stilstaande tafel}{figure.caption.30}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Extended Kalman Filter}{26}{subsection.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.1}Complementary filter voor attitude}{26}{subsubsection.8.3.1}\protected@file@percent }
+\abx@aux@cite{0}{nxp2013}
+\abx@aux@segm{0}{0}{nxp2013}
+\newlabel{eq:complementary}{{9}{27}{Complementary filter voor attitude}{equation.9}{}}
+\newlabel{eq:horizontaal}{{11}{27}{Complementary filter voor attitude}{equation.11}{}}
+\@writefile{toc}{\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{27}{paragraph*.31}\protected@file@percent }
+\newlabel{eq:roll_matrix}{{12}{27}{Stap 1: De roll rotatie ($R_x$)}{equation.12}{}}
+\@writefile{toc}{\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{27}{paragraph*.32}\protected@file@percent }
+\newlabel{eq:pitch_matrix}{{13}{27}{Stap 2: De pitch rotatie ($R_y$)}{equation.13}{}}
+\newlabel{eq:matrix}{{14}{27}{Stap 2: De pitch rotatie ($R_y$)}{equation.14}{}}
+\newlabel{eq:accel_correctie}{{15}{27}{Stap 2: De pitch rotatie ($R_y$)}{equation.15}{}}
+\newlabel{lst:gravity_comp}{{8.3.1}{28}{}{lstlisting.-3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.2}State vector}{28}{subsubsection.8.3.2}\protected@file@percent }
+\newlabel{eq:toestandsvector}{{16}{28}{State vector}{equation.16}{}}
+\@writefile{tdo}{\contentsline {todo}{Tabel toestandsvector invullen met eenheden en initiële waarden.}{28}{section*.33}\protected@file@percent }
+\pgfsyspdfmark {pgfid8}{19562754}{29538153}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.3}Motion model en Jacobian matrix}{28}{subsubsection.8.3.3}\protected@file@percent }
+\newlabel{eq:fx}{{17}{28}{Motion model en Jacobian matrix}{equation.17}{}}
+\newlabel{eq:fy}{{18}{28}{Motion model en Jacobian matrix}{equation.18}{}}
+\newlabel{eq:fv}{{19}{28}{Motion model en Jacobian matrix}{equation.19}{}}
+\newlabel{eq:ftheta}{{20}{28}{Motion model en Jacobian matrix}{equation.20}{}}
+\newlabel{eq:fba}{{21}{28}{Motion model en Jacobian matrix}{equation.21}{}}
+\newlabel{eq:fbg}{{22}{28}{Motion model en Jacobian matrix}{equation.22}{}}
+\newlabel{eq:jacobiaan_F}{{23}{29}{Motion model en Jacobian matrix}{equation.23}{}}
+\newlabel{eq:P_predict}{{24}{29}{Motion model en Jacobian matrix}{equation.24}{}}
+\newlabel{eq:symmetrisatie}{{25}{29}{Motion model en Jacobian matrix}{equation.25}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.4}Meetmodel en Kalman update}{29}{subsubsection.8.3.4}\protected@file@percent }
+\newlabel{eq:H}{{26}{29}{Meetmodel en Kalman update}{equation.26}{}}
+\newlabel{eq:innovatie}{{27}{29}{Meetmodel en Kalman update}{equation.27}{}}
+\newlabel{eq:S}{{28}{29}{Meetmodel en Kalman update}{equation.28}{}}
+\newlabel{eq:kalman_gain}{{29}{29}{Meetmodel en Kalman update}{equation.29}{}}
+\newlabel{eq:update}{{30}{30}{Meetmodel en Kalman update}{equation.30}{}}
+\newlabel{eq:joseph}{{31}{30}{Meetmodel en Kalman update}{equation.31}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.5}NIS-gebaseerde metingrejectie}{30}{subsubsection.8.3.5}\protected@file@percent }
+\newlabel{eq:NIS}{{32}{30}{NIS-gebaseerde metingrejectie}{equation.32}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.6}Stilstanddetectie (Zero Velocity Update)}{30}{subsubsection.8.3.6}\protected@file@percent }
+\newlabel{eq:zupt_innovatie}{{33}{30}{Stilstanddetectie (Zero Velocity Update)}{equation.33}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Resultaten en validatie}{32}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Discussie}{33}{section.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Conclusie}{34}{section.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Bronnen}{35}{section.11}\protected@file@percent }
+\abx@aux@read@bbl@mdfivesum{60678A2F0461533B194D748D9AF247E0}
 \abx@aux@defaultrefcontext{0}{stmicro_asm330lhh}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{bar_shalom_estimation}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{boers_particle_filter}{nty/global//global/global/global}
@@ -210,6 +250,7 @@
 \abx@aux@defaultrefcontext{0}{novatel_constellations}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{novatel_computation}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{NovAtelMultipath2026}{nty/global//global/global/global}
+\abx@aux@defaultrefcontext{0}{nxp2013}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{ofstandard2024}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{segger_rtt}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{ST_AN5296}{nty/global//global/global/global}
@@ -219,4 +260,4 @@
 \abx@aux@defaultrefcontext{0}{welch_kalman}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{witte2006effect}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{pmc_sensorfusion}{nty/global//global/global/global}
-\gdef \@abspage@last{29}
+\gdef \@abspage@last{36}

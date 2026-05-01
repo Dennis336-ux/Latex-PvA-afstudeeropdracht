@@ -2419,6 +2419,7 @@
     <bcf:citekey order="58" intorder="1">witte2006effect</bcf:citekey>
     <bcf:citekey order="59" intorder="1">ST_AN5296</bcf:citekey>
     <bcf:citekey order="60" intorder="1">stmicro_asm330lhh</bcf:citekey>
+    <bcf:citekey order="61" intorder="1">nxp2013</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

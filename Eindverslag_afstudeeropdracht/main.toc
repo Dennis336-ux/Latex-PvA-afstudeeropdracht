@@ -36,7 +36,16 @@
 \contentsline {subsubsection}{\numberline {8.2.1}Registerconfiguratie}{23}{subsubsection.8.2.1}%
 \contentsline {subsubsection}{\numberline {8.2.2}Gyroscooop kalibratie}{23}{subsubsection.8.2.2}%
 \contentsline {subsubsection}{\numberline {8.2.3}SPI-busprobleem bij de IMU-uitlezing}{25}{subsubsection.8.2.3}%
-\contentsline {subsection}{\numberline {8.3}Extended Kalman Filter}{25}{subsection.8.3}%
-\contentsline {section}{\numberline {9}Resultaten en validatie}{26}{section.9}%
-\contentsline {section}{\numberline {10}Discussie}{27}{section.10}%
-\contentsline {section}{Bronnen}{28}{section.10}%
+\contentsline {subsection}{\numberline {8.3}Extended Kalman Filter}{26}{subsection.8.3}%
+\contentsline {subsubsection}{\numberline {8.3.1}Complementary filter voor attitude}{26}{subsubsection.8.3.1}%
+\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{27}{paragraph*.31}%
+\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{27}{paragraph*.32}%
+\contentsline {subsubsection}{\numberline {8.3.2}State vector}{28}{subsubsection.8.3.2}%
+\contentsline {subsubsection}{\numberline {8.3.3}Motion model en Jacobian matrix}{28}{subsubsection.8.3.3}%
+\contentsline {subsubsection}{\numberline {8.3.4}Meetmodel en Kalman update}{29}{subsubsection.8.3.4}%
+\contentsline {subsubsection}{\numberline {8.3.5}NIS-gebaseerde metingrejectie}{30}{subsubsection.8.3.5}%
+\contentsline {subsubsection}{\numberline {8.3.6}Stilstanddetectie (Zero Velocity Update)}{30}{subsubsection.8.3.6}%
+\contentsline {section}{\numberline {9}Resultaten en validatie}{32}{section.9}%
+\contentsline {section}{\numberline {10}Discussie}{33}{section.10}%
+\contentsline {section}{\numberline {11}Conclusie}{34}{section.11}%
+\contentsline {section}{Bronnen}{35}{section.11}%

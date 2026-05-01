@@ -492,6 +492,39 @@
       \field{title}{Understanding and Mitigating GNSS Multipath Interference and Error}
       \field{year}{2026}
     \endentry
+    \entry{nxp2013}{report}{}{}
+      \name{author}{1}{}{%
+        {{hash=70a107d58d4aa1203cc8cde04480d72c}{%
+           family={{NXP Semiconductors}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {NXP Semiconductors}%
+      }
+      \strng{namehash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{fullhash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{fullhashraw}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{bibnamehash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{authorbibnamehash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{authornamehash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{authorfullhash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{authorfullhashraw}{70a107d58d4aa1203cc8cde04480d72c}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Sectie 3: Coordinate System and Rotation Axes}
+      \field{number}{AN3461}
+      \field{title}{Tilt Sensing Using a Three-Axis Accelerometer}
+      \field{type}{Application Note}
+      \field{year}{2013}
+      \verb{urlraw}
+      \verb https://www.nxp.com/docs/en/application-note/AN3461.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.nxp.com/docs/en/application-note/AN3461.pdf
+      \endverb
+    \endentry
     \entry{ofstandard2024}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=58a18e2176348285d512817b16d9c849}{%
