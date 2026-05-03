@@ -1,6 +1,6 @@
 \section{ontwerp}
-In dit hoofdstuk wordt het ontwerp van het sensor fusion systeem beschreven. Op basis van het vooronderzoek en de vastgestelde specificaties zijn de ontwerpkeuzes gemaakt die in dit hoofdstuk worden toegelicht. Het hoofdstuk begint met een beschrijving van de bestaande hardware van de MYLAPS RTK tracker, gevolgd door de systeemarchitectuur en tot slot het EKF-model met de bijbehorende toestandsvector en systeemmodel. Het doel van dit hoofdstuk is om de brug te slaan tussen het theoretisch kader en de uiteindelijke 
-implementatie. \todo[inline]{Inleiding aanpassen}
+In dit hoofdstuk wordt het ontwerp van het sensor fusion systeem beschreven. Op basis van het vooronderzoek en de vastgestelde specificaties zijn de ontwerpkeuzes gemaakt die in dit hoofdstuk worden toegelicht. Het hoofdstuk begint met een beschrijving van de bestaande hardware van de MYLAPS RTK tracker, gevolgd door de systeemarchitectuur en tot slot het wiskundig ontwerp van het filter. Het doel van dit hoofdstuk is om de brug te slaan tussen het theoretisch kader en de uiteindelijke implementatie. 
+\todo[inline]{Inleiding aanpassen}
 
 \subsection{Het huidige systeem}
 
@@ -16,7 +16,7 @@ Het sensor fusion systeem wordt geïmplementeerd op de bestaande MYLAPS ProRTK t
         \rowcolor{green!20}
         \textbf{Component} & \textbf{Type} & \textbf{Functie} \\ \hline
         Microcontroller &
-        Nordic Semiconductor nRF52, ARM Cortex-M4F &
+        Nordic Semiconductor nRF52, ARM Cortex-M4F \cite{nordic_nrf52832_ps} &
         Verwerkt alle data en draait het gehele systeem \\ \hline
         GNSS-ontvanger &
         u-blox X20P RTK ontvanger &
@@ -36,15 +36,14 @@ Het sensor fusion systeem wordt geïmplementeerd op de bestaande MYLAPS ProRTK t
     \end{tabularx}
 \end{table}
 
+Het gehele systeem van de tracker wordt aangestuurd door de nRF52832 microcontroller met een ARM Cortex-M4F processor. Deze is verantwoordelijk voor het verwerken van de GNSS data uit de ublox module en de communicatie met de IMU. Een belangrijk onderdeel van deze microcontroller is de beschikbare Floating-Point Unit (FPU). Aangezien het filter gebruik zal maken van veel wiskundig complexe berekeningen, is het noodzakelijk dat de software dit kan afhandelen zonder vertragingen. \\
 
-De nRF52 beschikt over een hardware floating-point unit (FPU), wat relevant is voor de EKF-implementatie omdat de matrixberekeningen 
-gebruikmaken van drijvende-kommaberekeningen.
+De locatiebepaling wordt doormiddel van de u-blox X20P RTK ontvanger tot stand gebracht. 
 
-De GNSS-ontvanger ondersteunt meerdere satelietconstellaties tegelijkertijd en is geconfigureerd om RTK-correcties te ontvangen, waardoor centimeterprecisie bereikbaar is bij een goede satellietgeometrie. Naast de standaard positiemeting levert de ontvanger ook de volledige $2 \times 2$ positiecovariantiematrix via het NAV-COV bericht. Dit is een waardevolle informatiebron voor de EKF, omdat het de richtingsafhankelijke GPS-meetonzekerheid nauwkeurig weergeeft.
+De locatiebepaling wordt primair gevoed door de u-blox X20P RTK-ontvanger. In tegenstelling tot standaard GPS-modules, levert deze ontvanger via de UART-verbinding niet alleen de actuele positie en snelheid op 25 Hz, maar verstrekt deze ook gedetailleerde onzekerheidsmarges (covarianties). Deze stroom aan extra diagnostische data is van enorme waarde voor het filterontwerp, maar vereist efficiënte communicatie via de UART-bus om vertragingen te voorkomen.  De interne bewegingsdynamiek wordt geregistreerd door de STMicroelectronics ASM330LHH. Dit is een 6-assige, automotive-grade IMU die versnellingen en hoeksnelheden aanlevert met een geconfigureerde frequentie van 200 Hz. 
 
-De ASM330LHH is een automotive-grade 6-assige IMU bestaande uit een 3-assige accelerometer en een 3-assige gyroscoop \cite{stmicro_asm330lhh}. De sensor kan data leveren op aanzienlijk hogere frequenties dan de 25 Hz van de GNSS ontvanger. Dit frequentieverschil is een belangrijke reden voor de keuze van een predictor-corrector aanpak in het EKF.
 
-Een relevant architecturaal gegeven is dat de IMU, de seriële flash en de CAN-controller op dezelfde SPI-bus zijn aangesloten. Dit heeft gevolgen voor de timing van de IMU-uitlezing en vormt een potentiële bron van problemen die in de implementatie verder wordt besproken.
+Een belangrijke architecturale uitdaging van de ProRTK-hardware is dat de communicatie met deze IMU via een Serial Peripheral Interface (SPI) verloopt, waarbij de fysieke bus wordt gedeeld met de externe NOR-flash (voor dichte datalogging) en de CAN-controller (voor voertuigtelemetrie). Dit gedeelde hardware-design vormt een fysieke bottleneck. Het uitlezen van de sensordata op 200 Hz moet in het software-ontwerp dan ook strikt gesynchroniseerd worden middels hardware-interrupts (Chip Select), om te voorkomen dat data-corruptie optreedt wanneer de IMU actief wordt uitgelezen terwijl de processor gelijktijdig bezig is met het wegschrijven van logs naar de flash-opslag. 
 
 \newpage
 

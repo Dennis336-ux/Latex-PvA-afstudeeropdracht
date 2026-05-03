@@ -398,6 +398,36 @@
       \verb https://www.microchip.com/en-us/development-tool/tseg-jlink
       \endverb
     \endentry
+    \entry{nordic_nrf52832_ps}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=af5e4455ba6301bed1741b8796304f18}{%
+           family={{Nordic Semiconductor}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{af5e4455ba6301bed1741b8796304f18}
+      \strng{fullhash}{af5e4455ba6301bed1741b8796304f18}
+      \strng{fullhashraw}{af5e4455ba6301bed1741b8796304f18}
+      \strng{bibnamehash}{af5e4455ba6301bed1741b8796304f18}
+      \strng{authorbibnamehash}{af5e4455ba6301bed1741b8796304f18}
+      \strng{authornamehash}{af5e4455ba6301bed1741b8796304f18}
+      \strng{authorfullhash}{af5e4455ba6301bed1741b8796304f18}
+      \strng{authorfullhashraw}{af5e4455ba6301bed1741b8796304f18}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{nRF52832 Product Specification}
+      \field{urlday}{3}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.nordicsemi.com/bundle/ps_nrf52832/page/nrf52832_ps.html
+      \endverb
+      \verb{url}
+      \verb https://docs.nordicsemi.com/bundle/ps_nrf52832/page/nrf52832_ps.html
+      \endverb
+    \endentry
     \entry{NovAtelGNSSerrorSources2026}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=3ea7e430eeeee35d7001093aaceb259f}{%
