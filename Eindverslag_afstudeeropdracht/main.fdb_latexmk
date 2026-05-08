@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1778233142.26451 "main.bcf" "main.bbl" "main" 1778233868.84748 0
-  "main.bcf" 1778233868 112288 72bf5909359a364a0036b26cc25bdd7e "pdflatex"
+["biber main"] 1778233142.26451 "main.bcf" "main.bbl" "main" 1778249811.71832 0
+  "main.bcf" 1778249810 112288 72bf5909359a364a0036b26cc25bdd7e "pdflatex"
   "references.bib" 1778233129 11133 346b824ff4d9cb5ce9b282461082a620 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1778233862.69728 "c:/Users/dennis.van.den.berg/OneDrive - MYLAPS/Documents/Stage documenten/Verslag/Latex-PvA-afstudeeropdracht/Eindverslag_afstudeeropdracht/main.tex" "main.pdf" "main" 1778233868.84854 0
+["pdflatex"] 1778249803.21998 "c:/Users/dennis.van.den.berg/OneDrive - MYLAPS/Documents/Stage documenten/Verslag/Latex-PvA-afstudeeropdracht/Eindverslag_afstudeeropdracht/main.tex" "main.pdf" "main" 1778249811.71958 0
   "C:/Users/dennis.van.den.berg/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1776067567 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/dennis.van.den.berg/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1770968456 11548 d4fe56588ac41e5f1778645e7cfd81a0 ""
   "C:/Users/dennis.van.den.berg/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1770911783 13340638 fb6f371123bf833ef095f19084c70c60 ""
@@ -288,15 +288,15 @@
   "images/sensorwaardes_origineel.png" 1776694603 62749 b4437e5b7996944b175097c0723aab0a ""
   "images/systeemarchitectuur_v4.pdf" 1778073781 28226 31b08d623461bc42588d9274a57cc247 ""
   "images/trilateration.jpg" 1775547520 26453 ada4c280e4954931457b27fdd9cb232c ""
-  "implementatie.tex" 1778233847 42507 21ee59b6e73c6155258dcb54f7320463 ""
+  "implementatie.tex" 1778249783 42463 9e67a72e9496f9318c003dce044e7d00 ""
   "inleiding.tex" 1777530491 59 0a0ab831432b0a946d90288dac378ce9 ""
   "logos/HvA Internationaal.jpg" 1770909276 129636 fc5b4e491fab9f8de7dc3c29802299b1 ""
-  "main.aux" 1778233868 27203 0da4f8e78c8d090e517190b93034a507 "pdflatex"
+  "main.aux" 1778249810 27069 82a752d5e113a9ce1072ba26c04ce45d "pdflatex"
   "main.bbl" 1778233145 41997 6502fd4991f6d12d92491ba00bb8d4b1 "biber main"
-  "main.out" 1778233868 7257 7410724f2f5e6523853e3ed0f666a086 "pdflatex"
-  "main.run.xml" 1778233868 2305 52095dfad395b381e9a32937e764a41c "pdflatex"
+  "main.out" 1778249810 7083 503e1928e75a5fb955fbc460338d90d2 "pdflatex"
+  "main.run.xml" 1778249810 2305 52095dfad395b381e9a32937e764a41c "pdflatex"
   "main.tex" 1776947451 415 5635c6082936c685032aa7baecfd6ae3 ""
-  "main.toc" 1778233868 4498 200e4f9a00042397ac0e2d81aa2c07f3 "pdflatex"
+  "main.toc" 1778249810 4409 afd502e15274ae530711ee181225a080 "pdflatex"
   "resultaten.tex" 1774339616 90 361a8afc3aed131335525db4f9e7ac6b ""
   "specificaties.tex" 1777888336 2539 510da28a5709afb19598035546f7f4d8 ""
   "systeemontwerp.tex" 1778134250 12243 5c0a50ea889cc99eb4744177f659c349 ""
