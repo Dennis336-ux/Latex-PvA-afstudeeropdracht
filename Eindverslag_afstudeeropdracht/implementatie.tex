@@ -185,7 +185,7 @@ Hierin zijn de waardes te zien van het apparaat die stil ligt op een tafel. Hier
     \label{fig:sensorwaardes_filter}
 \end{figure}
 
-Zoals te zien in de afbeelding, hebben MEMS gyroscopen (Micro-Electro-Mechanical System) een systematische meetafwijking bij stilstand, ook wel \textit{zero-rate offset} of bias genoemd. Deze offset zal accumuleren bij het bepalen van de richting als dit niet gecompenseerd wordt. Om dit te verhelpen wordt bij het opstarten een eenmalige kalibratie uitgevoerd. De eerste 400 samples worden verworpen vanwege de pieken van de sensor. Vervolgens worden 200 opeenvolgende samples gemiddeld als kalibratieoffset. De berekende offset wordt bij iedere gyroscoopuitlezing afgetrokken van de ruwe sensorwaarde. Het resultaat hiervan is te zien in figuur \ref{fig:sensorwaardes_kalibratie}.
+Zoals te zien in de afbeelding, hebben MEMS gyroscopen (Micro-Electro-Mechanical System) een systematische meetafwijking bij stilstand, ook wel \textit{zero-rate offset} of bias genoemd. Deze offset zal accumuleren bij het bepalen van de richting als dit niet gecompenseerd wordt. Om dit te verhelpen wordt bij het opstarten een eenmalige kalibratie uitgevoerd. De eerste 400 samples worden niet gebruikt vanwege de pieken van de sensor. Vervolgens wordt een gemiddelde gebruikt van 200 opeenvolgende samples als kalibratieoffset. De berekende offset wordt bij iedere gyroscoopuitlezing afgetrokken van de ruwe sensorwaarde. Het resultaat hiervan is te zien in figuur \ref{fig:sensorwaardes_kalibratie}.
 
 \newpage
 
@@ -198,7 +198,7 @@ Zoals te zien in de afbeelding, hebben MEMS gyroscopen (Micro-Electro-Mechanical
 
 \subsubsection{SPI-busprobleem bij de IMU-uitlezing}
  
-Bij langere testmomenten bleek dat de sensordata sporadisch incorrect was. De uitgelezen waardes bevatten uitschieters die niet overeenkwamen met de werkelijke situatie. Dit is duidelijk te zien in figuur \ref{fig:imu_pieken} De pieken waren consistent en werden vrijwel altijd veroorzaakt op momenten dat andere apparaten ook gebruik maakten van de SPI-bus. Op de tracker delen de IMU, de seriële flash en de CAN-controller dezelfde SPI-bus. Dit betekent dat alle drie de apparaten via dezelfde datalijn (MOSI/MISO) en kloklijnen communiceren met de microcontroller. \\
+Bij langere testmomenten bleek dat de sensordata sporadisch incorrect was. De uitgelezen waardes bevatten uitschieters die niet overeenkwamen met de werkelijke situatie. Dit is duidelijk te zien in figuur \ref{fig:imu_pieken}. De pieken waren consistent en werden vrijwel altijd veroorzaakt op momenten dat andere apparaten ook gebruik maakten van de SPI-bus. Op de tracker delen de IMU, de seriële flash en de CAN controller dezelfde SPI-bus. Dit betekent dat alle drie de apparaten via dezelfde datalijn (MOSI/MISO) en kloklijnen communiceren met de microcontroller. \\
 
 \begin{figure}[h]
     \centering
@@ -217,20 +217,52 @@ spi_xfer(config->spi, &xfer);     // voer transactie uit
 gpio_pin_set(config->cs_pin);     // CS hoog: deselecteer IMU
 \end{lstlisting}
 
-Aanvullend vereist de ASM330LHH een korte dummy-transactie voordat de eerste daadwerkelijke communicatie plaatsvindt. Dit heeft te maken met de fundamentele werking van het SPI-protocol: SPI is een uitwisselingsprotocol waarbij de master en slave tegelijkertijd data uitwisselen. Op het moment dat de CS-pin laag wordt getrokken en de eerste byte verstuurd wordt, stuurt de sensor gelijktijdig een byte terug — maar omdat de sensor op dat moment nog niet weet welk register gelezen wordt, is die teruggestuurde byte betekenisloos. Door eerst een dummy-byte van 0xFF te sturen wordt deze onbruikbare teruggestuurde byte bewust weggegooid, zodat de sensor en de microcontroller daarna in een gedefinieerde begintoestand verkeren voor de echte communicatie:
-
-\begin{lstlisting}[language=C]
-uint8_t dummy_tx = 0xFF;
-spi_xfer(config->spi, &dummy_xfer);
-nrf_delay_us(1);
-\end{lstlisting}
-
-Na het toepassen van deze beide aanpassingen verdwenen de sporadische uitschieters 
-volledig uit de sensordata.
+Bovendien verwacht de ASM330LHH een soort dummy overdracht voordat de daadwerkelijke communicatie plaatsvindt. Dit heeft te maken met het SPI protocol. Bij SPI vindt dataoverdracht gelijktijdig plaats. Zodra de microcontroller (master) de SCK activeert om een commando te versturen, wordt er op hetzelfde moment een byte vanuit de sensor (slave) teruggestuurd. De sensor heeft nog niet de tijd gehad om de binnenkomende commando te verwerken. Hierdoor ontstaat onbruikbare data. Door bewust eerst een dummy-byte van \texttt{0xFF} te sturen zonder de ontvangen byte te verwerken, wordt deze initiële toestand weggegooid. Hierna bevinden zowel de sensor als de microcontroller zich in een bekende begintoestand. Na het toepassen van deze methodes zijn de sporadische uitschieters verdwenen uit de sensordata.
 
 \subsection{Extended Kalman Filter}
 
-Om de data van de IMU te combineren met dat van de GNSS data wordt gebruik gemaakt van een extended kalman filter. Aangezien het systeem niet lineair is, is dit de meest geschikte manier van combineren. Dit filter maakt gebruik van de prediction-update structuur. Deze prediction stap wordt elke 5 ms uitgevoerd op basis van IMU data en de update stap wordt uitgevoerd zodra een nieuwe GNSSS meting beschikbaar is (25 Hz). De onderdelen van dit filter zullen hieropvolgend uitgelicht worden.
+Om de IMU-data te combineren met de GNSS-data wordt gebruikgemaakt van een Extended Kalman Filter. Aangezien het systeem niet-lineair is, is dit de meest geschikte methode. Het filter bestaat uit een aantal afzonderlijke componenten die elk een specifieke rol vervullen. Tabel~\ref{tab:ekf_componenten} geeft een overzicht van deze componenten voordat elk onderdeel in detail wordt toegelicht.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Overzicht van de componenten van het Extended Kalman Filter.}
+    \label{tab:ekf_componenten}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\textwidth}{|l|l|X|}
+        \hline
+        \rowcolor{green!20}
+        \textbf{Component} & \textbf{Frequentie} & \textbf{Functie} \\ \hline
+        Complementary filter & 200 Hz & 
+        Bepaalt pitch en roll uit gyroscoop en accelerometer voor 
+        zwaartekrachtcompensatie \\ \hline
+        State vector $\mathbf{x}$ & n.v.t & 
+        Bevat alle geschatte grootheden: positie, snelheid, heading en 
+        sensorbiassen \\ \hline
+        Motion model + Jacobiaan $F$ & 200 Hz & 
+        Voorspelt de nieuwe toestand op basis van IMU-data 
+        (predictiestap) \\ \hline
+        Procesruismatrix $Q$ & 200 Hz & 
+        Modelleert de onzekerheid van het bewegingsmodel per tijdstap \\ \hline
+        Covariantiematrix $P$ & 200 Hz & 
+        Houdt bij hoe zeker het filter is over elke grootheid \\ \hline
+        Meetmodel $H$ + R-matrix & 25 Hz & 
+        Beschrijft welke grootheden worden gemeten en hoe onzeker die 
+        meting is \\ \hline
+        Kalman gain $K$ & 25 Hz & 
+        Bepaalt hoeveel gewicht de GNSS-meting krijgt ten opzichte van 
+        de predictiestap \\ \hline
+        NIS-check & 25 Hz & 
+        Toetst statistische plausibiliteit van de GNSS-meting; verwerpt 
+        uitschieters \\ \hline
+        ZUPT & Continu & 
+        Corrigeert snelheidsschatting naar nul bij gedetecteerde 
+        stilstand \\ \hline
+    \end{tabularx}
+\end{table}
+
+De predictiestap wordt elke 5\,ms uitgevoerd op basis van IMU-data. De updatestap 
+wordt uitgevoerd zodra een nieuwe GNSS-meting beschikbaar is (elke 40\,ms). De 
+onderdelen worden hieronder stapsgewijs toegelicht.
 
 
 \subsubsection{Complementary filter voor attitude}
@@ -320,25 +352,26 @@ float flat_x = (raw_ax * cosf(pitch_rad)) +
 
 \subsubsection{State vector}
 
-Om het filter op te bouwen moeten de grootheden van het systeem bijgehouden worden. Dit wordt bereikt door middel van de state vector. Dit is een lijst van alle variabelen die het filter op elk tijdstip schat. In dit geval bestaat de state vector uit zes elementen.
- 
+Om het filter op te bouwen moeten de grootheden van het systeem bijgehouden worden. Dit wordt bereikt door middel van de state vector. Dit is een lijst van alle variabelen die het filter op elk tijdstip schat. In dit geval bestaat de state vector uit zes elementen zoals te zien in formule \ref{eq:toestandsvector}
+
 \begin{equation}
     \mathbf{x} = \begin{bmatrix} X & Y & v & \theta & b_a & b_g \end{bmatrix}^T
     \label{eq:toestandsvector}
 \end{equation}
- 
-Hierbij zijn $X$ en $Y$ de positie in meters in het lokale coördinatenstelsel, $v$ de rijsnelheid in m/s, $\theta$ de heading (kijkrichting) in radialen, $b_a$ de accelerometerbias in m/s² en $b_g$ de gyroscoop-bias in rad/s. De positie, snelheid en heading zijn de grootheden die gebruikt worden voor de route bepaling. De bias termen zorgen ervoor dat het filter de sensorfouten kan schatten tijdens gebruikt. \\
- 
-Het filter wordt geïnitialiseerd zodra de eerste RTK fix plaatsvindt. Op dat moment wordt de positie op het nulpunt gezet, de snelheid op de gemeten GNSS snelheid, de heading op de GNSS heading en de biassen op nul.
- 
-\todo[inline]{Tabel toestandsvector invullen met eenheden en initiële waarden.}
- 
+
+Hierbij zijn $X$ en $Y$ de positie in meters in het lokale coördinatenstelsel, $v$ de rijsnelheid in m/s en $\theta$ de heading (rijrichting) in radialen. Deze vier grootheden vormen de kern van de positieschatting en worden direct gebruikt voor de routebepaling. \\
+
+Naast deze vier grootheden bevat de state vector twee biastermen: $b_a$ voor de accelerometer en $b_g$ voor de gyroscoop. Een bias is een kleine systematische meetafwijking die aanwezig is onafhankelijk van de werkelijke beweging. Hoewel bij het opstarten al een eenmalige gyroscoop kalibratie wordt uitgevoerd die de zero-rate offset verwijdert, blijft er altijd een kleine resterende fout over. Deze fout kan langzaam veranderen tijdens gebruik door drift of eventueel de opwarming van de sensor. \\
+
+Door $b_a$ en $b_g$ op te nemen in de state vector schat het EKF deze resterende afwijking continu bij tijdens het rijden en trekt deze af van de gemeten versnelling en hoeksnelheid voordat ze worden geïntegreerd. Dit wordt in opvolgende paragrafen duidelijker toegelicht. Zonder deze correcties zou een kleine constante fout in de gemeten versnelling zich bij integratie opstapelen tot een toenemende fout in snelheid. \\
+
+Het filter wordt geïnitialiseerd zodra de eerste RTK fix plaatsvindt, omdat dit het moment is dat het systeem het meest nauwkeurig is. Het EKF zal dit punt gebruiken als positieoorsprong van het te gebruiken coördinatenstelsel.
  
 \subsubsection{Motion model en Jacobian matrix}
 
-Na het definiëren van de state vector, moet het filter weten hoe de toestand verandert over de tijd. Dit wordt ook wel het motion model genoemd. Dit model beschrijft welke waarde elke grootheid naar verwachting heeft na elk tijdstap, op basis van de IMU metingen. \\
- 
-Hiervoor wordt een zogenaamd unicycle-model gebruikt. Dit is een eenvoudig maar effectief rijmodel dat ervan uitgaat dat het object vooruit beweegt met snelheid $v$ in de richting $\theta$ en draait met een hoeksnelheid $\dot{\theta}$. Zijwaartse slip wordt niet gemodelleerd. De zes bewegingsvergelijkingen zijn:
+Na het definiëren van de state vector, moet het filter weten hoe zijn toestand (state) verandert over de tijd. Dit wordt ook wel het motion model genoemd. Dit model beschrijft welke waarde elke grootheid naar verwachting heeft na elk tijdstip, op basis van de IMU metingen. \\
+
+Om dit te bereiken wordt een zogenoemde \textit{unicycle model} gebruikt zoals beschreven in paragraaf 13.1.2.3 van \textit{`Planning Algorithms'} \cite{lavalle2006planning}. Dit is een standaard rijmodel binnen de robotica en besturingstechniek dat ervan uitgaat dat het object beweegt met snelheid $v$ in de richting $\theta$ en draait met een hoeksnelheid $\dot{\theta}$ (yaw-rate). Zijwaartse slip wordt in dit geval niet volledig meegenomen.
  
 \begin{align}
     X_{k+1}      &= X_k + v_k \cdot \cos(\theta_k) \cdot \Delta t \label{eq:fx} \\
@@ -349,9 +382,16 @@ Hiervoor wordt een zogenaamd unicycle-model gebruikt. Dit is een eenvoudig maar 
     b_{g,k+1}    &= b_{g,k} \label{eq:fbg}
 \end{align}
  
-De eerste twee vergelijkingen (\ref{eq:fx} en \ref{eq:fy}) beschrijven hoe de positie verandert op basis van de huidige snelheid en rijrichting. Vergelijking \ref{eq:fv} werkt de snelheid bij op basis van de gemeten versnelling, gecorrigeerd voor de geschatte accelerometerbias. Vergelijking \ref{eq:ftheta} werkt de heading bij op basis van de gemeten yaw-rate, gecorrigeerd voor de gyroscoop-bias. De laatste twee vergelijkingen (\ref{eq:fba} en \ref{eq:fbg}) beschrijven dat de biassen worden verondersteld constant te blijven over één tijdstap. De procesruis in de $Q$-matrix zorgt er echter voor dat het filter kleine langzame veranderingen in de bias toch kan bijhouden.
- 
-Naast de toestand zelf houdt het EKF ook bij hoe zeker het is over die schatting. Dit wordt de covariantiematrix $P$ genoemd: een $6 \times 6$ matrix waarbij elk element aangeeft hoe sterk twee toestandsgrootheden samen onzeker zijn. Een grote waarde op de diagonaal betekent dat het filter weinig vertrouwen heeft in de bijbehorende toestandsgrootheid.
+De eerste twee vergelijkingen (\ref{eq:fx} en \ref{eq:fy}) beschrijven hoe de positie verandert op basis van de huidige snelheid en rijrichting. Vergelijking \ref{eq:fv} werkt de snelheid bij op basis van de gemeten versnelling, waarbij de accelerometerbias als correctie dient. Vergelijking \ref{eq:ftheta} werkt de heading bij op basis van de gemeten yaw rate, die vervolgens ook gecorrigeerd wordt door de gyroscoop bias.
+
+De laatste twee vergelijkingen (\ref{eq:fba} en \ref{eq:fbg}) tonen de biassen die over één tijdstap van 5\,ms worden bepaalt. Deze blijft gedurende deze tijdstap constant, omdat deze termen afhankelijk zijn van de predictiestap. 
+
+
+
+
+
+
+Naast de toestand zelf houdt het EKF ook bij hoe zeker het is over die schatting. Dit wordt de covariantiematrix $P$ genoemd: een $6 \times 6$ matrix waarbij elk element aangeeft hoe sterk twee toestandsgrootheden samen onzeker zijn. Een grote waarde op de diagonaal betekent dat het filter weinig vertrouwen heeft in de bijbehorende toestandsgrootheid \cite{welch1995introduction}.
  
 Omdat vergelijkingen \ref{eq:fx} en \ref{eq:fy} niet-lineair zijn in $\theta$ — ze bevatten een sinus en cosinus — kan de covariantiematrix niet rechtstreeks worden bijgewerkt. Het EKF lineariseert het bewegingsmodel via de Jacobiaan $F$: de matrix van alle partiële afgeleiden van het bewegingsmodel naar de toestandsgrootheden. Simpel gezegd beschrijft $F$ hoe een kleine verandering in één toestandsgrootheid doorwerkt op alle andere grootheden na één tijdstap. De Jacobiaan wordt op elk tijdstip opnieuw berekend rondom de huidige schatting:
  
@@ -374,7 +414,7 @@ Met de Jacobiaan wordt de covariantiematrix $P$ in de predictiestap bijgewerkt. 
     \label{eq:P_predict}
 \end{equation}
  
-Om te voorkomen dat $P$ door accumulerende afrondingsfouten in zwevendekommagetallen asymmetrisch wordt, wat de filterstabiliteit kan ondermijnen, wordt na elke stap een symmetrisatie uitgevoerd:
+Om te voorkomen dat $P$ door accumulerende afrondingsfouten in zwevendekommagetallen asymmetrisch wordt, wat de filterstabiliteit kan ondermijnen, wordt er volgens best-practices voor numerieke stabiliteit in Kalman-filters \cite{grewal2014kalman} na elke stap een symmetrisatie uitgevoerd:
  
 \begin{equation}
     P \leftarrow \frac{P + P^T}{2}

@@ -36,18 +36,18 @@ Het sensor fusion systeem wordt geïmplementeerd op de bestaande MYLAPS ProRTK t
     \end{tabularx}
 \end{table}
 
-Het gehele systeem van de tracker wordt aangestuurd door de nRF52832 microcontroller met een ARM Cortex-M4F processor. Deze is verantwoordelijk voor het verwerken van de GNSS data uit de ublox module en de communicatie met de IMU. Een belangrijk onderdeel van deze microcontroller is de beschikbare Floating-Point Unit (FPU). Aangezien het filter gebruik zal maken van veel wiskundig complexe berekeningen, is het noodzakelijk dat de software dit kan afhandelen zonder vertragingen. \\
+Het gehele systeem van de tracker wordt aangestuurd door de nRF52832 microcontroller met een ARM Cortex-M4F processor. Deze is verantwoordelijk voor het verwerken van de GNSS data uit de u-blox module en de communicatie met de IMU. Een belangrijk onderdeel van deze microcontroller is de beschikbare Floating-Point Unit (FPU). Aangezien het filter gebruik maakt van veel wiskundig complexe berekeningen met komma getallen, zoals sinus- en cosinusfuncties, is het noodzakelijk dat de software dit kan afhandelen zonder vertragingen die het systeem verstoren. \\
 
-De locatiebepaling wordt doormiddel van de u-blox X20P RTK ontvanger tot stand gebracht. 
+De locatiebepaling wordt bepaalt door de u-blox X20P RTK ontvanger. In tegenstelling tot standaard GPS modules levert deze ontvanger niet alleen positie en snelheid, maar ook zijn eigen nauwkeurigheid (horizontal accuracy) en positiecovarianties. Deze matrix is een wiskundige marge die aangeeft in welke specifieke richting de GPS twijfelt. In plaat van een algemene onzekerheidscirkel geeft deze matrix een onzekerheids-ellips rondom de tracker. Het vertelt het systeem of de GNSS meting op dat exacte moment bijvoorbeeld onzekerder is in de noord-zuid richting dan in de oost-west richting (de varianties en kruistermen). \\
 
-De locatiebepaling wordt primair gevoed door de u-blox X20P RTK-ontvanger. In tegenstelling tot standaard GPS-modules, levert deze ontvanger via de UART-verbinding niet alleen de actuele positie en snelheid op 25 Hz, maar verstrekt deze ook gedetailleerde onzekerheidsmarges (covarianties). Deze stroom aan extra diagnostische data is van enorme waarde voor het filterontwerp, maar vereist efficiënte communicatie via de UART-bus om vertragingen te voorkomen.  De interne bewegingsdynamiek wordt geregistreerd door de STMicroelectronics ASM330LHH. Dit is een 6-assige, automotive-grade IMU die versnellingen en hoeksnelheden aanlevert met een geconfigureerde frequentie van 200 Hz. 
-
-
-Een belangrijke architecturale uitdaging van de ProRTK-hardware is dat de communicatie met deze IMU via een Serial Peripheral Interface (SPI) verloopt, waarbij de fysieke bus wordt gedeeld met de externe NOR-flash (voor dichte datalogging) en de CAN-controller (voor voertuigtelemetrie). Dit gedeelde hardware-design vormt een fysieke bottleneck. Het uitlezen van de sensordata op 200 Hz moet in het software-ontwerp dan ook strikt gesynchroniseerd worden middels hardware-interrupts (Chip Select), om te voorkomen dat data-corruptie optreedt wanneer de IMU actief wordt uitgelezen terwijl de processor gelijktijdig bezig is met het wegschrijven van logs naar de flash-opslag. 
+Deze data is belangrijk en wordt dan ook direct gebruikt in het meetmodel (de R-matrix) van het filter. Hierdoor weet de software per fractie van een seconde exact hoeveel vertrouwen het nog in de satellietmeting mag hebben, en wanneer het beter is om de data van de interne sensoren voorrang te geven. De interne beweging van het systeem wordt bijgehouden door de STMicroelectronics ASM330LHH, een 6-assige IMU. \\
 
 \newpage
 
 \subsection{Black box}
+
+Figuur~\ref{fig:blackbox} geeft het systeem weer op het hoogste abstractieniveau. Het systeem ontvangt twee asynchrone datastromen en combineert deze tot een betrouwbare positieschatting. Deze wordt vervolgens via het X2-Link protocol van MYLAPS verzonden. De IMU zal sneller dan de GNSS zijn data moeten uitlezen om zo een correcte schatting te maken. Door deze hogere resolutie kan het systeem accurater dynamische bewegingen bijhouden. De u-blox module levert momenteel positiedata op 25 Hz. Door onderdelen als de positie, snelheid en accuracy te combineren met de data van de IMU kan een nieuwe schatting gemaakt worden voor deze velden. Het ontwerp van dit gehele systeem zal in opvolgende paragrafen toegelicht worden.
+
 
 \begin{figure}[htbp]
 \centering
@@ -83,145 +83,112 @@ Een belangrijke architecturale uitdaging van de ProRTK-hardware is dat de commun
     \draw[arrow] (sf.east) -- node[above, font=\footnotesize]
         {x, y, v, $\theta$} (out.west);
 \end{tikzpicture}
-\caption{\textbf{Niveau 1 -- Blackbox overzicht:} het sensor fusion systeem
+\caption{Blackbox overzicht het sensor fusion systeem
 ontvangt twee asynchrone datastromen en levert één betrouwbare
-positieschatting via het X2 Link protocol.}
+positieschatting. Deze wordt vervolgens door het X2-Link protocol verstuurd.}
 \label{fig:blackbox}
 \end{figure}
 
 
-\subsection{Interne architectuur}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[
-    block/.style={rectangle, draw, rounded corners=3pt,
-                  minimum width=2.8cm, minimum height=1cm,
-                  text centered, align=center,
-                  fill=blue!10, font=\small},
-    smallblock/.style={rectangle, draw, rounded corners=3pt,
-                  minimum width=2.2cm, minimum height=0.9cm,
-                  text centered, align=center,
-                  fill=orange!15, font=\footnotesize},
-    arrow/.style={->, thick, >=stealth}
-]
-    \node[block] (gps) at (0, 3)
-        {u-blox\\{\footnotesize NAV-PVT / NAV-COV}};
-    \node[block] (imu) at (0, -1)
-        {ASM330LHH\\{\footnotesize Accel + Gyro}};
-
-    \node[smallblock] (parser) at (4.5, 3)
-        {UBX Parser\\{\footnotesize checksum, offsets}};
-    \node[smallblock] (cal)    at (4.5, -1)
-        {Kalibratie \&\\Remapping};
-    \node[smallblock] (zupt)   at (4.5, -3)
-        {Stilstand-\\detectie (ZUPT)};
-
-    \node[block, minimum width=3.2cm, minimum height=7.5cm,
-        fill=green!10] (ekf) at (9, 0)
-        {Extended\\Kalman Filter\\[6pt]
-        {\footnotesize predictiestap 200 Hz}\\[2pt]
-        {\footnotesize updatestap 25 Hz}\\[2pt]
-        {\footnotesize NIS-check}};
-
-    \node[block] (out) at (13.5, 0)
-        {X2 Link\\Output};
-
-    % GPS naar parser
-    \draw[arrow] (gps) -- (parser);
-
-    % IMU naar kalibratie en ZUPT
-    \draw[arrow] (imu) -- (cal);
-    \draw[arrow] (imu) |- (zupt);
-
-    % Parser naar EKF: horizontale lijn op hoogte van parser
-    \draw[arrow] (parser.east) --
-        node[above, font=\tiny] {r\_ee, r\_nn, r\_en}
-        (ekf.west |- parser.east);
-
-    % Kalibratie naar EKF: horizontale lijn op hoogte van cal
-    \draw[arrow] (cal.east) --
-        node[above, font=\tiny] {flat\_x, $\omega_z$}
-        (ekf.west |- cal.east);
-
-    % ZUPT naar EKF: horizontale lijn op hoogte van zupt
-    \draw[arrow] (zupt.east) --
-        node[below, font=\tiny] {stilstand?}
-        (ekf.west |- zupt.east);
-
-    % EKF naar output
-    \draw[arrow] (ekf) -- (out);
-
-\end{tikzpicture}
-\caption{\textbf{Niveau 2 -- Interne architectuur:} de twee datastromen worden
-voorverwerkt voordat zij de EKF bereiken. De EKF voert op 200 Hz
-de predictiestap uit en op 25 Hz de updatestap met NIS-check.}
-\label{fig:architectuur}
-\end{figure}
-
 \newpage
 
+\subsection{Systeemarchitectuur}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/systeemarchitectuur_v4.pdf}
+    \caption{Blokschema waarin de systeemarchitectuur uitgebeeld is. De twee datastromen worden voorverwerkt voordat 
+    zij de EKF bereiken.}
+    \label{fig:architectuur}
+\end{figure}
+
+Figuur~\ref{fig:architectuur} toont de interne structuur van het systeem. De twee datastromen 
+worden elk afzonderlijk voorverwerkt voordat zij de EKF bereiken.
+
+
+
+
+
+\subsubsection*{GNSS-verwerking}
+
+De GNSS-datastroom wordt ingelezen en gevalideerd waarna de relevante meetgrootheden worden 
+geëxtraheerd. Naast de positie en snelheid worden ook de nauwkeurigheidsmarges van de ontvanger 
+meegenomen. Een belangrijk ontwerpaspect hierbij is dat de GNSS-kwaliteit niet constant is: 
+bij een volledige RTK Fixed fix is de meting aanzienlijk betrouwbaarder dan bij een Float fix 
+of bij het volledig wegvallen van RTK-correcties. Het ontwerp moet hier adaptief mee omgaan, 
+zodat het EKF bij slechtere GPS-kwaliteit automatisch meer vertrouwt op het eigen 
+bewegingsmodel en bij goede GPS-kwaliteit de metingen sterker volgt. De nauwkeurigheidsmarges 
+van de ontvanger vormen hiervoor de directe invoer voor de R-matrix van het EKF.
+
+\subsubsection*{IMU-verwerking en attitude bepaling}
+
+
+De ruwe IMU data is niet direct bruikbaar in het huidige systeem. 
+
+
+De ruwe IMU-data is niet direct bruikbaar als invoer voor het EKF. Een accelerometer meet 
+namelijk niet alleen de rijversnelling maar ook de zwaartekracht. Wanneer de tracker gekanteld 
+is gemonteerd, lekt een deel van de zwaartekrachtcomponent door naar de rijrichting-as, waardoor 
+het filter een valse rijversnelling zou interpreteren. Om dit te corrigeren moet eerst de 
+hellingshoek van de tracker worden bepaald. Dit wordt gedaan door het complementary filter dat 
+de gyroscoop en accelerometer combineert: de gyroscoop zorgt voor een snelle respons op 
+hoekveranderingen, terwijl de accelerometer de langzame drift van de gyroscoop corrigeert via 
+de zwaartekracht als absolute referentie. Met de berekende hellingshoek kan vervolgens de 
+zwaartekrachtcomponent wiskundig uit de meting worden weggerekend, zodat het EKF uitsluitend 
+de werkelijke rijversnelling als invoer krijgt.
+
+Daarnaast bevat de gyroscoop van nature een systematische meetafwijking bij stilstand, ook wel 
+de zero-rate offset genoemd. Zonder compensatie accumuleert deze fout bij integratie en leidt 
+dit tot oplopende koersfouten. Het ontwerp voorziet daarom in een kalibratiestap bij het 
+opstarten die deze offset bepaalt en vervolgens bij iedere uitlezing compenseert.
+
+\subsubsection*{Stilstanddetectie}
+
+Wanneer het systeem stilstaat maar de IMU kleine versnellingsfouten blijft meten, kan de 
+geschatte snelheid langzaam oplopen terwijl die in werkelijkheid nul is. Het ontwerp voorziet 
+daarom in een stilstanddetectie die de IMU-data continu analyseert. Wanneer het systeem als 
+stilstaand wordt beschouwd, wordt een Zero Velocity Update uitgevoerd die via het 
+Kalman-mechanisme de snelheidsschatting naar nul corrigeert. Dit voorkomt dat een stilstaand 
+systeem langzaam wegdrijft in positie door geaccumuleerde snelheidsfouten.
 
 \subsection{EKF dataflow}
 
 \begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[
-    block/.style={rectangle, draw, rounded corners=3pt,
-                  minimum width=3.5cm, minimum height=1cm,
-                  text centered, align=center,
-                  fill=blue!10, font=\small},
-    blockgreen/.style={rectangle, draw, rounded corners=3pt,
-                  minimum width=3.5cm, minimum height=1cm,
-                  text centered, align=center,
-                  fill=green!10, font=\small},
-    blockyellow/.style={rectangle, draw, rounded corners=3pt,
-                  minimum width=3.5cm, minimum height=1cm,
-                  text centered, align=center,
-                  fill=yellow!20, font=\small},
-    arrow/.style={->, thick, >=stealth}
-]
-    % Initialisatie
-    \node[blockyellow] (init) at (0, 0)
-        {Initialisatie\\{\footnotesize Eerste RTK Fixed fix}};
-
-    % Predictiestap
-    \node[blockgreen] (pred) at (5, 0)
-        {Predictiestap\\{\footnotesize IMU @ 200 Hz (5 ms)}};
-
-    % GPS check
-    \node[block] (gps) at (10, 0)
-        {GPS beschikbaar?\\{\footnotesize elke 40 ms}};
-
-    % Updatestap
-    \node[blockgreen] (upd) at (10, -2.5)
-        {Updatestap\\{\footnotesize GPS @ 25 Hz}};
-
-    % Uitvoer
-    \node[blockgreen] (out) at (5, -2.5)
-        {Toestandsschatting\\
-         {\footnotesize $[x,\, y,\, v,\, \theta,\, b_a,\, b_g]^T$}};
-
-    % Pijlen
-    \draw[arrow] (init) -- node[above, font=\footnotesize]
-        {eenmalig} (pred);
-    \draw[arrow] (pred) -- node[above, font=\footnotesize]
-        {wachten} (gps);
-    \draw[arrow] (gps)  -- node[right, font=\footnotesize]
-        {ja} (upd);
-    \draw[arrow] (gps.north) -- ++(0, 1)
-        -- node[above, font=\footnotesize] {nee, blijf predicteren}
-        ++(-5, 0) -- (pred.north);
-    \draw[arrow] (upd)  -- (out);
-    \draw[arrow] (out)  -- (pred);
-
-\end{tikzpicture}
-\caption{Flowchart van het algoritme na een eenmalige initialisatie
-bij de eerste RTK Fixed fix draait de predictiestap continu op 200 Hz.
-Elke 40 ms wordt een GPS-meting verwerkt in de updatestap waarna
-de toestandsschatting wordt bijgewerkt.}
-\label{fig:ekf_flow}
+    \centering
+    % figuur dataflow hier
+    \caption{Flowchart van het algoritme: na een eenmalige initialisatie bij de eerste RTK Fixed 
+    fix draait de predictiestap continu op 200\,Hz. Elke 40\,ms wordt een GPS-meting verwerkt 
+    in de updatestap waarna de toestandsschatting wordt bijgewerkt.}
+    \label{fig:dataflow}
 \end{figure}
+
+Figuur~\ref{fig:dataflow} toont de dataflow van het algoritme. Het systeem wacht na het 
+opstarten op de eerste RTK Fixed fix voordat het initialiseert. De reden hiervoor is dat de 
+oorsprong van het lokale coördinatenstelsel bij de initialisatie wordt vastgelegd. Een onjuiste 
+of onnauwkeurige oorsprong introduceert een systematische fout die gedurende de volledige 
+sessie aanwezig blijft. Een RTK Fixed fix garandeert de hoogst mogelijke nauwkeurigheid op dat 
+moment en vormt daarmee de meest betrouwbare basis voor de initialisatie. Tijdens de 
+wachtperiode zijn de kalibratie en het complementary filter al wel actief, zodat de 
+IMU-verwerking volledig gereed is op het moment dat de eerste fix binnenkomt.
+
+Na de initialisatie werkt het systeem in een continue cyclus van twee stappen. De predictiestap 
+wordt op 200\,Hz uitgevoerd op basis van de IMU-data en werkt de toestandsschatting bij via 
+het bewegingsmodel. Omdat het bewegingsmodel een benadering van de werkelijkheid is, neemt de 
+onzekerheid in de covariantiematrix P bij elke stap licht toe. De updatestap wordt op 25\,Hz 
+uitgevoerd wanneer een nieuwe GNSS-meting beschikbaar is. Elke meting wordt eerst statistisch 
+getoetst via de NIS-check voordat deze wordt verwerkt. Metingen die te ver afwijken van de 
+verwachte spreiding worden als onbetrouwbaar beschouwd en verworpen, zodat uitschieters door 
+bijvoorbeeld multipath of een tijdelijke False Fixed situatie geen directe invloed hebben op 
+de toestandsschatting. Wanneer de meting wordt geaccepteerd, wordt de toestandsschatting 
+gecorrigeerd en neemt de onzekerheid in P af.
+
+Bij GPS-uitval blijft uitsluitend de predictiestap actief. De positieschatting degradeert 
+hierbij geleidelijk door IMU-drift, maar het systeem blijft een geldige schatting produceren 
+en valt niet terug naar een ongeldige toestand. De stilstanddetectie blijft ook tijdens 
+GPS-uitval actief, zodat positiedrift bij stilstand wordt onderdrukt. Zodra het GPS-signaal 
+terugkeert wordt de updatestap hervat en convergeert het filter opnieuw naar de absolute 
+GPS-positie.
+
 
 
 \newpage

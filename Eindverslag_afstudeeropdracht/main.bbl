@@ -290,7 +290,7 @@
       \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{Geraadpleegd op 22 mei 2024}
+      \field{note}{Geraadpleegd op 22 april 2026}
       \field{title}{Wireless Equine Gait Analysis}
       \field{year}{2024}
       \verb{urlraw}
@@ -298,6 +298,65 @@
       \endverb
       \verb{url}
       \verb https://inertia-technology.com/usecase/wireless-equine-gait-analysis/
+      \endverb
+    \endentry
+    \entry{lavalle2006planning}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=10b09a560dbab6229987301f9a193d77}{%
+           family={LaValle},
+           familyi={L\bibinitperiod},
+           given={Steven\bibnamedelima M},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, UK}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{10b09a560dbab6229987301f9a193d77}
+      \strng{fullhash}{10b09a560dbab6229987301f9a193d77}
+      \strng{fullhashraw}{10b09a560dbab6229987301f9a193d77}
+      \strng{bibnamehash}{10b09a560dbab6229987301f9a193d77}
+      \strng{authorbibnamehash}{10b09a560dbab6229987301f9a193d77}
+      \strng{authornamehash}{10b09a560dbab6229987301f9a193d77}
+      \strng{authorfullhash}{10b09a560dbab6229987301f9a193d77}
+      \strng{authorfullhashraw}{10b09a560dbab6229987301f9a193d77}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Geraadpleegd op 25-03-2026}
+      \field{title}{Planning Algorithms}
+      \field{year}{2006}
+    \endentry
+    \entry{linearmotiontips2020yaw}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=580ad370a5890e18ec802ce08978a1c4}{%
+           family={{Linear Motion Tips}},
+           familyi={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{580ad370a5890e18ec802ce08978a1c4}
+      \strng{fullhash}{580ad370a5890e18ec802ce08978a1c4}
+      \strng{fullhashraw}{580ad370a5890e18ec802ce08978a1c4}
+      \strng{bibnamehash}{580ad370a5890e18ec802ce08978a1c4}
+      \strng{authorbibnamehash}{580ad370a5890e18ec802ce08978a1c4}
+      \strng{authornamehash}{580ad370a5890e18ec802ce08978a1c4}
+      \strng{authorfullhash}{580ad370a5890e18ec802ce08978a1c4}
+      \strng{authorfullhashraw}{580ad370a5890e18ec802ce08978a1c4}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{2}
+      \field{note}{Geraadpleegd op 08-05-2026}
+      \field{title}{Motion basics: How to define roll, pitch, and yaw for linear systems}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://www.linearmotiontips.com/motion-basics-how-to-define-roll-pitch-and-yaw-for-linear-systems/
+      \endverb
+      \verb{url}
+      \verb https://www.linearmotiontips.com/motion-basics-how-to-define-roll-pitch-and-yaw-for-linear-systems/
       \endverb
     \endentry
     \entry{pieterjan_complementary}{misc}{}{}
@@ -851,8 +910,10 @@
       \field{year}{2022}
     \endentry
   \enddatalist
+  \missing{grewal2014kalman}
   \missing{novatel_multipath}
   \missing{ublox_interface}
+  \missing{welch1995introduction}
 \endrefsection
 \endinput
 

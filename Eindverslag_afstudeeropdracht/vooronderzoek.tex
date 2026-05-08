@@ -102,7 +102,18 @@ Een Inertial Measurement Unit (IMU) is een sensor die de beweging van een object
 
 De accelerometer meet de versnelling van een object, maar neemt ook altijd de zwaartekracht mee. Als het apparaat stil ligt, meet het uitsluitend de zwaartekracht (9,81 m/s²). Door de zwaartekrachtcomponent te compenseren en de resterende versnelling eenmalig te integreren kan de snelheid worden bepaald. Een tweede integratie geeft de relatieve positieverandering. \\
 
-De gyroscoop meet draaibewegingen om de drie ruimtelijke assen (X, Y en Z). Hiermee berekent het systeem hoe de oriëntatie van het object verandert, zoals het kantelen of draaien. Omdat een gyroscoop niet beïnvloed wordt door normale, rechte versnellingen of trillingen, is deze sensor ideaal om de actuele koers (heading) van een bewegend object bij te houden.
+De gyroscoop meet draaibewegingen om de drie assen (X, Y en Z). Hiermee berekent het systeem hoe de oriëntatie van het object verandert, zoals het kantelen of draaien. Deze oriëntaties worden de pitch, roll en yaw genoemd en zijn weergegeven in figuur \ref{fig:oriëntatie}
+
+
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{images/oriëntatie.png}
+	\caption{De verschillende bewegingsdynamieken die een object ondervind zijn uitgedrukt in de pitch, roll en yaw \cite{linearmotiontips2020yaw}.}
+	\label{fig:oriëntatie}
+\end{figure}
+
+
+Omdat een gyroscoop niet beïnvloed wordt door normale, rechte versnellingen of trillingen, is deze sensor ideaal om de actuele koers (heading) van een bewegend object bij te houden.
 Een overzicht van deze sensoren is te zien in tabel \ref{tab:imu_sensoren}
 
 \begin{table}[htbp]
