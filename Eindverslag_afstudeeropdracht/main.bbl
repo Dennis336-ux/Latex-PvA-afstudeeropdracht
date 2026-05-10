@@ -700,6 +700,28 @@
       \verb https://www.st.com/resource/en/application_note/an5296-asm330lhh-automotive-inertial-module-digital-3axis-accelerometer-and-digital-3axis-gyroscope-stmicroelectronics.pdf
       \endverb
     \endentry
+    \entry{jockeyclub_racehorses}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=eb5560ec2430dee90e3323dc840a443e}{%
+           family={{The Jockey Club}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{eb5560ec2430dee90e3323dc840a443e}
+      \strng{fullhash}{eb5560ec2430dee90e3323dc840a443e}
+      \strng{fullhashraw}{eb5560ec2430dee90e3323dc840a443e}
+      \strng{bibnamehash}{eb5560ec2430dee90e3323dc840a443e}
+      \strng{authorbibnamehash}{eb5560ec2430dee90e3323dc840a443e}
+      \strng{authornamehash}{eb5560ec2430dee90e3323dc840a443e}
+      \strng{authorfullhash}{eb5560ec2430dee90e3323dc840a443e}
+      \strng{authorfullhashraw}{eb5560ec2430dee90e3323dc840a443e}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{[Online]. Available: https://www.thejockeyclub.co.uk/the-racing/racing-explained/how-fast-are-racehorses/}
+      \field{note}{Geraadpleegd op 16 februari 2026}
+      \field{title}{How Fast Are Racehorses? | Racing Explained}
+    \endentry
     \entry{valente2020accuracy}{article}{}{}
       \name{author}{4}{}{%
         {{hash=0c4d60e2ac164609d1bf0f86d54fc3b4}{%
@@ -910,10 +932,6 @@
       \field{year}{2022}
     \endentry
   \enddatalist
-  \missing{grewal2014kalman}
-  \missing{novatel_multipath}
-  \missing{ublox_interface}
-  \missing{welch1995introduction}
 \endrefsection
 \endinput
 

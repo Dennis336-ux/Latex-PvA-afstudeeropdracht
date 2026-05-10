@@ -1,84 +1,148 @@
-% !TeX root = main.tex
-
 \section{Specificaties}
 
+\todo[inline]{Hier moet nog meer aandacht aan besteed worden aangezien het nog niet helemaal duidelijk is hoe de specificaties opgesteld moeten worden. Het is namelijk meer een onderzoeksverslag waarbij er niet harde eisen vanuit de opdrachtgever aanwezig zijn. Momenteel worden de specificaties gebruikt die zijn opgesteld in het Plan van Aanpak.} 
+
+Op basis van de probleemstelling en de wensen van MYLAPS zijn de specificaties 
+en onderzoekscriteria voor het sensor fusion systeem vastgesteld. Het project 
+richt zich op een softwarematige implementatie binnen de bestaande hardware van 
+de ProRTK tracker. \\
+
+Omdat de primaire scenario de paardensport betreft, zijn de dynamische eigenschappen van een galoperend paard een belangrijk punt. Volgens The Jockey Club bedraagt de hoogst gemeten snelheid in de paardensport tot wel 70,76 km/u~\cite{jockeyclub_racehorses}. Het systeem moet 
+deze snelheden met een veiligheidsmarge kunnen verwerken, wat resulteert in 
+een minimale snelheidseis van 80 km/u. Naast de hoge snelheden resulteren de dynamische bewegingen tot eisen aan het meetbereik van de sensoren. \\
+
+Uit biomechanisch onderzoek~\cite{witte2006effect} blijkt dat bij 
+galopperende racepaarden op snelheden van 9 tot 17 m/s een verticale kracht 
+van 24,7 N/kg op de voorledematen wordt gemeten bij topsnelheid. Via 
+$F = m \cdot a$ volgt hieruit een piekversnelling op het zwaartepunt van 
+circa 2,5 g. De versnelling die op de romp wordt gemeten ligt lager, omdat 
+de romp als demper werkt ten opzichte van de ledematen. De voorwaartse en 
+zijwaartse versnellingen liggen bovendien aanzienlijk lager dan de verticale 
+piekwaarde. Het accelerometerbereik van de IMU moet minimaal ruim boven deze 
+2,5 g liggen om clipping bij piekbelastingen te voorkomen. \\
+
+Het gyroscoopbereik is bepaald op basis van de verwachte hoeksnelheden tijdens gebruik. Bij een object dat met snelheid $v$ een cirkel met straal $r$ aflegt, geldt voor de hoeksnelheid formule \ref{eq:hoeksnelheid}.
+
+\begin{equation}
+    \omega = \frac{v}{r} [rad/s]
+    \label{eq:hoeksnelheid}
+\end{equation}
+
+Voor de straal van de bochten is uitgegaan van de geometrie van een standaard racebaan in Amerika. Volgens deze dimensies heeft een standaardbaan een omtrek van 1609 m, met twee rechte stukken van elk ongeveer 366 m \cite{ofstandard2024}. De resterende lengte van de bochten worden in formule \ref{eq:booglengte} berekent.
+
+\begin{equation}
+    L_{\text{boog}} = \frac{1609 - 2 \times 366}{2} = 439 \text{ m}
+    \label{eq:booglengte}
+\end{equation}
+
+Beide halve cirkels samen vormen één volledige cirkel met omtrek $2 \times 439 = 878$ m. Door middel van formule \ref{eq:straal} wordt de straal van deze twee bochten berekent.
+
+\begin{equation}
+    r = \frac{878}{2\pi} \approx 140 \text{ m}
+    \label{eq:straal}
+\end{equation}
+
+Bij galop op topsnelheid ($v = 17$ m/s, conform \cite{witte2006effect}) geeft vergelijking \ref{eq:hoeksnelheid} en \ref{eq:straal} een hoeksnelheid van:
+
+\begin{equation}
+    \omega = \frac{17}{140} \approx 0{,}12 \text{ rad/s} \approx 7 \text{ DPS}
+    \label{eq:omega_racebaan}
+\end{equation}
+
+Dit is de hoeksnelheid op een standaard racebaan bij topsnelheid. Als worst-case wordt ook een krappe trainingsbaan beschouwd met een bochtenradius van $r = 20$ m en een snelheid van $v = 13$ m/s \cite{witte2006effect}:
+
+\begin{equation}
+    \omega = \frac{13}{20} = 0{,}65 \text{ rad/s} \approx 37 \text{ DPS}
+    \label{eq:omega_training}
+\end{equation}
+
+Een grafische weergave van de baangeometrie is weergegeven in figuur \ref{fig:racebaan}.
+
+\newpage
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.85\textwidth]{racetrack_gyro.png}
+    \caption{Overzicht van een standaard racebaan voor paarden}
+    \label{fig:racebaan}
+\end{figure}
+
+Een centrale eis is het behoud van de bestaande nauwkeurigheid. In open 
+omgevingen levert het huidige RTK-systeem een positienauwkeurigheid van 1 tot 
+2 cm bij een volledige RTK Fixed fix. De toevoeging van de IMU mag deze 
+precisie niet negatief beïnvloeden. Tegelijkertijd moet het systeem in staat 
+zijn om foutieve GNSS-metingen, veroorzaakt door bijvoorbeeld multipath of 
+tijdelijke signaaluitval, te herkennen en af te vangen zodat de 
+positieschatting stabiel blijft. Wanneer het GNSS-signaal tijdelijk volledig 
+wegvalt, moet de IMU de positieschatting logisch kunnen doorzetten totdat 
+het signaal terugkeert. \\
+
+Omdat de metingen live worden bijgehouden, mag er geen merkbare vertraging 
+ontstaan. De verwerking van de sensordata moet korter zijn dan het interval 
+tussen twee opeenvolgende metingen. De GNSS-ontvanger levert momenteel data 
+op 25 Hz, wat neerkomt op een update elke 40 ms. De IMU wordt op een hogere 
+frequentie uitgelezen om de positieschatting tussen twee GNSS-metingen bij 
+te houden. De exacte frequentie wordt bepaald door de mogelijkheden van de 
+hardware en de rekenbelasting op de microcontroller. \\
+
+Om de complexiteit binnen de gestelde projecttijd realistisch te houden, 
+beperkt de positiebepaling zich tot het tweedimensionale vlak. 
+Hoogtemetingen vallen buiten de scope, aangezien een wedstrijdparcours 
+nagenoeg vlak is en hoogtemeting geen onderdeel is van de huidige 
+MYLAPS-specificaties. \\
+
+Het onderstaande tabel geeft een overzicht van de vastgestelde 
+randvoorwaarden en onderzoekscriteria. Deze specificaties zijn gebaseerd op 
+de huidige stand van het vooronderzoek en kunnen gedurende het project worden 
+bijgesteld op basis van testresultaten en nader onderzoek.
+
+\newpage
 
 \begin{table}[htbp]
     \centering
-    \caption{Specificaties en eisen van het sensor fusion systeem.}
-    \label{tab:specificaties}
+    \caption{Randvoorwaarden van het sensor fusion systeem.}
+    \label{tab:randvoorwaarden}
     \renewcommand{\arraystretch}{1.3}
-    \begin{tabularx}{\textwidth}{|l|l|X|}
+    \begin{tabularx}{\textwidth}{|l|X|l|}
         \hline
         \rowcolor{green!20}
-        \textbf{Specificatie} & \textbf{Waarde} & \textbf{Onderbouwing} \\ \hline
+        \textbf{Randvoorwaarde} & \textbf{Onderbouwing} & \textbf{Waarde} \\ 
+        \hline
 
         Maximale snelheid &
-        $\geq$ 80 km/u &
-        Topsnelheid wedstrijdpaard $\approx$ 65--70 km/u, 
-        10\% veiligheidsmarge \\ \hline
+        Topsnelheid wedstrijdpaard $\approx$ 70,76 km/u~\cite{jockeyclub_racehorses}; 
+        10\% veiligheidsmarge aangehouden. &
+        $\geq$ 80 km/u \\ \hline
 
-        Positienauwkeurigheid (RTK Fixed) &
-        $\leq$ 5 cm (1-sigma) &
-        Baseline RTK-precisie mag niet verslechteren 
-        door sensor fusion \\ \hline
+        Accelerometerbereik &
+        Piekversnelling op het zwaartepunt bedraagt $\approx$ 2,5 g bij 
+        galop~\cite{witte2006effect}. &
+        Minimaal 2,5 g \\ \hline
 
-        Foutdetectiedrempel &
-        $\leq$ 15 cm per tijdstap &
-        Gebaseerd op typische multipath-positiefout 
-        van $\pm$1 m \cite{novatel_multipath} \\ \hline
-
-        NIS-drempelwaarde &
-        9{,}21 (--) &
-        Chi-kwadraat, 2 vrijheidsgraden, 
-        99\% betrouwbaarheid \cite{bar_shalom_estimation} \\ \hline
-
-        Maximale output-latency &
-        $\leq$ 500 ms &
-        Huidige MYLAPS X2 Link systeemstandaard \\ \hline
-
-        IMU-updatefrequentie &
-        200 Hz &
-        ASM330LHH geconfigureerd op 208 Hz ODR \cite{stmicro_asm330lhh} \\ \hline
+        Gyroscoopbereik &
+        Gebaseerd op de verwachte hoeksnelheden bij galop op een 
+        trainingsbaan. &
+        Minimaal 37 DPS \\ \hline
 
         GNSS-updatefrequentie &
-        10 Hz &
-        U-blox F9P geconfigureerd op 10 Hz \cite{ublox_interface} \\ \hline
+        Huidige configuratie van de u-blox X20P ontvanger. &
+        25 Hz \\ \hline
 
-        EKF predictiestap &
-        5 ms &
-        Aangestuurd door IMU-timer (1/200 Hz) \\ \hline
-
-        EKF updatestap &
-        40 ms &
-        Aangestuurd door GPS-frequentie (1/10 Hz) \\ \hline
-
-        Maximale versnelling &
-        $\leq$ 4 g &
-        ASM330LHH meetbereik ingesteld op $\pm$4 g \cite{stmicro_asm330lhh} \\ \hline
-
-        Maximale hoeksnelheid &
-        $\leq$ 500 DPS &
-        ASM330LHH meetbereik ingesteld op $\pm$500 DPS \cite{stmicro_asm330lhh} \\ \hline
-
-        Accel-bias clamp &
-        $\pm$ 2{,}0 m/s² &
-        Voorkomt divergentie bij langdurige GPS-uitval \\ \hline
-
-        Gyro-bias clamp &
-        $\pm$ 0{,}5 rad/s &
-        Realistische grens op basis van 
-        ASM330LHH specificaties \cite{stmicro_asm330lhh} \\ \hline
-
-        Dimensionaliteit &
-        2D vlak &
-        Projectafbakening; parcours is nagenoeg vlak \\ \hline
+        Verwerkingstijd &
+        Verwerking moet binnen het interval tussen twee GNSS-metingen 
+        zijn afgerond om merkbare latency te voorkomen. &
+        $\leq$ 40 ms \\ \hline
 
         Communicatieprotocol &
-        X2 Link &
-        Integratie in bestaande MYLAPS-infrastructuur \\ \hline
+        Integratie in bestaande MYLAPS-infrastructuur vereist. &
+        X2 Link \\ \hline
+
+        Dimensionaliteit &
+        Hoogtebepaling valt buiten de scope &
+        2D vlak \\ \hline
 
     \end{tabularx}
 \end{table}
+
 
 \newpage

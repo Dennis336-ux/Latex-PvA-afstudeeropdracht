@@ -49,63 +49,34 @@ Om de code succesvol te kunnen compileren en via de J-Link naar de microcontroll
 
 \subsection{IMU integratie}
 
-De ASM330LHH die gebruikt wordt in het huidige systeem bevat diverse instellingen die gebruikt kunnen worden in verschillende omstandigheden. De onderdelen waar rekening mee gehouden wordt zijn het bereik, de outputfrequentie, bandbreedte de Block Data Update en een laagdoorlaatfilter. In tabel \ref{tab:imu_config} zijn de verschillende configuraties te zien. De keuze voor de meetbereiken is gebaseerd op gegevens over de verwachte dynamiek. Hieronder wordt per parameter de keuze onderbouwd aan de hand van gepubliceerd onderzoek en de sensorspecificaties. 
+De ASM330LHH die gebruikt wordt in het huidige systeem bevat diverse instellingen die gebruikt kunnen worden in verschillende omstandigheden. De onderdelen waar rekening mee gehouden wordt zijn het bereik, de outputfrequentie, bandbreedte de Block Data Update en een laagdoorlaatfilter. In tabel \ref{tab:imu_config} zijn de verschillende configuraties te zien. De keuze voor de meetbereiken is gebaseerd op gegevens over de verwachte dynamiek en de gestelde specificaties. Hieronder wordt per parameter de keuze onderbouwd.
 
 \paragraph{Accelerometerbereik: \texorpdfstring{$\pm$4 g}{±4 g}}
 
-Witte et al. \cite{witte2006effect} meten bij galopperende racepaarden op snelheden van 9 tot 17 m/s een verticale kracht van 24,7 N/kg op de voorledematen bij topsnelheid. Door dit direct om te zetten naar een versnelling van het zwaartepunt wordt via $F = m \cdot a$ een waarde van 2,5 g geconcludeerd. De versnelling die op de romp wordt gemonteerd ervaart een lagere versnelling aangezien de romp werkt als een soort demper ten opzichte van de ledematen. Alhoewel dit alleen de verticale piekwaardes bedraagt, zullen de voorwaartse en zijwaartse versnelling aanzienlijk lager liggen. \\
-
-De ASM330LHH biedt bereiken van $\pm$2, $\pm$4, $\pm$8 en $\pm$16 g \cite{stmicro_asm330lhh}. Het bereik van $\pm$2 g is onvoldoende, omdat bij abrupte bewegingen dit snel overschreden kan worden. Dit zou resulteren in clipping van de data. Het bereik van $\pm$4 g biedt op basis van de bovenstaande berekening een marge van ongeveer 60\% boven de maximale berekende zwaartepuntversnelling bij topsnelheid. De resolutie is hierdoor echter tweemaal hoger dan bij 8 g (0,122 mg/LSB versus 0,244 mg/LSB). Dit bereik is als uitgangspunt gekozen voor de huidige implementatie. Mocht tijdens veldtests blijken dat het systeem de extreme bewegingen niet aankan, dan kan het bereik worden aangepast via het \texttt{CTRL1\_XL} register van de ASM330LHH zonder verdere aanpassingen aan de firmware.
+Zoals vastgesteld in de specificaties moet het accelerometerbereik ruim 
+boven de berekende piekversnelling van 2,5 g liggen om clipping te 
+voorkomen. De ASM330LHH biedt bereiken van $\pm$2, $\pm$4, $\pm$8 en 
+$\pm$16 g~\cite{stmicro_asm330lhh}. Het bereik van $\pm$2 g is 
+onvoldoende omdat dit bij abrupte bewegingen snel wordt overschreden. 
+Het bereik van $\pm$4 g biedt een marge van circa 60\% boven de 
+piekversnelling en geeft tegelijkertijd een tweemaal hogere resolutie 
+dan $\pm$8 g (0,122 mg/LSB versus 0,244 mg/LSB). Op basis hiervan is 
+$\pm$4 g gekozen als accelerometerbereik. Mocht tijdens veldtests 
+blijken dat dit bereik onvoldoende is, dan kan het worden aangepast 
+via het \texttt{CTRL1\_XL} register zonder verdere aanpassingen aan 
+de firmware.
 
 
 \paragraph{Gyroscoopbereik: \texorpdfstring{$\pm$500 DPS}{±500 DPS}}
 
-Het gyroscoopbereik is bepaald op basis van de verwachte hoeksnelheden tijdens gebruik. Bij een object dat met snelheid $v$ een cirkel met straal $r$ aflegt, geldt voor de hoeksnelheid formule \ref{eq:hoeksnelheid}.
-
-\begin{equation}
-    \omega = \frac{v}{r} [rad/s]
-    \label{eq:hoeksnelheid}
-\end{equation}
-
-
-Voor de straal van de bochten is uitgegaan van de geometrie van een standaard racebaan in Amerika. Volgens deze dimensies heeft een standaardbaan een omtrek van 1609 m, met twee rechte stukken van elk ongeveer 366 m \cite{ofstandard2024}. De resterende lengte van de bochten worden in formule \ref{eq:booglengte} berekent.
-
-\begin{equation}
-    L_{\text{boog}} = \frac{1609 - 2 \times 366}{2} = 439 \text{ m}
-    \label{eq:booglengte}
-\end{equation}
-
-Beide halve cirkels samen vormen één volledige cirkel met omtrek $2 \times 439 = 878$ m. Door middel van formule \ref{eq:straal} wordt de straal van deze twee bochten berekent.
-
-\begin{equation}
-    r = \frac{878}{2\pi} \approx 140 \text{ m}
-    \label{eq:straal}
-\end{equation}
-
-Bij galop op topsnelheid ($v = 17$ m/s, conform \cite{witte2006effect}) geeft vergelijking \ref{eq:hoeksnelheid} en \ref{eq:straal} een hoeksnelheid van:
-
-\begin{equation}
-    \omega = \frac{17}{140} \approx 0{,}12 \text{ rad/s} \approx 7 \text{ DPS}
-    \label{eq:omega_racebaan}
-\end{equation}
-
-Dit is de hoeksnelheid op een standaard racebaan bij topsnelheid. Als worst-case wordt ook een krappe trainingsbaan beschouwd met een bochtenradius van $r = 20$ m en een snelheid van $v = 13$ m/s \cite{witte2006effect}:
-
-\begin{equation}
-    \omega = \frac{13}{20} = 0{,}65 \text{ rad/s} \approx 37 \text{ DPS}
-    \label{eq:omega_training}
-\end{equation}
-
-Een grafische weergave van de baangeometrie en de bijbehorende berekeningen is gegeven in figuur \ref{fig:racebaan}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.85\textwidth]{racetrack_gyro.png}
-    \caption{Overzicht van een standaard racebaan voor paarden}
-    \label{fig:racebaan}
-\end{figure}
-
-De ASM330LHH biedt gyroscoopbereiken van $\pm$125, $\pm$250, $\pm$500, $\pm$1000, $\pm$2000 en $\pm$4000 DPS \cite{stmicro_asm330lhh}. Op basis van de berekende worst-case hoeksnelheid van 37 DPS (vergelijking \ref{eq:omega_training}) biedt $\pm$250 DPS in theorie voldoende marge. Desondanks is gekozen voor $\pm$500 DPS, zodat bij onverwachte bewegingen --- zoals steigergedrag of abrupte koerswijzigingen --- geen verzadiging optreedt. Dit geeft een veiligheidsmarge van een factor circa 14 ten opzichte van de berekende worst-case hoeksnelheid, terwijl de resolutie tweemaal hoger is dan bij $\pm$1000 DPS \cite{stmicro_asm330lhh}.
+Zoals vastgesteld in de specificaties bedraagt de worst-case hoeksnelheid 
+op een krappe trainingsbaan circa 37 DPS 
+(vergelijking~\ref{eq:omega_training}). De ASM330LHH biedt bereiken van 
+$\pm$125, $\pm$250, $\pm$500, $\pm$1000, $\pm$2000 en 
+$\pm$4000 DPS~\cite{stmicro_asm330lhh}. Hoewel $\pm$250 DPS op basis 
+van de berekende worst-case hoeksnelheid in theorie voldoende marge 
+biedt, is gekozen voor $\pm$500 DPS. Dit geeft een veiligheidsmarge 
+van een factor 14 voor onverwachte bewegingen zoals een plotse verandering van koers.
 
 \paragraph{Outputfrequentie (ODR): 208 Hz}
 
@@ -240,7 +211,7 @@ Om de IMU-data te combineren met de GNSS-data wordt gebruikgemaakt van een Exten
         sensorbiassen \\ \hline
         Motion model + Jacobiaan $F$ & 200 Hz & 
         Voorspelt de nieuwe toestand op basis van IMU-data 
-        (predictiestap) \\ \hline
+        (Updatestap) \\ \hline
         Procesruismatrix $Q$ & 200 Hz & 
         Modelleert de onzekerheid van het bewegingsmodel per tijdstap \\ \hline
         Covariantiematrix $P$ & 200 Hz & 
@@ -250,7 +221,7 @@ Om de IMU-data te combineren met de GNSS-data wordt gebruikgemaakt van een Exten
         meting is \\ \hline
         Kalman gain $K$ & 25 Hz & 
         Bepaalt hoeveel gewicht de GNSS-meting krijgt ten opzichte van 
-        de predictiestap \\ \hline
+        de updatestap \\ \hline
         NIS-check & 25 Hz & 
         Toetst statistische plausibiliteit van de GNSS-meting; verwerpt 
         uitschieters \\ \hline
@@ -260,7 +231,7 @@ Om de IMU-data te combineren met de GNSS-data wordt gebruikgemaakt van een Exten
     \end{tabularx}
 \end{table}
 
-De predictiestap wordt elke 5\,ms uitgevoerd op basis van IMU-data. De updatestap 
+De updatestap wordt elke 5\,ms uitgevoerd op basis van IMU-data. De updatestap 
 wordt uitgevoerd zodra een nieuwe GNSS-meting beschikbaar is (elke 40\,ms). De 
 onderdelen worden hieronder stapsgewijs toegelicht.
 
@@ -382,19 +353,27 @@ Om dit te bereiken wordt een zogenoemde \textit{unicycle model} gebruikt zoals b
     b_{g,k+1}    &= b_{g,k} \label{eq:fbg}
 \end{align}
  
-De eerste twee vergelijkingen (\ref{eq:fx} en \ref{eq:fy}) beschrijven hoe de positie verandert op basis van de huidige snelheid en rijrichting. Vergelijking \ref{eq:fv} werkt de snelheid bij op basis van de gemeten versnelling, waarbij de accelerometerbias als correctie dient. Vergelijking \ref{eq:ftheta} werkt de heading bij op basis van de gemeten yaw rate, die vervolgens ook gecorrigeerd wordt door de gyroscoop bias.
+De eerste twee vergelijkingen (\ref{eq:fx} en \ref{eq:fy}) beschrijven hoe de oost ($X_{k+1}$) en noord ($Y_{k+1}$) positie verandert op basis van de huidige snelheid en rijrichting. Vergelijking \ref{eq:fv} werkt de snelheid bij op basis van de gemeten versnelling, waarbij de accelerometerbias als correctie er af gehaald wordt. Vergelijking \ref{eq:ftheta} werkt de heading bij op basis van de gemeten yaw rate (zie figuur \ref{fig:oriëntatie}), die vervolgens ook gecorrigeerd wordt door de gyroscoop bias. \\
 
-De laatste twee vergelijkingen (\ref{eq:fba} en \ref{eq:fbg}) tonen de biassen die over één tijdstap van 5\,ms worden bepaalt. Deze blijft gedurende deze tijdstap constant, omdat deze termen afhankelijk zijn van de predictiestap. 
+De laatste twee vergelijkingen (\ref{eq:fba} en \ref{eq:fbg}) tonen de biassen die over één tijdstap van 5\,ms worden bepaalt. Deze blijft gedurende deze tijdstap constant, omdat deze termen afhankelijk zijn van de updatestap. \\
+
+Naast de toestand zelf houdt het EKF bij hoe zeker het is over elke 
+schatting. Dit wordt bijgehouden in de covariantiematrix $P$. Dit is een 
+$6 \times 6$ matrix waarbij de diagonaalelementen de onzekerheid per 
+toestandsgrootheid weergeven. Een grote waarde betekent dat het filter 
+weinig vertrouwen heeft in die schatting. Naarmate het filter meer 
+correctiemetingen verwerkt, nemen deze waarden af~\cite{welch_kalman}. \\
 
 
+\begin{comment}
 
+Aangezien het systeem niet lineair is, zoals te zien is aan de sinus en cosinus in de vergelijkingen, kan $P$ niet rechtstreeks worden bijgewerkt. Het EKF lost 
+dit op door het bewegingsmodel bij elke tijdstap lokaal te lineariseren via 
+de Jacobian matrix $F$. Dit is een matrix die beschrijft hoe een kleine verandering 
+in één grootheid doorwerkt op alle andere grootheden na één tijdstap. De 
+Jacobian matrix wordt elke tijdstap opnieuw berekend op basis van de huidige 
+schatting. Deze matrix is te zien in figuur \ref{eq:jacobiaan_F}.
 
-
-
-Naast de toestand zelf houdt het EKF ook bij hoe zeker het is over die schatting. Dit wordt de covariantiematrix $P$ genoemd: een $6 \times 6$ matrix waarbij elk element aangeeft hoe sterk twee toestandsgrootheden samen onzeker zijn. Een grote waarde op de diagonaal betekent dat het filter weinig vertrouwen heeft in de bijbehorende toestandsgrootheid \cite{welch1995introduction}.
- 
-Omdat vergelijkingen \ref{eq:fx} en \ref{eq:fy} niet-lineair zijn in $\theta$ — ze bevatten een sinus en cosinus — kan de covariantiematrix niet rechtstreeks worden bijgewerkt. Het EKF lineariseert het bewegingsmodel via de Jacobiaan $F$: de matrix van alle partiële afgeleiden van het bewegingsmodel naar de toestandsgrootheden. Simpel gezegd beschrijft $F$ hoe een kleine verandering in één toestandsgrootheid doorwerkt op alle andere grootheden na één tijdstap. De Jacobiaan wordt op elk tijdstip opnieuw berekend rondom de huidige schatting:
- 
 \begin{equation}
 F = \begin{bmatrix}
 1 & 0 & \cos\theta \cdot \Delta t & -v \sin\theta \cdot \Delta t & 0 & 0 \\
@@ -406,32 +385,43 @@ F = \begin{bmatrix}
 \end{bmatrix}
 \label{eq:jacobiaan_F}
 \end{equation}
- 
-Met de Jacobiaan wordt de covariantiematrix $P$ in de predictiestap bijgewerkt. De term $F_k \cdot P_k \cdot F_k^T$ geeft aan hoe de huidige onzekerheid doorwerkt na één tijdstap. De procesruismatrix $Q$ wordt opgeteld om te modelleren dat het bewegingsmodel nooit perfect is:
- 
+
+Met de Jacobiaan wordt $P$ bijgewerkt in de updatestap. De term 
+$F_k \cdot P_k \cdot F_k^T$ beschrijft hoe de huidige onzekerheid 
+doorwerkt na één tijdstap. Omdat het bewegingsmodel nooit perfect is, 
+wordt daarbovenop de procesruismatrix $Q$ opgeteld. Dit modelleert dat 
+de werkelijkheid altijd iets afwijkt van wat de vergelijkingen voorspellen:
+
 \begin{equation}
     P_{k+1}^- = F_k \cdot P_k \cdot F_k^T + Q
     \label{eq:P_predict}
 \end{equation}
- 
-Om te voorkomen dat $P$ door accumulerende afrondingsfouten in zwevendekommagetallen asymmetrisch wordt, wat de filterstabiliteit kan ondermijnen, wordt er volgens best-practices voor numerieke stabiliteit in Kalman-filters \cite{grewal2014kalman} na elke stap een symmetrisatie uitgevoerd:
- 
+
+Door afrondingsfouten in zwevendekommaberekeningen kan $P$ na verloop van 
+tijd licht asymmetrisch worden, wat de stabiliteit van het filter kan 
+verstoren. Om dit te voorkomen wordt $P$ na elke stap gesymmetriseerd:
+
 \begin{equation}
     P \leftarrow \frac{P + P^T}{2}
     \label{eq:symmetrisatie}
 \end{equation}
- 
-Na de predictiestap wordt ook de heading-wraparound toegepast. De heading wordt bijgehouden als hoek in radialen waarbij de gyroscoop-integratie de waarde onbeperkt kan laten oplopen of dalen als het systeem meerdere rondjes rijdt. Dit geeft problemen in de updatestap: als de EKF denkt dat de heading $7\pi$ is terwijl de GNSS $\pi$ meet, berekent het filter een enorme correctie terwijl de werkelijke fout nul is. Dit wordt voorkomen door de heading na elke stap terug te vouwen naar het bereik $[-\pi, +\pi]$:
- 
-\begin{verbatim}
+
+Tot slot wordt na elke updatestap de heading teruggevouwen naar het 
+bereik $[-\pi, +\pi]$. Wanneer het systeem meerdere rondjes rijdt, kan de 
+geïntegreerde heading onbeperkt oplopen — bijvoorbeeld naar $7\pi$. Als 
+het filter dan een GNSS-meting van $\pi$ ontvangt, berekent het een grote 
+correctie terwijl de werkelijke fout nul is. Door de heading na elke stap 
+terug te vouwen wordt dit voorkomen:
+
+\begin{lstlisting}[language=C]
 while (s_status[3][0] >  M_PI) s_status[3][0] -= 2.0f * M_PI;
 while (s_status[3][0] < -M_PI) s_status[3][0] += 2.0f * M_PI;
-\end{verbatim}
+\end{lstlisting}
  
  
 \subsubsection{Meetmodel en Kalman update}
  
-De predictiestap werkt de schatting bij op basis van het bewegingsmodel. Zodra een nieuwe GNSS-meting binnenkomt wordt de schatting gecorrigeerd op basis van het verschil tussen wat het filter verwachtte en wat de GNSS daadwerkelijk meet. Dit is de updatestap.
+De updatestap werkt de schatting bij op basis van het bewegingsmodel. Zodra een nieuwe GNSS-meting binnenkomt wordt de schatting gecorrigeerd op basis van het verschil tussen wat het filter verwachtte en wat de GNSS daadwerkelijk meet. Dit is de updatestap.
  
 De GNSS-ontvanger levert elke 40 ms een positiemeting in het lokale ENU-stelsel. Niet alle zes toestandsgrootheden worden direct gemeten — alleen de positie $X$ en $Y$ zijn direct zichtbaar in de GNSS-data. Het meetmodel $H$ beschrijft welke toestandsgrootheden worden gemeten. Het is een $2 \times 6$ matrix die aangeeft dat de meting alleen de eerste twee elementen van de toestandsvector betreft:
  
@@ -457,7 +447,7 @@ De innovatiecovariantie $S$ geeft aan hoe groot de verwachte spreiding van de in
     \label{eq:S}
 \end{equation}
  
-De Kalman gain $K$ bepaalt vervolgens hoeveel gewicht de meting krijgt ten opzichte van de predictiestap. Als de GNSS-meting erg nauwkeurig is (kleine $R$) is $K$ groot en wordt de meting sterk gevolgd. Als de GNSS-onzekerheid groot is zoals bij Lk=0, is $K$ klein en vertrouwt het filter meer op zijn eigen bewegingsmodel:
+De Kalman gain $K$ bepaalt vervolgens hoeveel gewicht de meting krijgt ten opzichte van de updatestap. Als de GNSS-meting erg nauwkeurig is (kleine $R$) is $K$ groot en wordt de meting sterk gevolgd. Als de GNSS-onzekerheid groot is zoals bij Lk=0, is $K$ klein en vertrouwt het filter meer op zijn eigen bewegingsmodel:
  
 \begin{equation}
     K = P^- \cdot H^T \cdot S^{-1}
@@ -478,7 +468,7 @@ Tot slot wordt de covariantiematrix bijgewerkt om te reflecteren dat de onzekerh
     \label{eq:joseph}
 \end{equation}
  
- 
+    
 \subsubsection{NIS-gebaseerde metingrejectie}
  
 Een GNSS-ontvanger kan soms een sterk afwijkende positie rapporteren door bijvoorbeeld multipath of een tijdelijke False Fixed situatie. Als het filter zo'n meting klakkeloos verwerkt, kan de positieschatting in één stap meters verspringen. Om dit te voorkomen wordt elke meting vooraf getoetst op statistische plausibiliteit via de Normalized Innovation Squared.
@@ -490,7 +480,7 @@ De NIS meet hoe verrassend de binnenkomende meting is gegeven de huidige onzeker
     \label{eq:NIS}
 \end{equation}
  
-Als het filter goed gekalibreerd is, volgt de NIS een chi-kwadraatverdeling met twee vrijheidsgraden — één voor elke gemeten dimensie. Bij een betrouwbaarheidsniveau van 99\% bedraagt de drempelwaarde $\chi^2_{2,\,0{,}99} = 9{,}210$. Elke meting met een hogere NIS wordt als statistisch onwaarschijnlijk beschouwd en verworpen, waarna de predictiestap gewoon doorgaat zonder correctie:
+Als het filter goed gekalibreerd is, volgt de NIS een chi-kwadraatverdeling met twee vrijheidsgraden — één voor elke gemeten dimensie. Bij een betrouwbaarheidsniveau van 99\% bedraagt de drempelwaarde $\chi^2_{2,\,0{,}99} = 9{,}210$. Elke meting met een hogere NIS wordt als statistisch onwaarschijnlijk beschouwd en verworpen, waarna de updatestap gewoon doorgaat zonder correctie:
  
 \begin{verbatim}
 if (nis > 9.210f) {
@@ -498,7 +488,7 @@ if (nis > 9.210f) {
 }
 \end{verbatim}
  
-Bij verwerping groeit $P$ via de volgende predictiestap verder, waardoor de Kalman gain bij de eerstvolgende betrouwbare meting groter wordt en het filter sneller kan corrigeren. Naast zijn functie als uitschuiverdetectie is de NIS ook een diagnosemiddel voor de filterafstemming. Als de gemiddelde NIS structureel boven 2 ligt worden metingen vaker dan verwacht als onwaarschijnlijk bestempeld, wat duidt op te kleine ruismatrices. Als de gemiddelde NIS structureel onder 2 ligt vertrouwt het filter de metingen te sterk, wat duidt op te grote ruismatrices.
+Bij verwerping groeit $P$ via de volgende updatestap verder, waardoor de Kalman gain bij de eerstvolgende betrouwbare meting groter wordt en het filter sneller kan corrigeren. Naast zijn functie als uitschuiverdetectie is de NIS ook een diagnosemiddel voor de filterafstemming. Als de gemiddelde NIS structureel boven 2 ligt worden metingen vaker dan verwacht als onwaarschijnlijk bestempeld, wat duidt op te kleine ruismatrices. Als de gemiddelde NIS structureel onder 2 ligt vertrouwt het filter de metingen te sterk, wat duidt op te grote ruismatrices.
  
  
 \subsubsection{Stilstanddetectie (Zero Velocity Update)}
@@ -530,5 +520,7 @@ De stilstanddetectie is gebaseerd op een variantieanalyse over een schuivend ven
 \end{enumerate}
  
 Om valse activering te voorkomen zijn twee hysterese-timers geïmplementeerd. Stilstand wordt pas bevestigd na 1000 ms aaneengesloten stilstanddetectie, terwijl beweging al na 150 ms wordt herkend. Dit asymmetrische ontwerp zorgt ervoor dat een korte stilstaande periode zoals stoppen voor een obstakel niet direct als stilstand wordt geregistreerd, maar dat hervatting van de beweging snel wordt gedetecteerd.
+\end{comment} 
+
 
 \newpage

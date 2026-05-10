@@ -1,7 +1,8 @@
 % !TeX root = main.tex
 
 \section{Robuuste Lokalisatie in Complexe Omgevingen}
-Binnen de wereld van competitieve sporten en evenementen, zoals marathons, wielerrondes en rallyraces, zijn nauwkeurige tijd en plaatsbepaling noodzakelijk. Tegenwoordig wordt er bij moderne analyses en live tracking verwacht dat er continu een accurate positiebepaling van de deelnemers plaatsvindt. Wedstrijden hangen namelijk vaak af van fracties van seconden en centimeters. In dit hoofdstuk wordt dan ook de nadruk gelegd op het huidige systeem en zijn beperkingen.
+
+Om het voordeel van sensor fusion te kunnen beoordelen, is het eerst noodzakelijk de werking en beperkingen van het huidige GNSS systeem in kaart te brengen. In dit hoofdstuk wordt de werking van RTK GNSS beschreven en worden de foutbronnen geanalyseerd die de betrouwbaarheid van de positiebepaling beperken.
 
 
 \subsection{GNSS}
@@ -104,10 +105,9 @@ De accelerometer meet de versnelling van een object, maar neemt ook altijd de zw
 
 De gyroscoop meet draaibewegingen om de drie assen (X, Y en Z). Hiermee berekent het systeem hoe de oriëntatie van het object verandert, zoals het kantelen of draaien. Deze oriëntaties worden de pitch, roll en yaw genoemd en zijn weergegeven in figuur \ref{fig:oriëntatie}
 
-
 \begin{figure}[htbp!]
 	\centering
-	\includegraphics[width=0.8\linewidth]{images/oriëntatie.png}
+	\includegraphics[width=0.5\linewidth]{images/oriëntatie.png}
 	\caption{De verschillende bewegingsdynamieken die een object ondervind zijn uitgedrukt in de pitch, roll en yaw \cite{linearmotiontips2020yaw}.}
 	\label{fig:oriëntatie}
 \end{figure}
@@ -296,9 +296,6 @@ op een andere manier op. Het UKF kiest namelijk een klein aantal geplaatste meet
 
 Het Particle Filter gaat nog een stap verder. In plaats van een klein aantal sigma punten gebruikt het 
 honderden tot duizenden willekeurig verspreide deeltjes om de onzekerheid in de toestandsschatting te beschrijven \cite{boers_particle_filter}. Elk deeltje stelt een mogelijke toestand voor en krijgt een gewicht op basis van hoe goed het overeenkomt met de meting. Het Particle Filter is daarmee een algemene aanpak en maakt geen aannames over de vorm van de ruis. Het grote nadeel is de enorme rekenkracht die vereist is. Tabel \ref{tab:filteralgoritmen} geeft een overzicht van alle besproken algoritmes.
-
-\newpage
-
 
 \begin{table}[htbp]
     \centering

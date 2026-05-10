@@ -46,9 +46,6 @@ Deze data is belangrijk en wordt dan ook direct gebruikt in het meetmodel (de R-
 
 \subsection{Black box}
 
-Figuur~\ref{fig:blackbox} geeft het systeem weer op het hoogste abstractieniveau. Het systeem ontvangt twee asynchrone datastromen en combineert deze tot een betrouwbare positieschatting. Deze wordt vervolgens via het X2-Link protocol van MYLAPS verzonden. De IMU zal sneller dan de GNSS zijn data moeten uitlezen om zo een correcte schatting te maken. Door deze hogere resolutie kan het systeem accurater dynamische bewegingen bijhouden. De u-blox module levert momenteel positiedata op 25 Hz. Door onderdelen als de positie, snelheid en accuracy te combineren met de data van de IMU kan een nieuwe schatting gemaakt worden voor deze velden. Het ontwerp van dit gehele systeem zal in opvolgende paragrafen toegelicht worden.
-
-
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
@@ -94,101 +91,8 @@ positieschatting. Deze wordt vervolgens door het X2-Link protocol verstuurd.}
 
 \subsection{Systeemarchitectuur}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.6\linewidth]{images/systeemarchitectuur_v4.pdf}
-    \caption{Blokschema waarin de systeemarchitectuur uitgebeeld is. De twee datastromen worden voorverwerkt voordat 
-    zij de EKF bereiken.}
-    \label{fig:architectuur}
-\end{figure}
-
-Figuur~\ref{fig:architectuur} toont de interne structuur van het systeem. De twee datastromen 
-worden elk afzonderlijk voorverwerkt voordat zij de EKF bereiken.
-
-
-
-
-
-\subsubsection*{GNSS-verwerking}
-
-De GNSS-datastroom wordt ingelezen en gevalideerd waarna de relevante meetgrootheden worden 
-geëxtraheerd. Naast de positie en snelheid worden ook de nauwkeurigheidsmarges van de ontvanger 
-meegenomen. Een belangrijk ontwerpaspect hierbij is dat de GNSS-kwaliteit niet constant is: 
-bij een volledige RTK Fixed fix is de meting aanzienlijk betrouwbaarder dan bij een Float fix 
-of bij het volledig wegvallen van RTK-correcties. Het ontwerp moet hier adaptief mee omgaan, 
-zodat het EKF bij slechtere GPS-kwaliteit automatisch meer vertrouwt op het eigen 
-bewegingsmodel en bij goede GPS-kwaliteit de metingen sterker volgt. De nauwkeurigheidsmarges 
-van de ontvanger vormen hiervoor de directe invoer voor de R-matrix van het EKF.
-
-\subsubsection*{IMU-verwerking en attitude bepaling}
-
-
-De ruwe IMU data is niet direct bruikbaar in het huidige systeem. 
-
-
-De ruwe IMU-data is niet direct bruikbaar als invoer voor het EKF. Een accelerometer meet 
-namelijk niet alleen de rijversnelling maar ook de zwaartekracht. Wanneer de tracker gekanteld 
-is gemonteerd, lekt een deel van de zwaartekrachtcomponent door naar de rijrichting-as, waardoor 
-het filter een valse rijversnelling zou interpreteren. Om dit te corrigeren moet eerst de 
-hellingshoek van de tracker worden bepaald. Dit wordt gedaan door het complementary filter dat 
-de gyroscoop en accelerometer combineert: de gyroscoop zorgt voor een snelle respons op 
-hoekveranderingen, terwijl de accelerometer de langzame drift van de gyroscoop corrigeert via 
-de zwaartekracht als absolute referentie. Met de berekende hellingshoek kan vervolgens de 
-zwaartekrachtcomponent wiskundig uit de meting worden weggerekend, zodat het EKF uitsluitend 
-de werkelijke rijversnelling als invoer krijgt.
-
-Daarnaast bevat de gyroscoop van nature een systematische meetafwijking bij stilstand, ook wel 
-de zero-rate offset genoemd. Zonder compensatie accumuleert deze fout bij integratie en leidt 
-dit tot oplopende koersfouten. Het ontwerp voorziet daarom in een kalibratiestap bij het 
-opstarten die deze offset bepaalt en vervolgens bij iedere uitlezing compenseert.
-
-\subsubsection*{Stilstanddetectie}
-
-Wanneer het systeem stilstaat maar de IMU kleine versnellingsfouten blijft meten, kan de 
-geschatte snelheid langzaam oplopen terwijl die in werkelijkheid nul is. Het ontwerp voorziet 
-daarom in een stilstanddetectie die de IMU-data continu analyseert. Wanneer het systeem als 
-stilstaand wordt beschouwd, wordt een Zero Velocity Update uitgevoerd die via het 
-Kalman-mechanisme de snelheidsschatting naar nul corrigeert. Dit voorkomt dat een stilstaand 
-systeem langzaam wegdrijft in positie door geaccumuleerde snelheidsfouten.
 
 \subsection{EKF dataflow}
-
-\begin{figure}[htbp]
-    \centering
-    % figuur dataflow hier
-    \caption{Flowchart van het algoritme: na een eenmalige initialisatie bij de eerste RTK Fixed 
-    fix draait de predictiestap continu op 200\,Hz. Elke 40\,ms wordt een GPS-meting verwerkt 
-    in de updatestap waarna de toestandsschatting wordt bijgewerkt.}
-    \label{fig:dataflow}
-\end{figure}
-
-Figuur~\ref{fig:dataflow} toont de dataflow van het algoritme. Het systeem wacht na het 
-opstarten op de eerste RTK Fixed fix voordat het initialiseert. De reden hiervoor is dat de 
-oorsprong van het lokale coördinatenstelsel bij de initialisatie wordt vastgelegd. Een onjuiste 
-of onnauwkeurige oorsprong introduceert een systematische fout die gedurende de volledige 
-sessie aanwezig blijft. Een RTK Fixed fix garandeert de hoogst mogelijke nauwkeurigheid op dat 
-moment en vormt daarmee de meest betrouwbare basis voor de initialisatie. Tijdens de 
-wachtperiode zijn de kalibratie en het complementary filter al wel actief, zodat de 
-IMU-verwerking volledig gereed is op het moment dat de eerste fix binnenkomt.
-
-Na de initialisatie werkt het systeem in een continue cyclus van twee stappen. De predictiestap 
-wordt op 200\,Hz uitgevoerd op basis van de IMU-data en werkt de toestandsschatting bij via 
-het bewegingsmodel. Omdat het bewegingsmodel een benadering van de werkelijkheid is, neemt de 
-onzekerheid in de covariantiematrix P bij elke stap licht toe. De updatestap wordt op 25\,Hz 
-uitgevoerd wanneer een nieuwe GNSS-meting beschikbaar is. Elke meting wordt eerst statistisch 
-getoetst via de NIS-check voordat deze wordt verwerkt. Metingen die te ver afwijken van de 
-verwachte spreiding worden als onbetrouwbaar beschouwd en verworpen, zodat uitschieters door 
-bijvoorbeeld multipath of een tijdelijke False Fixed situatie geen directe invloed hebben op 
-de toestandsschatting. Wanneer de meting wordt geaccepteerd, wordt de toestandsschatting 
-gecorrigeerd en neemt de onzekerheid in P af.
-
-Bij GPS-uitval blijft uitsluitend de predictiestap actief. De positieschatting degradeert 
-hierbij geleidelijk door IMU-drift, maar het systeem blijft een geldige schatting produceren 
-en valt niet terug naar een ongeldige toestand. De stilstanddetectie blijft ook tijdens 
-GPS-uitval actief, zodat positiedrift bij stilstand wordt onderdrukt. Zodra het GPS-signaal 
-terugkeert wordt de updatestap hervat en convergeert het filter opnieuw naar de absolute 
-GPS-positie.
-
 
 
 \newpage
