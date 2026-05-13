@@ -1,0 +1,221 @@
+\section*{A \quad Begrippenlijst}
+\addcontentsline{toc}{section}{Begrippenlijst}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{longtable}{p{4.5cm} p{10cm}}
+    \rowcolor{green!20}
+    \textbf{Begrip} & \textbf{Omschrijving} \\
+    \hline
+    \endfirsthead
+
+    \rowcolor{green!20}
+    \textbf{Begrip} & \textbf{Omschrijving} \\
+    \hline
+    \endhead
+
+    Accelerometer &
+    Sensor die de versnelling van een object meet langs drie assen.
+    Meet naast bewegingsversnelling ook altijd de zwaartekracht. \\
+
+    ASM330LHH &
+    Automotive-grade IMU van STMicroelectronics met een 3-assige
+    accelerometer en 3-assige gyroscoop, geïntegreerd op de
+    ProRTK tracker. \\
+
+    Bias &
+    Systematische meetafwijking van een sensor die aanwezig is
+    ongeacht de werkelijke beweging. Accumuleert bij integratie
+    tot een toenemende positiefout. \\
+
+    BDU (Block Data Update) &
+    Instelling van de IMU die ervoor zorgt dat de uitvoerregisters
+    pas worden bijgewerkt nadat de microcontroller ze volledig
+    heeft uitgelezen, om incorrecte meetwaarden te voorkomen. \\
+
+    CAN-bus &
+    Communicatieprotocol voor betrouwbare datacommunicatie tussen
+    elektronische componenten. \\
+
+    Covariantiematrix ($P$) &
+    Matrix in het EKF die bijhoudt hoe zeker het filter is over
+    elke grootheid. Grote diagonaalwaarden duiden op grote
+    onzekerheid. Neemt toe bij de predictiestap en af bij
+    de updatestap. \\
+
+    Complementary filter &
+    Eenvoudig filteralgoritme dat twee sensordatastromen combineert
+    op basis van een vaste weging. Wordt gebruikt om de
+    hellingshoek van de tracker te bepalen met behulp van de
+    accelerometer- en gyroscoopdata. \\
+
+    DPS (Degrees Per Second) &
+    Eenheid voor hoeksnelheid, gebruikt voor het aangeven van het
+    meetbereik van een gyroscoop. \\
+
+    ECEF (Earth-Centered Earth-Fixed) &
+    Driedimensionaal coördinatenstelsel met de oorsprong in het
+    middelpunt van de aarde, waarbij X, Y en Z in meters worden
+    uitgedrukt. Wordt als tussenstap gebruikt bij de omrekening
+    van geografische coördinaten naar het ENU-stelsel. \\
+
+    EKF (Extended Kalman Filter) &
+    Variant van het Kalman Filter die niet-lineaire systemen kan
+    verwerken door het bewegingsmodel bij elke tijdstap lokaal
+    te lineariseren. Vormt de kern van het sensor fusion systeem
+    in dit project. \\
+
+    ENU (East-North-Up) &
+    Lokaal coördinatenstelsel waarbij X naar het oosten wijst,
+    Y naar het noorden en Z omhoog. Wordt gebruikt als intern
+    coördinatenstelsel van het EKF. \\
+
+    FPU (Floating-Point Unit) &
+    Hardware-eenheid in de processor die kommaberekeningen
+    uitvoert. Belangrijk voor de intensieve matrixoperaties
+    in het EKF. \\
+
+    GNSS (Global Navigation Satellite System) &
+    Overkoepelende term voor satellietnavigatiesystemen zoals GPS
+    (VS), Galileo (EU), GLONASS (Rusland) en BeiDou (China).
+    Bepaalt de positie via trilateration op basis van
+    aankomsttijden van satellietsignalen. \\
+
+    Gyroscoop &
+    Sensor die de hoeksnelheid van een object meet langs drie
+    assen. Door integratie over de tijd kan de
+    oriëntatieverandering worden bepaald. Gevoelig voor drift
+    bij langdurig gebruik. \\
+
+    hAcc (Horizontal Accuracy) &
+    Schatting van de horizontale positienauwkeurigheid zoals
+    vermeld door de u-blox GNSS-ontvanger. Beschikbaar op 25\,Hz. \\
+
+    IMU (Inertial Measurement Unit) &
+    Sensor die de beweging van een object meet via traagheid,
+    onafhankelijk van externe referenties. Bestaat typisch uit
+    een accelerometer en een gyroscoop (soms ook een magnetometer). \\
+
+    Innovatie &
+    Het verschil tussen de door het EKF voorspelde positie en de
+    werkelijk gemeten RTK positie. Wordt gebruikt om de
+    toestandsschatting bij te sturen in de updatestap. \\
+
+    Jacobiaan ($F$) &
+    Matrix van partiële afgeleiden die beschrijft hoe een kleine
+    verandering in één grootheid invloed heeft op alle andere
+    grootheden na één tijdstap. Wordt gebruikt om het
+    niet lineaire bewegingsmodel lineair te maken in het ekf. \\
+
+    Kalman gain ($K$) &
+    Wegingsfactor in het EKF die dynamisch bepaalt hoeveel gewicht
+    de GNSS meting krijgt ten opzichte van de eigen voorspelling
+    van het filter. Groot bij betrouwbare metingen, klein bij
+    onzekere metingen. \\
+
+    Multipath &
+    Effect waarbij een GNSS signaal reflecteert tegen
+    objecten voordat het de antenne bereikt. Veroorzaakt een
+    positiefout doordat de ontvanger een langere signaalweg meet
+    dan de werkelijke afstand. \\
+
+    NAV-COV &
+    UBX-bericht van de u-blox ontvanger dat de volledige
+    positiecovariantiematrix bevat, met varianties in oost- en
+    noordrichting en de kruisterm. Beschikbaar op 1\,Hz. \\
+
+    NAV-PVT &
+    UBX-bericht van de u-blox ontvanger dat positie, snelheid
+    en nauwkeurigheidsschatting (hAcc) bevat.
+    Beschikbaar op 25\,Hz. \\
+
+    NIS (Normalized Innovation Squared) &
+    Statistische toets die meet hoe verrassend een binnenkomende
+    GNSS-meting is gegeven de huidige filterstaat. Wordt gebruikt
+    om foutieve metingen te detecteren en te verwerpen. \\
+
+    nRF52832 &
+    Microcontroller van Nordic Semiconductor met een ARM
+    Cortex-M4F processor en hardware FPU. Vormt de rekenkern
+    van de ProRTK tracker. \\
+
+    ODR (Output Data Rate) &
+    De frequentie waarmee een sensor nieuwe meetwaarden levert,
+    uitgedrukt in Hz. \\
+
+    Procesruismatrix ($Q$) &
+    Matrix in het EKF die per tijdstap modelleert hoeveel
+    onzekerheid er wordt toegevoegd doordat het bewegingsmodel
+    nooit perfect is. Bepaalt hoe snel het filter openstaat
+    voor bijsturing. \\
+
+    ProRTK tracker &
+    Compacte sporttimer van MYLAPS die draadloos communiceert
+    via het X2 Link protocol en een RTK GNSS-ontvanger combineert
+    met een IMU op één printplaat. \\
+
+    RTK (Real-Time Kinematic) &
+    Techniek die de nauwkeurigheid van GNSS verbetert tot
+    1--2\,cm door gebruik te maken van een basisstation dat
+    real-time correcties stuurt naar de mobiele ontvanger. \\
+
+    RTK Fixed &
+    Operatiemodus van de RTK-ontvanger waarbij de
+    fase-ambiguïteiten volledig zijn opgelost. Geeft de hoogste
+    nauwkeurigheid van 1--2\,cm. \\
+
+    RTK Float &
+    Operatiemodus van de RTK-ontvanger waarbij de
+    fase-ambiguïteiten nog niet definitief zijn opgelost.
+    Nauwkeurigheid typisch 10--50\,cm. \\
+
+    Sensor fusion &
+    Het combineren van meerdere sensordatastromen tot één
+    betrouwbare schatting, waarbij de voordelen van elke sensor
+    worden benut en de nadelen worden gecompenseerd. \\
+
+    SPI (Serial Peripheral Interface) &
+    Synchroon serieel communicatieprotocol voor communicatie
+    tussen de microcontroller en randapparatuur. De IMU,
+    seriële flash en CAN-controller delen dezelfde SPI-bus
+    op de ProRTK. \\
+
+    Toestandsvector ($\mathbf{x}$) &
+    Vector die alle geschatte grootheden van het systeem bevat:
+    positie ($X$, $Y$), snelheid ($v$), heading ($\theta$),
+    accelerometerbias ($b_a$) en gyroscoop-bias ($b_g$). \\
+
+    UART &
+    Serieel communicatieprotocol voor communicatie tussen de
+    microcontroller en de GNSS-ontvanger. \\
+
+    UBX &
+    Binair communicatieprotocol van u-blox voor efficiënte
+    overdracht van GNSS-data tussen de ontvanger en de
+    microcontroller. \\
+
+    u-blox X20P &
+    RTK GNSS-ontvanger geïntegreerd in de ProRTK tracker.
+    Levert positie, snelheid en nauwkeurigheidsmarges via
+    het UBX-protocol. \\
+
+    Unicycle-model &
+    Vereenvoudigd rijmodel uit de robotica dat ervan uitgaat dat
+    een object vooruit beweegt met een bepaalde snelheid en
+    draaisnelheid, zonder zijwaartse slip. \\
+
+    WGS84 &
+    Wereldwijd coördinatenstelsel dat geografische coördinaten
+    definieert ten opzichte van een referentie-ellipsoïde.
+    Standaard coördinatenstelsel voor GNSS-ontvangers. \\
+
+    X2 Link &
+    Draadloos communicatieprotocol van MYLAPS voor de overdracht
+    van positie- en tijddata van de tracker naar de
+    MYLAPS-server. \\
+
+    ZUPT (Zero Velocity Update) &
+    Extra correctiestap in het EKF die de snelheidsschatting
+    naar nul trekt wanneer het systeem als stilstaand wordt
+    gedetecteerd. Voorkomt positiedrift bij stilstand. \\
+
+\end{longtable}

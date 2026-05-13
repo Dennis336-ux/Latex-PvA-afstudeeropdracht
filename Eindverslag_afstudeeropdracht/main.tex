@@ -12,6 +12,8 @@
 
 \input{inleiding}
 
+\input{huidig_sys.tex}
+
 \input{vooronderzoek}
 
 \input{specificaties}
@@ -25,5 +27,18 @@
 \input{conclusie.tex}
 
 \printbibliography[heading=bibintoc, title={Bronnen}]
+
+\newpage
+
+\appendix
+\renewcommand{\appendixname}{Bijlage}
+\renewcommand{\thesection}{\Alph{section}}
+
+% Voeg "Bijlagen" als hoofdkopje toe aan de inhoudsopgave
+\addcontentsline{toc}{section}{\textbf{Bijlagen}}
+
+% Elke bijlage als subsection zodat het inspringt onder "Bijlagen"
+\addcontentsline{toc}{subsection}{A\quad Begrippenlijst}
+\input{begrippenlijst.tex}
 
 \end{document}

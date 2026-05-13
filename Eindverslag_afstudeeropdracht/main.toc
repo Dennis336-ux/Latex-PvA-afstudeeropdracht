@@ -1,48 +1,54 @@
 \contentsline {section}{\numberline {1}Voorwoord}{2}{section.1}%
 \contentsline {section}{\numberline {2}Samenvatting}{3}{section.2}%
-\contentsline {section}{\numberline {3}Inleiding}{5}{section.3}%
-\contentsline {section}{\numberline {4}Robuuste Lokalisatie in Complexe Omgevingen}{6}{section.4}%
-\contentsline {subsection}{\numberline {4.1}GNSS}{6}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Nauwkeurigheid via RTK}{7}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Gebreken}{7}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Sensor Fusion}{10}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Inertial Measurement Unit (IMU)}{10}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Alternatieve aanvullende sensoren}{11}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Magnetometer}{11}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Odometrie en Distance Measuring Instruments}{11}{subsubsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.3}Doppler radar}{11}{subsubsection.5.2.3}%
-\contentsline {subsubsection}{\numberline {5.2.4}LiDAR}{12}{subsubsection.5.2.4}%
-\contentsline {subsubsection}{\numberline {5.2.5}Vision Aided Navigation (Camera)}{12}{subsubsection.5.2.5}%
-\contentsline {subsection}{\numberline {5.3}filteralgoritmes}{12}{subsection.5.3}%
-\contentsline {subsubsection}{\numberline {5.3.1}Complementair filter}{12}{subsubsection.5.3.1}%
-\contentsline {subsubsection}{\numberline {5.3.2}Kalman Filter}{13}{subsubsection.5.3.2}%
-\contentsline {subsubsection}{\numberline {5.3.3}Extended Kalman Filter (EKF)}{14}{subsubsection.5.3.3}%
-\contentsline {subsubsection}{\numberline {5.3.4}Unscented Kalman Filter (UKF) en Particle Filter}{15}{subsubsection.5.3.4}%
-\contentsline {section}{\numberline {6}Specificaties}{16}{section.6}%
-\contentsline {section}{\numberline {7}ontwerp}{19}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Het huidige systeem}{19}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Black box}{20}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Systeemarchitectuur}{21}{subsection.7.3}%
-\contentsline {subsection}{\numberline {7.4}EKF dataflow}{21}{subsection.7.4}%
-\contentsline {section}{\numberline {8}implementatie}{22}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Ontwikkelomgeving en testopstelling}{22}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}IMU integratie}{23}{subsection.8.2}%
-\contentsline {paragraph}{Accelerometerbereik: $\pm $4 g}{23}{paragraph*.20}%
-\contentsline {paragraph}{Gyroscoopbereik: $\pm $500 DPS}{23}{paragraph*.21}%
-\contentsline {paragraph}{Outputfrequentie (ODR): 208 Hz}{23}{paragraph*.22}%
-\contentsline {paragraph}{Bandbreedte laagdoorlaatfilter: 50 Hz}{23}{paragraph*.23}%
-\contentsline {paragraph}{Block Data Update (BDU)}{23}{paragraph*.24}%
-\contentsline {paragraph}{Gyroscoop LPF1}{24}{paragraph*.25}%
-\contentsline {subsubsection}{\numberline {8.2.1}Registerconfiguratie}{24}{subsubsection.8.2.1}%
-\contentsline {subsubsection}{\numberline {8.2.2}Gyroscooop kalibratie}{24}{subsubsection.8.2.2}%
-\contentsline {subsubsection}{\numberline {8.2.3}SPI-busprobleem bij de IMU-uitlezing}{26}{subsubsection.8.2.3}%
-\contentsline {subsection}{\numberline {8.3}Extended Kalman Filter}{27}{subsection.8.3}%
-\contentsline {subsubsection}{\numberline {8.3.1}Complementary filter voor attitude}{27}{subsubsection.8.3.1}%
-\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{28}{paragraph*.33}%
-\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{29}{paragraph*.34}%
-\contentsline {subsubsection}{\numberline {8.3.2}State vector}{29}{subsubsection.8.3.2}%
-\contentsline {subsubsection}{\numberline {8.3.3}Motion model en Jacobian matrix}{30}{subsubsection.8.3.3}%
-\contentsline {section}{\numberline {9}Resultaten en validatie}{31}{section.9}%
-\contentsline {section}{\numberline {10}Discussie}{32}{section.10}%
-\contentsline {section}{\numberline {11}Conclusie}{33}{section.11}%
-\contentsline {section}{Bronnen}{34}{section.11}%
+\contentsline {section}{\numberline {3}Inleiding}{6}{section.3}%
+\contentsline {section}{\numberline {4}Het huidige systeem}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}De ProRTK tracker}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Werking van het huidige systeem}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Beperking van het huidige systeem}{8}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Robuuste lokalisatie in complexe omgevingen}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}GNSS}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Nauwkeurigheid via RTK}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Gebreken}{10}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Sensor Fusion}{13}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Inertial Measurement Unit (IMU)}{13}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Alternatieve aanvullende sensoren}{14}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Magnetometer}{14}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Odometrie en Distance Measuring Instruments}{14}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Doppler radar}{14}{subsubsection.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.4}LiDAR}{15}{subsubsection.6.2.4}%
+\contentsline {subsubsection}{\numberline {6.2.5}Vision Aided Navigation (Camera)}{15}{subsubsection.6.2.5}%
+\contentsline {subsection}{\numberline {6.3}Filteralgoritmes}{15}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Complementair filter}{15}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}Kalman Filter}{16}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}Extended Kalman Filter (EKF)}{17}{subsubsection.6.3.3}%
+\contentsline {subsubsection}{\numberline {6.3.4}Unscented Kalman Filter (UKF) en Particle Filter}{18}{subsubsection.6.3.4}%
+\contentsline {section}{\numberline {7}Specificaties}{19}{section.7}%
+\contentsline {section}{\numberline {8}Ontwerp}{22}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Black box}{22}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Systeemarchitectuur}{23}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}EKF dataflow}{23}{subsection.8.3}%
+\contentsline {section}{\numberline {9}implementatie}{24}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Ontwikkelomgeving en testopstelling}{24}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}IMU integratie}{25}{subsection.9.2}%
+\contentsline {paragraph}{Accelerometerbereik: $\pm $4 g}{25}{paragraph*.21}%
+\contentsline {paragraph}{Gyroscoopbereik: $\pm $500 DPS}{25}{paragraph*.22}%
+\contentsline {paragraph}{Outputfrequentie (ODR): 208 Hz}{25}{paragraph*.23}%
+\contentsline {paragraph}{Bandbreedte laagdoorlaatfilter: 50 Hz}{25}{paragraph*.24}%
+\contentsline {paragraph}{Block Data Update (BDU)}{25}{paragraph*.25}%
+\contentsline {paragraph}{Gyroscoop LPF1}{26}{paragraph*.26}%
+\contentsline {subsubsection}{\numberline {9.2.1}Registerconfiguratie}{26}{subsubsection.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.2}Gyroscooop kalibratie}{26}{subsubsection.9.2.2}%
+\contentsline {subsubsection}{\numberline {9.2.3}SPI-busprobleem bij de IMU-uitlezing}{28}{subsubsection.9.2.3}%
+\contentsline {subsection}{\numberline {9.3}Extended Kalman Filter}{29}{subsection.9.3}%
+\contentsline {subsubsection}{\numberline {9.3.1}Complementary filter voor attitude}{29}{subsubsection.9.3.1}%
+\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{30}{paragraph*.34}%
+\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{31}{paragraph*.35}%
+\contentsline {subsubsection}{\numberline {9.3.2}State vector}{31}{subsubsection.9.3.2}%
+\contentsline {subsubsection}{\numberline {9.3.3}Motion model en Jacobian matrix}{32}{subsubsection.9.3.3}%
+\contentsline {section}{\numberline {10}Resultaten en validatie}{33}{section.10}%
+\contentsline {section}{\numberline {11}Discussie}{34}{section.11}%
+\contentsline {section}{\numberline {12}Conclusie}{35}{section.12}%
+\contentsline {section}{Bronnen}{36}{section.12}%
+\contentsline {section}{\textbf {Bijlagen}}{38}{section.12}%
+\contentsline {subsection}{A\hskip 1em\relax Begrippenlijst}{38}{section*.36}%
+\contentsline {section}{Begrippenlijst}{38}{section*.36}%

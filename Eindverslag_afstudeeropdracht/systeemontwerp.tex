@@ -1,48 +1,6 @@
-\section{ontwerp}
+\section{Ontwerp}
 In dit hoofdstuk wordt het ontwerp van het sensor fusion systeem beschreven. Op basis van het vooronderzoek en de vastgestelde specificaties zijn de ontwerpkeuzes gemaakt die in dit hoofdstuk worden toegelicht. Het hoofdstuk begint met een beschrijving van de bestaande hardware van de MYLAPS RTK tracker, gevolgd door de systeemarchitectuur en tot slot het wiskundig ontwerp van het filter. Het doel van dit hoofdstuk is om de brug te slaan tussen het theoretisch kader en de uiteindelijke implementatie. 
 \todo[inline]{Inleiding aanpassen}
-
-\subsection{Het huidige systeem}
-
-Het sensor fusion systeem wordt geïmplementeerd op de bestaande MYLAPS ProRTK tracker. Voordat het ontwerp van het systeem wordt beschreven, is het relevant het huidige systeem van de tracker in kaart te brengen. De ProRTK is een compacte, herlaadbare sporttimer die draadloos communiceert met de MYLAPS server via het X2 Link protocol. Het apparaat combineert een RTK GNSS-ontvanger met een IMU op één printplaat. De voor dit project relevante hardwarecomponenten zijn weergegeven in tabel \ref{tab:hardware}.
-
-\begin{table}[htbp]
-    \centering
-    \caption{Relevante hardwarecomponenten van de MYLAPS ProRTK tracker.}
-    \label{tab:hardware}
-    \renewcommand{\arraystretch}{1.3}
-    \begin{tabularx}{\textwidth}{|l|X|X|}
-        \hline
-        \rowcolor{green!20}
-        \textbf{Component} & \textbf{Type} & \textbf{Functie} \\ \hline
-        Microcontroller &
-        Nordic Semiconductor nRF52, ARM Cortex-M4F \cite{nordic_nrf52832_ps} &
-        Verwerkt alle data en draait het gehele systeem \\ \hline
-        GNSS-ontvanger &
-        u-blox X20P RTK ontvanger &
-        Levert RTK positie en bijbehorende data (bijvoorbeeld snelheid) op 25 Hz 
-        via UART \\ \hline
-        IMU &
-        STMicroelectronics ASM330LHH, 6-assig &
-        Levert versnelling en hoeksnelheid op 200 Hz 
-        via SPI \\ \hline
-        Seriële flash &
-        Externe NOR-flash &
-        Opslag van logs en instellingen, gedeelde SPI-bus \\ \hline
-        CAN-controller &
-        CAN-bus interface &
-        Communicatie met timinginfrastructuur, 
-        gedeelde SPI-bus \\ \hline
-    \end{tabularx}
-\end{table}
-
-Het gehele systeem van de tracker wordt aangestuurd door de nRF52832 microcontroller met een ARM Cortex-M4F processor. Deze is verantwoordelijk voor het verwerken van de GNSS data uit de u-blox module en de communicatie met de IMU. Een belangrijk onderdeel van deze microcontroller is de beschikbare Floating-Point Unit (FPU). Aangezien het filter gebruik maakt van veel wiskundig complexe berekeningen met komma getallen, zoals sinus- en cosinusfuncties, is het noodzakelijk dat de software dit kan afhandelen zonder vertragingen die het systeem verstoren. \\
-
-De locatiebepaling wordt bepaalt door de u-blox X20P RTK ontvanger. In tegenstelling tot standaard GPS modules levert deze ontvanger niet alleen positie en snelheid, maar ook zijn eigen nauwkeurigheid (horizontal accuracy) en positiecovarianties. Deze matrix is een wiskundige marge die aangeeft in welke specifieke richting de GPS twijfelt. In plaat van een algemene onzekerheidscirkel geeft deze matrix een onzekerheids-ellips rondom de tracker. Het vertelt het systeem of de GNSS meting op dat exacte moment bijvoorbeeld onzekerder is in de noord-zuid richting dan in de oost-west richting (de varianties en kruistermen). \\
-
-Deze data is belangrijk en wordt dan ook direct gebruikt in het meetmodel (de R-matrix) van het filter. Hierdoor weet de software per fractie van een seconde exact hoeveel vertrouwen het nog in de satellietmeting mag hebben, en wanneer het beter is om de data van de interne sensoren voorrang te geven. De interne beweging van het systeem wordt bijgehouden door de STMicroelectronics ASM330LHH, een 6-assige IMU. \\
-
-\newpage
 
 \subsection{Black box}
 
