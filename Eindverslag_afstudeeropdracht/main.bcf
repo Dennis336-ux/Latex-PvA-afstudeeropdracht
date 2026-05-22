@@ -2403,7 +2403,7 @@
     <bcf:citekey order="30" intorder="1">witte2006effect</bcf:citekey>
     <bcf:citekey order="31" intorder="1">ofstandard2024</bcf:citekey>
     <bcf:citekey order="32" intorder="1">witte2006effect</bcf:citekey>
-    <bcf:citekey order="33" intorder="1">witte2006effect</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">wiki_shatin</bcf:citekey>
     <bcf:citekey order="38" intorder="1">jockeyclub_racehorses</bcf:citekey>
     <bcf:citekey order="39" intorder="1">witte2006effect</bcf:citekey>
     <bcf:citekey order="40" intorder="1">segger_rtt</bcf:citekey>
@@ -2415,9 +2415,13 @@
     <bcf:citekey order="46" intorder="1">witte2006effect</bcf:citekey>
     <bcf:citekey order="47" intorder="1">ST_AN5296</bcf:citekey>
     <bcf:citekey order="48" intorder="1">stmicro_asm330lhh</bcf:citekey>
-    <bcf:citekey order="49" intorder="1">nxp2013</bcf:citekey>
-    <bcf:citekey order="50" intorder="1">lavalle2006planning</bcf:citekey>
-    <bcf:citekey order="51" intorder="1">welch_kalman</bcf:citekey>
+    <bcf:citekey order="49" intorder="1">analogdevices_an1057</bcf:citekey>
+    <bcf:citekey order="50" intorder="1">nxp2013</bcf:citekey>
+    <bcf:citekey order="51" intorder="1">lavalle2006planning</bcf:citekey>
+    <bcf:citekey order="52" intorder="1">welch_kalman</bcf:citekey>
+    <bcf:citekey order="53" intorder="1">thrun2005probabilistic</bcf:citekey>
+    <bcf:citekey order="53" intorder="2">bar_shalom_estimation</bcf:citekey>
+    <bcf:citekey order="54" intorder="1">nxp2013</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

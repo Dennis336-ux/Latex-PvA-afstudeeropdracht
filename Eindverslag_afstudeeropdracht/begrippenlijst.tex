@@ -1,5 +1,5 @@
-\section*{A \quad Begrippenlijst}
-\addcontentsline{toc}{section}{Begrippenlijst}
+\section{Begrippenlijst}
+\label{app:begrippenlijst}
 
 \renewcommand{\arraystretch}{1.4}
 \begin{longtable}{p{4.5cm} p{10cm}}
@@ -108,7 +108,7 @@
 
     Kalman gain ($K$) &
     Wegingsfactor in het EKF die dynamisch bepaalt hoeveel gewicht
-    de GNSS meting krijgt ten opzichte van de eigen voorspelling
+    de GNSS meting krijgt ten opzichte van de eigen voorspelling (IMU meting)
     van het filter. Groot bij betrouwbare metingen, klein bij
     onzekere metingen. \\
 
@@ -119,24 +119,22 @@
     dan de werkelijke afstand. \\
 
     NAV-COV &
-    UBX-bericht van de u-blox ontvanger dat de volledige
-    positiecovariantiematrix bevat, met varianties in oost- en
-    noordrichting en de kruisterm. Beschikbaar op 1\,Hz. \\
+    UBX bericht van de u-blox ontvanger dat de volledige
+    positiecovariantiematrix bevat, met varianties in oost en
+    noordrichting. \\
 
     NAV-PVT &
-    UBX-bericht van de u-blox ontvanger dat positie, snelheid
-    en nauwkeurigheidsschatting (hAcc) bevat.
-    Beschikbaar op 25\,Hz. \\
+    UBX bericht van de u-blox ontvanger dat positie, snelheid
+    en nauwkeurigheidsschatting (hAcc) bevat. \\
 
     NIS (Normalized Innovation Squared) &
     Statistische toets die meet hoe verrassend een binnenkomende
-    GNSS-meting is gegeven de huidige filterstaat. Wordt gebruikt
-    om foutieve metingen te detecteren en te verwerpen. \\
+    GNSS-meting is in vergelijking met de huidige staat van het filter. Wordt gebruikt
+    om grote foutive sprongen te verwerpen. \\
 
     nRF52832 &
     Microcontroller van Nordic Semiconductor met een ARM
-    Cortex-M4F processor en hardware FPU. Vormt de rekenkern
-    van de ProRTK tracker. \\
+    Cortex-M4F processor en hardware FPU. \\
 
     ODR (Output Data Rate) &
     De frequentie waarmee een sensor nieuwe meetwaarden levert,
@@ -156,17 +154,17 @@
     RTK (Real-Time Kinematic) &
     Techniek die de nauwkeurigheid van GNSS verbetert tot
     1--2\,cm door gebruik te maken van een basisstation dat
-    real-time correcties stuurt naar de mobiele ontvanger. \\
+    real time correcties stuurt naar de mobiele ontvanger. \\
 
     RTK Fixed &
-    Operatiemodus van de RTK-ontvanger waarbij de
-    fase-ambiguïteiten volledig zijn opgelost. Geeft de hoogste
+    Modus van de RTK ontvanger waarbij de
+    `carrier phase ambiguity' volledig is opgelost. Geeft de hoogste
     nauwkeurigheid van 1--2\,cm. \\
 
     RTK Float &
-    Operatiemodus van de RTK-ontvanger waarbij de
-    fase-ambiguïteiten nog niet definitief zijn opgelost.
-    Nauwkeurigheid typisch 10--50\,cm. \\
+    Operatiemodus van de RTK ontvanger waarbij de
+    `carrier phase ambiguity' nog niet definitief is opgelost.
+    Nauwkeurigheid typisch 10--50\,cm maar kan ook meer zijn. \\
 
     Sensor fusion &
     Het combineren van meerdere sensordatastromen tot één
@@ -175,28 +173,22 @@
 
     SPI (Serial Peripheral Interface) &
     Synchroon serieel communicatieprotocol voor communicatie
-    tussen de microcontroller en randapparatuur. De IMU,
-    seriële flash en CAN-controller delen dezelfde SPI-bus
+    tussen de microcontroller en hardware. De IMU,
+    seriële flash en CAN controller delen dezelfde SPI bus
     op de ProRTK. \\
 
-    Toestandsvector ($\mathbf{x}$) &
+    State vector ($\mathbf{x}$) &
     Vector die alle geschatte grootheden van het systeem bevat:
     positie ($X$, $Y$), snelheid ($v$), heading ($\theta$),
-    accelerometerbias ($b_a$) en gyroscoop-bias ($b_g$). \\
+    accelerometerbias ($b_a$) en gyroscoop bias ($b_g$). \\
 
     UART &
     Serieel communicatieprotocol voor communicatie tussen de
-    microcontroller en de GNSS-ontvanger. \\
-
-    UBX &
-    Binair communicatieprotocol van u-blox voor efficiënte
-    overdracht van GNSS-data tussen de ontvanger en de
-    microcontroller. \\
+    microcontroller en de GNSS ontvanger. \\
 
     u-blox X20P &
-    RTK GNSS-ontvanger geïntegreerd in de ProRTK tracker.
-    Levert positie, snelheid en nauwkeurigheidsmarges via
-    het UBX-protocol. \\
+    RTK GNSS ontvanger geïntegreerd in de ProRTK tracker.
+    Levert positie, snelheid en nauwkeurigheidsmarges. \\
 
     Unicycle-model &
     Vereenvoudigd rijmodel uit de robotica dat ervan uitgaat dat
@@ -204,18 +196,13 @@
     draaisnelheid, zonder zijwaartse slip. \\
 
     WGS84 &
-    Wereldwijd coördinatenstelsel dat geografische coördinaten
-    definieert ten opzichte van een referentie-ellipsoïde.
-    Standaard coördinatenstelsel voor GNSS-ontvangers. \\
+    Dit is een wereldwijd coördinatenstelsel dat geografische locaties bepaalt op basis van een wiskundig model van de aarde (de referentie-ellipsoïde). Het is de wereldwijde standaard die door alle GNSS ontvangers (zoals gps) wordt gebruikt. \\
 
     X2 Link &
     Draadloos communicatieprotocol van MYLAPS voor de overdracht
-    van positie- en tijddata van de tracker naar de
-    MYLAPS-server. \\
+    van de nuttige paramaters naar de server. Hiermee kunnen deze parameters uitgelezen worden doormiddel van de ontwikkelde applicaties. \\
 
     ZUPT (Zero Velocity Update) &
-    Extra correctiestap in het EKF die de snelheidsschatting
-    naar nul trekt wanneer het systeem als stilstaand wordt
-    gedetecteerd. Voorkomt positiedrift bij stilstand. \\
+    Extr correctiestap in het EKF die de snelheidsschatting naar nul brengt wanneer het systeem als stilstaand wordt gedetecteerd. Voorkomt drift bij stilstand. \\
 
 \end{longtable}

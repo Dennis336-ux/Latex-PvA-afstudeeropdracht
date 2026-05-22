@@ -19,6 +19,28 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
+    \entry{analogdevices_an1057}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=a12ff886a2379a9ee6efaa9acfb54df4}{%
+           family={{Analog Devices}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{a12ff886a2379a9ee6efaa9acfb54df4}
+      \strng{fullhash}{a12ff886a2379a9ee6efaa9acfb54df4}
+      \strng{fullhashraw}{a12ff886a2379a9ee6efaa9acfb54df4}
+      \strng{bibnamehash}{a12ff886a2379a9ee6efaa9acfb54df4}
+      \strng{authorbibnamehash}{a12ff886a2379a9ee6efaa9acfb54df4}
+      \strng{authornamehash}{a12ff886a2379a9ee6efaa9acfb54df4}
+      \strng{authorfullhash}{a12ff886a2379a9ee6efaa9acfb54df4}
+      \strng{authorfullhashraw}{a12ff886a2379a9ee6efaa9acfb54df4}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online]. Available: \url{https://www.analog.com/en/resources/app-notes/an-1057.html}. Geraadpleegd op 20 mei 2026}
+      \field{title}{AN-1057: Using an Accelerometer for Inclination Sensing}
+      \field{year}{2010}
+    \endentry
     \entry{stmicro_asm330lhh}{manual}{}{}
       \list{organization}{1}{%
         {STMicroelectronics}%
@@ -859,6 +881,29 @@
       \field{type}{techreport}
       \field{year}{1995}
     \endentry
+    \entry{wiki_shatin}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=b6aea1a416c89509a7df1cbb69249cb6}{%
+           family={{Wikipedia contributors}},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{fullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{fullhashraw}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{bibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorbibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authornamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorfullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorfullhashraw}{b6aea1a416c89509a7df1cbb69249cb6}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://en.wikipedia.org/wiki/Sha_Tin_Racecourse}}
+      \field{note}{Geraadpleegd op: [Vul de datum van vandaag in]}
+      \field{title}{Sha Tin Racecourse --- {Wikipedia}{,} The Free Encyclopedia}
+      \field{year}{2026}
+    \endentry
     \entry{witte2006effect}{article}{}{}
       \name{author}{3}{}{%
         {{hash=eb8fefddbf4141003760348a14ac7a48}{%
@@ -932,6 +977,7 @@
       \field{year}{2022}
     \endentry
   \enddatalist
+  \missing{thrun2005probabilistic}
 \endrefsection
 \endinput
 

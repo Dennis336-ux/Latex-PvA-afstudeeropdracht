@@ -1,5 +1,70 @@
 \section{Resultaten en validatie}
 
+In dit hoofdstuk worden de resultaten uiteengezet om zo de werking van het gemaakte systeem uit te drukken. Er zal dan ook concreet worden uitgelegd hoe het systeem gevalideerd is waarbij verschillende omstandigheden getest zijn.
+
+\subsection{Testopzet}
+
+De validatie van het systeem is uitgevoerd aan de hand van 
+twee testscenario's. Een looptest bij lage snelheden en een autotest op een vaste route. Beide test zijn uitgevoerd in een gecontroleerde omgeving omdat veldtests op een wedstrijdparcours met een rijdend paard buiten de scope van dit project vallen. \\
+
+De eerste test is uitgevoerd met de tracker fysiek in de hand bij lage 
+snelheden en varierende bewegingen. Dit scenario is gekozen omdat het 
+ook kleine dynamische schommelingen in kaart brengt die het filter moet 
+kunnen verwerken. Tijdens deze test worden de EKF-berekeningen uitgevoerd 
+zodra een nieuwe RTK-positie binnenkomt. De gefilterde uitvoer wordt via 
+RTT-logging uitgelezen met de J-Link debugprobe, terwijl de onbewerkte 
+GNSS-positie tegelijkertijd naar de MYLAPS-server wordt verstuurd voor 
+visualisatie. Op deze manier kunnen de ruwe positie en de EKF-positie 
+direct naast elkaar worden beoordeeld. Een nadeel van deze aanpak is dat 
+er voor het uitlezen van de RTT-logging altijd een fysieke verbinding met 
+de J-Link nodig is. \\
+
+De tweede test is uitgevoerd in een auto op een van tevoren vastgelegde 
+route. De tracker is met velcro aan de zijkant van de auto gemonteerd 
+met de GNSS-antenne uitstekend aan de bovenkant. Om een directe 
+vergelijking mogelijk te maken is een tweede externe tracker op 
+dezelfde antenne aangesloten, zodat beide trackers exact dezelfde 
+satellietdata ontvangen. Hiermee kan het gedrag van de EKF worden 
+vergeleken met een onafhankelijke referentiemeting onder identieke 
+omstandigheden. \\
+
+Tijdens beide tests zijn de volgende grootheden gelogd via RTT:
+
+\begin{table}[htbp]
+    \centering
+    \caption{Gelogde grootheden tijdens de validatietests.}
+    \label{tab:logvelden}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \rowcolor{green!20}
+        \textbf{Veld} & \textbf{Omschrijving} \\ \hline
+        Lk & RTK-status: 0 = geen fix, 1 = Float, 2 = Fixed \\ \hline
+        Raw & Ruwe GNSS-positie van de u-blox ontvanger 
+              (breedtegraad, lengtegraad in $10^{-7}$ graden) \\ \hline
+        EKF & Gefilterde positieschatting van het EKF 
+              (zelfde eenheid als Raw) \\ \hline
+        hAcc & Horizontale nauwkeurigheidsschatting van de 
+               u-blox ontvanger in mm \\ \hline
+        Ppos & Positieonzekerheid van het EKF: 
+               $\sqrt{P[0][0] + P[1][1]}$ in mm \\ \hline
+        NIS & Normalized Innovation Squared; statistisch 
+              signaal voor outlier detection. 
+              Drempelwaarde: 9{,}21 \\ \hline
+        ba & Geschatte accelerometerbias in mG \\ \hline
+        covEE & Variantie in oost-richting uit NAV-COV in mm \\ \hline
+        covNN & Variantie in noord-richting uit NAV-COV in mm \\ \hline
+    \end{tabularx}
+\end{table}
+
+De tests zijn uitgevoerd onder gecontroleerde omstandigheden die niet 
+volledig representatief zijn voor gebruik in de paardensport. De 
+bewegingsdynamiek van een galoperend paard — met hogere verticale 
+versnellingen en onvoorspelbare richtingsveranderingen — verschilt 
+wezenlijk van lopen of autorijden. De conclusies uit dit hoofdstuk 
+gelden dan ook primair als bewijs dat het filter correct functioneert 
+onder de geteste omstandigheden. Veldvalidatie op een wedstrijdparcours 
+is noodzakelijk als vervolgstap.
 
 
 \newpage

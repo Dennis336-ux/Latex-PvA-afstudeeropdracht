@@ -34,11 +34,9 @@
 \renewcommand{\appendixname}{Bijlage}
 \renewcommand{\thesection}{\Alph{section}}
 
-% Voeg "Bijlagen" als hoofdkopje toe aan de inhoudsopgave
-\addcontentsline{toc}{section}{\textbf{Bijlagen}}
-
-% Elke bijlage als subsection zodat het inspringt onder "Bijlagen"
-\addcontentsline{toc}{subsection}{A\quad Begrippenlijst}
 \input{begrippenlijst.tex}
+\newpage
+\input{zwaartekracht.tex}
+
 
 \end{document}

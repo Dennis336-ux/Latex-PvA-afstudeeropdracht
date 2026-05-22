@@ -255,71 +255,68 @@ Het complementary filter bepaalt deze hoeken door de gyroscoop en de acceleromet
 
 Hierbij is $\omega_{\text{pitch}}$ de gemeten hoeksnelheid, zijn $a_x$, $a_y$ en $a_z$ de gemeten versnellingen op de drie assen en is $\Delta t$ de tijdstap. De coëfficiënt 0{,}98 bepaalt hoeveel gewicht de gyroscoop krijgt ten opzichte van de accelerometer. Hetzelfde wordt ook berekend voor de rollhoek. \\
 
-Zodra de hoeken bekend zijn vanuit het complementary filter, worden ze ingezet om de eerder genoemde zwaartekracht wiskundig weg te rekenen. Om de voorwaartse rijversnelling te bepalen, moet de versnellingsvector $\mathbf{a}^b = [a_x, a_y, a_z]^T$ uit het gekantelde assenstelsel van de tracker worden teruggedraaid naar het horizontale referentievlak. Dit wordt gedaan met behulp van Euler-rotatiematrices. Zoals beschreven in de applicatienotitie \textit{Tilt Sensing Using a Three-Axis Accelerometer} van NXP Semiconductors \cite{nxp2013}, wordt de rotatie om de $x$-as (Roll, $\phi_r$) en de $y$-as (Pitch, $\theta_p$) gedefinieerd door de volgende twee matrices:
+
+\subsubsection{Zwaartekrachtcompensatie}
+
+Zodra de hellingshoek (pitch) bekend is vanuit het complementary filter, wordt 
+deze gebruikt om de zwaartekrachtcomponent weg te rekenen uit de gemeten 
+versnelling op de x-as. Wanneer een sensor gekanteld is, projecteert de 
+zwaartekracht zich gedeeltelijk op de meetassen van de accelerometer. Zoals 
+beschreven in de applicatienote van Analog Devices~\cite{analogdevices_an1057}, 
+geldt dat de projectie van de zwaartekracht op de x as gelijk is aan 
+$g \cdot \sin(\theta_p)$ bij een pitch $\theta_p$. Bij een pitch
+$\theta_p$ projecteert de zwaartekracht zich dus als $-\sin(\theta_p)$ op 
+de x as van de sensor. Dit component wordt afgetrokken van de ruwe meting 
+zoals uitgedrukt in formule~\ref{eq:grav_comp}.
 
 \begin{equation}
-R_x(\phi_r) = \begin{bmatrix} 
-1 & 0 & 0 \\ 
-0 & \cos\phi_r & \sin\phi_r \\ 
-0 & -\sin\phi_r & \cos\phi_r 
-\end{bmatrix}, \quad
-R_y(\theta_p) = \begin{bmatrix} 
-\cos\theta_p & 0 & -\sin\theta_p \\ 
-0 & 1 & 0 \\ 
-\sin\theta_p & 0 & \cos\theta_p 
-\end{bmatrix}
+    a_{\text{net}} = a_x - (-\sin\theta_p) = a_x + \sin\theta_p
+    \label{eq:grav_comp}
 \end{equation}
 
-De totale transformatie naar het horizontale vlak wordt verkregen door de ruwe sensordata te vermenigvuldigen met deze matrices, zoals weergegeven in formule \ref{eq:horizontaal}.
+Hierbij is $a_x$ de ruwe accelerometerwaarde in g en $\theta_p$ de 
+pitchhoek in radialen. De netto versnelling wordt vervolgens omgezet 
+naar m/s² in formule~\ref{eq:accel_ms2}.
 
 \begin{equation}
-    \mathbf{a}_{\text{horizontaal}} = R_y(\theta_p) \cdot R_x(\phi_r) \cdot \mathbf{a}^b
-    \label{eq:horizontaal}
+    a_{\text{ms}^2} = a_{\text{net}} \cdot 9{,}81
+    \label{eq:accel_ms2}
 \end{equation}
 
-De berekening voor de voorwaartse as ($x$-component) wordt in twee stappen uiteengezet.
-
-\paragraph{Stap 1: De roll rotatie ($R_x$)}
-Eerst wordt de roll matrix vermenigvuldigd met de sensordata. Omdat dit een draaiing om de $x$-as betreft, blijft de $x$-waarde zelf onveranderd, maar mixen de $y$- en $z$-waarden met elkaar. Dit zorgt voor een tussenvector $\mathbf{v}'$ zoals te zien in formule \ref{eq:roll_matrix}
-
-\begin{equation}
-    \mathbf{v}' = R_x(\phi_r) \cdot \begin{bmatrix} a_x \\ a_y \\ a_z \end{bmatrix} = \begin{bmatrix} a_x \\ a_y \cos\phi_r + a_z \sin\phi_r \\ -a_y \sin\phi_r + a_z \cos\phi_r \end{bmatrix}
-    \label{eq:roll_matrix}
-\end{equation}
-
-\paragraph{Stap 2: De pitch rotatie ($R_y$)}
-Vervolgens wordt de pitch matrix toegepast op deze nieuwe tussenvector $\mathbf{v}'$. Aangezien alleen de voorwaartse as (longitudinale) belangrijk is, hoeft alleen de bovenste rij van matrix $R_y$ gebruikt te worden. De bovenste rij is $[\cos\theta_p, 0, -\sin\theta_p]$. Vermenigvuldigen met de tussenvector geeft formule \ref{eq:pitch_matrix}.
-
-\begin{equation}
-    a_{\text{long}} = (\cos\theta_p \cdot v'_x) + (0 \cdot v'_y) - (\sin\theta_p \cdot v'_z)
-    \label{eq:pitch_matrix}
-\end{equation}
-
-Vervolgens worden de bekende waarden uit de tussenvector $\mathbf{v}'$ in deze vergelijking gesubstitueert. Hieruit volgt formule \ref{eq:matrix} en \ref{eq:accel_correctie}.
-
-\begin{equation}
-    a_{\text{long}} = a_x \cos\theta_p - \sin\theta_p (-a_y \sin\phi_r + a_z \cos\phi_r)
-    \label{eq:matrix}
-\end{equation}
-
-\begin{equation}
-    a_{\text{long}} = a_x \cdot \cos\theta_p + a_y \cdot \sin\phi_r \cdot \sin\theta_p - a_z \cdot \cos\phi_r \cdot \sin\theta_p
-    \label{eq:accel_correctie}
-\end{equation}
-
-In deze vergelijking compenseren de termen met $a_y$ en $a_z$ voor het deel van de zwaartekracht dat door de hellingshoek in de meting van de $x$-as is gelekt. De nauwkeurigheid van deze compensatie is echter afhankelijk van de kwaliteit van de hoekschatting uit het complementary filter. Omdat het filter de pitch en roll benadert op basis van een gyroscoop met lichte drift en een accelerometer die gevoelig is voor trillingen, bevat $a_{\text{long}}$ nog een kleine resterende zwaartekracht. Hierdoor bevat het systeem een kleine versnellingsfout. De uitkomst $a_{\text{long}}$ zal als invoer worden meegegeven aan het EKF. Deze theorie is softwarematig toegepast en dit is hieronder weergegeven. \\
+In code is dit als volgt geïmplementeerd:
 
 \begin{lstlisting}[language=C, label=lst:gravity_comp]
-// Omrekenen naar radialen
-float pitch_rad = ((float)current_attitude.pitch_x100 / 100.0f) * ((float)M_PI / 180.0f);
-float roll_rad  = ((float)current_attitude.roll_x100  / 100.0f) * ((float)M_PI / 180.0f);
+// Omzetten van milli-g naar g
+float raw_ax = (float)current_accel.x / 1000.0f;
 
-// Berekening van longitudinale versnelling
-float flat_x = (raw_ax * cosf(pitch_rad)) +
-               (raw_ay * sinf(roll_rad) * sinf(pitch_rad)) -
-               (raw_az * cosf(roll_rad) * sinf(pitch_rad));
+// Pitchhoek omzetten naar radialen
+float pitch_rad = ((float)current_attitude.pitch_x100 / 100.0f)
+                  * ((float)M_PI / 180.0f);
+
+// Zwaartekrachtcomponent op de X-as bepalen en aftrekken
+float grav_x    = -sinf(pitch_rad);
+float net_ax    = raw_ax - grav_x;
+
+// Omzetten van g naar m/s2
+float accel_ms2 = net_ax * 9.81f;
 \end{lstlisting}
 
+Deze methode gebruikt alleen de pitch omdat de tracker zo is 
+gemonteerd dat de rijrichting overeenkomt met de x as van de sensor. 
+De roll heeft in dat geval geen noemenswaardige invloed op de 
+voorwaartse versnelling en wordt daarom buiten beschouwing gelaten. 
+Dit is een vereenvoudiging van de hiervoor uitgewerkte benadering 
+waarbij door middel van rotatiematrices de versnellingsvector volledig 
+naar het horizontale vlak wordt teruggedraaid~\cite{nxp2013}. Deze 
+methode is opgenomen in bijlage~\ref{app:zwaartekracht} voor de 
+volledigheid.
+
+De uitkomst \texttt{accel\_ms2} is de gecorrigeerde rijversnelling 
+in m/s² die als invoer wordt meegegeven aan de predictiestap van het 
+EKF. Een kleine resterende fout blijft aanwezig omdat de pitchschatting 
+uit het complementary filter niet perfect is. Deze wordt deels 
+gecompenseerd door de accelerometerbias $b_a$ in de state vector 
+van het EKF.
 
 \subsubsection{State vector}
 
@@ -338,7 +335,7 @@ Door $b_a$ en $b_g$ op te nemen in de state vector schat het EKF deze resterende
 
 Het filter wordt geïnitialiseerd zodra de eerste RTK fix plaatsvindt, omdat dit het moment is dat het systeem het meest nauwkeurig is. Het EKF zal dit punt gebruiken als positieoorsprong van het te gebruiken coördinatenstelsel.
  
-\subsubsection{Motion model en Jacobian matrix}
+\subsubsection{Motion model}
 
 Na het definiëren van de state vector, moet het filter weten hoe zijn toestand (state) verandert over de tijd. Dit wordt ook wel het motion model genoemd. Dit model beschrijft welke waarde elke grootheid naar verwachting heeft na elk tijdstip, op basis van de IMU metingen. \\
 
@@ -357,12 +354,106 @@ De eerste twee vergelijkingen (\ref{eq:fx} en \ref{eq:fy}) beschrijven hoe de oo
 
 De laatste twee vergelijkingen (\ref{eq:fba} en \ref{eq:fbg}) tonen de biassen die over één tijdstap van 5\,ms worden bepaalt. Deze blijft gedurende deze tijdstap constant, omdat deze termen afhankelijk zijn van de updatestap. \\
 
+\subsubsection{Covariantiematrix en Jacobian matrix}
+
 Naast de toestand zelf houdt het EKF bij hoe zeker het is over elke 
-schatting. Dit wordt bijgehouden in de covariantiematrix $P$. Dit is een 
-$6 \times 6$ matrix waarbij de diagonaalelementen de onzekerheid per 
-toestandsgrootheid weergeven. Een grote waarde betekent dat het filter 
-weinig vertrouwen heeft in die schatting. Naarmate het filter meer 
-correctiemetingen verwerkt, nemen deze waarden af~\cite{welch_kalman}. \\
+schatting. Dit wordt bijgehouden in de covariantiematrix $P$, een 
+$6 \times 6$ matrix~\cite{welch_kalman}. Een concreet voorbeeld: als 
+het filter net is geïnitialiseerd en nog weinig GNSS-correcties heeft 
+ontvangen, is de onzekerheid over de positie groot. Dit wordt 
+weerspiegeld door grote waarden op de diagonaal van $P$ voor de 
+positie-elementen $P[0][0]$ en $P[1][1]$. Naarmate meer 
+GNSS-correcties binnenkomen en het filter convergeert, nemen deze 
+waarden af. Een groot $P[0][0]$ betekent dus concreet: het filter 
+heeft weinig vertrouwen in zijn huidige schatting van de 
+oost-positie $X$. \\
+
+De off-diagonaalelementen van $P$ beschrijven de correlatie tussen 
+twee grootheden. Een niet-nul waarde op positie $P[0][4]$ betekent 
+dat de onzekerheid in de oost-positie $X$ en de onzekerheid in de 
+accelerometerbias $b_a$ aan elkaar gekoppeld zijn. Dit is een 
+belangrijk mechanisme dat verderop wordt uitgelegd. \\
+
+Omdat vergelijkingen~\ref{eq:fx} en~\ref{eq:fy} niet-lineair zijn 
+in $\theta$ — ze bevatten een sinus en cosinus — kan $P$ niet 
+rechtstreeks worden bijgewerkt. Het EKF lost dit op door het 
+bewegingsmodel bij elke tijdstap lokaal te lineariseren via de 
+Jacobiaan $F$~\cite{thrun2005probabilistic, bar_shalom_estimation}. 
+De Jacobiaan is de matrix van alle partiële afgeleiden van het 
+bewegingsmodel naar de toestandsgrootheden. Een partiële afgeleide 
+geeft aan hoeveel een uitkomst verandert als één invoergrootheid een 
+kleine stap neemt terwijl de rest constant blijft. \\
+
+Als concreet voorbeeld: vergelijking~\ref{eq:fx} beschrijft dat 
+$X_{k+1} = X_k + v_k \cdot \cos(\theta_k) \cdot \Delta t$. De 
+partiële afgeleide naar $v$ geeft aan hoeveel $X_{k+1}$ verandert 
+als $v$ een kleine stap neemt. Dat is $\cos(\theta) \cdot \Delta t$ 
+— precies de term die op rij 0, kolom 2 van de Jacobiaan staat. De 
+partiële afgeleide van diezelfde vergelijking naar $\theta$ is 
+$-v \cdot \sin(\theta) \cdot \Delta t$, wat op rij 0, kolom 3 staat. 
+Op dezelfde manier worden alle andere afgeleiden bepaald voor de 
+overige bewegingsvergelijkingen~\ref{eq:fy}--\ref{eq:fbg}. Dit 
+levert de volgende Jacobiaan op die elke tijdstap opnieuw wordt 
+berekend op basis van de huidige schatting van $v$ en $\theta$:
+
+\begin{equation}
+F = \begin{bmatrix}
+1 & 0 & \cos\theta \cdot \Delta t & -v \sin\theta \cdot \Delta t & 0 & 0 \\
+0 & 1 & \sin\theta \cdot \Delta t &  v \cos\theta \cdot \Delta t & 0 & 0 \\
+0 & 0 & 1 & 0 & -\Delta t & 0 \\
+0 & 0 & 0 & 1 & 0 & -\Delta t \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1
+\end{bmatrix}
+\label{eq:jacobiaan_F}
+\end{equation}
+
+De structuur van de matrix vertelt direct hoe de grootheden met 
+elkaar verbonden zijn. De enen op de diagonaal geven aan dat elke 
+grootheid zichzelf doorgeeft naar de volgende tijdstap. De nulwaarden 
+geven aan dat die twee grootheden elkaar niet direct beïnvloeden — 
+zo heeft de oost-positie $X$ geen invloed op de heading $\theta$ en 
+andersom. 
+
+Twee elementen verdienen extra aandacht. Op rij 2 (snelheid $v$) 
+staat $-\Delta t$ op kolom 4 (accelerometerbias $b_a$). Dit zegt: 
+een kleine toename van de bias $b_a$ leidt na één tijdstap tot een 
+afname van de snelheidsschatting met $\Delta t$, precies zoals 
+vergelijking~\ref{eq:fv} beschrijft. Op rij 3 (heading $\theta$) 
+staat eveneens $-\Delta t$ op kolom 5 (gyroscoop-bias $b_g$), 
+overeenkomstig vergelijking~\ref{eq:ftheta}.
+
+Wanneer $F \cdot P \cdot F^T$ wordt berekend verspreidt deze 
+koppeling zich door $P$. Na een aantal tijdstappen zonder 
+GNSS-correctie is er een niet-nul waarde opgebouwd op 
+$P[0][4]$ — de correlatie tussen de oost-positie en de 
+accelerometerbias. Dit betekent dat het filter weet dat een deel 
+van de positieonzekerheid wordt veroorzaakt door de bias. Zodra 
+er een GNSS-correctie binnenkomt die een positiefout signaleert, 
+gebruikt het filter via de Kalman gain deze correlatie om een deel 
+van die positiefout toe te schrijven aan de bias en die dienovereenkomstig 
+bij te stellen. Zo werkt de biascorrectie indirect via de 
+covariantiematrix.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \begin{comment}

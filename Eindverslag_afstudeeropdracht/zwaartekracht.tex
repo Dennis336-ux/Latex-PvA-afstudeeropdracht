@@ -1,0 +1,105 @@
+\section{Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}
+\label{app:zwaartekracht}
+
+Tijdens de ontwikkeling van de zwaartekrachtcompensatie is eerst een 
+uitwerking gemaakt op basis van volledige Euler rotatiematrices. In deze 
+aanpak wordt de volledige versnellingsvector via twee opeenvolgende 
+rotaties teruggedraaid naar het horizontale referentievlak. Hierbij worden zowel 
+de pitch als de rollhoek meegenomen. Hoewel deze methode gebaseerd is op de correcte wiskunde, bleek tijdens het testen dat er alsnog foutieve waardes ontstonden. De uiteindelijke implementatie gebruikt dan ook alleen de pitchhoek, zoals beschreven in sectie~\ref{subsubsec:gravity_comp}. Deze bijlage bevat 
+de volledige wiskundige uitwerking van de oorspronkelijke methode ter 
+referentie.
+
+Om de voorwaartse rijversnelling te bepalen, wordt de versnellingsvector 
+$\mathbf{a}^b = [a_x, a_y, a_z]^T$ uit het gekantelde assenstelsel van 
+de tracker teruggedraaid naar het horizontale referentievlak. Dit wordt 
+gedaan met behulp van Euler-rotatiematrices. Zoals beschreven in de 
+applicatienotitie \textit{Tilt Sensing Using a Three-Axis Accelerometer} 
+van NXP Semiconductors~\cite{nxp2013}, wordt de rotatie om de $x$-as 
+(Roll, $\phi_r$) en de $y$-as (Pitch, $\theta_p$) gedefinieerd door de 
+volgende twee matrices:
+
+\begin{equation}
+R_x(\phi_r) = \begin{bmatrix} 
+1 & 0 & 0 \\ 
+0 & \cos\phi_r & \sin\phi_r \\ 
+0 & -\sin\phi_r & \cos\phi_r 
+\end{bmatrix}, \quad
+R_y(\theta_p) = \begin{bmatrix} 
+\cos\theta_p & 0 & -\sin\theta_p \\ 
+0 & 1 & 0 \\ 
+\sin\theta_p & 0 & \cos\theta_p 
+\end{bmatrix}
+\end{equation}
+
+De totale transformatie naar het horizontale vlak wordt verkregen door 
+de ruwe sensordata te vermenigvuldigen met deze matrices:
+
+\begin{equation}
+    \mathbf{a}_{\text{horizontaal}} = R_y(\theta_p) \cdot R_x(\phi_r) 
+    \cdot \mathbf{a}^b
+    \label{eq:horizontaal_bijlage}
+\end{equation}
+
+De berekening voor de voorwaartse as ($x$-component) wordt in twee 
+stappen uiteengezet.
+
+\paragraph{Stap 1: De roll rotatie ($R_x$)}
+
+Eerst wordt de rollmatrix vermenigvuldigd met de sensordata. Omdat dit 
+een draaiing om de $x$-as betreft, blijft de $x$-waarde zelf 
+onveranderd, maar mixen de $y$- en $z$-waarden met elkaar. Dit geeft 
+een tussenvector $\mathbf{v}'$:
+
+\begin{equation}
+    \mathbf{v}' = R_x(\phi_r) \cdot \begin{bmatrix} a_x \\ a_y \\ a_z 
+    \end{bmatrix} = \begin{bmatrix} a_x \\ a_y \cos\phi_r + a_z 
+    \sin\phi_r \\ -a_y \sin\phi_r + a_z \cos\phi_r \end{bmatrix}
+    \label{eq:roll_matrix_bijlage}
+\end{equation}
+
+\paragraph{Stap 2: De pitch rotatie ($R_y$)}
+
+Vervolgens wordt de pitchmatrix toegepast op de tussenvector 
+$\mathbf{v}'$. Omdat alleen de voorwaartse as relevant is, wordt 
+uitsluitend de bovenste rij van $R_y$ gebruikt, namelijk 
+$[\cos\theta_p,\ 0,\ {-\sin\theta_p}]$:
+
+\begin{equation}
+    a_{\text{long}} = (\cos\theta_p \cdot v'_x) + (0 \cdot v'_y) - 
+    (\sin\theta_p \cdot v'_z)
+    \label{eq:pitch_matrix_bijlage}
+\end{equation}
+
+Na substitutie van de bekende waarden uit $\mathbf{v}'$ volgt:
+
+\begin{equation}
+    a_{\text{long}} = a_x \cos\theta_p - \sin\theta_p 
+    (-a_y \sin\phi_r + a_z \cos\phi_r)
+\end{equation}
+
+\begin{equation}
+    a_{\text{long}} = a_x \cdot \cos\theta_p + a_y \cdot \sin\phi_r 
+    \cdot \sin\theta_p - a_z \cdot \cos\phi_r \cdot \sin\theta_p
+    \label{eq:accel_correctie_bijlage}
+\end{equation}
+
+De termen met $a_y$ en $a_z$ compenseren het deel van de zwaartekracht 
+dat door de hellingshoeken in de meting van de $x$-as is gelekt. In 
+code zag deze uitwerking er als volgt uit:
+
+\begin{lstlisting}[language=C]
+float pitch_rad = ((float)current_attitude.pitch_x100 / 100.0f)
+                  * ((float)M_PI / 180.0f);
+float roll_rad  = ((float)current_attitude.roll_x100  / 100.0f)
+                  * ((float)M_PI / 180.0f);
+
+float flat_x = (raw_ax * cosf(pitch_rad)) +
+               (raw_ay * sinf(roll_rad) * sinf(pitch_rad)) -
+               (raw_az * cosf(roll_rad) * sinf(pitch_rad));
+\end{lstlisting}
+
+Tijdens het testen bleek dat het weglaten van de rollterm een 
+verwaarloosbaar effect had op de nauwkeurigheid, omdat de tracker zo 
+is gemonteerd dat de rollhoek klein blijft tijdens normaal gebruik. 
+Op basis hiervan is de implementatie vereenvoudigd naar de methode 
+beschreven in sectie~\ref{subsubsec:gravity_comp}.

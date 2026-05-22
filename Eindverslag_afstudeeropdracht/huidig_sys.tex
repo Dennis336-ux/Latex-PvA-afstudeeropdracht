@@ -7,7 +7,24 @@ huidige systeem en de beperking die aanleiding geeft tot dit onderzoek.
 
 \subsection{De ProRTK tracker}
 
-De ProRTK is een herlaadbare tracker die draadloos communiceert met de MYLAPS server via het X2 Link protocol. Het apparaat is een opvolger van hiervoorgaande trackers die voornamelijk bedoeld zijn voor autoraces, dirt bike, hardloopwedstrijden etc. Deze tracker zal zich voornamelijk focussen op de paardensport en wordt zo ontworpen voor gebruik. De tracker bestaat uit diverse onderdelen, waarbij de relevante hardwarecomponenten voor dit project zijn weergegeven in tabel \ref{tab:hardware}.
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{tracker.jpg}
+        \caption{Prototype van het te ontwikkelen tracker. Dit is het huidige model bij start van het project.}
+        \label{fig:tracker}
+    \end{minipage}
+    \hfill % Zorgt voor maximale witruimte tussen de twee afbeeldingen
+    \begin{minipage}[b]{0.42\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{binnenkant_tracker.jpg}
+        \caption{Binnenkant van de behuizing van de tracker.}
+        \label{fig:binnenkant_tracker}
+    \end{minipage}
+\end{figure}
+
+De ProRTK is een herlaadbare tracker (te zien in figuur \ref{fig:tracker}) die draadloos communiceert met de MYLAPS server via het X2 Link protocol. Het apparaat is een opvolger van hiervoorgaande trackers die voornamelijk bedoeld zijn voor autoraces, dirt bike, hardloopwedstrijden etc. Deze tracker zal zich voornamelijk focussen op paardenraces maar is ook nauw verwant met de autosport. De tracker bestaat uit diverse onderdelen, waarbij de relevante hardwarecomponenten voor dit project zijn weergegeven in tabel \ref{tab:hardware}.
 
 \begin{table}[htbp]
     \centering
@@ -23,7 +40,7 @@ De ProRTK is een herlaadbare tracker die draadloos communiceert met de MYLAPS se
         \cite{nordic_nrf52832_ps} &
         Verwerkt alle sensordata en draait het gehele systeem \\ \hline
         GNSS-ontvanger &
-        u-blox X20P RTK-ontvanger &
+        u-blox X20P RTK ontvanger &
         Levert RTK-positie en snelheid op 25\,Hz via UART \\ \hline
         IMU &
         STMicroelectronics ASM330LHH, 6-assig &
@@ -34,6 +51,9 @@ De ProRTK is een herlaadbare tracker die draadloos communiceert met de MYLAPS se
         CAN-controller &
         CAN-bus interface &
         Communicatie met timinginfrastructuur; gedeelde SPI-bus \\ \hline
+        Helix antenne &
+        HX-CU7005A &
+        Ontvangt satellietsignalen voor de RTK positiebepaling. \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -46,73 +66,46 @@ De positiebepaling wordt bepaald door de u-blox X20P RTK ontvanger. Deze module 
 
 \subsection{Werking van het huidige systeem}
 
-Figuur~\ref{fig:huidig_systeem} toont de werking van het huidige systeem 
-op hoog niveau. De tracker ontvangt continu satellietdata van het 
-GNSS-netwerk en stuurt de berekende positie via het X2 Link protocol 
-door naar de MYLAPS-server. De IMU levert wel data maar deze wordt in 
-de huidige firmware niet verwerkt voor positiebepaling.
-
 \begin{figure}[htbp]
     \centering
-    \begin{tikzpicture}[
-        node distance=1.6cm and 2.2cm,
-        box/.style={
-            rectangle, rounded corners=4pt,
-            minimum width=3.2cm, minimum height=1.0cm,
-            text centered, draw=black, thick,
-            font=\small
-        },
-        dashedbox/.style={
-            rectangle, rounded corners=4pt,
-            minimum width=3.2cm, minimum height=1.0cm,
-            text centered, draw=gray, dashed,
-            font=\small, text=gray
-        },
-        arrow/.style={->, thick, >=stealth},
-        label/.style={font=\footnotesize, midway}
-    ]
-
-    % Nodes
-    \node[box, align=center] (gnss) 
-        {RTK GNSS\\u-blox X20P\\\footnotesize 25 Hz};
-
-    \node[box, align=center, right=of gnss] (mcu) 
-        {nRF52832\\Microcontroller};
-
-    \node[box, align=center, right=of mcu] (output) 
-        {X2 Link\\output};
-
-    \node[dashedbox, align=center, below=of mcu] (imu) 
-        {IMU\\ASM330LHH\\\footnotesize niet gebruikt};
-
-    % Arrows
-    \draw[arrow] (gnss) -- node[above, label]{positie, snelheid} (mcu);
-    \draw[arrow] (mcu)  -- node[above, label]{positie} (output);
-    \draw[arrow, gray, dashed] (imu) -- node[right, label]
-        {\textcolor{gray}{ongebruikt}} (mcu);
-
-    \end{tikzpicture}
-    \caption{Werking van het huidige systeem. De positiebepaling is 
-    volledig gebaseerd op de RTK GNSS-ontvanger. De IMU is fysiek 
-    aanwezig maar wordt niet ingezet voor de positiebepaling.}
-    \label{fig:huidig_systeem}
+    \includegraphics[width=1\textwidth]{schema_tracker.png}
+    \caption{Schematisch overzicht van het huidige systeem en de werking 
+    van de positiebepaling. De IMU wordt hierbij niet toegepast.}
+    \label{fig:schema_tracker}
 \end{figure}
+
+Figuur~\ref{fig:schema_tracker} geeft een overzicht van de werking van 
+het huidige systeem. De positiebepaling is gebaseerd op de 
+u-blox X20P RTK ontvanger. Deze ontvangt continu satellietsignalen van 
+de vier grote GNSS-constellaties (GPS, Galileo, GLONASS en BeiDou)
+via de helixantenne op de tracker. Tegelijkertijd ontvangt een vast 
+opgesteld RTK basestation op een bekende locatie diezelfde 
+satellietsignalen en berekent het verschil tussen de gemeten en de 
+werkelijke positie. Deze correctie wordt draadloos naar de GNSS ontvanger 
+in de tracker gestuurd, waardoor een nauwkeurigheid van 1 tot 2 
+centimeter wordt bereikt in plaats van de enkele meters die een standaard 
+GNSS ontvanger haalt. De precieze werking van GNSS en RTK wordt 
+uitgebreider behandeld in het volgende hoofdstuk. \\
+
+De verwerkte positiedata wordt gezamenlijk met aanvullende informatie zoals de rijsnelheid, rijrichting en meetnauwkeurigheid elke 40\,ms (25 Hz) doorgegeven aan de nRF52832 microcontroller. Deze verwerkt de data en verstuurt het vervolgens via het X2 Link protocol (ontwikkeld door MYLAPS) naar de server. Hier wordt deze data gebruikt voor tijdregistratie en live tracking. \\
+
+Zoals te zien in het schema is de ASM330LHH IMU wel fysiek aanwezig op 
+de printplaat maar wordt de data ervan niet gebruikt in het huidige 
+systeem. De IMU levert continu versnellings- en gyroscoopdata, maar 
+deze informatie gaat momenteel verloren. Dit vormt dan ook het startpunt van dit onderzoek.
 
 \subsection{Beperking van het huidige systeem}
 
-De afhankelijkheid van een enkele sensor vormt de kern van het probleem. 
-Wanneer het GNSS-signaal tijdelijk wegvalt of een foutieve positie 
-rapporteert — door bijvoorbeeld signaalreflecties of blokkades — heeft 
-het huidige systeem geen enkel mechanisme om dit op te vangen. De 
-gerapporteerde positie springt dan direct mee met de foutieve meting, 
-of valt volledig weg. In een wedstrijdomgeving waarbij de uitslag 
-afhankelijk is van centimeterprecisie is dit onaanvaardbaar.
+Enkel het gebruik van de GNSS module vormt de kern van het probleem. De ontvanger is namelijk kwetsbaar voor verstoringen in bijvoorbeeld de omgeving. De signalen kunnen worden geblokkeerd of gereflecteerd door verschillende objecten voordat ze de antenna bereiken. Deze omstandigheden kunnen resulteren in een foutieve positie. Hiernaast kan de kwaliteit van het signaal verslechteren of zelf volledig wegvallen. \\
 
-Tegelijkertijd bevat de tracker al een IMU die in principe geschikt is 
-om de positieschatting te ondersteunen wanneer het GNSS-signaal 
-onbetrouwbaar is. Deze sensor blijft in het huidige systeem volledig 
-onbenut. Dat vormt het vertrekpunt van dit onderzoek: de theoretische 
-achtergrond van GNSS, IMU en de methoden om beide te combineren worden 
-in de volgende hoofdstukken behandeld.
+Wanneer dit soort verstoringen optreedt, heeft het huidige systeem 
+geen enkel mechanisme om dit te detecteren of op te vangen. De 
+gerapporteerde positie springt direct mee met de foutieve meting, 
+of valt volledig weg. In een wedstrijdomgeving waarbij de uitslag 
+afhangt van centimeterprecisie is dit niet acceptabel. \\
+
+Tegelijkertijd bevat de tracker al een IMU die in principe geschikt is om de positiebepaling te ondersteunen wanneer het signaal onbetrouwbaar is. Door de data van beide sensoren te combineren (sensor fusion) zou het systeem robuuster kunnen worden. \\
+
+Om te bepalen of deze combinatie daadwerkelijk verbetering oplevert, is in het volgende hoofdstuk een theoretisch kader opgesteld over de werking van GNSS en RTK, de huidige beperkingen, de IMU en methoden om beide te combineren. 
 
 \newpage
