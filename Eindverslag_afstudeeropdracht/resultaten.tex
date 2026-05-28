@@ -1,34 +1,33 @@
 \section{Resultaten en validatie}
+\label{sec:resultaten}
 
 In dit hoofdstuk worden de resultaten uiteengezet om zo de werking van het gemaakte systeem uit te drukken. Er zal dan ook concreet worden uitgelegd hoe het systeem gevalideerd is waarbij verschillende omstandigheden getest zijn.
 
 \subsection{Testopzet}
 
-De validatie van het systeem is uitgevoerd aan de hand van 
-twee testscenario's. Een looptest bij lage snelheden en een autotest op een vaste route. Beide test zijn uitgevoerd in een gecontroleerde omgeving omdat veldtests op een wedstrijdparcours met een rijdend paard buiten de scope van dit project vallen. \\
+De validatie van het systeem is uitgevoerd aan de hand van drie 
+testscenario's. Hieronder valt een normale werking met een stabiele RTK-verbinding, 
+uitgeschakelde RTCM correcties en volledige GPS uitval. De tests zijn uitgevoerd in een gecontroleerde omgeving 
+omdat veldtests op een wedstrijdparcours met een rijdend paard buiten 
+de scope van dit project vallen. \\
 
-De eerste test is uitgevoerd met de tracker fysiek in de hand bij lage 
-snelheden en varierende bewegingen. Dit scenario is gekozen omdat het 
-ook kleine dynamische schommelingen in kaart brengt die het filter moet 
-kunnen verwerken. Tijdens deze test worden de EKF-berekeningen uitgevoerd 
-zodra een nieuwe RTK-positie binnenkomt. De gefilterde uitvoer wordt via 
-RTT-logging uitgelezen met de J-Link debugprobe, terwijl de onbewerkte 
-GNSS-positie tegelijkertijd naar de MYLAPS-server wordt verstuurd voor 
-visualisatie. Op deze manier kunnen de ruwe positie en de EKF-positie 
-direct naast elkaar worden beoordeeld. Een nadeel van deze aanpak is dat 
-er voor het uitlezen van de RTT-logging altijd een fysieke verbinding met 
-de J-Link nodig is. \\
+De tests zijn zowel lopend als met een auto uitgevoerd. Bij de looptest 
+is de tracker fysiek in de hand gehouden bij lage snelheden en 
+schommelende bewegingen. Dit brengt kleine dynamische verstoringen in 
+kaart die het filter moet kunnen verwerken. Bij de autotest is de 
+tracker met velcro aan de zijkant van de auto gemonteerd met de antenne 
+uitstekend aan de bovenkant. Hiermee worden hogere snelheden en grotere afstanden getest. Om het systeem direct te vergelijken is bij de autotest een tweede externe tracker op dezelfde antenne aangesloten, zodat beide trackers exact dezelfde satellietdata ontvangen. \\
 
-De tweede test is uitgevoerd in een auto op een van tevoren vastgelegde 
-route. De tracker is met velcro aan de zijkant van de auto gemonteerd 
-met de GNSS-antenne uitstekend aan de bovenkant. Om een directe 
-vergelijking mogelijk te maken is een tweede externe tracker op 
-dezelfde antenne aangesloten, zodat beide trackers exact dezelfde 
-satellietdata ontvangen. Hiermee kan het gedrag van de EKF worden 
-vergeleken met een onafhankelijke referentiemeting onder identieke 
-omstandigheden. \\
+De EKF berekeningen worden uitgevoerd zodra nieuwe positie informatie 
+binnenkomt op 25\,Hz. De uitvoer wordt via RTT-logging uitgelezen met 
+de J-Link debugprobe. Tegelijkertijd wordt de ruwe RTK positie naar de 
+MYLAPS server verstuurd voor visualisatie, zodat de ruwe positie en de 
+EKF positie direct naast elkaar beoordeeld kunnen worden. Een nadeel 
+van deze aanpak is dat voor het uitlezen van de RTT-logging altijd een 
+fysieke verbinding met de J-Link nodig is. \\
 
-Tijdens beide tests zijn de volgende grootheden gelogd via RTT:
+Tijdens alle testscenario's zijn de grootheden uit tabel~\ref{tab:logvelden} 
+bijgehouden.
 
 \begin{table}[htbp]
     \centering
@@ -39,39 +38,275 @@ Tijdens beide tests zijn de volgende grootheden gelogd via RTT:
         \hline
         \rowcolor{green!20}
         \textbf{Veld} & \textbf{Omschrijving} \\ \hline
+        T & Timestamp van de meting (in systeem-ticks of milliseconden) \\ \hline
         Lk & RTK-status: 0 = geen fix, 1 = Float, 2 = Fixed \\ \hline
-        Raw & Ruwe GNSS-positie van de u-blox ontvanger 
-              (breedtegraad, lengtegraad in $10^{-7}$ graden) \\ \hline
-        EKF & Gefilterde positieschatting van het EKF 
+        Raw & Ruwe RTK positie van de u-blox receiver 
+              (breedtegraad, lengtegraad in $10^{-7}$ graden \cite{ublox_x20p_interface_hpg202}) \\ \hline
+        EKF & Positieschatting van het EKF 
               (zelfde eenheid als Raw) \\ \hline
-        hAcc & Horizontale nauwkeurigheidsschatting van de 
-               u-blox ontvanger in mm \\ \hline
+        hAcc & Horizontale nauwkeurigheid van de 
+               u-blox receiver in mm \\ \hline
         Ppos & Positieonzekerheid van het EKF: 
                $\sqrt{P[0][0] + P[1][1]}$ in mm \\ \hline
         NIS & Normalized Innovation Squared; statistisch 
               signaal voor outlier detection. 
               Drempelwaarde: 9{,}21 \\ \hline
+        spd & Rijsnelheid (velocity) in cm/s \\ \hline
+        hdg & Heading (rijrichting) van de u-blox module in graden \\ \hline
         ba & Geschatte accelerometerbias in mG \\ \hline
-        covEE & Variantie in oost-richting uit NAV-COV in mm \\ \hline
-        covNN & Variantie in noord-richting uit NAV-COV in mm \\ \hline
+        heading & Gefilterde heading (rijrichting) van de EKF schatting in graden \\ \hline
+        covEE & Onzekerheid in oost-richting vanuit de u-blox module in mm \\ \hline
+        covNN & Onzekerheid in noord-richting vanuit de u-blox module in mm \\ \hline
     \end{tabularx}
 \end{table}
 
 De tests zijn uitgevoerd onder gecontroleerde omstandigheden die niet 
-volledig representatief zijn voor gebruik in de paardensport. De 
-bewegingsdynamiek van een galoperend paard — met hogere verticale 
-versnellingen en onvoorspelbare richtingsveranderingen — verschilt 
-wezenlijk van lopen of autorijden. De conclusies uit dit hoofdstuk 
-gelden dan ook primair als bewijs dat het filter correct functioneert 
-onder de geteste omstandigheden. Veldvalidatie op een wedstrijdparcours 
-is noodzakelijk als vervolgstap.
-
+volledig representatief zijn voor gebruik in de paardensport. De bewegingen van een galoperend paard verschillen dan ook met die van een loop en autotest. De resultaten uit dit hoofdstuk gelden dan ook primair als bewijs dat het filter functioneert onder de geteste omstandigheden. Dit geeft echter een inzicht in de verwachte werking van het systeem onder de ideale omstandigheden.
 
 \newpage
 
+\subsection{Normale omstandigheden}
 
-\section{Discussie}
+Onder normale omstandigheden, waarbij de RTK verbinding stabiel is en 
+geen verstoringen aanwezig zijn, volgt het EKF de binnenkomende positie nauw. Dit is volgens verwachting. Bij een RTK fix met een nauwkeurigheid van 14 \,mm en een Ppos van 17 tot 19 \,mm is de RTK meting betrouwbaar genoeg voor het filter om deze sterk te volgen. De afwijking tussend de EKF en RTK positie bedraagt niet meer dan 1 \,cm wat aantoont dat het systeem goed functioneert. \\
+
+Figuur~\ref{fig:lopen_norm} toont de volledige looproute waarbij de EKF positie 
+en de ruwe RTK positie vrijwel samenvallen. Figuur~\ref{fig:lopen_norm_zoom} 
+toont een ingezoomd gedeelte waaruit blijkt dat de afwijking verwaarloosbaar 
+klein is. Dezelfde conclusie geldt voor de autotest, zoals te zien is in 
+figuur~\ref{fig:lopen_norm_auto}. Ook bij hogere snelheden en grotere 
+afstanden blijft het EKF de RTK positie nauwkeurig volgen gedurende de rit.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{normaal_lopen.png}
+    \caption{Afgelegde route met de tracker in de hand. Het EKF volgt 
+    nauw de RTK-positie.}
+    \label{fig:lopen_norm}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{normaal_lopen_zoom.png}
+    \caption{Ingezoomde weergave van een deel van de looproute. De 
+    afwijking tussen EKF en RTK-positie is verwaarloosbaar klein.}
+    \label{fig:lopen_norm_zoom}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{normaal_auto.png}
+    \caption{Afgelegde route met de tracker gemonteerd op de auto. 
+    Het EKF blijft ook bij hogere snelheden nauw aansluiten op de 
+    RTK-positie.}
+    \label{fig:lopen_norm_auto}
+\end{figure}
+
+\newpage
+
+Aanvullend op de looptest is de werking van de uitschieterdetectie (NIS check) gevalideerd. Hierbij zijn softwarematige sprongen van 5 meter toegevoegd, ter simulatie van multipath fouten. Figuur \ref{fig:grote_sprongen} laat deze route met afwijkingen zien. Uit Figuur \ref{fig:geen_sprongen} blijkt dat het systeem deze onwaarschijnlijke metingen succesvol herkent en verwerpt. Het filter negeert de foute updates en trekt de route door.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{grote_sprongen.png}
+        \caption{Ruwe GNSS-route met softwarematig geïnjecteerde positiesprongen van 5 meter.}
+        \label{fig:grote_sprongen}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{geen_sprongen.png}
+        \caption{De door het EKF gecorrigeerde route, waarbij de uitschieters succesvol zijn verworpen.}
+        \label{fig:geen_sprongen}
+    \end{minipage}
+\end{figure}
+
+Een beperking die zichtbaar wordt tijdens de autotest is het gedrag 
+bij achteruitrijden. De u-blox receiver levert de snelheid altijd als een positieve waarde, ongeacht de rijrichting. Het EKF interpreteert de gemeten snelheid daardoor als een voorwaartse beweging, terwijl in werkelijkheid de auto achteruitrijdt. De beweging komt dan ook niet overeen met de voorwaartse versnelling die gemeten is en deze RTK positie wordt dan ook verworpen. Dit is een bekend probleem van het systeem aangezien deze berust op het principe dat het systeem beweegt in de richting dat het kijkt. Aangezien achteruitrijden in de paardensport niet voorkomt, is dit buiten beschouwing gelaten. Voor toepassing bij autosport is dit echter een punt van aandacht. Dit is zichtbaar in figuur~\ref{fig:lopen_norm_auto_achteruit}. Het EKF beweegt vooruit terwijl de RKT positie achteruitgaat. \\
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{normaal_auto_achteruit.png}
+    \caption{Achteruitrijden tijdens de autotest. De EKF positie 
+    beweegt vooruit omdat de u-blox receiver geen rijrichting 
+    meelevert en het model geen achteruitrijden opvangt.}
+    \label{fig:lopen_norm_auto_achteruit}
+\end{figure}
+
+\newpage
+
+\subsection{RTCM correcties uitgeschakeld}
+
+Als tweede scenario zijn de RTCM correcties uitgeschakeld, waardoor de 
+receiver verslechterd van een RTK fix naar standaard GNSS nauwkeurigheid. 
+Dit simuleert een situatie waarbij de verbinding met de basestation 
+tijdelijk wegvalt, wat in de praktijk kan voorkomen bij een te grote 
+afstand tot de basestation of obstakels in de omgeving.
+
+Figuur~\ref{fig:lopen_rtk} toont de volledige looproute tijdens dit 
+scenario. Op meerdere momenten tijdens de route wijkt de ruwe GNSS positie af van de verwachte route doordat de RTK correcties ontbreken. Figuur~\ref{fig:lopen_rtk_sprong} toont een opvallend moment 
+waarbij de ruwe positie een plotselinge zijwaartse sprong maakt. Het EKF trekt de route op dat moment logischerwijze door. Dit is verwacht gedrag aangezien het filter minder gewicht geeft aan de GNSS meting doordat de nauwkeurigheid (hAcc) hoger is. Het vertrouwt hierdoor meer op zijn eigen IMU data. \\
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{rtk_uit_lopen.png}
+    \caption{Looproute met uitgeschakelde RTCM-correcties. Op meerdere 
+    momenten wijkt de EKF-positie af van de foutieve GNSS-positie.}
+    \label{fig:lopen_rtk}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{rtk_uit_lopen_zoom.png}
+    \caption{Ingezoomd moment waarbij de ruwe GNSS-positie een plotselinge 
+    sprong maakt. Het EKF trekt de route logisch door maar driftt na 
+    verloop van tijd mee met de foutieve positie.}
+    \label{fig:lopen_rtk_sprong}
+\end{figure}
+
+Dit proces is duidelijk terug te zien in het teruggegeven log bestand. Onderstaand is een ingekort stuk uit het log bestand weergegeven tijdens dit signaalverlies. Zodra de fix wegvalt (\texttt{Lk:0}) stijgt de nauwkeurigheid (hAcc van 15 mm naar 1676 mm) waardoor het filter de meting als onbetrouwbaar ziet. Naarmate deze periode langer duurt is te zien dat zijn eigen onzekerheid groeit. Dit is te zien aan de \texttt{Ppos} waarde (de positieonzekerheid), die in deze periode stijgt van 19~mm naar ruim 1000~mm.
+
+\begin{lstlisting}[caption={Log-extract dat de oplopende onzekerheid (Ppos) toont tijdens het verlies en herstel van de RTK fix.}, label={lst:log_outage}, basicstyle=\ttfamily\scriptsize, breaklines=true, frame=single]
+00> T:1242073664 | Lk:2 | Raw:... | EKF:... | hAcc:15 mm   | Ppos:19 mm   | NIS:0 | spd:151 cms | hdg:100 deg
+00> T:1242113664 | Lk:0 | Raw:... | EKF:... | hAcc:1676 mm | Ppos:45 mm   | NIS:0 | spd:159 cms | hdg:99 deg
+00> T:1242153664 | Lk:0 | Raw:... | EKF:... | hAcc:1625 mm | Ppos:63 mm   | NIS:0 | spd:163 cms | hdg:98 deg
+... [onzekerheid groeit] ...
+00> T:1244833664 | Lk:0 | Raw:... | EKF:... | hAcc:746 mm  | Ppos:1026 mm | NIS:0 | spd:138 cms | hdg:94 deg
+00> T:1244873664 | Lk:0 | Raw:... | EKF:... | hAcc:741 mm  | Ppos:1032 mm | NIS:0 | spd:130 cms | hdg:94 deg
+...
+00> >>> RTK OUTAGE END <<<
+...
+00> T:1247513664 | Lk:0 | Raw:... | EKF:... | hAcc:419 mm  | Ppos:876 mm  | NIS:0 | spd:153 cms | hdg:115 deg
+00> T:1247553664 | Lk:2 | Raw:... | EKF:... | hAcc:14 mm   | Ppos:386 mm  | NIS:1 | spd:149 cms | hdg:122 deg
+00> T:1247633664 | Lk:2 | Raw:... | EKF:... | hAcc:14 mm   | Ppos:258 mm  | NIS:0 | spd:130 cms | hdg:122 deg
+\end{lstlisting}
+
+Vanwege deze oplopende onzekerheid krijgt de ruwe positie geleidelijk weer meer gewicht. Hierdoor wordt het filter uiteindelijk toch gedwongen om langzaam mee te driften met de foute positie, totdat het signaal zich herstelt en de \texttt{Ppos} weer daalt. \\
 
 
+Figuur~\ref{fig:auto_rtk} laat de volledige autoroute zien met uitgeschakelde correcties. Deze resultaten zijn vergelijkbaar met de looptest. Het systeem trekt de route voor korte duur door bij plotselinge sprongen, maar begint na langere tijd mee te driften. Dit is zichtbaar in figuur~\ref{fig:auto_rtk_sprong}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{rtk_uit_auto.png}
+    \caption{Autoroute met uitgeschakelde RTCM-correcties. Het EKF 
+    wijkt op meerdere momenten af van de foutieve GNSS-positie.}
+    \label{fig:auto_rtk}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{rtk_uit_auto_zoom.png}
+    \caption{Ingezoomd moment tijdens de autotest. Het EKF trekt de 
+    route kortdurend goed door maar drift langzamerhand mee met 
+    de foutieve positie.}
+    \label{fig:auto_rtk_sprong}
+\end{figure}
+
+Bij een hiervoorgaande testrit zijn ook opvallende resultaten aangetoond. Hierbij is de referentie tracker op de achterkant van de auto geplaatst vanwege het gebrek van een antenne splitter. Hierdoor is deze tracker niet volledig representatief van het correcte rijgedrag. \\
+
+Op rechte stukken presteert het systeem goed, zoals zichtbaar in 
+figuur~\ref{fig:auto_rtk_recht}. Zonder zijwaartse bewegingen kan het filter nauwkeurig schattingen maken. \\
+
+Een opvallend resultaat is zichtbaar in figuur~\ref{fig:auto_rtk_bocht}. Tijdens het rijden over een drempel maakt de ruwe GNSS positie een schommelende beweging maar het filter vlakt dit af naar een vloeiende boog. Aangezien de externe referentie een vergelijkbare schommelende beweging maakt is te concluderen dat niet overeenkomt met de werkelijkheid. Dit is te verklaren aangezien het systeem geen rekening houdt met kanteling of verticale bewegingen. Een drempel verandert de positie van de antenne, maar de rijrichting blijft hetzelfde. Het systeem presteert dus zoals verwacht, alhoewel dit een kleine beperking is in de robuustheid.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{rtk_uit_auto_recht.png}
+    \caption{Recht stuk tijdens de aanvullende autotest. Het systeem 
+    presteert goed zonder zijwaartse dynamiek.}
+    \label{fig:auto_rtk_recht}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{rtk_uit_auto_bocht.png}
+    \caption{Bocht tijdens de aanvullende autotest. De ruwe GNSS-positie 
+    toont een schommeling door een drempel; het EKF vlakt dit af naar 
+    een vloeiende boog doordat het model geen verticale bewegingen 
+    modelleert.}
+    \label{fig:auto_rtk_bocht}
+\end{figure}
+
+\newpage
+
+\subsection{GPS uitval}
+
+In het derde en meest extreme scenario wordt een volledige GPS uitval gesimuleerd. Hierbij wordt het signaal softwarematig gedurende twee seconden geblokkeerd, waarna het voor acht seconden wordt hersteld. Dit patroon herhaalt zich en simuleert zo een situatie waarbij het systeem volledig moet vertrouwen op zijn interne IMU data zonder externe hulp. \\
+
+Figuur~\ref{fig:lopen_gps_rood} toont de afgelegde looproute waarbij de positie op meerdere momenten ontbreekt. In figuur~\ref{fig:lopen_gps_groen} is zichtbaar hoe het systeem deze gaten opvangt. Het systeem trekt een vloeiende lijn aan de hand van de gemaakte schattingen. \\
+
+Hoewel de route logisch wordt doorgetrokken, is de schatting niet feilloos. Na de uitval is duidelijk te zien dat de afgelegde afstand licht overschat of onderschat wordt. Dit komt door een incorrecte schatting van de snelheid. Een imperfecte zwaartekrachtcompensatie zou hier de boosdoener van kunnen zijn. Daarnaast drift de gyroscoop op momenten enkele graden waardoor een kleine afwijking ontstaat van de werkelijke route. \\
+
+\newpage
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{gps_out_lopen_rood.png}
+    \caption{Looproute waarbij het satellietsignaal softwarematig periodiek voor 2 seconden is geblokkeerd.}
+    \label{fig:lopen_gps_rood}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{gps_out_lopen_groen.png}
+    \caption{Het EKF vult de gaten in het signaal op. Zichtbaar is een lichte positionele afwijking door drift.}
+    \label{fig:lopen_gps_groen}
+\end{figure}
+
+Tijdens de autotest treden vergelijkbare effecten op. In figuur~\ref{fig:auto_gps_rood_1} is een trajectdeel met twee gaten te zien. Figuur~\ref{fig:auto_gps_groen_1} laat zien dat het bovenste gat zeer goed wordt overbrugt, terwijl er bij het onderste gat een lichte afwijking in zowel snelheid als richting heeft plaatsgevonden.
+
+\newpage
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{gps_out_auto_rood_1.png}
+    \caption{Fragment van de autotest met twee signaalgaten.}
+    \label{fig:auto_gps_rood_1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{gps_out_auto_groen_1.png}
+    \caption{Het EKF overbrugt de gaten, waarbij het onderste gat een lichte afwijking vertoont.}
+    \label{fig:auto_gps_groen_1}
+\end{figure}
+
+Meerdere soortgelijke resultaten zijn weergegeven in figuren \ref{fig:auto_gps_rood_2} tot en met \ref{fig:auto_gps_groen_3}.
+
+\newpage
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{gps_out_auto_rood_2.png}
+        \caption{Ruwe route met signaaluitval (situatie 2).}
+        \label{fig:auto_gps_rood_2}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{gps_out_auto_groen_2.png}
+        \caption{Door het EKF aangevulde route (situatie 2).}
+        \label{fig:auto_gps_groen_2}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{gps_out_auto_rood_3.png}
+        \caption{Ruwe route met signaaluitval (situatie 3).}
+        \label{fig:auto_gps_rood_3}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{gps_out_auto_groen_3.png}
+        \caption{Door het EKF aangevulde route (situatie 3).}
+        \label{fig:auto_gps_groen_3}
+    \end{minipage}
+\end{figure}
 
 \newpage

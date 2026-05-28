@@ -1,9 +1,9 @@
 % !TeX root = main.tex
 
 \section{Robuuste lokalisatie in complexe omgevingen}
+\label{sec:lokalisatie}
 
-Om het voordeel van sensor fusion te kunnen beoordelen, is het eerst noodzakelijk de werking en beperkingen van het huidige GNSS systeem in kaart te brengen. In dit hoofdstuk wordt de werking van RTK GNSS beschreven en worden de foutbronnen geanalyseerd die de betrouwbaarheid van de positiebepaling beperken.
-
+Om het voordeel van sensor fusion te kunnen beoordelen, is het eerst noodzakelijk de werking en beperkingen van het huidige GNSS systeem in kaart te brengen. In dit hoofdstuk wordt de werking van RTK GNSS beschreven en worden de foutbronnen geanalyseerd die de betrouwbaarheid van de positioning beperken.
 
 \subsection{GNSS}
 
@@ -37,7 +37,7 @@ Door de intersectie van meerdere afstandssferen (één per satelliet) te bepalen
 Hoewel GNSS-ontvangers breed inzetbaar zijn, kent deze techniek beperkingen. Een standaard smartphone-GPS behaalt onder ideale omstandigheden een horizontale nauwkeurigheid van grofweg 4,9 meter \cite{gpsgov2026accuracy}. Voor het nauwkeurig volgen van een atleet of voertuig op een wedstrijdparcours is deze foutmarge vaak onacceptabel groot. Om dit te verhelpen wordt tegenwoordig regelmatig gebruik gemaakt van een techniek genaamd Real-Time Kinematic (RTK). 
 
 \subsection{Nauwkeurigheid via RTK}
-Om de nauwkeurigheid van GNSS te verbeteren wordt de techniek Real-Time Kinematic (RTK) gebruikt. Dit systeem bestaat uit twee ontvangers, namelijk een stationair `Base Station' op een bekende locatie en een mobiele `Rover Receiver' \cite{gpsgeometer_rtk}. Het basisstation berekent afwijkingen die veroorzaakt worden door clock errors en vertragingen van het satellietsignaal door de atmosfeer. Denk hierbij aan invloeden door ionen, maar ook temperatuur en luchtvochtigheid. De correcties worden in real-time naar de rover gestuurd. Doordat het basisstation en rover zich in hetzelfde lokale gebied bevinden, zijn de atmosferische omstandigheden vrijwel identiek en kunnen de fouten grotendeels worden verholpen. Hiermee zou een theoretische nauwkeurigheid van minder dan 50 mm behaald moeten kunnen worden \cite{valente2020accuracy}. Er zijn twee verschillende omstandigheden waarin het systeem zich kan bevinden waarmee de huidige kwaliteit beschreven kan worden:
+Om de nauwkeurigheid van GNSS te verbeteren wordt de techniek Real-Time Kinematic (RTK) gebruikt. Dit systeem bestaat uit twee ontvangers, namelijk een stationair `Base Station' op een bekende locatie en een mobiele `Rover Receiver' \cite{gpsgeometer_rtk}. De basestation berekent afwijkingen die veroorzaakt worden door clock errors en vertragingen van het satellietsignaal door de atmosfeer. Denk hierbij aan invloeden door ionen, maar ook temperatuur en luchtvochtigheid. De correcties worden in real-time naar de rover gestuurd. Doordat de basestation en rover zich in hetzelfde lokale gebied bevinden, zijn de atmosferische omstandigheden vrijwel identiek en kunnen de fouten grotendeels worden verholpen. Hiermee zou een theoretische nauwkeurigheid van minder dan 50 mm behaald moeten kunnen worden \cite{valente2020accuracy}. Er zijn twee verschillende omstandigheden waarin het systeem zich kan bevinden waarmee de huidige kwaliteit beschreven kan worden:
 
 \begin{itemize}
 	\item RTK Float: De ontvanger gebruikt de fase van de satellietsignalen (draaggolven) voor de locatiebepaling, 
@@ -45,6 +45,13 @@ Om de nauwkeurigheid van GNSS te verbeteren wordt de techniek Real-Time Kinemati
 	\item RTK Fixed: De berekening is succesvol afgerond en vastgezet. De ontvanger kan nu de exacte afstand tot de satellieten bepalen, wat een typische nauwkeurigheid van 1 tot 2 cm geeft.
 \end{itemize}
 
+De correcties van de basestation worden naar de rover verstuurd via 
+het RTCM-protocol (Radio Technical Commission for Maritime Services). 
+Dit is een standaard voor het uitwisselen van 
+differentiële GNSS correcties die wordt gepubliceerd door de RTCM 
+Special Committee 104~\cite{rtcm_standard}. De u-blox receiver in de 
+ProRTK tracker ontvangt deze RTCM berichten en verwerkt ze automatisch 
+om de RTK-oplossing te berekenen. Wanneer de verbinding met de basestation wegvalt en er geen RTCM correcties meer binnenkoen, kan de ontvanger geen RTK fix mee krijgen. Hierdoor verslechterd de nauwkeurigheid naar die van standaard GNSS.
 
 De afwijkingen en gebreken worden in de hieropvolgende paragraaf beschreven.
 
@@ -96,6 +103,8 @@ Het gebruik van RTK-GNSS biedt dan ook een grote verbetering in precisie, maar k
 
 
 \section{Sensor Fusion}
+\label{sec:sensor_fusion}
+
 Om de beperkingen van RTK GNSS aan te pakken, wordt in dit hoofdstuk onderzocht welke aanvullende sensoren en methoden beschikbaar zijn om de betrouwbaarheid van positiebepaling te verhogen. Sensor fusion is het combineren van de werkingen van verschillende sensoren om zo tot een geheel systeem te komen. Dit is een veelgebruikte benadering in navigatiesystemen voor robotica, luchtvaart en voertuigtoepassingen. In dit hoofdstuk worden de relevante sensoren en filteralgoritmes uiteengezet beoordeeld op geschiktheid voor dit project.
 
 \subsection{Inertial Measurement Unit (IMU)}

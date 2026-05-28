@@ -1,102 +1,28 @@
 \section{implementatie}
+\label{sec:implementatie}
 
-Dit hoofdstuk beschrijft de technische implementatie van het sensor fusion systeem op de RTK hardware. De implementatie is opgebouwd uit de volgende onderdelen
-
-De implementatie is stapsgewijs opgebouwd: eerst de ontwikkelomgeving en debuginfrastructuur, vervolgens de IMU-integratie inclusief een opgetreden SPI-busprobleem, daarna de u-blox integratie en het EKF zelf, en tot slot de stilstanddetectie en het faultsimulatiemechanisme. \todo[inline]{Inleiding aanpassen. Alle onderdelen toevoegen als er meer bijkomen}
-
-
+Dit hoofdstuk beschrijft de implementatie van het sensor fusion systeem. De realisatie is stapsgewijs opgebouwd: de configuratie van de ontwikkelomgeving, de IMU integratie inclusief datacommunicatie, en tot slot de realisatie van het Extended Kalman Filter (EKF).
 
 \subsection{Ontwikkelomgeving en testopstelling}
-Voor de eindgebruiker is het systeem ontworpen om draadloos firmware door middel van Over The Air (OTA) updates te sturen. Tijdens het ontwikkel process is dit echter een onpraktische methode. Het is namelijk traag en biedt geen mogelijkheid om duidelijk te kunnen debuggen. Hierom wordt tijdens het ontwikkelen gebruikgemaakt van een SEGGER J-Link debug probe \cite{segger_rtt}. \\ 
 
-Hoewel de J-Link standaard een 20 pins JTAG connector ter beschikking heeft, maakt de microcontroller op het printplaat gebruik van de Serial Wire Debug (SWD) interface. SWD is ontworpen voor ARM processoren en vereist minder verbindingen dan JTAG. Uit de documentatie van het bord blijkt dat er slechts 4 pinnen nodig zijn om software te flashen: \\
+Voor de eindgebruiker is het systeem ontworpen om draadloos firmware te ontvangen via Over The Air (OTA) updates. Aangezien dit niet efficiënt is voor programmeren, is een fysieke testopstelling gerealiseerd met behulp van een SEGGER J-Link debug probe \cite{segger_rtt}. \\
 
+Hoewel de J-Link standaard een 20 pins JTAG-connector heeft, communiceert de microcontroller op de printplaat via de Serial Wire Debug (SWD) interface. Omdat de printplaat niet is voorzien van een fysieke debug-header, is de verbinding handmatig tot stand gebracht. De PCB bevat specifieke testpads bedoeld voor de vier SWD signalen (VCC, GND, SWDIO en SWCLK) waaraan tijdelijk 4 kabels zijn gesoldeerd. Deze staan direct in verbinding met de J-Link (zie Figuur \ref{fig:JTAG}).
 
-\vspace{-0.5em}
-\noindent
-\begin{minipage}{0.6\textwidth}
-\begin{itemize}
-\setlength{\itemsep}{1.em}
-    \item VCC / Vref (Voltage Reference): Dit meet het spanningsniveau van de microcontroller, zodat de datasignalen hierop afgestemd kunnen worden.
-    \item GND (Ground)
-    \item SWDIO (Serial Wire Debug I/O): Dit is een bidirectionele pin bedoeld voor de data overdracht.
-    \item SWCLK (Serial Wire Clock): Dit levert het kloksignaal om de communicatie te synchroniseren.
-\end{itemize}
-\end{minipage}
-\hfill
-\begin{minipage}{0.3\textwidth}
-\centering
-\includegraphics[width=0.6\linewidth]{JTAG_Pinout.png}
-\captionof{figure}{Pinout van de JTAG connector \cite{microchip-tseg-jlink}}
-\label{fig:JTAG}
-\end{minipage} 
-
-\bigskip
-
-In figuur \ref{fig:JTAG} is te zien dat pinnen 1, 7, 9 en één van de GND pinnen hiervoor gebruikt kunnen worden. Aangezien er geen debug header ter beschikking is op het bord, worden deze vier signalen toegankelijk door specifieke test pads op de PCB. Voor de ontwikkelopstelling zijn hier tijdelijk draden aan gesoldeerd die direct in verbinding staan met de J-Link. \\
-
-Bij het maken van de eerste verbinding via de J-Link moet er rekening mee gehouden worden dat de microcontroller beveiligd is. Om nieuwe software te kunnen flashen en te kunnen debuggen, moet de chip volledig gewist worden, waarbij alle bestaande firmware en instellingen verloren gaan. Voor een correcte werking van het systeem is het echter noodzakelijk dat er na het wissen specifieke productiedata in het externe flash geheugen wordt teruggeplaatst. Zonder deze data in de flash zal de applicatie niet correct opstarten. \\
-
-Om de code succesvol te kunnen compileren en via de J-Link naar de microcontroller te flashen, is additionele software nodig. Omdat het project gebruikmaakt van een Linux omgeving zullen de volgende componenten geïnstalleerd worden voor een correcte omgeving: 
-
-\begin{itemize}
-    \item \textbf{Windows Subsystem for Linux (WSL2):} Dit biedt een Linux omgeving (bijvoorbeeld Ubuntu) binnen Windows. Dit is noodzakelijk voor het draaien van de huidige scripts binnen het systeem.
-    \item \textbf{USBIPD-WIN:} Aangezien WSL standaard geen directe toegang heeft tot fysieke USB poorten van de computer, wordt deze software gebruikt om de fysieke J-Link probe te verbinden met de virtuele Linux omgeving.
-    \item \textbf{J-Link Software:} Bevat de benodigde drivers en software (zoals de J-Link GDB Server en JLinkExe) binnen Linux om daadwerkelijk te kunnen communiceren met de debug probe.
-    \item \textbf{Cross-Compiler Toolchain (bijv. ARM GCC):} Omdat de code op een x86-computer wordt geschreven maar op een ARM-microcontroller moet draaien, is een cross-compiler (zoals \textit{gcc-arm-none-eabi}) nodig om de C/C++ code te vertalen naar de juiste machinecode.
-\end{itemize}
-
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.2\linewidth]{JTAG_Pinout.png}
+    \caption{Pinout van de JTAG connector waarbij pinnen 1, 7, 9 en GND zijn gebruikt voor de SWD-verbinding \cite{microchip-tseg-jlink}.}
+    \label{fig:JTAG}
+\end{figure}
 
 \subsection{IMU integratie}
 
-De ASM330LHH die gebruikt wordt in het huidige systeem bevat diverse instellingen die gebruikt kunnen worden in verschillende omstandigheden. De onderdelen waar rekening mee gehouden wordt zijn het bereik, de outputfrequentie, bandbreedte de Block Data Update en een laagdoorlaatfilter. In tabel \ref{tab:imu_config} zijn de verschillende configuraties te zien. De keuze voor de meetbereiken is gebaseerd op gegevens over de verwachte dynamiek en de gestelde specificaties. Hieronder wordt per parameter de keuze onderbouwd.
+Voor de ASM330LHH IMU moeten diverse parameters worden geconfigureerd om te voldoen aan de dynamische eisen van het systeem. De functionele keuzes zijn samengevat in Tabel~\ref{tab:imu_config}. De vertaalslag hiervan naar de exacte bit-waarden in de controleregisters (zoals \texttt{CTRL1\_XL}) is gedocumenteerd in Bijlage X.
 
-\paragraph{Accelerometerbereik: \texorpdfstring{$\pm$4 g}{±4 g}}
-
-Zoals vastgesteld in de specificaties moet het accelerometerbereik ruim 
-boven de berekende piekversnelling van 2,5 g liggen om clipping te 
-voorkomen. De ASM330LHH biedt bereiken van $\pm$2, $\pm$4, $\pm$8 en 
-$\pm$16 g~\cite{stmicro_asm330lhh}. Het bereik van $\pm$2 g is 
-onvoldoende omdat dit bij abrupte bewegingen snel wordt overschreden. 
-Het bereik van $\pm$4 g biedt een marge van circa 60\% boven de 
-piekversnelling en geeft tegelijkertijd een tweemaal hogere resolutie 
-dan $\pm$8 g (0,122 mg/LSB versus 0,244 mg/LSB). Op basis hiervan is 
-$\pm$4 g gekozen als accelerometerbereik. Mocht tijdens veldtests 
-blijken dat dit bereik onvoldoende is, dan kan het worden aangepast 
-via het \texttt{CTRL1\_XL} register zonder verdere aanpassingen aan 
-de firmware.
-
-
-\paragraph{Gyroscoopbereik: \texorpdfstring{$\pm$500 DPS}{±500 DPS}}
-
-Zoals vastgesteld in de specificaties bedraagt de worst-case hoeksnelheid 
-op een krappe trainingsbaan circa 37 DPS 
-(vergelijking~\ref{eq:omega_training}). De ASM330LHH biedt bereiken van 
-$\pm$125, $\pm$250, $\pm$500, $\pm$1000, $\pm$2000 en 
-$\pm$4000 DPS~\cite{stmicro_asm330lhh}. Hoewel $\pm$250 DPS op basis 
-van de berekende worst-case hoeksnelheid in theorie voldoende marge 
-biedt, is gekozen voor $\pm$500 DPS. Dit geeft een veiligheidsmarge 
-van een factor 14 voor onverwachte bewegingen zoals een plotse verandering van koers.
-
-\paragraph{Outputfrequentie (ODR): 208 Hz}
-
-De outputfrequentie bepaalt hoe vaak de sensor per seconde een nieuwe meting levert. Voor de integratie van de IMU data in het systeem is gekozen om de sensor elke 5 ms uit te lezen (200 Hz). De keuze hiervoor is tot stand gekomen door het EquiMoves systeem van Intertia Technology dat speciaal is ontwikkeld voor bewegingsanalyse van paarden \cite{InertiaEquineGait}. Bovendien concludeert het onderzoek naar de invloed van samplefrequentie op IMU oriëntatieschatting dat 200 Hz voldoende is voor het vastelggen van bewegingen bij hardlopen \cite{Fan2025Influence}. Alhoewel de galopperende bewegingen van een paard niet exact hetzelfde zijn zal dit als goede basis dienen. De dichtstbijzijnde beschikbare ODR stap van de ASM330LHH boven de 200 Hz is 208 Hz en is daarom gekozen.
- 
-\paragraph{Bandbreedte laagdoorlaatfilter: 50 Hz}
- 
-De sensor bevat een intern digitaal laagdoorlaatfilter dat hoogfrequente ruis uit de meting filtert voordat de data wordt uitgelezen. Uit onderzoek naar IMU-signaalverwerking bij bewegingsanalyse blijkt dat de relevante bewegingsfrequenties van rijdende voertuigen en galopperende paarden zich bevinden onder de 10 Hz \cite{witte2006effect}. Een bandbreedte van 50 Hz verstoord het signaal niet en biedt tegelijkertijd demping van hoogfrequente ruis boven de 50 Hz. 
- 
-\paragraph{Block Data Update (BDU)}
-
-De Block Data Update instelling zorgt ervoor dat de sensor de uitvoerregisters pas bijwerkt nadat de microcontroller ze volledig heeft uitgelezen. Zonder BDU kan het voorkomen dat de hoge byte van een nieuwe meting al beschikbaar is terwijl de microcontroller nog bezig is de lage byte van de vorige meting te lezen. Het resultaat is dan een onjuiste gecombineerde waarde. De application note van STMicroelectronics voor de ASM330LHH (pagina 18) beveelt het inschakelen van BDU expliciet aan bij gebruik van een seriële interface: \textit{``it is strongly recommended to set the BDU (Block Data Update) bit to 1 in the CTRL3\_C register. This feature avoids reading values (most significant and least significant parts of output data) related to different samples''} \cite{ST_AN5296}. Met BDU ingeschakeld blijft de registerinhoud stabiel totdat de uitlezing volledig is afgerond.
- 
-\paragraph{Gyroscoop LPF1}
- 
-Naast het algemene laagdoorlaatfilter biedt de ASM330LHH een extra filterlaag specifiek voor de gyroscoop, aangeduid als LPF1. Dit filter is ingeschakeld om resterende hoogfrequente trillingen op de gyroscoopuitgang verder te dempen. \\
- 
 \begin{table}[htbp]
     \centering
-    \caption{Geconfigureerde parameters van de ASM330LHH IMU.}
+    \caption{Geconfigureerde functionele parameters van de ASM330LHH IMU.}
     \label{tab:imu_config}
     \renewcommand{\arraystretch}{1.3}
     \begin{tabularx}{\textwidth}{|X|X|}
@@ -108,33 +34,14 @@ Naast het algemene laagdoorlaatfilter biedt de ASM330LHH een extra filterlaag sp
         Outputfrequentie (ODR) & 208 Hz \\ \hline
         Laagdoorlaatfilter & 50 Hz \\ \hline
         Block Data Update (BDU) & Ingeschakeld \\ \hline
-        Gyroscoop LPF1 & Ingeschakeld \\ \hline
     \end{tabularx}
 \end{table}
 
+Om de beweging accuraat vast te leggen zonder clipping, is het accelerometerbereik ingesteld op $\pm$4 g. Dit geeft een veiligheidsmarge van 60\% ten opzichte van de berekende piekversnelling van 2,5 g \cite{stmicro_asm330lhh}. Voor het gyroscoopbereik is gekozen voor $\pm$500 DPS \cite{stmicro_asm330lhh}. Ten opzichte van de eerder berekende worst-case hoeksnelheid van 37 DPS op de renbaan, biedt dit een ruime marge (factor 14) voor abrupte en onverwachte bewegingen. \\
 
-\subsubsection{Registerconfiguratie}
- 
-De hiervoorgaande paramaters worden gecofigureerd via de controleregisters van de ASM330LHH. In tabel~\ref{tab:registers} zijn de relevante registers en de bijbehorende instellingen weergegeven zoals geïmplementeerd in de firmware.
- 
-\begin{table}[htbp]
-    \centering
-    \caption{Registerconfiguratie van de ASM330LHH, geverifieerd aan de hand van de firmware en de datasheet \cite{stmicro_asm330lhh}.}
-    \label{tab:registers}
-    \renewcommand{\arraystretch}{1.3}
-    \begin{tabularx}{\textwidth}{|l|l|l|X|}
-        \hline
-        \rowcolor{green!20}
-        \textbf{Register} & \textbf{Instelling} & \textbf{Waarde} & \textbf{Resultaat} \\ \hline
-        CTRL1\_XL & ODR\_XL{[}3:0{]} = 0101 & 5 & Accelerometer ODR: 208 Hz \\ \hline
-        CTRL1\_XL & FS\_XL{[}1:0{]} = 10   & 2 & Accelerometerbereik: $\pm$4 g \\ \hline
-        CTRL2\_G  & ODR\_G{[}3:0{]} = 0101  & 5 & Gyroscoop ODR: 208 Hz \\ \hline
-        CTRL2\_G  & FS\_G{[}1:0{]} = 01     & 1 & Gyroscoopbereik: $\pm$500 DPS \\ \hline
-        CTRL3\_C  & BDU = 1                  & 1 & Block Data Update ingeschakeld \\ \hline
-        CTRL4\_C  & LPF1\_SEL\_G = 1         & 1 & Gyroscoop LPF1 ingeschakeld \\ \hline
-        CTRL6\_C  & FTYPE{[}2:0{]} = 111     & 7 & LPF1 laagste bandbreedte ($\approx$50 Hz) \\ \hline
-    \end{tabularx}
-\end{table}
+Voor de outputfrequentie (ODR) is een waarde van 208 Hz geconfigureerd. Dit sluit aan bij de standaard die gehanteerd wordt in het EquiMoves systeem voor paarden \cite{InertiaEquineGait} en het onderzoek naar IMU oriëntatieschatting bij hardlopers \cite{Fan2025Influence}. De IMU beschikt bovendien over een digitale laagdoorlaatfilter die in het systeem is afgesteld op 50 Hz. Hiervoor is gekozen, omdat onderzoek concludeert dat bewegingsfrequenties bij renpaarden zich onder de 10 Hz bevinden \cite{witte2006effect}. Hiermee wordt hoogfrequente ruis gedempt, zonder het werkelijke signaal aan te tasten. \\
+
+Als laatst is de \textit{Block Data Update} (BDU) ingeschakeld om fouten bij het uitlezen van de seriële interface te voorkomen. Zoals geadviseerd door STMicroelectronics \cite{ST_AN5296} (pagina 18), garandeert dit dat de hoge en lage bytes van de outputregisters afkomstig zijn van hetzelfde meetsample.
 
 
 \subsubsection{Gyroscooop kalibratie}
@@ -149,6 +56,8 @@ Wanneer de IMU goed is geconfigureerd kan gekeken worden naar het uitlezen van d
 
 Hierin zijn de waardes te zien van het apparaat die stil ligt op een tafel. Hierin zijn de verschillende g-krachten op de assen te zien en die resulteren gezamenlijk tot ongeveer 1000 milli g wat overeenkomt met de zwaartekracht. Er is duidelijk een offset te zien en de waardes schommelen. Het valt ruim binnen de specificaties van de IMU aangezien de datasheet vermeld dat het bij een zero rate level tussen de -10 en +10 dps kan zitten. De accelerometer is daarentegen vrij gelijk. Om met de waardes van de gyroscope te werken moet ernaar gekeken worden om de waardes richting 0 te krijgen en de schommelingen te verminderen. Om de schommelingen te verminderen is een filter toegevoegd die zich binnen de configuratie van de IMU bevindt. De resultaten hiervan zijn te zien in figuur \ref{fig:sensorwaardes_filter}.
 
+\newpage
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{sensorwaardes_filter.png}
@@ -157,8 +66,6 @@ Hierin zijn de waardes te zien van het apparaat die stil ligt op een tafel. Hier
 \end{figure}
 
 Zoals te zien in de afbeelding, hebben MEMS gyroscopen (Micro-Electro-Mechanical System) een systematische meetafwijking bij stilstand, ook wel \textit{zero-rate offset} of bias genoemd. Deze offset zal accumuleren bij het bepalen van de richting als dit niet gecompenseerd wordt. Om dit te verhelpen wordt bij het opstarten een eenmalige kalibratie uitgevoerd. De eerste 400 samples worden niet gebruikt vanwege de pieken van de sensor. Vervolgens wordt een gemiddelde gebruikt van 200 opeenvolgende samples als kalibratieoffset. De berekende offset wordt bij iedere gyroscoopuitlezing afgetrokken van de ruwe sensorwaarde. Het resultaat hiervan is te zien in figuur \ref{fig:sensorwaardes_kalibratie}.
-
-\newpage
 
 \begin{figure}[h]
     \centering
@@ -190,9 +97,18 @@ gpio_pin_set(config->cs_pin);     // CS hoog: deselecteer IMU
 
 Bovendien verwacht de ASM330LHH een soort dummy overdracht voordat de daadwerkelijke communicatie plaatsvindt. Dit heeft te maken met het SPI protocol. Bij SPI vindt dataoverdracht gelijktijdig plaats. Zodra de microcontroller (master) de SCK activeert om een commando te versturen, wordt er op hetzelfde moment een byte vanuit de sensor (slave) teruggestuurd. De sensor heeft nog niet de tijd gehad om de binnenkomende commando te verwerken. Hierdoor ontstaat onbruikbare data. Door bewust eerst een dummy-byte van \texttt{0xFF} te sturen zonder de ontvangen byte te verwerken, wordt deze initiële toestand weggegooid. Hierna bevinden zowel de sensor als de microcontroller zich in een bekende begintoestand. Na het toepassen van deze methodes zijn de sporadische uitschieters verdwenen uit de sensordata.
 
+
 \subsection{Extended Kalman Filter}
 
-Om de IMU-data te combineren met de GNSS-data wordt gebruikgemaakt van een Extended Kalman Filter. Aangezien het systeem niet-lineair is, is dit de meest geschikte methode. Het filter bestaat uit een aantal afzonderlijke componenten die elk een specifieke rol vervullen. Tabel~\ref{tab:ekf_componenten} geeft een overzicht van deze componenten voordat elk onderdeel in detail wordt toegelicht.
+
+
+
+
+\begin{comment}
+    
+Het EKF combineert de IMU-data met de RTK data tot één betrouwbare positieschatting. Dit filter is opgebouwd uit meerdere onderdelen waarvan deze zijn weergegeven in tabel \ref{tab:ekf_componenten}.
+
+\newpage
 
 \begin{table}[htbp]
     \centering
@@ -264,7 +180,7 @@ versnelling op de x-as. Wanneer een sensor gekanteld is, projecteert de
 zwaartekracht zich gedeeltelijk op de meetassen van de accelerometer. Zoals 
 beschreven in de applicatienote van Analog Devices~\cite{analogdevices_an1057}, 
 geldt dat de projectie van de zwaartekracht op de x as gelijk is aan 
-$g \cdot \sin(\theta_p)$ bij een pitch $\theta_p$. Bij een pitch
+$g \cdot \sin(\theta_p)$. Bij een pitch
 $\theta_p$ projecteert de zwaartekracht zich dus als $-\sin(\theta_p)$ op 
 de x as van de sensor. Dit component wordt afgetrokken van de ruwe meting 
 zoals uitgedrukt in formule~\ref{eq:grav_comp}.
@@ -310,13 +226,6 @@ waarbij door middel van rotatiematrices de versnellingsvector volledig
 naar het horizontale vlak wordt teruggedraaid~\cite{nxp2013}. Deze 
 methode is opgenomen in bijlage~\ref{app:zwaartekracht} voor de 
 volledigheid.
-
-De uitkomst \texttt{accel\_ms2} is de gecorrigeerde rijversnelling 
-in m/s² die als invoer wordt meegegeven aan de predictiestap van het 
-EKF. Een kleine resterende fout blijft aanwezig omdat de pitchschatting 
-uit het complementary filter niet perfect is. Deze wordt deels 
-gecompenseerd door de accelerometerbias $b_a$ in de state vector 
-van het EKF.
 
 \subsubsection{State vector}
 
@@ -434,8 +343,6 @@ gebruikt het filter via de Kalman gain deze correlatie om een deel
 van die positiefout toe te schrijven aan de bias en die dienovereenkomstig 
 bij te stellen. Zo werkt de biascorrectie indirect via de 
 covariantiematrix.
-
-
 
 
 

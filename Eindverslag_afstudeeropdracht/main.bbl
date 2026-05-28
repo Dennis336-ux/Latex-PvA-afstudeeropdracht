@@ -19,28 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
-    \entry{analogdevices_an1057}{misc}{}{}
-      \name{author}{1}{}{%
-        {{hash=a12ff886a2379a9ee6efaa9acfb54df4}{%
-           family={{Analog Devices}},
-           familyi={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{a12ff886a2379a9ee6efaa9acfb54df4}
-      \strng{fullhash}{a12ff886a2379a9ee6efaa9acfb54df4}
-      \strng{fullhashraw}{a12ff886a2379a9ee6efaa9acfb54df4}
-      \strng{bibnamehash}{a12ff886a2379a9ee6efaa9acfb54df4}
-      \strng{authorbibnamehash}{a12ff886a2379a9ee6efaa9acfb54df4}
-      \strng{authornamehash}{a12ff886a2379a9ee6efaa9acfb54df4}
-      \strng{authorfullhash}{a12ff886a2379a9ee6efaa9acfb54df4}
-      \strng{authorfullhashraw}{a12ff886a2379a9ee6efaa9acfb54df4}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{[Online]. Available: \url{https://www.analog.com/en/resources/app-notes/an-1057.html}. Geraadpleegd op 20 mei 2026}
-      \field{title}{AN-1057: Using an Accelerometer for Inclination Sensing}
-      \field{year}{2010}
-    \endentry
     \entry{stmicro_asm330lhh}{manual}{}{}
       \list{organization}{1}{%
         {STMicroelectronics}%
@@ -90,6 +68,36 @@
       \field{labeltitlesource}{title}
       \field{title}{Estimation with Applications to Tracking and Navigation}
       \field{year}{2001}
+    \endentry
+    \entry{kalmanfilter_net}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=be66a6c45dabc0af12f7e4ec5744dca7}{%
+           family={Becker},
+           familyi={B\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{be66a6c45dabc0af12f7e4ec5744dca7}
+      \strng{fullhash}{be66a6c45dabc0af12f7e4ec5744dca7}
+      \strng{fullhashraw}{be66a6c45dabc0af12f7e4ec5744dca7}
+      \strng{bibnamehash}{be66a6c45dabc0af12f7e4ec5744dca7}
+      \strng{authorbibnamehash}{be66a6c45dabc0af12f7e4ec5744dca7}
+      \strng{authornamehash}{be66a6c45dabc0af12f7e4ec5744dca7}
+      \strng{authorfullhash}{be66a6c45dabc0af12f7e4ec5744dca7}
+      \strng{authorfullhashraw}{be66a6c45dabc0af12f7e4ec5744dca7}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Geraadpleegd op 28 mei 2026}
+      \field{title}{Kalman Filter Tutorial}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://kalmanfilter.net/
+      \endverb
+      \verb{url}
+      \verb https://kalmanfilter.net/
+      \endverb
     \endentry
     \entry{boers_particle_filter}{article}{}{}
       \name{author}{1}{}{%
@@ -667,6 +675,28 @@
       \verb https://ofstandard.com/general/standard-dimensions-of-horse-racing-track
       \endverb
     \endentry
+    \entry{rtcm_standard}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=18a6c308ab0f748662239731bff99a83}{%
+           family={{RTCM Special Committee 104}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{18a6c308ab0f748662239731bff99a83}
+      \strng{fullhash}{18a6c308ab0f748662239731bff99a83}
+      \strng{fullhashraw}{18a6c308ab0f748662239731bff99a83}
+      \strng{bibnamehash}{18a6c308ab0f748662239731bff99a83}
+      \strng{authorbibnamehash}{18a6c308ab0f748662239731bff99a83}
+      \strng{authornamehash}{18a6c308ab0f748662239731bff99a83}
+      \strng{authorfullhash}{18a6c308ab0f748662239731bff99a83}
+      \strng{authorfullhashraw}{18a6c308ab0f748662239731bff99a83}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online]. Available: \url{https://www.rtcm.org/publications}. Geraadpleegd op 25 mei 2026}
+      \field{title}{RTCM Standard 10403.4 -- Differential GNSS (Global Navigation Satellite Systems) Services}
+      \field{year}{2023}
+    \endentry
     \entry{segger_rtt}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=4397897de0152d3d5099a9dc7f054d5d}{%
@@ -743,6 +773,34 @@
       \field{howpublished}{[Online]. Available: https://www.thejockeyclub.co.uk/the-racing/racing-explained/how-fast-are-racehorses/}
       \field{note}{Geraadpleegd op 16 februari 2026}
       \field{title}{How Fast Are Racehorses? | Racing Explained}
+    \endentry
+    \entry{ublox_x20p_interface_hpg202}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=ce67d5508a290f64ab6c0ffd9c130268}{%
+           family={{u-blox AG}},
+           familyi={u\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Thalwil, Switzerland}%
+      }
+      \list{organization}{1}{%
+        {u-blox AG}%
+      }
+      \strng{namehash}{ce67d5508a290f64ab6c0ffd9c130268}
+      \strng{fullhash}{ce67d5508a290f64ab6c0ffd9c130268}
+      \strng{fullhashraw}{ce67d5508a290f64ab6c0ffd9c130268}
+      \strng{bibnamehash}{ce67d5508a290f64ab6c0ffd9c130268}
+      \strng{authorbibnamehash}{ce67d5508a290f64ab6c0ffd9c130268}
+      \strng{authornamehash}{ce67d5508a290f64ab6c0ffd9c130268}
+      \strng{authorfullhash}{ce67d5508a290f64ab6c0ffd9c130268}
+      \strng{authorfullhashraw}{ce67d5508a290f64ab6c0ffd9c130268}
+      \field{sortinit}{u}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Beschikbaar via de officiële u-blox documentatie}
+      \field{title}{u-blox X20P Interface Description: High Precision GNSS, Version HPG 2.02}
+      \field{year}{2026}
     \endentry
     \entry{valente2020accuracy}{article}{}{}
       \name{author}{4}{}{%
@@ -977,7 +1035,7 @@
       \field{year}{2022}
     \endentry
   \enddatalist
-  \missing{thrun2005probabilistic}
+  \missing{ublox_x20p_interface}
 \endrefsection
 \endinput
 

@@ -1,3 +1,27 @@
 \section{Conclusie}
+\label{sec:conclusie}
+
+Het doel van dit project was het onderzoeken naar sensor fusion methodes met de al beschikte IMU om zo de robuustheid van de ProRTK tracker van MYLAPS te verbeteren. \\
+
+Uit de validatietests blijkt dat het ontwikkelde systeem, gebruikmakend van EKF, positieve resultaten laat zien. Onder stabiele omstandigheden volgt het systeem de RTK positie nauwkeurig zonder de oorspronkelijke nauwkeurigheid negatief te beïnvloeden. Een grote meerwaarde van het systeem blijkt tijdens signaalverstoringen. Het systeem is in staat om onrealistische sprongen (zoals multipath fouten) te verwerpen en een logische route door te trekken. Ook bij volledige signaaluitval van 2 seconden vangt het systeem dit op met een kleine afwijking. \\ 
+
+De nauwkeurigheid verslechterd echter bij langere duur. Na langere periodes ontstaat er een afwijking in de afgelegde afstand en richting veroorzaakt door gyroscoopdrift en de snelheidsschatting. Daarnaast is een beperking van het systeem dat achterwaartse bewegingen niet ondersteunt worden. Gezien de context van paardensport, waarbij uitsluitend voorwaartse beweging plaatsvindt, is dit geen belemmering voor deze toepassing. \\
+
+Concluderend kan gesteld worden dat het systeem een betrouwbare basis vormt. De problemen van RTK worden opgevangen en een vloeiende positieschatting wordt gerealiseerd voor enige tijd.
+
+\newpage
+
+
+\section{Discussie}
+\label{sec:discussie}
+
+In dit onderzoek is aangetoond dat het ontworpen systeem de positiebepaling van de ProRTK tracker aanzienlijk robuuster maakt. Echter kijkend naar de resultaten zijn er een aantal beperkingen die in overweging genomen moeten worden. \\
+
+Ten eerste is de validatie van het systeem uitgevoerd door middel van loop testen en autotesten. Hoewel deze tests aantonen dat de werking van het filter correct is, geeft dit niet een realistisch beeld kijkend naar de dynamiek van een renpaard. Zoals in de specificaties is vastgesteld, kan de tracker klappen ervaren tot ongeveer 2,5 g. Deze schokken introduceren ruis op de accelerometer en dit is in de huidige tests niet goed in kaart gebracht. \\
+
+Ten tweede is het systeem beperkt tot voorwaartse beweging. Omdat de snelheidsdata van de u-blox altijd een positieve waarde geeft en het filter uitgaat van voorwaartse beweging in de kijkrichting, faalt de positieschatting bij achteruitrijden. Voor paardenraces is dit irrelevant, maar voor een bredere inzetbaarheid zal deze logica aangevuld moeten worden. \\
+
+Tot slot valt op dat het systeem drift vertoont bij langdurig signaaluitval of verslechtering. Een kleine afwijking is zowel accelerometer als gyroscoop data resulteert in aanzienlijke afwijking over lange tijd. Voor vervolgonderzoek is het wellicht een mogelijkheid om te experimenteren met andere sensoren als een magnetometer of een ander filter. \\
+
 
 \newpage

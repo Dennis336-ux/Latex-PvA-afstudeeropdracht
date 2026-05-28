@@ -1,6 +1,7 @@
 % !TeX root = main.tex
 
 \section{Inleiding}
+\label{sec:inleiding}
 
 In de hedendaagse topsport wordt het verschil tussen winst en verlies vaak 
 bepaald door fracties van seconden en enkele centimeters. Waar tijdwaarneming 
@@ -27,6 +28,10 @@ betrouwbaar signaal. Signaaluitval en multipath effecten door tribunes en gebouw
 De ProRTK tracker beschikt naast de RTK GNSS ontvanger ook over een `Inertial Measurement Unit' (IMU), bestaande uit een accelerometer en een gyroscoop. Deze IMU 
 wordt in het huidige systeem echter niet ingezet voor de positiebepaling. Hierom is er vanuit MYLAPS de wens om te achterhalen of deze IMU (en eventuele aanvullende sensoren), doormiddel van sensorfusion (combinatie van meerdere sensordatastromen), meerwaarde kan bieden aan de huidige positiebepaling. De centrale vraag van dit onderzoek is of de aanwezige IMU ingezet kan worden om de robuustheid van de positiebepaling te verbeteren, en zo ja, in welke mate. \\
 
-\todo[inline]{Opmaak van de hoofdstukken vermelden wanneer het verslag klaar is.}
+
+\subsection*{Leeswijzer}
+Om de centrale onderzoeksvraag te beantwoorden, is dit verslag opgebouwd uit meerdere hoofdstukken. In hoofdstuk \ref{sec:huidige_systeem} wordt eerst de context geschetst door het huidige systeem en de bijbehorende beperkingen te analyseren. Vervolgens vormen hoofdstuk \ref{sec:lokalisatie} en \ref{sec:sensor_fusion} het theoretisch kader, waarin de werking van RTK GNSS, de oorzaken van signaalverlies en de principes van sensor fusion worden onderzocht. \\
+
+Op basis van deze theorie worden in hoofdstuk \ref{sec:specificaties} de randvoorwaarden vastgesteld. De technische kern van de oplossing wordt behandeld in hoofdstuk \ref{sec:ontwerp} en \ref{sec:implementatie}. Hierin wordt de architectuur en de realisatie van het ontwikkelde systeem uiteen gezet. Tot slot worden de prestaties geanalyseerd in hoofdstuk \ref{sec:resultaten}, waarna het verslag wordt afgesloten met een conclusie (hoofdstuk \ref{sec:conclusie}) en discussie (Hoofdstuk \ref{sec:discussie}).
 
 \newpage

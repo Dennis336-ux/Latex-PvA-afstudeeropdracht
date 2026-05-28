@@ -8,7 +8,7 @@
 \contentsline {section}{\numberline {5}Robuuste lokalisatie in complexe omgevingen}{9}{section.5}%
 \contentsline {subsection}{\numberline {5.1}GNSS}{9}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Nauwkeurigheid via RTK}{10}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Gebreken}{10}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.3}Gebreken}{11}{subsection.5.3}%
 \contentsline {section}{\numberline {6}Sensor Fusion}{13}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Inertial Measurement Unit (IMU)}{13}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Alternatieve aanvullende sensoren}{14}{subsection.6.2}%
@@ -24,33 +24,26 @@
 \contentsline {subsubsection}{\numberline {6.3.4}Unscented Kalman Filter (UKF) en Particle Filter}{18}{subsubsection.6.3.4}%
 \contentsline {section}{\numberline {7}Specificaties}{19}{section.7}%
 \contentsline {section}{\numberline {8}Ontwerp}{22}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Black box}{22}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Systeemarchitectuur}{23}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}EKF dataflow}{23}{subsection.8.3}%
-\contentsline {section}{\numberline {9}implementatie}{24}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Ontwikkelomgeving en testopstelling}{24}{subsection.9.1}%
+\contentsline {subsection}{\numberline {8.1}Globale systeemarchitectuur}{22}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Ontwerp van het Extended Kalman Filter}{22}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.2.1}De state vector}{22}{subsubsection.8.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2}Het bewegingsmodel: de prediction}{23}{subsubsection.8.2.2}%
+\contentsline {subsubsection}{\numberline {8.2.3}De updatestap: RTK correctie}{23}{subsubsection.8.2.3}%
+\contentsline {section}{\numberline {9}implementatie}{25}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Ontwikkelomgeving en testopstelling}{25}{subsection.9.1}%
 \contentsline {subsection}{\numberline {9.2}IMU integratie}{25}{subsection.9.2}%
-\contentsline {paragraph}{Accelerometerbereik: $\pm $4 g}{25}{paragraph*.23}%
-\contentsline {paragraph}{Gyroscoopbereik: $\pm $500 DPS}{25}{paragraph*.24}%
-\contentsline {paragraph}{Outputfrequentie (ODR): 208 Hz}{25}{paragraph*.25}%
-\contentsline {paragraph}{Bandbreedte laagdoorlaatfilter: 50 Hz}{25}{paragraph*.26}%
-\contentsline {paragraph}{Block Data Update (BDU)}{25}{paragraph*.27}%
-\contentsline {paragraph}{Gyroscoop LPF1}{26}{paragraph*.28}%
-\contentsline {subsubsection}{\numberline {9.2.1}Registerconfiguratie}{26}{subsubsection.9.2.1}%
-\contentsline {subsubsection}{\numberline {9.2.2}Gyroscooop kalibratie}{26}{subsubsection.9.2.2}%
-\contentsline {subsubsection}{\numberline {9.2.3}SPI-busprobleem bij de IMU-uitlezing}{28}{subsubsection.9.2.3}%
-\contentsline {subsection}{\numberline {9.3}Extended Kalman Filter}{29}{subsection.9.3}%
-\contentsline {subsubsection}{\numberline {9.3.1}Complementary filter voor attitude}{29}{subsubsection.9.3.1}%
-\contentsline {subsubsection}{\numberline {9.3.2}Zwaartekrachtcompensatie}{30}{subsubsection.9.3.2}%
-\contentsline {subsubsection}{\numberline {9.3.3}State vector}{31}{subsubsection.9.3.3}%
-\contentsline {subsubsection}{\numberline {9.3.4}Motion model}{31}{subsubsection.9.3.4}%
-\contentsline {subsubsection}{\numberline {9.3.5}Covariantiematrix en Jacobian matrix}{32}{subsubsection.9.3.5}%
-\contentsline {section}{\numberline {10}Resultaten en validatie}{34}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Testopzet}{34}{subsection.10.1}%
-\contentsline {section}{\numberline {11}Discussie}{35}{section.11}%
-\contentsline {section}{\numberline {12}Conclusie}{36}{section.12}%
-\contentsline {section}{Bronnen}{37}{section.12}%
-\contentsline {section}{\numberline {A}Begrippenlijst}{39}{appendix.A}%
-\contentsline {section}{\numberline {B}Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{42}{appendix.B}%
-\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{42}{paragraph*.37}%
-\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{42}{paragraph*.38}%
+\contentsline {subsubsection}{\numberline {9.2.1}Gyroscooop kalibratie}{26}{subsubsection.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.2}SPI-busprobleem bij de IMU-uitlezing}{27}{subsubsection.9.2.2}%
+\contentsline {subsection}{\numberline {9.3}Extended Kalman Filter}{28}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Resultaten en validatie}{29}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Testopzet}{29}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Normale omstandigheden}{30}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}RTCM correcties uitgeschakeld}{32}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}GPS uitval}{36}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Conclusie}{40}{section.11}%
+\contentsline {section}{\numberline {12}Discussie}{41}{section.12}%
+\contentsline {section}{Bronnen}{42}{section.12}%
+\contentsline {section}{\numberline {A}Begrippenlijst}{44}{appendix.A}%
+\contentsline {section}{\numberline {B}Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{47}{appendix.B}%
+\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{47}{paragraph*.42}%
+\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{47}{paragraph*.43}%
