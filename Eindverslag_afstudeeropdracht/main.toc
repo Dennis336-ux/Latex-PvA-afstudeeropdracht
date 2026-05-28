@@ -28,22 +28,24 @@
 \contentsline {subsection}{\numberline {8.2}Ontwerp van het Extended Kalman Filter}{22}{subsection.8.2}%
 \contentsline {subsubsection}{\numberline {8.2.1}De state vector}{22}{subsubsection.8.2.1}%
 \contentsline {subsubsection}{\numberline {8.2.2}Het bewegingsmodel: de prediction}{23}{subsubsection.8.2.2}%
-\contentsline {subsubsection}{\numberline {8.2.3}De updatestap: RTK correctie}{23}{subsubsection.8.2.3}%
+\contentsline {subsubsection}{\numberline {8.2.3}De updatestap: RTK correctie}{24}{subsubsection.8.2.3}%
+\contentsline {subsubsection}{\numberline {8.2.4}Foutreductie: NIS-gebaseerde metingrejectie}{24}{subsubsection.8.2.4}%
 \contentsline {section}{\numberline {9}implementatie}{25}{section.9}%
 \contentsline {subsection}{\numberline {9.1}Ontwikkelomgeving en testopstelling}{25}{subsection.9.1}%
 \contentsline {subsection}{\numberline {9.2}IMU integratie}{25}{subsection.9.2}%
 \contentsline {subsubsection}{\numberline {9.2.1}Gyroscooop kalibratie}{26}{subsubsection.9.2.1}%
 \contentsline {subsubsection}{\numberline {9.2.2}SPI-busprobleem bij de IMU-uitlezing}{27}{subsubsection.9.2.2}%
-\contentsline {subsection}{\numberline {9.3}Extended Kalman Filter}{28}{subsection.9.3}%
-\contentsline {section}{\numberline {10}Resultaten en validatie}{29}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Testopzet}{29}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Normale omstandigheden}{30}{subsection.10.2}%
-\contentsline {subsection}{\numberline {10.3}RTCM correcties uitgeschakeld}{32}{subsection.10.3}%
-\contentsline {subsection}{\numberline {10.4}GPS uitval}{36}{subsection.10.4}%
-\contentsline {section}{\numberline {11}Conclusie}{40}{section.11}%
-\contentsline {section}{\numberline {12}Discussie}{41}{section.12}%
-\contentsline {section}{Bronnen}{42}{section.12}%
-\contentsline {section}{\numberline {A}Begrippenlijst}{44}{appendix.A}%
-\contentsline {section}{\numberline {B}Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{47}{appendix.B}%
-\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{47}{paragraph*.42}%
-\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{47}{paragraph*.43}%
+\contentsline {subsection}{\numberline {9.3}Datavoorbewerking en Transformaties}{28}{subsection.9.3}%
+\contentsline {subsubsection}{\numberline {9.3.1}Zwaartekrachtcompensatie (Complementary Filter)}{28}{subsubsection.9.3.1}%
+\contentsline {section}{\numberline {10}Resultaten en validatie}{30}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Testopzet}{30}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Normale omstandigheden}{31}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}RTCM correcties uitgeschakeld}{33}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}GPS uitval}{37}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Conclusie}{41}{section.11}%
+\contentsline {section}{\numberline {12}Discussie}{42}{section.12}%
+\contentsline {section}{Bronnen}{43}{section.12}%
+\contentsline {section}{\numberline {A}Begrippenlijst}{45}{appendix.A}%
+\contentsline {section}{\numberline {B}Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{48}{appendix.B}%
+\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{48}{paragraph*.44}%
+\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{48}{paragraph*.45}%

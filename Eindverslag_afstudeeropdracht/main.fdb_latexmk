@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1779972128.35925 "main.bcf" "main.bbl" "main" 1779975326.57672 0
-  "main.bcf" 1779975325 112225 fdb2c6e50c2df49cc9d363a10f1cf641 "pdflatex"
-  "references.bib" 1779972116 12697 229a41e11f5ca747be6839e77ce87211 ""
+["biber main"] 1779993507.47132 "main.bcf" "main.bbl" "main" 1779997450.04963 0
+  "main.bcf" 1779997449 112447 d9e85dc8ccd0526f99d9bbc480ed07b6 "pdflatex"
+  "references.bib" 1779986807 13270 06f6d3c8e73ec997c92c6a3cc8b516f0 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1779975317.99978 "c:/Users/Dennis van den Berg/OneDrive/Documenten/School/Stage_verslag/Latex-PvA-afstudeeropdracht/Eindverslag_afstudeeropdracht/main.tex" "main.pdf" "main" 1779975326.57764 0
+["pdflatex"] 1779997440.64362 "c:/Users/Dennis van den Berg/OneDrive/Documenten/School/Stage_verslag/Latex-PvA-afstudeeropdracht/Eindverslag_afstudeeropdracht/main.tex" "main.pdf" "main" 1779997450.05101 0
   "C:/Users/Dennis van den Berg/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1777799416 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Dennis van den Berg/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1775113920 11548 41825f0f56598aee7ae07846bb7bb99d ""
   "C:/Users/Dennis van den Berg/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1777799237 13340701 075c155f16931552caed06822723270c ""
@@ -305,22 +305,23 @@
   "images/sha_tin.jpg" 1779430835 87205 ae073dd23ca6c9bd8f46dc6491eb5289 ""
   "images/tracker.jpg" 1779430835 668749 38f1d57046c906568aa7b2805962b3ae ""
   "images/trilateration.jpg" 1777799224 26453 ada4c280e4954931457b27fdd9cb232c ""
-  "implementatie.tex" 1779954277 34391 af675a2199cca1a8f7f464a69d4d2c33 ""
+  "implementatie.tex" 1779997430 12208 1cc604039336a2f94683191c676c97e2 ""
   "inleiding.tex" 1779957839 3294 2fff744c029ed8c27a974e2b24a9ac9f ""
   "logos/HvA Internationaal.jpg" 1775113157 129636 fc5b4e491fab9f8de7dc3c29802299b1 ""
-  "main.aux" 1779975325 34457 3dda4e3776fccf246b10146a85a49e7b "pdflatex"
-  "main.bbl" 1779972130 47799 165c22c6d01ad2b9d48546b6d376448c "biber main"
-  "main.out" 1779975325 7993 347a22b7681f5bb3b6ef63a3fe9a0f74 "pdflatex"
-  "main.run.xml" 1779975325 2305 52095dfad395b381e9a32937e764a41c "pdflatex"
+  "logos/mylaps_logo.jpg" 1779982569 4694 ce4019e642eb74d64e241af2fb24c851 ""
+  "main.aux" 1779997449 36127 8a524a64a225bae8df01d4a2dce6f5a3 "pdflatex"
+  "main.bbl" 1779993510 50286 9a71740a4209a6578e44476643d17aca "biber main"
+  "main.out" 1779997449 8662 00ce300160a16cff08f53660a50725ae "pdflatex"
+  "main.run.xml" 1779997449 2305 52095dfad395b381e9a32937e764a41c "pdflatex"
   "main.tex" 1779430835 618 8227e5247e02d6ef699a6baa4be0d44f ""
-  "main.toc" 1779975325 4307 74ae0d651cacf9acf70799a284fb4c0c "pdflatex"
-  "resultaten.tex" 1779963150 18036 ef6814872b206b7670f75071b97ab72b ""
+  "main.toc" 1779997449 4564 d19a86aeb5504a92736b55b941643e44 "pdflatex"
+  "resultaten.tex" 1779993497 17991 a1b514b521fa725b10224183c63b047e ""
   "specificaties.tex" 1779963338 8329 62bfe5a2b0f9761a1034548fc5a35582 ""
-  "systeemontwerp.tex" 1779975308 12972 9b361b8d7e0352eac79202d4b131746b ""
-  "template.tex" 1779099449 3066 a7050ea72a99a5d46cdad1dfc3a2f781 ""
+  "systeemontwerp.tex" 1779991938 11391 9ceb269cf1c510d3eed00120a0190f4d ""
+  "template.tex" 1779983515 3350 0df09d95b21043d38193c0e72b003757 ""
   "titlepage.tex" 1778430067 926 3e46988732975dbf90b4970cc7f9a1db ""
   "vooronderzoek.tex" 1779954277 31776 f02a4444381e7d611c103a490c152591 ""
-  "voorwoord.tex" 1775113157 79 5a249797e2a144912fbd52731704f838 ""
+  "voorwoord.tex" 1779997430 79 5a249797e2a144912fbd52731704f838 ""
   "zwaartekracht.tex" 1779430835 4426 2f222aaf341ae4f9a32d821658da15ae ""
   (generated)
   "main.aux"

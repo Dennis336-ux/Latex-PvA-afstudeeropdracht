@@ -330,6 +330,34 @@
       \verb https://inertia-technology.com/usecase/wireless-equine-gait-analysis/
       \endverb
     \endentry
+    \entry{kalman_filter_com_nis}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3af4631ab380d3d64d6c744ba2799bb5}{%
+           family={{Kalman-Filter.com}},
+           familyi={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{3af4631ab380d3d64d6c744ba2799bb5}
+      \strng{fullhash}{3af4631ab380d3d64d6c744ba2799bb5}
+      \strng{fullhashraw}{3af4631ab380d3d64d6c744ba2799bb5}
+      \strng{bibnamehash}{3af4631ab380d3d64d6c744ba2799bb5}
+      \strng{authorbibnamehash}{3af4631ab380d3d64d6c744ba2799bb5}
+      \strng{authornamehash}{3af4631ab380d3d64d6c744ba2799bb5}
+      \strng{authorfullhash}{3af4631ab380d3d64d6c744ba2799bb5}
+      \strng{authorfullhashraw}{3af4631ab380d3d64d6c744ba2799bb5}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Geraadpleegd op 28 mei 2026}
+      \field{title}{Normalized Innovation Squared ({NIS})}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://kalman-filter.com/normalized-innovation-squared/
+      \endverb
+      \verb{url}
+      \verb https://kalman-filter.com/normalized-innovation-squared/
+      \endverb
+    \endentry
     \entry{lavalle2006planning}{book}{}{}
       \name{author}{1}{}{%
         {{hash=10b09a560dbab6229987301f9a193d77}{%
@@ -417,6 +445,34 @@
       \field{note}{[Online]. Available: \url{https://web.archive.org/web/20220518025559/http:/www.pieter-jan.com/node/11}. Geraadpleegd op 7 april 2026.}
       \field{title}{Reading a IMU Without Kalman: The Complementary Filter}
       \field{year}{2013}
+    \endentry
+    \entry{medcalc_chisquare}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=b225de68eddd0f17b536c61f08d3c0c1}{%
+           family={{MedCalc Software Ltd.}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{b225de68eddd0f17b536c61f08d3c0c1}
+      \strng{fullhash}{b225de68eddd0f17b536c61f08d3c0c1}
+      \strng{fullhashraw}{b225de68eddd0f17b536c61f08d3c0c1}
+      \strng{bibnamehash}{b225de68eddd0f17b536c61f08d3c0c1}
+      \strng{authorbibnamehash}{b225de68eddd0f17b536c61f08d3c0c1}
+      \strng{authornamehash}{b225de68eddd0f17b536c61f08d3c0c1}
+      \strng{authorfullhash}{b225de68eddd0f17b536c61f08d3c0c1}
+      \strng{authorfullhashraw}{b225de68eddd0f17b536c61f08d3c0c1}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Geraadpleegd op 28 mei 2026}
+      \field{title}{Values of the Chi-squared distribution}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://www.medcalc.org/en/manual/chi-square-table.php
+      \endverb
+      \verb{url}
+      \verb https://www.medcalc.org/en/manual/chi-square-table.php
+      \endverb
     \endentry
     \entry{Meng2017RobustLocalization}{article}{}{}
       \name{author}{3}{}{%

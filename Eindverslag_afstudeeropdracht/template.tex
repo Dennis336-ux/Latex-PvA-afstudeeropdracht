@@ -82,8 +82,17 @@
 
 %logo's boven 
 \fancyhf{}
-\fancyhead[LE,RO]{\includegraphics[width=.4\textwidth]{logos/HvA Internationaal.jpg}}
-\fancyfoot[LE,RO]{\thepage}
+\fancyhead[L]{\includegraphics[width=.4\textwidth]{logos/HvA Internationaal.jpg}}
+\fancyhead[R]{\includegraphics[width=0.2\textwidth]{logos/mylaps_logo.jpg}}
+
+% FOOTERS (Onder)
+% Voettekst links
+\fancyfoot[R]{\Large \textbf{Company Confidential}}
+% Paginanummer rechts
+\fancyfoot[L]{\thepage}
+
+% Optioneel: voeg een dun lijntje toe boven de voettekst
+\renewcommand{\footrulewidth}{0.4pt} 
 \setlength{\headsep}{20pt}
 
 % Convert to Dutch

@@ -20,6 +20,8 @@ Het ontwerp van het EKF wordt hieropvolgend uiteengezet.
 \subsection{Ontwerp van het Extended Kalman Filter}
 \label{sec:ekf_ontwerp}
 
+\todo[inline]{Toevoegen van een schematische weergave van het filter}
+
 Het EKF vormt de kern van het sensor fusion systeem. In het theoretisch kader (Hoofdstuk~\ref{sec:sensorfusion}) zijn meerdere filteralgoritmes vergeleken. Het standaard Kalman filter is afgevallen aangezien de positieverandering afhangt van rijrichting en dit is niet lineair. Het Unscented Kalman filter en het Particle filter bieden beiden een nauwkeurige benadering vergelijkbaar met het EKF, maar vereisen beiden aanzienlijk meer rekenkracht en complexiteit. In dit hoofdstuk zal uitgelegd worden hoe het filter is opgezet en welke onderdelen dit bevat.
 
 \subsubsection{De state vector}
@@ -96,7 +98,7 @@ Wanneer de u-blox module een nieuwe meting genereert (25 Hz), corrigeert de upda
     \label{eq:H}
 \end{equation}
 
-Het verschil tussen deze binnen komende RTK data ($\mathbf{z} = [X, Y, v]^T$) en de voorspelde toestand door middel van de IMU, vormt de meetafwijking $\mathbf{y}$. De mate waarin deze afwijking het uiteindelijke systeem corrigeert, wordt bepaald door de \textit{Kalman Gain} ($K$). Deze factor geeft een bepaalde hoeveelheid gewicht aan de voorspelling en de correctie. Dit wordt bepaald door formule \ref{eq:kalman_gain}.
+Het verschil tussen deze binnen komende RTK data ($\mathbf{z} = [X, Y, v]^T$) en de voorspelde toestand door middel van de IMU, vormt de meetafwijking $\mathbf{y}$. De mate waarin deze afwijking het uiteindelijke systeem corrigeert, wordt bepaald door de \textit{Kalman Gain} ($K$) \cite{kalmanfilter_net}. Deze factor geeft een bepaalde hoeveelheid gewicht aan de voorspelling en de correctie. Dit wordt bepaald door formule \ref{eq:kalman_gain}.
 
 \begin{equation}
     K = P^- \cdot H^T \cdot (H \cdot P^- \cdot H^T + R)^{-1}
@@ -105,19 +107,9 @@ Het verschil tussen deze binnen komende RTK data ($\mathbf{z} = [X, Y, v]^T$) en
 
 Hierin dient de $R$ matrix als de `measurement noise'. Dit is een $3 \times 3$ matrix waarbij de onzekerheden van de positie (x en y) en de grondsnelheid gebruikt worden om de Kalman Gain te schalen. Aangezien de u-blox module dynamisch de nauwkeurigheid van zowel de positie als de snelheid kan bijhouden, wordt dit gebruikt in de $R$ matrix.
 
-\begin{comment}
-    
-
 \subsubsection{Foutreductie: NIS-gebaseerde metingrejectie}
 
-De Kalman gain vertrouwt op de aanname dat de meetonzekerheid $R$ de werkelijke
-GNSS-nauwkeurigheid correct weergeeft. In de praktijk kan de GNSS-ontvanger
-echter een meting met lage foutschatting rapporteren die desondanks meters
-afwijkt, bijvoorbeeld door multipath of een tijdelijke \textit{False Fixed}
-situatie — een probleem dat in Hoofdstuk~\ref{sec:robuuste_lokalisatie} is
-beschreven. Als het filter zo'n meting ongecontroleerd verwerkt, springt de
-positieschatting direct mee. Om dit te voorkomen wordt elke meting vooraf
-getoetst via de \textit{Normalized Innovation Squared} (NIS):
+De Kalman gain vertrouwt op de aanname dat de nauwkeurigheid die de u-blox teruggeeft correct is. In de praktijk is het echter mogelijk dat de tracker een goede nauwkeurigheid biedt, terwijl de werkelijke positie meters afwijkt. Dit is dan ook een gevolg van bijvoorbeeld multipath zoals beschreven in hoofdstuk \ref{sec:gebreken}. Als het filter zo een meting ongecontroleerd verwerkt, springt de positieschatting direct mee. Om dit te voorkomen wordt elke meting vooraf getoetst via de \textit{Normalized Innovation Squared} (NIS) zoals weergegeven in formule \ref{eq:NIS}.
 
 \begin{equation}
     \text{NIS} = \mathbf{y}^T \cdot S^{-1} \cdot \mathbf{y},
@@ -126,37 +118,6 @@ getoetst via de \textit{Normalized Innovation Squared} (NIS):
     \label{eq:NIS}
 \end{equation}
 
-De NIS drukt uit hoe verrassend een meting is gegeven de verwachte spreiding van
-het filter op dat moment. Bij een goed functionerend filter volgt de NIS een
-chi-kwadraatverdeling met twee vrijheidsgraden. Als drempelwaarde is
-$\chi^2_{2,\,0{,}99} = 9{,}21$ gekozen, wat overeenkomt met een
-betrouwbaarheidsniveau van 99\,\%: slechts 1\,\% van de correcte metingen wordt
-ten onrechte verworpen, terwijl sterke uitschieters betrouwbaar worden herkend.
-Bij verwerping groeit $P$ gewoon door, waardoor de Kalman gain bij de
-eerstvolgende betrouwbare meting groter is en het filter sneller bijstuurt.
+Hierbij is $z$ de meetvector die de u-blox meet. Volgens de theorie hoort de uitkomst van de NIS bij een functionerend filter een $\chi^2$-verdeling te volgen \cite{kalman_filter_com_nis}. Een drempelwaarde van $9{,}21$ is ingesteld en dit komt overeen met een betrouwbaarheidsinterval van 99\,\% \cite{medcalc_chisquare}. Wanneer deze waarde overschreden wordt zal de meting als onwaarschijnlijk gezien worden. Wanneer dit het geval is, zal het systeem de IMU voorspelling gebruiken in plaats van de correctie.
 
-\subsubsection{Foutreductie: Zero Velocity Update (ZUPT)}
-
-Wanneer het systeem stilstaat, accumuleert de IMU-integratie kleine
-versnellingsfouten die de geschatte snelheid langzaam laten oplopen. De
-GNSS-positiemeting corrigeert dit indirect, maar niet snel genoeg wanneer de
-onzekerheid $P$ laag is en het filter minder naar de GNSS luistert. De Zero
-Velocity Update lost dit op door bij gedetecteerde stilstand een pseudo-meting
-$v = 0$ aan het filter aan te bieden. Dit werkt via hetzelfde Kalman-mechanisme
-als de GNSS-update, maar gebruikt de snelheidsrij van $P$ als Kalman gain,
-zodat alleen de snelheid en de daaraan gekoppelde biassen worden bijgestuurd en
-de positieschatting onaangetast blijft. Een bijkomend voordeel is dat de biassen
-bij stilstand sneller convergeren: het filter kan resterende afwijkingen dan
-volledig aan de sensorbiassen toeschrijven. De stilstanddetectie is gebaseerd op
-een variantieanalyse over een schuivend venster van IMU-samples. Een object
-geldt als stilstaand wanneer zowel de variantie van de accelerometer als die van
-de gyroscoop onder een drempelwaarde liggen, én het absolute gemiddelde van het
-gyroscoopsignaal klein is. Die laatste voorwaarde is bewust toegevoegd om
-rechtdoor rijden met lage variatie niet ten onrechte als stilstand te herkennen.
-Om valse activering te voorkomen zijn twee hysterese-timers gehanteerd: stilstand
-wordt pas bevestigd na een aaneengesloten detectieperiode, terwijl het hervatten
-van beweging snel wordt herkend.
-
-
-\end{comment}
 \newpage
