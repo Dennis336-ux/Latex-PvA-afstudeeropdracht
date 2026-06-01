@@ -99,6 +99,31 @@
       \verb https://kalmanfilter.net/
       \endverb
     \endentry
+    \entry{Boe2021Complementary}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=1693148592b32adf68bc6b8869ebe219}{%
+           family={Boe},
+           familyi={B\bibinitperiod},
+           given={Sean},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{1693148592b32adf68bc6b8869ebe219}
+      \strng{fullhash}{1693148592b32adf68bc6b8869ebe219}
+      \strng{fullhashraw}{1693148592b32adf68bc6b8869ebe219}
+      \strng{bibnamehash}{1693148592b32adf68bc6b8869ebe219}
+      \strng{authorbibnamehash}{1693148592b32adf68bc6b8869ebe219}
+      \strng{authornamehash}{1693148592b32adf68bc6b8869ebe219}
+      \strng{authorfullhash}{1693148592b32adf68bc6b8869ebe219}
+      \strng{authorfullhashraw}{1693148592b32adf68bc6b8869ebe219}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://seanboe.com/blog/complementary-filters}}
+      \field{note}{Geraadpleegd op [datum]}
+      \field{title}{Complementary Filters for {IMU} Fusion}
+      \field{year}{2021}
+    \endentry
     \entry{boers_particle_filter}{article}{}{}
       \name{author}{1}{}{%
         {{hash=9c8eca8cd56918e766a37590aa57ee2b}{%
@@ -731,6 +756,37 @@
       \verb https://ofstandard.com/general/standard-dimensions-of-horse-racing-track
       \endverb
     \endentry
+    \entry{punters_shatin}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=227c0de0e700af9d984815e0aabe2a77}{%
+           family={{Punters}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{227c0de0e700af9d984815e0aabe2a77}
+      \strng{fullhash}{227c0de0e700af9d984815e0aabe2a77}
+      \strng{fullhashraw}{227c0de0e700af9d984815e0aabe2a77}
+      \strng{bibnamehash}{227c0de0e700af9d984815e0aabe2a77}
+      \strng{authorbibnamehash}{227c0de0e700af9d984815e0aabe2a77}
+      \strng{authornamehash}{227c0de0e700af9d984815e0aabe2a77}
+      \strng{authorfullhash}{227c0de0e700af9d984815e0aabe2a77}
+      \strng{authorfullhashraw}{227c0de0e700af9d984815e0aabe2a77}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Sha Tin Racecourse}
+      \field{urlday}{1}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.punters.com.au/tracks/sha-tin_165/
+      \endverb
+      \verb{url}
+      \verb https://www.punters.com.au/tracks/sha-tin_165/
+      \endverb
+    \endentry
     \entry{rtcm_standard}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=18a6c308ab0f748662239731bff99a83}{%
@@ -1056,6 +1112,41 @@
       \verb 10.1242/jeb.02511
       \endverb
     \endentry
+    \entry{Woodman2007Inertial}{report}{}{}
+      \name{author}{1}{}{%
+        {{hash=b86717f6a7585a322607ace1ec027945}{%
+           family={Woodman},
+           familyi={W\bibinitperiod},
+           given={Oliver\bibnamedelima J.},
+           giveni={O\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {University of Cambridge, Computer Laboratory}%
+      }
+      \strng{namehash}{b86717f6a7585a322607ace1ec027945}
+      \strng{fullhash}{b86717f6a7585a322607ace1ec027945}
+      \strng{fullhashraw}{b86717f6a7585a322607ace1ec027945}
+      \strng{bibnamehash}{b86717f6a7585a322607ace1ec027945}
+      \strng{authorbibnamehash}{b86717f6a7585a322607ace1ec027945}
+      \strng{authornamehash}{b86717f6a7585a322607ace1ec027945}
+      \strng{authorfullhash}{b86717f6a7585a322607ace1ec027945}
+      \strng{authorfullhashraw}{b86717f6a7585a322607ace1ec027945}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{8}
+      \field{number}{UCAM-CL-TR-696}
+      \field{title}{An Introduction to Inertial Navigation}
+      \field{type}{techreport}
+      \field{year}{2007}
+      \verb{urlraw}
+      \verb https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-696.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-696.pdf
+      \endverb
+    \endentry
     \entry{pmc_sensorfusion}{article}{}{}
       \name{author}{3}{}{%
         {{hash=01a783820fca905cdcff203f64caa39f}{%
@@ -1091,7 +1182,6 @@
       \field{year}{2022}
     \endentry
   \enddatalist
-  \missing{ublox_x20p_interface}
 \endrefsection
 \endinput
 

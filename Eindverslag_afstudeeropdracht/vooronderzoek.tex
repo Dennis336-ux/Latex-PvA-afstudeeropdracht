@@ -3,7 +3,7 @@
 \section{Robuuste lokalisatie in complexe omgevingen}
 \label{sec:lokalisatie}
 
-Om het voordeel van sensor fusion te kunnen beoordelen, is het eerst noodzakelijk de werking en beperkingen van het huidige GNSS systeem in kaart te brengen. In dit hoofdstuk wordt de werking van RTK GNSS beschreven en worden de foutbronnen geanalyseerd die de betrouwbaarheid van de positioning beperken.
+Om het voordeel van sensor fusion te kunnen beoordelen, is het eerst noodzakelijk de werking en beperkingen van het huidige GNSS systeem in kaart te brengen. In dit hoofdstuk wordt de werking van RTK GNSS beschreven en worden de foutbronnen geanalyseerd die de betrouwbaarheid van de positiebepaling beperken.
 
 \subsection{GNSS}
 
@@ -51,7 +51,7 @@ Dit is een standaard voor het uitwisselen van
 differentiële GNSS correcties die wordt gepubliceerd door de RTCM 
 Special Committee 104~\cite{rtcm_standard}. De u-blox receiver in de 
 ProRTK tracker ontvangt deze RTCM berichten en verwerkt ze automatisch 
-om de RTK-oplossing te berekenen. Wanneer de verbinding met de basestation wegvalt en er geen RTCM correcties meer binnenkoen, kan de ontvanger geen RTK fix mee krijgen. Hierdoor verslechterd de nauwkeurigheid naar die van standaard GNSS.
+om de RTK-oplossing te berekenen. Wanneer de verbinding met de basestation wegvalt en er geen RTCM correcties meer binnenkoen, kan de ontvanger geen RTK fix mee krijgen. Hierdoor verslechtert de nauwkeurigheid naar die van standaard GNSS.
 
 De afwijkingen en gebreken worden in de hieropvolgende paragraaf beschreven.
 
@@ -67,7 +67,7 @@ De hoge nauwkeurigheid is in de praktijk sterk afhankelijk van de omgeving. Omda
 	\item \textbf{Tropospheric delay:} Dit is de laag in de atmosfeer die het dichtstbij de aarde ligt. Hierbij ontstaat vertraging door verandering in temperatuur, luchtvochtigheid en druk. Ook hier kan de RTK voor compenseren aangezien deze condities vrij constant zijn in het te meten gebied.
 \end{enumerate}
 
-De multipath en NLOS effecten zijn door `Novatel' uitgebeeld zoals te zien is in figuur \ref{fig:multipath}. Bovendien zijn de afwijkingen aangetoond in tabel \ref{tab:gnss_error_sources}. 
+De multipath en NLOS effecten zijn door `Novatel', een bedrijf gespecialiseerd in GPS en GNSS apparatuur, uitgebeeld zoals te zien is in figuur \ref{fig:multipath}. Bovendien zijn de afwijkingen aangetoond in tabel \ref{tab:gnss_error_sources}. 
 
 \newpage
 
@@ -97,7 +97,7 @@ De multipath en NLOS effecten zijn door `Novatel' uitgebeeld zoals te zien is in
     \end{tabular}
 \end{table}
 
-Het gebruik van RTK-GNSS biedt dan ook een grote verbetering in precisie, maar kent dus alsnog meerdere gebreken. Het systeem heeft moeite met zichzelf corrigeren en zal dan ook regelmatig foutieve waarden als waarheid zien. In de topsport is garantie voor nauwkeurige data noodzakelijk. Om dit op te lossen wordt gekeken naar Sensor Fusion dat in het hieropvolgende hoofdstuk beschreven wordt.
+Het gebruik van RTK-GNSS biedt dan ook een grote verbetering in nauwkeurigheid, maar kent dus alsnog meerdere gebreken. Het systeem heeft moeite met zichzelf corrigeren en zal dan ook regelmatig foutieve waarden als waarheid zien. In de topsport is garantie voor nauwkeurige data noodzakelijk. Om dit op te lossen wordt gekeken naar Sensor Fusion dat in het hieropvolgende hoofdstuk beschreven wordt.
 
 \newpage
 
@@ -125,6 +125,8 @@ De gyroscoop meet draaibewegingen om de drie assen (X, Y en Z). Hiermee berekent
 Omdat een gyroscoop niet beïnvloed wordt door normale, rechte versnellingen of trillingen, is deze sensor ideaal om de actuele koers (heading) van een bewegend object bij te houden.
 Een overzicht van deze sensoren is te zien in tabel \ref{tab:imu_sensoren}
 
+\newpage
+
 \begin{table}[htbp]
     \centering
     \renewcommand{\arraystretch}{1.3}
@@ -140,20 +142,20 @@ Een overzicht van deze sensoren is te zien in tabel \ref{tab:imu_sensoren}
     \end{tabularx}
 \end{table}
 
-Een fundamenteel nadeel van een IMU is de drift. Zowel de accelerometer als de gyroscoop hebben hier last van. Elke kleine fout in de gemeten versnelling of hoeksnelheid accumuleert bij integratie. Een accelerometer bias van slechts 10 mg (0.098 m/s$^2$) resulteert na tien seconden al in een snelheidsfout van ongeveer 0.98 m/s en een positiefout van ongeveer 4.9 meter via dubbele integratie. Dit maakt een IMU als alleenstaande navigatiesysteem ongeschikt voor langetermijn zonder externe correctie.
+Een fundamenteel nadeel van een IMU is de drift. Zowel de accelerometer als de gyroscoop hebben hier last van. Elke kleine fout in de gemeten versnelling of hoeksnelheid accumuleert bij integratie. Een accelerometer bias van slechts 10 milli-g (0.098 m/s$^2$) resulteert na tien seconden al in een snelheidsfout van ongeveer 0.98 m/s en een positiefout van ongeveer 4.9 meter via dubbele integratie. Dit maakt een IMU als alleenstaande navigatiesysteem ongeschikt voor langetermijn zonder externe correctie.
 
-De noodzaak om deze sensoren te combineren is gebaseerd op het feit dat ze elkaar nuttig aanvullen. Waar de IMU op korte termijn zeer responsief is maar op lange termijn wegdrift, biedt GNSS juist een absolute positiebepaling. Door beide systemen te combineren, ontstaat er een robuuste oplossing. De IMU blijft de positie schatten wanneer GNSS wegvalt of onbetrouwbaar is door obstakels, terwijl de GNSS metingen worden gebruikt om de drift van de IMU te corrigeren en de fouten te beperken. \\
+De noodzaak om deze sensoren te combineren is gebaseerd op het feit dat ze elkaar nuttig aanvullen. Waar de IMU op korte termijn zeer responsief is maar op lange termijn drift vertoont, biedt GNSS juist een absolute positiebepaling. Door beide systemen te combineren, ontstaat er een robuuste oplossing. De IMU blijft de positie schatten wanneer GNSS wegvalt of onbetrouwbaar is door obstakels, terwijl de GNSS metingen worden gebruikt om de drift van de IMU te corrigeren en de fouten te beperken. \\
 
 
 
 \subsection{Alternatieve aanvullende sensoren}
 
-Naast GNSS en IMU zijn er andere sensortechnologieën die theoretisch de nauwkeurigheid en robuustheid van het systeem kunnen verbeteren. Voor dit project is onderzocht welke alternatieven relevant zijn, met als randvoorwaarden de compactheid van de tracker en de praktische omgeving van de paardensport.
+Hoewel de hardware van de tracker vastligt, is theoretisch onderzocht welke aanvullende sensoren de robuustheid van de positiebepaling zouden kunnen verbeteren. Dit brengt mogelijke richtingen voor vervolgonderzoek in kaart. De alternatieven worden beoordeeld op de compactheid van de tracker en de praktische omgeving van de paardensport.
 
 \subsubsection{Magnetometer}
 Een magnetometer meet de sterkte en richting van het magnetisch veld van de aarde en kan daarmee een absolute heading referentie bieden. In een 9-assige IMU is de magnetometer geïntegreerd naast de accelerometer en gyroscoop. Het grote voordeel is dat heading-drift direct kan worden gecorrigeerd zonder externe sensor. In de literatuur wordt de magnetometer dan ook regelmatig ingezet in AHRS-systemen (Attitude and Heading Reference System) voor luchtvaart en marinenavigatie \cite{bar_shalom_estimation}. \\
 
-De integratie van een magnetometer hangt echter sterk af van de omgeving. Magnetometers zijn extreem gevoelig voor magnetische interferentie die door verschillende omstandigheden veroorzaakt worden. Denk hierbij aan interne componenten op de printplaat van de tracker, zoals de batterij en de antenne, als de externe omgeving, zoals tribunes of hekwerken. Om deze foutbronnen te vermijden zal afgewogen moeten worden of het risico van deze magnetische storingen opweegt tegen de voordelen. Bovendien zal achterhaald moeten worden of de toevoeging hiervan daadwerkelijk nuttig is voor deze gebruiksomstandigheden.
+De integratie van een magnetometer hangt echter sterk af van de omgeving. Magnetometers zijn extreem gevoelig voor magnetische interferentie die door verschillende omstandigheden veroorzaakt worden. Denk hierbij aan interne componenten op de printplaat van de tracker, zoals de batterij en de antenne, als de externe omgeving, zoals tribunes of hekwerken. Om deze foutbronnen te vermijden zou afgewogen moeten worden of het risico van deze magnetische storingen opweegt tegen de voordelen. Daarnaast vereist het toevoegen van een magnetometer een 9-assige IMU, wat een wijziging van de huidige hardware betekent. Een magnetometer valt daarmee buiten de scope van dit project en is uitsluitend relevant als optie voor vervolgonderzoek.
 
 \subsubsection{Odometrie en Distance Measuring Instruments}
 Odometrie omvat alle technieken waarbij de afgelegde afstand wordt gemeten via mechanische of optische middelen. Een Distance Measuring Instrument (DMI) kan zowel een wiel encoder als een stappenteller bedragen. De wiel encoder meet de rotaties en berekent hieruit de afgelegde afstand en snelheid. De stappenteller herkent aan de hand van de mechanische beweging wanneer een stap plaatsvindt en maakt een accurate schatting van de afgelegde afstand per stap. Deze technieken bieden een nauwkeurige snelheidsmeting die onafhankelijk is van GPS en IMU. Door de complexe en variabele bewegingen van het paard is dit echter moeilijk te realiseren.
@@ -278,7 +280,7 @@ Het EKF lost dit op door het niet lineaire model op elk moment lokaal te lineari
 \label{fig:ekf_linearisatie}
 \end{figure}
 
-In meerdere dimensies tegelijk wordt dit gedaan met behulp van een zogenoemde Jacobiaan matrix. Dit is een tabel van alle partiële afgeleiden die beschrijft hoe elke toestandsvariabele (positie, snelheid, richting) de andere beïnvloedt bij een kleine verandering. 
+In meerdere dimensies tegelijk wordt dit gedaan met behulp van een zogenoemde Jacobian matrix. Dit is een tabel van alle partiële afgeleiden die beschrijft hoe elke toestandsvariabele (positie, snelheid, richting) de andere beïnvloedt bij een kleine verandering. 
 Een partiële afgeleide is in essentie dezelfde helling als hierboven beschreven, maar dan berekend voor één variabele tegelijk terwijl de rest constant wordt gehouden. Voor een systeem met drie toestandsvariabelen $x$, $v$ en $\theta$ ziet de Jacobiaan-matrix $F$ er schematisch uit zoals beschreven in formule \ref{eq:jacobiaan}.
 
 \begin{equation}

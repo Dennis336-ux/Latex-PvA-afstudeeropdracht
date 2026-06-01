@@ -6,7 +6,7 @@ en onderzoekscriteria voor het systeem vastgesteld. Het project
 richt zich op een softwarematige implementatie binnen de bestaande hardware van 
 de ProRTK tracker. \\
 
-Omdat de paardensport de primaire scenario is, zijn de dynamische eigenschappen van een galloperend paard een belangrijk punt. Volgens The Jockey Club is de hoogst gemeten snelheid in de paardensport tot wel 70,76 km/u~\cite{jockeyclub_racehorses}. Het systeem moet 
+Omdat de paardensport het primaire scenario is, zijn de dynamische eigenschappen van een galloperend paard een belangrijk punt. Volgens The Jockey Club is de hoogst gemeten snelheid in de paardensport tot wel 70,76 km/u~\cite{jockeyclub_racehorses}. Het systeem moet 
 deze snelheden met een veiligheidsmarge kunnen verwerken, wat resulteert in 
 een minimale snelheidseis van 80 km/u. Naast de hoge snelheden resulteren de dynamische bewegingen tot eisen aan het meetbereik van de sensoren. \\
 
@@ -14,7 +14,7 @@ Uit biomechanisch onderzoek~\cite{witte2006effect} blijkt dat bij
 galopperende racepaarden op snelheden van 9 tot 17 m/s een verticale kracht 
 van 24,7 N/kg op de voorledematen wordt gemeten bij topsnelheid. Via 
 $F = m \cdot a$ volgt hieruit een piekversnelling op het zwaartepunt van 
-ongeveer 2,5 g. De versnelling die op de romp wordt gemeten ligt lager, omdat 
+ongeveer 2,5 $g$. De versnelling die op de romp wordt gemeten ligt lager, omdat 
 de romp als demper werkt ten opzichte van de ledematen. De voorwaartse en 
 zijwaartse versnellingen liggen bovendien aanzienlijk lager dan de verticale 
 piekwaarde. Het accelerometerbereik van de IMU moet minimaal ruim boven deze 
@@ -76,7 +76,7 @@ Een top down view van deze renbaan is weergegeven in figuur \ref{fig:sha_tin}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.50\textwidth]{sha_tin.jpg}
-    \caption{Top down view van de Sha Tin racebaan.}
+    \caption{Top down view van de Sha Tin racebaan \cite{punters_shatin}.}
     \label{fig:sha_tin}
 \end{figure}
 
@@ -87,7 +87,7 @@ Hoewel de hoeksnelheden op officiële wedstrijd-racebanen met $6$ tot $7$ DPS re
 Een centrale eis is het behoud van de bestaande nauwkeurigheid. In open 
 omgevingen levert het huidige RTK-systeem een positienauwkeurigheid van 1 tot 
 2 cm bij een volledige RTK Fixed fix. De toevoeging van de IMU mag deze 
-precisie niet negatief beïnvloeden. Tegelijkertijd moet het systeem in staat 
+nauwkeurigheid niet negatief beïnvloeden. Tegelijkertijd moet het systeem in staat 
 zijn om foutieve GNSS-metingen, veroorzaakt door bijvoorbeeld multipath of 
 tijdelijke signaaluitval, te herkennen en af te vangen zodat de 
 positieschatting stabiel blijft. Wanneer het GNSS-signaal tijdelijk volledig 
@@ -109,9 +109,7 @@ nagenoeg vlak is en hoogtemeting geen onderdeel is van de huidige
 MYLAPS-specificaties. \\
 
 De onderstaande tabel geeft een overzicht van de vastgestelde 
-randvoorwaarden en onderzoekscriteria. Deze specificaties zijn gebaseerd op 
-de huidige stand van het vooronderzoek en kunnen gedurende het project worden 
-bijgesteld op basis van testresultaten en nader onderzoek.
+randvoorwaarden en onderzoekscriteria.
 
 \begin{table}[htbp]
     \centering

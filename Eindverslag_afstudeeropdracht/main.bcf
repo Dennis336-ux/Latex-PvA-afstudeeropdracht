@@ -2405,27 +2405,30 @@
     <bcf:citekey order="32" intorder="1">ofstandard2024</bcf:citekey>
     <bcf:citekey order="33" intorder="1">witte2006effect</bcf:citekey>
     <bcf:citekey order="34" intorder="1">wiki_shatin</bcf:citekey>
-    <bcf:citekey order="39" intorder="1">jockeyclub_racehorses</bcf:citekey>
-    <bcf:citekey order="40" intorder="1">witte2006effect</bcf:citekey>
-    <bcf:citekey order="41" intorder="1">InertiaEquineGait</bcf:citekey>
-    <bcf:citekey order="42" intorder="1">Fan2025Influence</bcf:citekey>
-    <bcf:citekey order="43" intorder="1">ublox_x20p_interface</bcf:citekey>
-    <bcf:citekey order="44" intorder="1">lavalle2006planning</bcf:citekey>
-    <bcf:citekey order="45" intorder="1">kalmanfilter_net</bcf:citekey>
-    <bcf:citekey order="46" intorder="1">bar_shalom_estimation</bcf:citekey>
-    <bcf:citekey order="47" intorder="1">kalmanfilter_net</bcf:citekey>
-    <bcf:citekey order="48" intorder="1">kalman_filter_com_nis</bcf:citekey>
-    <bcf:citekey order="49" intorder="1">medcalc_chisquare</bcf:citekey>
-    <bcf:citekey order="50" intorder="1">segger_rtt</bcf:citekey>
-    <bcf:citekey order="51" intorder="1">microchip-tseg-jlink</bcf:citekey>
-    <bcf:citekey order="52" intorder="1">stmicro_asm330lhh</bcf:citekey>
-    <bcf:citekey order="53" intorder="1">stmicro_asm330lhh</bcf:citekey>
-    <bcf:citekey order="54" intorder="1">InertiaEquineGait</bcf:citekey>
-    <bcf:citekey order="55" intorder="1">Fan2025Influence</bcf:citekey>
-    <bcf:citekey order="56" intorder="1">witte2006effect</bcf:citekey>
-    <bcf:citekey order="57" intorder="1">ST_AN5296</bcf:citekey>
-    <bcf:citekey order="60" intorder="1">ublox_x20p_interface_hpg202</bcf:citekey>
-    <bcf:citekey order="61" intorder="1">nxp2013</bcf:citekey>
+    <bcf:citekey order="35" intorder="1">punters_shatin</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">jockeyclub_racehorses</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">witte2006effect</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">InertiaEquineGait</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">Fan2025Influence</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">ublox_x20p_interface_hpg202</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">Woodman2007Inertial</bcf:citekey>
+    <bcf:citekey order="46" intorder="1">Boe2021Complementary</bcf:citekey>
+    <bcf:citekey order="47" intorder="1">lavalle2006planning</bcf:citekey>
+    <bcf:citekey order="48" intorder="1">kalmanfilter_net</bcf:citekey>
+    <bcf:citekey order="49" intorder="1">bar_shalom_estimation</bcf:citekey>
+    <bcf:citekey order="50" intorder="1">kalmanfilter_net</bcf:citekey>
+    <bcf:citekey order="51" intorder="1">kalman_filter_com_nis</bcf:citekey>
+    <bcf:citekey order="52" intorder="1">medcalc_chisquare</bcf:citekey>
+    <bcf:citekey order="53" intorder="1">segger_rtt</bcf:citekey>
+    <bcf:citekey order="54" intorder="1">microchip-tseg-jlink</bcf:citekey>
+    <bcf:citekey order="55" intorder="1">stmicro_asm330lhh</bcf:citekey>
+    <bcf:citekey order="56" intorder="1">stmicro_asm330lhh</bcf:citekey>
+    <bcf:citekey order="57" intorder="1">InertiaEquineGait</bcf:citekey>
+    <bcf:citekey order="58" intorder="1">Fan2025Influence</bcf:citekey>
+    <bcf:citekey order="59" intorder="1">witte2006effect</bcf:citekey>
+    <bcf:citekey order="60" intorder="1">ST_AN5296</bcf:citekey>
+    <bcf:citekey order="63" intorder="1">ublox_x20p_interface_hpg202</bcf:citekey>
+    <bcf:citekey order="64" intorder="1">nxp2013</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

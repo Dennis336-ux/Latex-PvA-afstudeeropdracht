@@ -1,11 +1,13 @@
-\section{implementatie}
+\section{Implementatie}
 \label{sec:implementatie}
 
 Dit hoofdstuk beschrijft de implementatie van het sensor fusion systeem. De realisatie is stapsgewijs opgebouwd: de configuratie van de ontwikkelomgeving, de IMU integratie inclusief datacommunicatie, en tot slot de realisatie van het Extended Kalman Filter (EKF).
 
 \subsection{Ontwikkelomgeving en testopstelling}
 
-Voor de eindgebruiker is het systeem ontworpen om draadloos firmware te ontvangen via Over The Air (OTA) updates. Aangezien dit niet efficiënt is voor programmeren, is een fysieke testopstelling gerealiseerd met behulp van een SEGGER J-Link debug probe \cite{segger_rtt}. \\
+Voor de eindgebruiker is het systeem ontworpen om draadloos firmware te ontvangen via Over The Air (OTA) updates. Voor de ontwikkeling en het testen is deze methode echter onpraktisch. Het draadloos versturen en installeren van de nieuwe firmware kost relatief veel tijd. Tijdens een ontwikkelproject, waarbij de code voortdurend wordt aangepast en opnieuw getest moet worden, vertraagt dit het proces aanzienlijk. \\
+
+Om die reden is een fysieke testopstelling gerealiseerd met behulp van een SEGGER J-Link debug probe. Deze maakt het mogelijk om firmware via een bekabelde verbinding snel te flashen. Daarnaast biedt de J-Link ondersteuning voor Real Time Transfer (RTT). Dit is een technologie van SEGGER waarmee de debugprobe data uit een buffer in het RAM van de microcontroller leest terwijl de processor blijft draaien. Hierdoor kan met lage overhead en zonder de uitvoering te onderbreken live data tussen de microcontroller en de computer worden uitgewisseld \cite{segger_rtt}. Hiermee kunnen sensorwaarden en filteruitkomsten live worden gelogd, wat in hoofdstuk \ref{sec:resultaten} wordt gebruikt om de werking van het EKF te valideren. \\
 
 Hoewel de J-Link standaard een 20 pins JTAG-connector heeft, communiceert de microcontroller op de printplaat via de Serial Wire Debug (SWD) interface. Omdat de printplaat niet is voorzien van een fysieke debug-header, is de verbinding handmatig tot stand gebracht. De PCB bevat specifieke testpads bedoeld voor de vier SWD signalen (VCC, GND, SWDIO en SWCLK) waaraan tijdelijk 4 kabels zijn gesoldeerd. Deze staan direct in verbinding met de J-Link (zie Figuur \ref{fig:JTAG}).
 
@@ -54,7 +56,7 @@ Wanneer de IMU goed is geconfigureerd kan gekeken worden naar het uitlezen van d
     \label{fig:sensorwaardes}
 \end{figure}
 
-Hierin zijn de waardes te zien van het apparaat die stil ligt op een tafel. Hierin zijn de verschillende g-krachten op de assen te zien en die resulteren gezamenlijk tot ongeveer 1000 milli g wat overeenkomt met de zwaartekracht. Er is duidelijk een offset te zien en de waardes schommelen. Het valt ruim binnen de specificaties van de IMU aangezien de datasheet vermeld dat het bij een zero rate level tussen de -10 en +10 dps kan zitten. De accelerometer is daarentegen vrij gelijk. Om met de waardes van de gyroscope te werken moet ernaar gekeken worden om de waardes richting 0 te krijgen en de schommelingen te verminderen. Om de schommelingen te verminderen is een filter toegevoegd die zich binnen de configuratie van de IMU bevindt. De resultaten hiervan zijn te zien in figuur \ref{fig:sensorwaardes_filter}.
+Hierin zijn de waardes te zien van het apparaat die stil ligt op een tafel. Hierin zijn de verschillende g-krachten op de assen te zien en die resulteren gezamenlijk tot ongeveer 1000 milli g wat overeenkomt met de zwaartekracht. Er is duidelijk een offset te zien en de waardes schommelen. Het valt ruim binnen de specificaties van de IMU aangezien de datasheet vermeldt dat het bij een zero rate level tussen de -10 en +10 dps kan zitten. De accelerometer is daarentegen vrij gelijk. Voordat de gyroscoopwaarden bruikbaar zijn voor het filter, dienen deze gekalibreerd te worden naar nul om zo de schommelingen te verminderen. Om de schommelingen te verminderen is het digitale laagdoorlaatfilter van de ASM330LHH ingeschakeld, dat zoals vermeld in tabel \ref{tab:imu_config} is afgesteld op een van 50 Hz. Dit filter dempt de hoogfrequente ruis op de gyroscoopmetingen, zonder de werkelijke bewegingsfrequenties (bij renpaarden onder de 10 Hz) aan te tasten. De resultaten hiervan zijn te zien in figuur \ref{fig:sensorwaardes_filter}.
 
 \newpage
 

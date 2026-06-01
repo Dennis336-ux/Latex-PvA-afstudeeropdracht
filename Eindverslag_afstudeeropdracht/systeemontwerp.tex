@@ -1,19 +1,24 @@
 \section{Ontwerp}
 \label{sec:ontwerp}
 
-Dit hoofdstuk beschrijft het ontwerp van het systeem. Het zal zich focussen op de globale werking en een gedetailleerde opbouw van het wiskundig filter.
+Dit hoofdstuk beschrijft het ontwerp van de softwarematige uitbreiding van het systeem. Het zal zich focussen op de globale werking en een gedetailleerde opbouw van het wiskundig filter.
 
 \subsection{Globale systeemarchitectuur}
 
-Het sensor fusion systeem combineert twee asynchrone datastromen tot één betrouwbare positieschatting. Er is gekozen om de IMU uit te lezen met een frequentie van 200 Hz. Deze keuze is gebaseerd op onderzoek van Inertia Technology naar paardengang \cite{InertiaEquineGait} en studies naar IMU sample frequenties bij dynamische bewegingen \cite{Fan2025Influence}. Hieruit blijkt dat 200 Hz de fysieke beweging accuraat vastlegt, terwijl hogere frequenties geen aanzienlijke verbetering opleveren. De u-blox module levert daarentegen de positiedata op 25 Hz \cite{ublox_x20p_interface}. 
 
-Het wiskundig filter voor het samenvoegen van de datastromen staat centraal. Hiervoor is in het ontwerp gekozen voor een Extended Kalman Filter (EKF). Binnen dit filter wordt de 200 Hz IMU data gebruikt voor een continue positievoorspelling (de predictiestap), waarna deze schatting wordt gecorrigeerd door de u-blox module (de updatestap). Het bewegingsmodel in dit filter is ontworpen met het idee dat het object uitsluitend beweegt in de richting waarin het georiënteerd is (\textit{heading}). Dit is kort beschreven in hoofdstuk 6 `Sensor fusion'. Tijdens een race zal de tracker dan ook nagenoeg volledig voorwaarts bewegen. Hierdoor kan de voorwaartse versnelling, samen met de kijkrichting, direct gebruikt worden om de verplaatsing te bepalen. \\
 
-Deze ontwerpkeuze brengt echter het probleem met zich mee dat de gemeten versnelling in de voorwaartse as (de x as van de IMU) zeer accuraat moet zijn. Wanneer de tracker niet perfect horizontaal gemonteerd is, lekt een deel van de zwaartekracht (1 g) naar de voorwaartse as. Dit wordt door het filter foutief geïnterpreteerd als een voorwaartse versnelling. Hierom bevat het systeem een zwaartekrachtcompensatie, door middel van een \textit{complementary filter}, die nog vóór het EKF wordt toegepast. \\
+Het sensor fusion systeem combineert twee asynchrone datastromen tot één betrouwbare positieschatting. Er is gekozen om de IMU uit te lezen met een frequentie van 200 Hz. Deze keuze is gebaseerd op onderzoek van Inertia Technology naar paardengang \cite{InertiaEquineGait} en studies naar IMU sample frequenties bij dynamische bewegingen \cite{Fan2025Influence}. Hieruit blijkt dat 200 Hz de fysieke beweging accuraat vastlegt, terwijl hogere frequenties geen aanzienlijke verbetering opleveren. De u-blox module levert daarentegen de positiedata op 25 Hz \cite{ublox_x20p_interface_hpg202}. \\
 
-De positiedata wordt standaard geleverd in lengtegraad, breedtegraad en hoogte. Om dit te gebruiken met het EKF wordt dit getransformeerd naar een lokaal \textit{East-North-Up} (ENU) coördinatenstelsel in meters. Dit stelsel maakt gebruik van een nulpunt (in dit geval de locatie waarbij de eerste RTK fix plaatsvindt) om zo in de x en y as te bepalen waar de tracker zich bevindt.
+Het wiskundig filter voor het samenvoegen van de datastromen staat centraal. Op basis van de vergelijking van filteralgoritmes in hoofdstuk \ref{sec:sensor_fusion} is gekozen voor een Extended Kalman Filter (EKF). Het standaard Kalman Filter valt af omdat de positiebepaling niet lineair is. Bij de positiebepaling zijn onderdelen als de snelheid en de kijkrichting noodzakelijk. Hierbij wordt het bepalen van de kijkrichting bepaald door gebruik te maken van sinus en cosinus functie die per difinitie niet lineair zijn. Het Unscented Kalman Filter en het Particle Filter kunnen deze niet-lineariteit ook verwerken, maar vereisen aanzienlijk meer complexiteit en rekenkracht. Binnen dit filter wordt de 200 Hz IMU data gebruikt voor een continue positievoorspelling (de predictiestap), waarna deze schatting wordt gecorrigeerd door de u-blox module (de updatestap). Het bewegingsmodel in dit filter is ontworpen met het idee dat het object uitsluitend beweegt in de richting waarin het georiënteerd is (\textit{heading}). Tijdens een race zal de tracker dan ook nagenoeg volledig voorwaarts bewegen. Hierdoor kan de voorwaartse versnelling, samen met de kijkrichting, direct gebruikt worden om de verplaatsing te bepalen. \\
+
+Deze ontwerpkeuze brengt echter het probleem met zich mee dat de gemeten versnelling in de voorwaartse as (de x-as van de IMU) zeer accuraat moet zijn. Een accelerometer meet namelijk niet alleen de bewegingsversnelling, maar ook de reactie op de zwaartekracht. Om de werkelijke voorwaartse versnelling uit de meting te halen, moet de zwaartekrachtcomponent daarom eerst worden verwijderd op basis van de oriëntatie van de sensor \cite{Woodman2007Inertial}. Wanneer de tracker niet perfect horizontaal gemonteerd is, lekt anders een deel van de zwaartekracht (1 $g$) naar de voorwaartse as, wat door het filter wordt geïnterpreteerd als een voorwaartse versnelling. Tijdens de eerste tests bleek dat deze zwaartekrachtcomponent de snelheidsschatting merkbaar verstoorde. Om dit te corrigeren is vóór het EKF een afzonderlijke zwaartekrachtcompensatie toegepast. \\
+
+Voor het bepalen van de oriëntatie die hiervoor nodig is, is gebruikgemaakt van een \textit{complementary filter}. Dit is methode om de pitch te schatten uit de accelerometer en gyroscoopdata \cite{Boe2021Complementary}, zoals beschreven in hoofdstuk \ref{sec:sensor_fusion} complementair filter. \\
+
+De positiedata wordt standaard geleverd in lengtegraad, breedtegraad en hoogte. Om dit te gebruiken met het EKF wordt dit getransformeerd naar een lokaal \textit{East-North-Up} (ENU) coördinatenstelsel in meters. Dit stelsel maakt gebruik van een nulpunt (in dit geval de locatie waarbij de eerste RTK fix plaatsvindt) om zo in de x en y as te bepalen waar de tracker zich bevindt. \\
 
 Het ontwerp van het EKF wordt hieropvolgend uiteengezet.
+
 
 
 % ═══════════════════════════════════════════════════════════════
@@ -22,7 +27,7 @@ Het ontwerp van het EKF wordt hieropvolgend uiteengezet.
 
 \todo[inline]{Toevoegen van een schematische weergave van het filter}
 
-Het EKF vormt de kern van het sensor fusion systeem. In het theoretisch kader (Hoofdstuk~\ref{sec:sensorfusion}) zijn meerdere filteralgoritmes vergeleken. Het standaard Kalman filter is afgevallen aangezien de positieverandering afhangt van rijrichting en dit is niet lineair. Het Unscented Kalman filter en het Particle filter bieden beiden een nauwkeurige benadering vergelijkbaar met het EKF, maar vereisen beiden aanzienlijk meer rekenkracht en complexiteit. In dit hoofdstuk zal uitgelegd worden hoe het filter is opgezet en welke onderdelen dit bevat.
+Het EKF vormt de kern van het sensor fusion systeem. In het theoretisch kader (hoofdstuk~\ref{sec:sensor_fusion}) zijn meerdere filteralgoritmes vergeleken. Het standaard Kalman filter is afgevallen aangezien de positieverandering afhangt van rijrichting en dit is niet lineair. Het Unscented Kalman filter en het Particle filter bieden beiden een nauwkeurige benadering vergelijkbaar met het EKF, maar vereisen beiden aanzienlijk meer rekenkracht en complexiteit. In dit hoofdstuk zal uitgelegd worden hoe het filter is opgezet en welke onderdelen dit bevat.
 
 \subsubsection{De state vector}
 
@@ -59,7 +64,7 @@ Naast het voorspellen van de toestand zelf, berekent het filter continu hoe zeke
     \label{eq:P_predict}
 \end{equation}
 
-$F$ is in dit geval de `Jacobian matrix' en $Q$ is de `process noise matrix'. Deze process matrix wordt vooraf opgesteld en geeft aan hoeveel ruis elke toestand vermoedelijk bevat. Aangezien deze niet dynamisch aangepast kan worden, wordt van te voren een schatting gemaakt welke waardes deze moet bevatten. Het EKF gebruikt de Jacobian matrix om het niet lineaire model (sinus en cosinus) te lineariseren \cite{bar_shalom_estimation}. Dit is een matrix opgebouwd uit alle partiële afgeleiden van het bewegingsmodel. \\
+$F$ is in dit geval de `Jacobian matrix' en $Q$ is de `process noise matrix'. Deze process matrix wordt vooraf opgesteld en geeft aan hoeveel ruis elke toestand vermoedelijk bevat. Aangezien deze niet dynamisch aangepast kan worden, wordt van tevoren een schatting gemaakt welke waardes deze moet bevatten. Het EKF gebruikt de Jacobian matrix om het niet lineaire model (sinus en cosinus) te lineariseren \cite{bar_shalom_estimation}. Dit is een matrix opgebouwd uit alle partiële afgeleiden van het bewegingsmodel. \\
 
 De opbouw van $F$ is direct te herleiden uit de formules \ref{eq:fx} tot en met \ref{eq:fbg}. Neem als voorbeeld de eerste formule voor de oost positie ($X_{k+1}$):
 \begin{itemize}
@@ -70,7 +75,7 @@ De opbouw van $F$ is direct te herleiden uit de formules \ref{eq:fx} tot en met 
     \item De afgeleide van $X$ naar de biassen is nul.
 \end{itemize}
 
-Wanneer ditzelfde principe wordt toegepast op alle zes de vergelijkingen, ontstaat de complete $6 \times 6$ Jacobian matrix voor dit systeem zoals weergegeven in formule \ref{eq:jacobiaan_F}.
+Wanneer ditzelfde principe wordt toegepast op alle zes de vergelijkingen, ontstaat de complete $6 \times 6$ Jacobian matrix voor dit systeem zoals weergegeven in formule \ref{eq:jacobian_F}.
 
 \begin{equation}
 F = \begin{bmatrix}
@@ -81,7 +86,7 @@ F = \begin{bmatrix}
 0 & 0 & 0                          & 0                             & 1          & 0          \\
 0 & 0 & 0                          & 0                             & 0          & 1
 \end{bmatrix}
-\label{eq:jacobiaan_F}
+\label{eq:jacobian_F}
 \end{equation}
 
 
@@ -109,7 +114,7 @@ Hierin dient de $R$ matrix als de `measurement noise'. Dit is een $3 \times 3$ m
 
 \subsubsection{Foutreductie: NIS-gebaseerde metingrejectie}
 
-De Kalman gain vertrouwt op de aanname dat de nauwkeurigheid die de u-blox teruggeeft correct is. In de praktijk is het echter mogelijk dat de tracker een goede nauwkeurigheid biedt, terwijl de werkelijke positie meters afwijkt. Dit is dan ook een gevolg van bijvoorbeeld multipath zoals beschreven in hoofdstuk \ref{sec:gebreken}. Als het filter zo een meting ongecontroleerd verwerkt, springt de positieschatting direct mee. Om dit te voorkomen wordt elke meting vooraf getoetst via de \textit{Normalized Innovation Squared} (NIS) zoals weergegeven in formule \ref{eq:NIS}.
+De Kalman gain vertrouwt op de aanname dat de nauwkeurigheid die de u-blox teruggeeft correct is. In de praktijk is het echter mogelijk dat de tracker een goede nauwkeurigheid biedt, terwijl de werkelijke positie meters afwijkt. Dit is dan ook een gevolg van bijvoorbeeld multipath zoals beschreven in hoofdstuk \ref{sec:lokalisatie}. Als het filter zo een meting ongecontroleerd verwerkt, springt de positieschatting direct mee. Om dit te voorkomen wordt elke meting vooraf getoetst via de \textit{Normalized Innovation Squared} (NIS) zoals weergegeven in formule \ref{eq:NIS}.
 
 \begin{equation}
     \text{NIS} = \mathbf{y}^T \cdot S^{-1} \cdot \mathbf{y},
