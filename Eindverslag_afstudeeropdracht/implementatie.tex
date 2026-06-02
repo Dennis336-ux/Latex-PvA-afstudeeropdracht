@@ -20,7 +20,9 @@ Hoewel de J-Link standaard een 20 pins JTAG-connector heeft, communiceert de mic
 
 \subsection{IMU integratie}
 
-Voor de ASM330LHH IMU moeten diverse parameters worden geconfigureerd om te voldoen aan de dynamische eisen van het systeem. De functionele keuzes zijn samengevat in Tabel~\ref{tab:imu_config}. De vertaalslag hiervan naar de exacte bit-waarden in de controleregisters (zoals \texttt{CTRL1\_XL}) is gedocumenteerd in Bijlage X.
+Voor de ASM330LHH IMU moeten diverse parameters worden geconfigureerd om te voldoen aan de dynamische eisen van het systeem. De functionele keuzes zijn samengevat in Tabel~\ref{tab:imu_config}.
+
+\newpage
 
 \begin{table}[htbp]
     \centering
@@ -39,7 +41,7 @@ Voor de ASM330LHH IMU moeten diverse parameters worden geconfigureerd om te vold
     \end{tabularx}
 \end{table}
 
-Om de beweging accuraat vast te leggen zonder clipping, is het accelerometerbereik ingesteld op $\pm$4 g. Dit geeft een veiligheidsmarge van 60\% ten opzichte van de berekende piekversnelling van 2,5 g \cite{stmicro_asm330lhh}. Voor het gyroscoopbereik is gekozen voor $\pm$500 DPS \cite{stmicro_asm330lhh}. Ten opzichte van de eerder berekende worst-case hoeksnelheid van 37 DPS op de renbaan, biedt dit een ruime marge (factor 14) voor abrupte en onverwachte bewegingen. \\
+Om de beweging accuraat vast te leggen zonder clipping, is het accelerometerbereik ingesteld op $\pm$4 g. Dit geeft een veiligheidsmarge van 60\% ten opzichte van de berekende piekversnelling van 2,5 g \cite{stmicro_asm330lhh}. Voor het gyroscoopbereik is gekozen voor $\pm$500 DPS \cite{stmicro_asm330lhh}. Ten opzichte van de eerder berekende worst-case hoeksnelheid van 30 DPS op de renbaan, biedt dit een ruime marge (factor 16) voor abrupte en onverwachte bewegingen. \\
 
 Voor de outputfrequentie (ODR) is een waarde van 208 Hz geconfigureerd. Dit sluit aan bij de standaard die gehanteerd wordt in het EquiMoves systeem voor paarden \cite{InertiaEquineGait} en het onderzoek naar IMU oriëntatieschatting bij hardlopers \cite{Fan2025Influence}. De IMU beschikt bovendien over een digitale laagdoorlaatfilter die in het systeem is afgesteld op 50 Hz. Hiervoor is gekozen, omdat onderzoek concludeert dat bewegingsfrequenties bij renpaarden zich onder de 10 Hz bevinden \cite{witte2006effect}. Hiermee wordt hoogfrequente ruis gedempt, zonder het werkelijke signaal aan te tasten. \\
 
@@ -57,8 +59,6 @@ Wanneer de IMU goed is geconfigureerd kan gekeken worden naar het uitlezen van d
 \end{figure}
 
 Hierin zijn de waardes te zien van het apparaat die stil ligt op een tafel. Hierin zijn de verschillende g-krachten op de assen te zien en die resulteren gezamenlijk tot ongeveer 1000 milli g wat overeenkomt met de zwaartekracht. Er is duidelijk een offset te zien en de waardes schommelen. Het valt ruim binnen de specificaties van de IMU aangezien de datasheet vermeldt dat het bij een zero rate level tussen de -10 en +10 dps kan zitten. De accelerometer is daarentegen vrij gelijk. Voordat de gyroscoopwaarden bruikbaar zijn voor het filter, dienen deze gekalibreerd te worden naar nul om zo de schommelingen te verminderen. Om de schommelingen te verminderen is het digitale laagdoorlaatfilter van de ASM330LHH ingeschakeld, dat zoals vermeld in tabel \ref{tab:imu_config} is afgesteld op een van 50 Hz. Dit filter dempt de hoogfrequente ruis op de gyroscoopmetingen, zonder de werkelijke bewegingsfrequenties (bij renpaarden onder de 10 Hz) aan te tasten. De resultaten hiervan zijn te zien in figuur \ref{fig:sensorwaardes_filter}.
-
-\newpage
 
 \begin{figure}[h]
     \centering

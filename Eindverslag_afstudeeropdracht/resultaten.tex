@@ -67,7 +67,7 @@ volledig representatief zijn voor gebruik in de paardensport. De bewegingen van 
 \subsection{Normale omstandigheden}
 
 Onder normale omstandigheden, waarbij de RTK verbinding stabiel is en 
-geen verstoringen aanwezig zijn, volgt het EKF de binnenkomende positie nauw. Dit is volgens verwachting. Bij een RTK fix met een nauwkeurigheid van 14 \,mm en een Ppos van 17 tot 19 \,mm is de RTK meting betrouwbaar genoeg voor het filter om deze sterk te volgen. De afwijking tussend de EKF en RTK positie bedraagt niet meer dan 1 \,cm wat aantoont dat het systeem goed functioneert. \\
+geen verstoringen aanwezig zijn, volgt het EKF de binnenkomende positie nauwkeurig. Dit is volgens verwachting. Bij een RTK fix met een nauwkeurigheid van 14 \,mm en een Ppos van 17 tot 19 \,mm is de RTK meting betrouwbaar genoeg voor het filter om deze sterk te volgen. De afwijking tussend de EKF en RTK positie bedraagt niet meer dan 1 \,cm wat aantoont dat het systeem goed functioneert. \\
 
 Figuur~\ref{fig:lopen_norm} toont de volledige looproute waarbij de EKF positie 
 en de ruwe RTK positie vrijwel samenvallen. Figuur~\ref{fig:lopen_norm_zoom} 
@@ -80,7 +80,7 @@ afstanden blijft het EKF de RTK positie nauwkeurig volgen gedurende de rit.
     \centering
     \includegraphics[width=1\textwidth]{normaal_lopen.png}
     \caption{Afgelegde route met de tracker in de hand. Het EKF volgt 
-    nauw de RTK-positie.}
+    nauwkeurig de RTK-positie.}
     \label{fig:lopen_norm}
 \end{figure}
 
@@ -96,7 +96,7 @@ afstanden blijft het EKF de RTK positie nauwkeurig volgen gedurende de rit.
     \centering
     \includegraphics[width=1\textwidth]{normaal_auto.png}
     \caption{Afgelegde route met de tracker gemonteerd op de auto. 
-    Het EKF blijft ook bij hogere snelheden nauw aansluiten op de 
+    Het EKF blijft ook bij hogere snelheden nauwkeurig aansluiten op de 
     RTK-positie.}
     \label{fig:lopen_norm_auto}
 \end{figure}
@@ -122,7 +122,7 @@ Aanvullend op de looptest is de werking van de uitschieterdetectie (NIS check) g
 \end{figure}
 
 Een beperking die zichtbaar wordt tijdens de autotest is het gedrag 
-bij achteruitrijden. De u-blox receiver levert de snelheid altijd als een positieve waarde, ongeacht de rijrichting. Het EKF interpreteert de gemeten snelheid daardoor als een voorwaartse beweging, terwijl in werkelijkheid de auto achteruitrijdt. De beweging komt dan ook niet overeen met de voorwaartse versnelling die gemeten is en deze RTK positie wordt dan ook verworpen. Dit is een bekend probleem van het systeem aangezien deze berust op het principe dat het systeem beweegt in de richting dat het kijkt. Aangezien achteruitrijden in de paardensport niet voorkomt, is dit buiten beschouwing gelaten. Voor toepassing bij autosport is dit echter een punt van aandacht. Dit is zichtbaar in figuur~\ref{fig:lopen_norm_auto_achteruit}. Het EKF beweegt vooruit terwijl de RKT positie achteruitgaat. \\
+bij achteruitrijden. De u-blox receiver levert de snelheid altijd als een positieve waarde, ongeacht de rijrichting. Het EKF interpreteert de gemeten snelheid daardoor als een voorwaartse beweging, terwijl in werkelijkheid de auto achteruitrijdt. De beweging komt dan ook niet overeen met de voorwaartse versnelling die gemeten is en deze RTK positie wordt dan ook verworpen. Dit is een bekend probleem van het systeem aangezien deze berust op het principe dat het systeem beweegt in de richting dat het kijkt. Aangezien achteruitrijden in de paardensport niet voorkomt, is dit buiten beschouwing gelaten. Voor toepassing bij autosport is dit echter een punt van aandacht. Dit is zichtbaar in figuur~\ref{fig:lopen_norm_auto_achteruit}. Het EKF beweegt vooruit terwijl de RTK positie achteruitgaat. \\
 
 \begin{figure}[htbp]
     \centering
@@ -138,10 +138,10 @@ bij achteruitrijden. De u-blox receiver levert de snelheid altijd als een positi
 \subsection{RTCM correcties uitgeschakeld}
 
 Als tweede scenario zijn de RTCM correcties uitgeschakeld, waardoor de 
-receiver verslechterd van een RTK fix naar standaard GNSS nauwkeurigheid. 
+receiver verslechtert van een RTK fix naar standaard GNSS nauwkeurigheid. 
 Dit simuleert een situatie waarbij de verbinding met de basestation 
 tijdelijk wegvalt, wat in de praktijk kan voorkomen bij een te grote 
-afstand tot de basestation of obstakels in de omgeving.
+afstand tot de basestation of obstakels in de omgeving. \\
 
 Figuur~\ref{fig:lopen_rtk} toont de volledige looproute tijdens dit 
 scenario. Op meerdere momenten tijdens de route wijkt de ruwe GNSS positie af van de verwachte route doordat de RTK correcties ontbreken. Figuur~\ref{fig:lopen_rtk_sprong} toont een opvallend moment 
@@ -164,7 +164,7 @@ waarbij de ruwe positie een plotselinge zijwaartse sprong maakt. Het EKF trekt d
     \label{fig:lopen_rtk_sprong}
 \end{figure}
 
-Dit proces is duidelijk terug te zien in het teruggegeven log bestand. Onderstaand is een ingekort stuk uit het log bestand weergegeven tijdens dit signaalverlies. Zodra de fix wegvalt (\texttt{Lk:0}) stijgt de nauwkeurigheid (hAcc van 15 mm naar 1676 mm) waardoor het filter de meting als onbetrouwbaar ziet. Naarmate deze periode langer duurt is te zien dat zijn eigen onzekerheid groeit. Dit is te zien aan de \texttt{Ppos} waarde (de positieonzekerheid), die in deze periode stijgt van 19~mm naar ruim 1000~mm.
+Dit proces is duidelijk terug te zien in het teruggegeven log bestand. Onderstaand is een ingekort stuk uit het log bestand weergegeven tijdens dit signaalverlies. Zodra de fix wegvalt (\texttt{Lk:0}) neemt de nauwkeurigheid drastisch af (hAcc van 15 mm naar 1676 mm) waardoor het filter de meting als onbetrouwbaar ziet. Naarmate deze periode langer duurt is te zien dat zijn eigen onzekerheid groeit. Dit is te zien aan de \texttt{Ppos} waarde (de positieonzekerheid), die in deze periode stijgt van 19~mm naar ruim 1000~mm.
 
 \begin{lstlisting}[caption={Log-extract dat de oplopende onzekerheid (Ppos) toont tijdens het verlies en herstel van de RTK fix.}, label={lst:log_outage}, basicstyle=\ttfamily\scriptsize, breaklines=true, frame=single]
 00> T:1242073664 | Lk:2 | Raw:... | EKF:... | hAcc:15 mm   | Ppos:19 mm   | NIS:0 | spd:151 cms | hdg:100 deg
@@ -254,6 +254,18 @@ Hoewel de route logisch wordt doorgetrokken, is de schatting niet feilloos. Na d
     \label{fig:lopen_gps_groen}
 \end{figure}
 
+Om de prestaties bij signaaluitval in kaart te brengen, is voor elke uitval de afwijking bepaald. Dit is het verschil tussen de EKF schatting en de werkelijke positie op het moment dat het signaal terugkeert. Dit is namelijk de drift die het systeem heeft opgebouwd zonder externe correctie. In figuur \ref{fig:lopen_afstand_uit} is dit uiteengezet. Alhoewel er kleine schommelingen te zien zijn overschrijdt geen enkele uitval 350 mm.
+
+\newpage
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{lopen_afstand_uit.png}
+    \caption{Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de looptest. Elke ster vertegenwoordigt één uitval.}
+    \label{fig:lopen_afstand_uit}
+\end{figure}
+
+
 Tijdens de autotest treden vergelijkbare effecten op. In figuur~\ref{fig:auto_gps_rood_1} is een trajectdeel met twee gaten te zien. Figuur~\ref{fig:auto_gps_groen_1} laat zien dat het bovenste gat zeer goed wordt overbrugt, terwijl er bij het onderste gat een lichte afwijking in zowel snelheid als richting heeft plaatsgevonden.
 
 \newpage
@@ -307,5 +319,18 @@ Meerdere soortgelijke resultaten zijn weergegeven in figuren \ref{fig:auto_gps_r
         \label{fig:auto_gps_groen_3}
     \end{minipage}
 \end{figure}
+
+Net zoals bij de looptest zijn nogmaals de afwijkingen uiteengezet. Deze waarden zijn weergegeven in figuur \ref{fig:uitval_afstand}. uit het figuur blijkt dat de afwijking sterk varieert per uitval. In het merendeel van de gevallen blijft de afwijking beperkt, van enkele millimeters tot ongeveer 650 mm. Echter in een aantal gevallen loopt de afwijking op tot enkele meters, met een maximum van ongeveer 3,9 m. Opvallend is dat de grote afwijkingen plaatsvinden op momenten dat de auto een grote versnelling of vertraging heeft. Het filter overschat of onderschat zijn positie door deze plotse verandering in snelheid waardoor de afwijking met de realiteit toeneemt. Tijdens fragmenten waarbij de auto een relatief stabiele snelheid bevat, is te zien dat de afwijkingen rond de 300 tot 650 mm bedragen. Dit is ook te herkennen in de afwijkingen van de looptest aangezien hier met een relatief stabiele snelheid het traject is afgelegd. Voor een tijdelijke uitval zijn afwijkingen onder de meter acceptabel, echter bij deze grote sprongen bevat het systeem nog ruimte voor verbetering. \\
+
+\newpage
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{uitval_afstand.png}
+    \caption{Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de autotest. Elke ster vertegenwoordigt één uitval.}
+    \label{fig:uitval_afstand}
+\end{figure}
+
+
 
 \newpage

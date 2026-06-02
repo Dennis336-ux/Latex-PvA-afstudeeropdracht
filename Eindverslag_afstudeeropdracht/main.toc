@@ -17,7 +17,7 @@
 \contentsline {subsubsection}{\numberline {4.2.4}LiDAR}{16}{subsubsection.4.2.4}%
 \contentsline {subsubsection}{\numberline {4.2.5}Vision Aided Navigation (Camera)}{16}{subsubsection.4.2.5}%
 \contentsline {subsection}{\numberline {4.3}Filteralgoritmes}{16}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Complementair filter}{16}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.1}Complementary filter}{16}{subsubsection.4.3.1}%
 \contentsline {subsubsection}{\numberline {4.3.2}Kalman Filter}{17}{subsubsection.4.3.2}%
 \contentsline {subsubsection}{\numberline {4.3.3}Extended Kalman Filter (EKF)}{18}{subsubsection.4.3.3}%
 \contentsline {subsubsection}{\numberline {4.3.4}Unscented Kalman Filter (UKF) en Particle Filter}{19}{subsubsection.4.3.4}%
@@ -33,18 +33,17 @@
 \contentsline {subsection}{\numberline {7.1}Ontwikkelomgeving en testopstelling}{26}{subsection.7.1}%
 \contentsline {subsection}{\numberline {7.2}IMU integratie}{26}{subsection.7.2}%
 \contentsline {subsubsection}{\numberline {7.2.1}Gyroscooop kalibratie}{27}{subsubsection.7.2.1}%
-\contentsline {subsubsection}{\numberline {7.2.2}SPI-busprobleem bij de IMU-uitlezing}{29}{subsubsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.3}Datavoorbewerking en Transformaties}{30}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.2.2}SPI-busprobleem bij de IMU-uitlezing}{28}{subsubsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.3}Datavoorbewerking en Transformaties}{29}{subsection.7.3}%
 \contentsline {subsubsection}{\numberline {7.3.1}Zwaartekrachtcompensatie (Complementary Filter)}{30}{subsubsection.7.3.1}%
-\contentsline {section}{\numberline {8}Resultaten en validatie}{32}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Testopzet}{32}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Normale omstandigheden}{33}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}RTCM correcties uitgeschakeld}{35}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}GPS uitval}{39}{subsection.8.4}%
-\contentsline {section}{\numberline {9}Conclusie}{43}{section.9}%
-\contentsline {section}{\numberline {10}Discussie}{44}{section.10}%
-\contentsline {section}{Bronnen}{45}{section.10}%
+\contentsline {section}{\numberline {8}Resultaten en validatie}{31}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Testopzet}{31}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Normale omstandigheden}{32}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}RTCM correcties uitgeschakeld}{34}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}GPS uitval}{38}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Conclusie}{44}{section.9}%
+\contentsline {section}{Bronnen}{45}{section.9}%
 \contentsline {section}{\numberline {A}Begrippenlijst}{48}{appendix.A}%
 \contentsline {section}{\numberline {B}Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{51}{appendix.B}%
-\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{51}{paragraph*.44}%
-\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{51}{paragraph*.45}%
+\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{51}{paragraph*.46}%
+\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{51}{paragraph*.47}%

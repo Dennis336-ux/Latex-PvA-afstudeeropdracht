@@ -20,8 +20,8 @@ De basis voor moderne positiebepaling wordt gevormd door Global Navigation Satel
         \textbf{GNSS-constellatie} & \textbf{Beheerder} & \textbf{Aantal satellieten} & \textbf{Frequentiebanden} & \textbf{Aandachtsgebied} \\ \hline
         GPS                        & VS (DoD)           & 31 actief                   & L1, L2, L5                & Wereldwijd               \\ \hline
         Galileo                    & Europese Unie      & 30 actief                   & E1, E5a, E5b, E6          & Wereldwijd               \\ \hline
-        GLONASS                    & Rusland            & 24 actief                   & L1, L2, L3OC              & Niet meer in gebruik buiten Rusland \\ \hline
-        BeiDou                     & China              & 45                          & B1l, B2l, B3l             & Wereldwijd               \\ \hline
+        GLONASS                    & Rusland            & 24 actief                   & L1, L2, L3OC              & Veelal niet meer gebruikt buiten Rusland \\ \hline
+        BeiDou                     & China              & 45 actief                         & B1l, B2l, B3l             & Wereldwijd               \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -193,12 +193,12 @@ Een belangrijk hulpmiddel kan ook fotogrammetrie zijn. Door het gebruik van een 
 \subsection{Filteralgoritmes}
 Het combineren van meerdere sensordatastromen vereist een systeem dat omgaat met de onzekerheden van beide bronnen en optimaal gebruik maakt van de informatie. In de navigatietechniek zijn verschillende algoritmes ontwikkeld voor dit doel. In deze paragraaf worden de meest gangbare methoden besproken.
 
-\subsubsection{Complementair filter}
+\subsubsection{Complementary filter}
 
-De `complementary filter' is een eenvoudige sensor fusion techniek dat twee of meer metingen combineert voor een accurate schatting. Dit filter combineert typisch een hoogfrequente bron met een laagfrequente bron. In dit geval zou het de laagfrequente GPS signaal met de hoogfrequente IMU combineren. Dit filter is in formule \ref{eq:complementair_filter} wiskundig uitgebeeld.
+De `complementary filter' is een eenvoudige sensor fusion techniek dat twee of meer metingen combineert voor een accurate schatting. Dit filter combineert typisch een hoogfrequente bron met een laagfrequente bron. In dit geval zou het de laagfrequente GPS signaal met de hoogfrequente IMU combineren. Dit filter is in formule \ref{eq:complementary_filter} wiskundig uitgebeeld.
 
 \begin{equation} 
-	\label{eq:complementair_filter}
+	\label{eq:complementary_filter}
     x_{\text{fused}} = \alpha \cdot x_{\text{IMU}} + (1 - \alpha) \cdot x_{\text{GPS}}
 \end{equation}
 
@@ -209,9 +209,9 @@ Waarbij:
 	\item \textbf{Lage $\alpha$:} GPS domineert (beter voor lange termijn)
 \end{itemize}
 
-Het complementaire filter is rekenkundig eenvoudig en geschikt voor systemen met beperkte rekenkracht. Het nadeel is echter dat de filtercoëfficiënt $\alpha$ vast is en geen rekening houdt met de onzekerheden van de sensoren. Bij sterk wisselende GPS kwaliteit (bijvoorbeeld overgang van RTK Fixed naar Float) kan de vaste weging leiden tot suboptimale resultaten. \\
+De complementary filter is rekenkundig eenvoudig en geschikt voor systemen met beperkte rekenkracht. Het nadeel is echter dat de filtercoëfficiënt $\alpha$ vast is en geen rekening houdt met de onzekerheden van de sensoren. Bij sterk wisselende GPS kwaliteit (bijvoorbeeld overgang van RTK Fixed naar Float) kan de vaste weging leiden tot suboptimale resultaten. \\
 
-Een veelgebruikte toepassing van het complementaire filter is echter de combinatie van gyroscoop en accelerometer data voor het schatten van de oriëntatie (pitch en roll), ook wel attitude estimation genoemd. De gyroscoop integreert de hoeksnelheid naar een oriëntatieschatting en reageert nauwkeurig op snelle bewegingen. Dit brengt echter fouten door oplopende integratiedrift. De accelerometer meet alle krachten die op het object werken waardoor meer dan alleen de zwaartekrachts vector gemeten wordt. Elke kleine kracht wordt meegenomen in het meetmodel. Het geeft echter een absolute referentie. Het complementaire filter benut deze karakteristieken door ze te combineren. Formule \ref{eq:comp_filter_code} laat dit overzichtelijk zien \cite{pieterjan_complementary}.
+Een veelgebruikte toepassing van de complementary filter is echter de combinatie van gyroscoop en accelerometer data voor het schatten van de oriëntatie (pitch en roll), ook wel attitude estimation genoemd. De gyroscoop integreert de hoeksnelheid naar een oriëntatieschatting en reageert nauwkeurig op snelle bewegingen. Dit brengt echter fouten door oplopende integratiedrift. De accelerometer meet alle krachten die op het object werken waardoor meer dan alleen de zwaartekrachts vector gemeten wordt. Elke kleine kracht wordt meegenomen in het meetmodel. Het geeft echter een absolute referentie. De complementary filter benut deze karakteristieken door ze te combineren. Formule \ref{eq:comp_filter_code} laat dit overzichtelijk zien \cite{pieterjan_complementary}.
 
 \begin{equation} \label{eq:comp_filter_code}
     \mathit{angle} = 0.98 \cdot (\mathit{angle} + \mathit{gyrData} \cdot dt) + 0.02 \cdot (\mathit{accData})
@@ -222,7 +222,7 @@ Een veelgebruikte toepassing van het complementaire filter is echter de combinat
 Een typische waarde voor $\alpha$ is 0.95 tot 0.99, waardoor de gyroscoop de oriëntatie bepaalt bij snelle bewegingen en de accelerometer de langetermijndrift corrigeert. Voor GPS/IMU-fusie waarbij de onzekerheden sterk variëren in de tijd is echter een adaptief filter nodig. 
 
 \subsubsection{Kalman Filter}
-Het kalman Filter (KF), in 1960 bedacht door Rudolf Kálmán, is een wiskundig algoritme dat de werkelijke toestand van een systeem berekent, zelfs als de sensormetingen ruis of omgevingsnauwkeurigheden bevatten \cite{welch_kalman}. Waar een complementair filter met vaste wegingen werkt, is het Kalman Filter dynamisch. Het berekent continu de optimale balans door de meetonzekerheid van de sensoren (bevindt zich in de $R$-matrix) en de onzekerheid van het eigen rekenmodel (de process noise, vastgelegd in de $Q$-matrix) tegen elkaar af te wegen.
+Het kalman Filter (KF), in 1960 bedacht door Rudolf Kálmán, is een wiskundig algoritme dat de werkelijke toestand van een systeem berekent, zelfs als de sensormetingen ruis of omgevingsnauwkeurigheden bevatten \cite{welch_kalman}. Waar de complementary filter met vaste wegingen werkt, is het Kalman Filter dynamisch. Het berekent continu de optimale balans door de meetonzekerheid van de sensoren (bevindt zich in de $R$-matrix) en de onzekerheid van het eigen rekenmodel (de process noise, vastgelegd in de $Q$-matrix) tegen elkaar af te wegen.
 
 
 \begin{figure}[htbp!]
@@ -321,7 +321,7 @@ honderden tot duizenden willekeurig verspreide deeltjes om de onzekerheid in de 
         \textbf{Lineariteit} & 
         \textbf{Rekencomplexiteit} & 
         \textbf{Toepassing} \\ \hline
-        Complementair filter & 
+        Complementary filter & 
         Ja & 
         Laag & 
         Eenvoudige IMU attitude \\ \hline

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.1) (preloaded format=pdflatex 2026.2.12)  1 JUN 2026 16:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.1) (preloaded format=pdflatex 2026.2.12)  2 JUN 2026 16:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1081,7 +1081,7 @@ Package pgfplots Warning: running in backwards compatibility mode (unsuitable ti
  on input line 4.
 
 (titlepage.tex
-<logos/HvA Internationaal.jpg, id=197, 337.7418pt x 133.2177pt>
+<logos/HvA Internationaal.jpg, id=193, 337.7418pt x 133.2177pt>
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 8.
@@ -1093,7 +1093,7 @@ File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 4.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-<logos/mylaps_logo.jpg, id=208, 150.5625pt x 61.73062pt>
+<logos/mylaps_logo.jpg, id=204, 150.5625pt x 61.73062pt>
 File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 4.
@@ -1178,7 +1178,7 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 48.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
  [7]) (huidig_sys.tex
-<images/tracker.jpg, id=293, 3190.92125pt x 1742.51pt>
+<images/tracker.jpg, id=287, 3190.92125pt x 1742.51pt>
 File: images/tracker.jpg Graphic file (type jpg)
 <use images/tracker.jpg>
 Package pdftex.def Info: images/tracker.jpg  used on input line 12.
@@ -1188,7 +1188,7 @@ Underfull \hbox (badness 6157) in paragraph at lines 13--13
 [][]|\OT1/cmr/bx/n/9 Pro-to-type van het te on-twikke-len
  []
 
-<images/binnenkant_tracker.jpg, id=294, 3186.90625pt x 2231.33624pt>
+<images/binnenkant_tracker.jpg, id=288, 3186.90625pt x 2231.33624pt>
 File: images/binnenkant_tracker.jpg Graphic file (type jpg)
 <use images/binnenkant_tracker.jpg>
 Package pdftex.def Info: images/binnenkant_tracker.jpg  used on input line 19.
@@ -1208,7 +1208,7 @@ Underfull \hbox (badness 1527) in paragraph at lines 57--57
 []|\OT1/cmr/m/n/10 Communicatie met timing-in-fras-truc-tuur;
  []
 
-<images/schema_tracker.png, id=300, 817.3737pt x 260.8947pt>
+<images/schema_tracker.png, id=294, 817.3737pt x 260.8947pt>
 File: images/schema_tracker.png Graphic file (type png)
 <use images/schema_tracker.png>
 Package pdftex.def Info: images/schema_tracker.png  used on input line 67.
@@ -1260,6 +1260,10 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 92.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
 [9 <./images/schema_tracker.png>]) (vooronderzoek.tex
+Underfull \hbox (badness 1048) in paragraph at lines 25--25
+\OT1/cmr/m/n/10 bruikt buiten Rus-
+ []
+
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 28.
@@ -1268,8 +1272,8 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 28.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
- [10]
-<images/trilateration.jpg, id=332, 510.40688pt x 370.38374pt>
+[10]
+<images/trilateration.jpg, id=326, 510.40688pt x 370.38374pt>
 File: images/trilateration.jpg Graphic file (type jpg)
 <use images/trilateration.jpg>
 Package pdftex.def Info: images/trilateration.jpg  used on input line 32.
@@ -1292,7 +1296,7 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 72.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
  [12]
-<images/multipath voorbeeld.png, id=368, 272.874pt x 181.77pt>
+<images/multipath voorbeeld.png, id=362, 272.874pt x 181.77pt>
 File: images/multipath voorbeeld.png Graphic file (type png)
 <use images/multipath voorbeeld.png>
 Package pdftex.def Info: images/multipath voorbeeld.png  used on input line 77.
@@ -1315,7 +1319,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 113--114
 
  []
 
-<images/oriëntatie.png, id=380, 562.1pt x 493.845pt>
+<images/oriëntatie.png, id=374, 562.1pt x 493.845pt>
 File: images/oriëntatie.png Graphic file (type png)
 <use images/oriëntatie.png>
 Package pdftex.def Info: images/oriëntatie.png  used on input line 119.
@@ -1394,7 +1398,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 212--213
 
  []
 
-<images/kalman_filter.png, id=412, 383.7537pt x 177.7842pt>
+<images/kalman_filter.png, id=406, 383.7537pt x 177.7842pt>
 File: images/kalman_filter.png Graphic file (type png)
 <use images/kalman_filter.png>
 Package pdftex.def Info: images/kalman_filter.png  used on input line 230.
@@ -1463,7 +1467,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 13--22
 
  []
 
-<images/racetrack_gyro.png, id=466, 1535.7375pt x 670.75594pt>
+<images/racetrack_gyro.png, id=460, 1535.7375pt x 670.75594pt>
 File: images/racetrack_gyro.png Graphic file (type png)
 <use images/racetrack_gyro.png>
 Package pdftex.def Info: images/racetrack_gyro.png  used on input line 62.
@@ -1471,7 +1475,7 @@ Package pdftex.def Info: images/racetrack_gyro.png  used on input line 62.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/sha_tin.jpg, id=469, 730.73pt x 602.25pt>
+<images/sha_tin.jpg, id=463, 730.73pt x 602.25pt>
 File: images/sha_tin.jpg Graphic file (type jpg)
 <use images/sha_tin.jpg>
 Package pdftex.def Info: images/sha_tin.jpg  used on input line 78.
@@ -1594,58 +1598,49 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--11
 
  []
 
-<images/JTAG_Pinout.png, id=568, 242.40562pt x 441.14813pt>
+<images/JTAG_Pinout.png, id=562, 242.40562pt x 441.14813pt>
 File: images/JTAG_Pinout.png Graphic file (type png)
 <use images/JTAG_Pinout.png>
 Package pdftex.def Info: images/JTAG_Pinout.png  used on input line 16.
 (pdftex.def)             Requested size: 96.73788pt x 176.05223pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 42--43
-
- []
-
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 44.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 25.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
 File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
-Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 44.
+Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 25.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
 [26 <./images/JTAG_Pinout.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 44--45
 
  []
 
-<images/sensorwaardes_origineel.png, id=588, 733.99219pt x 253.69781pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 46--47
+
+ []
+
+<images/sensorwaardes_origineel.png, id=581, 733.99219pt x 253.69781pt>
 File: images/sensorwaardes_origineel.png Graphic file (type png)
 <use images/sensorwaardes_origineel.png>
-Package pdftex.def Info: images/sensorwaardes_origineel.png  used on input line 54.
+Package pdftex.def Info: images/sensorwaardes_origineel.png  used on input line 56.
 (pdftex.def)             Requested size: 483.69687pt x 167.18944pt.
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 60.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 62.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
 File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
-Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 60.
+Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 62.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
 [27 <./images/sensorwaardes_origineel.png (PNG copy)>]
-File: logos/HvA Internationaal.jpg Graphic file (type jpg)
-<use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 61.
-(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-File: logos/mylaps_logo.jpg Graphic file (type jpg)
-<use logos/mylaps_logo.jpg>
-Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 61.
-(pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
- [28]
-<images/sensorwaardes_filter.png, id=602, 733.99219pt x 253.69781pt>
+<images/sensorwaardes_filter.png, id=590, 733.99219pt x 253.69781pt>
 File: images/sensorwaardes_filter.png Graphic file (type png)
 <use images/sensorwaardes_filter.png>
 Package pdftex.def Info: images/sensorwaardes_filter.png  used on input line 65.
 (pdftex.def)             Requested size: 483.69687pt x 167.18944pt.
-<images/sensorwaardes_kalibraties.png, id=604, 733.99219pt x 253.69781pt>
+<images/sensorwaardes_kalibraties.png, id=592, 733.99219pt x 253.69781pt>
 File: images/sensorwaardes_kalibraties.png Graphic file (type png)
 <use images/sensorwaardes_kalibraties.png>
 Package pdftex.def Info: images/sensorwaardes_kalibraties.png  used on input line 74.
@@ -1655,28 +1650,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 81--82
 
  []
 
-<images/imu_pieken.png, id=606, 514.0806pt x 228.855pt>
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 82.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+File: logos/mylaps_logo.jpg Graphic file (type jpg)
+<use logos/mylaps_logo.jpg>
+Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 82.
+(pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
+[28 <./images/sensorwaardes_filter.png (PNG copy)> <./images/sensorwaardes_kalibraties.png (PNG copy)>]
+<images/imu_pieken.png, id=601, 514.0806pt x 228.855pt>
 File: images/imu_pieken.png Graphic file (type png)
 <use images/imu_pieken.png>
 Package pdftex.def Info: images/imu_pieken.png  used on input line 85.
 (pdftex.def)             Requested size: 483.69687pt x 215.33324pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 90--91
 
  []
 
-File: logos/HvA Internationaal.jpg Graphic file (type jpg)
-<use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 91.
-(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-File: logos/mylaps_logo.jpg Graphic file (type jpg)
-<use logos/mylaps_logo.jpg>
-Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 91.
-(pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
-[29 <./images/sensorwaardes_filter.png (PNG copy)> <./images/sensorwaardes_kalibraties.png (PNG copy)>] (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+(C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 ) (C:\Users\dennis.van.den.berg\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
@@ -1686,19 +1679,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 108--109
  []
 
 
+Underfull \vbox (badness 1342) has occurred while \output is active []
+
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 109.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+File: logos/mylaps_logo.jpg Graphic file (type jpg)
+<use logos/mylaps_logo.jpg>
+Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 109.
+(pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
+ [29 <./images/imu_pieken.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 110--111
 
  []
 
-File: logos/HvA Internationaal.jpg Graphic file (type jpg)
-<use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 113.
-(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
-File: logos/mylaps_logo.jpg Graphic file (type jpg)
-<use logos/mylaps_logo.jpg>
-Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 113.
-(pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
-[30 <./images/imu_pieken.png>]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 121.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 126.
@@ -1710,7 +1705,7 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 141.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
- [31]) (resultaten.tex
+[30]) (resultaten.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--13
 
  []
@@ -1733,22 +1728,22 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 65.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
-[32]
+[31]
 Underfull \hbox (badness 10000) in paragraph at lines 69--71
 
  []
 
-<images/normaal_lopen.png, id=659, 1404.74812pt x 572.89032pt>
+<images/normaal_lopen.png, id=649, 1404.74812pt x 572.89032pt>
 File: images/normaal_lopen.png Graphic file (type png)
 <use images/normaal_lopen.png>
 Package pdftex.def Info: images/normaal_lopen.png  used on input line 81.
 (pdftex.def)             Requested size: 483.69687pt x 197.26274pt.
-<images/normaal_lopen_zoom.png, id=660, 1407.00656pt x 583.42969pt>
+<images/normaal_lopen_zoom.png, id=650, 1407.00656pt x 583.42969pt>
 File: images/normaal_lopen_zoom.png Graphic file (type png)
 <use images/normaal_lopen_zoom.png>
 Package pdftex.def Info: images/normaal_lopen_zoom.png  used on input line 89.
 (pdftex.def)             Requested size: 483.69687pt x 200.56236pt.
-<images/normaal_auto.png, id=661, 1373.88281pt x 579.66562pt>
+<images/normaal_auto.png, id=651, 1373.88281pt x 579.66562pt>
 File: images/normaal_auto.png Graphic file (type png)
 <use images/normaal_auto.png>
 Package pdftex.def Info: images/normaal_auto.png  used on input line 97.
@@ -1761,8 +1756,8 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 104.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
-[33 <./images/normaal_lopen.png> <./images/normaal_lopen_zoom.png>]
-<images/grote_sprongen.png, id=673, 1046.40938pt x 554.07pt>
+[32 <./images/normaal_lopen.png> <./images/normaal_lopen_zoom.png>]
+<images/grote_sprongen.png, id=663, 1046.40938pt x 554.07pt>
 File: images/grote_sprongen.png Graphic file (type png)
 <use images/grote_sprongen.png>
 Package pdftex.def Info: images/grote_sprongen.png  used on input line 112.
@@ -1772,7 +1767,7 @@ Underfull \hbox (badness 1571) in paragraph at lines 113--113
 \OT1/cmr/bx/n/9 ge^^?^^Pnjecteerde posi-tiespron-gen van 5
  []
 
-<images/geen_sprongen.png, id=674, 1025.33063pt x 545.03625pt>
+<images/geen_sprongen.png, id=664, 1025.33063pt x 545.03625pt>
 File: images/geen_sprongen.png Graphic file (type png)
 <use images/geen_sprongen.png>
 Package pdftex.def Info: images/geen_sprongen.png  used on input line 118.
@@ -1782,7 +1777,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 124--126
 
  []
 
-<images/normaal_auto_achteruit.png, id=676, 1373.13pt x 587.94656pt>
+<images/normaal_auto_achteruit.png, id=666, 1373.13pt x 587.94656pt>
 File: images/normaal_auto_achteruit.png Graphic file (type png)
 <use images/normaal_auto_achteruit.png>
 Package pdftex.def Info: images/normaal_auto_achteruit.png  used on input line 129.
@@ -1795,40 +1790,45 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 136.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
-[34 <./images/normaal_auto.png> <./images/grote_sprongen.png> <./images/geen_sprongen.png>]
+[33 <./images/normaal_auto.png> <./images/grote_sprongen.png> <./images/geen_sprongen.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 140--145
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 146--149
 
  []
 
-<images/rtk_uit_lopen.png, id=688, 1407.00656pt x 585.68813pt>
+<images/rtk_uit_lopen.png, id=678, 1407.00656pt x 585.68813pt>
 File: images/rtk_uit_lopen.png Graphic file (type png)
 <use images/rtk_uit_lopen.png>
 Package pdftex.def Info: images/rtk_uit_lopen.png  used on input line 152.
 (pdftex.def)             Requested size: 483.69687pt x 201.33873pt.
-<images/rtk_uit_lopen_zoom.png, id=689, 1413.78188pt x 595.47469pt>
+<images/rtk_uit_lopen_zoom.png, id=679, 1413.78188pt x 595.47469pt>
 File: images/rtk_uit_lopen_zoom.png Graphic file (type png)
 <use images/rtk_uit_lopen_zoom.png>
 Package pdftex.def Info: images/rtk_uit_lopen_zoom.png  used on input line 160.
 (pdftex.def)             Requested size: 483.69687pt x 203.73077pt.
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 168.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 165.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
 File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
-Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 168.
+Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 165.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
-[35 <./images/normaal_auto_achteruit.png> <./images/rtk_uit_lopen.png>]
+[34 <./images/normaal_auto_achteruit.png> <./images/rtk_uit_lopen.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 184--185
 
  []
 
-<images/rtk_uit_auto.png, id=700, 1358.82657pt x 577.40718pt>
+<images/rtk_uit_auto.png, id=690, 1358.82657pt x 577.40718pt>
 File: images/rtk_uit_auto.png Graphic file (type png)
 <use images/rtk_uit_auto.png>
 Package pdftex.def Info: images/rtk_uit_auto.png  used on input line 191.
 (pdftex.def)             Requested size: 483.69687pt x 205.53163pt.
-<images/rtk_uit_auto_zoom.png, id=701, 1409.265pt x 582.67688pt>
+<images/rtk_uit_auto_zoom.png, id=691, 1409.265pt x 582.67688pt>
 File: images/rtk_uit_auto_zoom.png Graphic file (type png)
 <use images/rtk_uit_auto_zoom.png>
 Package pdftex.def Info: images/rtk_uit_auto_zoom.png  used on input line 199.
@@ -1851,7 +1851,7 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 212.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
-[36 <./images/rtk_uit_lopen_zoom.png>]
+[35 <./images/rtk_uit_lopen_zoom.png>]
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
 Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 212.
@@ -1860,13 +1860,13 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 212.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
- [37 <./images/rtk_uit_auto.png> <./images/rtk_uit_auto_zoom.png>]
-<images/rtk_uit_auto_recht.png, id=732, 1396.4672pt x 584.93532pt>
+ [36 <./images/rtk_uit_auto.png> <./images/rtk_uit_auto_zoom.png>]
+<images/rtk_uit_auto_recht.png, id=721, 1396.4672pt x 584.93532pt>
 File: images/rtk_uit_auto_recht.png Graphic file (type png)
 <use images/rtk_uit_auto_recht.png>
 Package pdftex.def Info: images/rtk_uit_auto_recht.png  used on input line 215.
 (pdftex.def)             Requested size: 483.69687pt x 202.60619pt.
-<images/rtk_uit_auto_bocht.png, id=733, 1359.57938pt x 584.93532pt>
+<images/rtk_uit_auto_bocht.png, id=722, 1359.57938pt x 584.93532pt>
 File: images/rtk_uit_auto_bocht.png Graphic file (type png)
 <use images/rtk_uit_auto_bocht.png>
 Package pdftex.def Info: images/rtk_uit_auto_bocht.png  used on input line 223.
@@ -1879,7 +1879,7 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 231.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
- [38 <./images/rtk_uit_auto_recht.png> <./images/rtk_uit_auto_bocht.png>]
+ [37 <./images/rtk_uit_auto_recht.png> <./images/rtk_uit_auto_bocht.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 235--236
 
  []
@@ -1902,13 +1902,13 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 241.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
-[39]
-<images/gps_out_lopen_rood.png, id=749, 1400.23125pt x 576.65437pt>
+[38]
+<images/gps_out_lopen_rood.png, id=739, 1400.23125pt x 576.65437pt>
 File: images/gps_out_lopen_rood.png Graphic file (type png)
 <use images/gps_out_lopen_rood.png>
 Package pdftex.def Info: images/gps_out_lopen_rood.png  used on input line 245.
 (pdftex.def)             Requested size: 483.69687pt x 199.20114pt.
-<images/gps_out_lopen_groen.png, id=750, 1408.51219pt x 576.65437pt>
+<images/gps_out_lopen_groen.png, id=740, 1408.51219pt x 576.65437pt>
 File: images/gps_out_lopen_groen.png Graphic file (type png)
 <use images/gps_out_lopen_groen.png>
 Package pdftex.def Info: images/gps_out_lopen_groen.png  used on input line 252.
@@ -1921,104 +1921,104 @@ File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
 Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 259.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
- [40 <./images/gps_out_lopen_rood.png> <./images/gps_out_lopen_groen.png>]
-<images/gps_out_auto_rood_1.png, id=761, 1362.59062pt x 583.42969pt>
+ [39 <./images/gps_out_lopen_rood.png> <./images/gps_out_lopen_groen.png>]
+<images/lopen_afstand_uit.png, id=749, 1541.76pt x 928.97063pt>
+File: images/lopen_afstand_uit.png Graphic file (type png)
+<use images/lopen_afstand_uit.png>
+Package pdftex.def Info: images/lopen_afstand_uit.png  used on input line 263.
+(pdftex.def)             Requested size: 483.69687pt x 291.4366pt.
+File: logos/HvA Internationaal.jpg Graphic file (type jpg)
+<use logos/HvA Internationaal.jpg>
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 271.
+(pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
+File: logos/mylaps_logo.jpg Graphic file (type jpg)
+<use logos/mylaps_logo.jpg>
+Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 271.
+(pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
+ [40 <./images/lopen_afstand_uit.png (PNG copy)>]
+<images/gps_out_auto_rood_1.png, id=758, 1362.59062pt x 583.42969pt>
 File: images/gps_out_auto_rood_1.png Graphic file (type png)
 <use images/gps_out_auto_rood_1.png>
-Package pdftex.def Info: images/gps_out_auto_rood_1.png  used on input line 263.
+Package pdftex.def Info: images/gps_out_auto_rood_1.png  used on input line 275.
 (pdftex.def)             Requested size: 483.69687pt x 207.10562pt.
-<images/gps_out_auto_groen_1.png, id=762, 1386.68062pt x 575.14874pt>
+<images/gps_out_auto_groen_1.png, id=759, 1386.68062pt x 575.14874pt>
 File: images/gps_out_auto_groen_1.png Graphic file (type png)
 <use images/gps_out_auto_groen_1.png>
-Package pdftex.def Info: images/gps_out_auto_groen_1.png  used on input line 270.
+Package pdftex.def Info: images/gps_out_auto_groen_1.png  used on input line 282.
 (pdftex.def)             Requested size: 483.69687pt x 200.62054pt.
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 277.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 289.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
 File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
-Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 277.
+Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 289.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
  [41 <./images/gps_out_auto_rood_1.png> <./images/gps_out_auto_groen_1.png>]
-<images/gps_out_auto_rood_2.png, id=773, 1355.8153pt x 566.115pt>
+<images/gps_out_auto_rood_2.png, id=770, 1355.8153pt x 566.115pt>
 File: images/gps_out_auto_rood_2.png Graphic file (type png)
 <use images/gps_out_auto_rood_2.png>
-Package pdftex.def Info: images/gps_out_auto_rood_2.png  used on input line 283.
+Package pdftex.def Info: images/gps_out_auto_rood_2.png  used on input line 295.
 (pdftex.def)             Requested size: 232.17242pt x 96.93797pt.
-<images/gps_out_auto_groen_2.png, id=774, 1355.0625pt x 564.60938pt>
+<images/gps_out_auto_groen_2.png, id=771, 1355.0625pt x 564.60938pt>
 File: images/gps_out_auto_groen_2.png Graphic file (type png)
 <use images/gps_out_auto_groen_2.png>
-Package pdftex.def Info: images/gps_out_auto_groen_2.png  used on input line 289.
+Package pdftex.def Info: images/gps_out_auto_groen_2.png  used on input line 301.
 (pdftex.def)             Requested size: 232.17242pt x 96.73184pt.
-<images/gps_out_auto_rood_3.png, id=775, 1343.0175pt x 571.38469pt>
+<images/gps_out_auto_rood_3.png, id=772, 1343.0175pt x 571.38469pt>
 File: images/gps_out_auto_rood_3.png Graphic file (type png)
 <use images/gps_out_auto_rood_3.png>
-Package pdftex.def Info: images/gps_out_auto_rood_3.png  used on input line 299.
+Package pdftex.def Info: images/gps_out_auto_rood_3.png  used on input line 311.
 (pdftex.def)             Requested size: 232.17242pt x 98.77321pt.
-<images/gps_out_auto_groen_3.png, id=776, 1281.28688pt x 561.59813pt>
+<images/gps_out_auto_groen_3.png, id=773, 1281.28688pt x 561.59813pt>
 File: images/gps_out_auto_groen_3.png Graphic file (type png)
 <use images/gps_out_auto_groen_3.png>
-Package pdftex.def Info: images/gps_out_auto_groen_3.png  used on input line 305.
+Package pdftex.def Info: images/gps_out_auto_groen_3.png  used on input line 317.
 (pdftex.def)             Requested size: 232.17242pt x 101.76027pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 323--324
+
+ []
+
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 311.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 325.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
 File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
-Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 311.
+Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 325.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
- [42 <./images/gps_out_auto_rood_2.png> <./images/gps_out_auto_groen_2.png> <./images/gps_out_auto_rood_3.png> <./images/gps_out_auto_groen_3.png>]) (conclusie.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--5
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 6--7
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 8--9
-
- []
-
+[42 <./images/gps_out_auto_rood_2.png> <./images/gps_out_auto_groen_2.png> <./images/gps_out_auto_rood_3.png> <./images/gps_out_auto_groen_3.png>]
+<images/uitval_afstand.png, id=784, 1541.76pt x 928.97063pt>
+File: images/uitval_afstand.png Graphic file (type png)
+<use images/uitval_afstand.png>
+Package pdftex.def Info: images/uitval_afstand.png  used on input line 329.
+(pdftex.def)             Requested size: 483.69687pt x 291.4366pt.
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 12.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 336.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
 File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
-Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 12.
+Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 336.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
-[43]
-Underfull \hbox (badness 10000) in paragraph at lines 18--19
+ [43 <./images/uitval_afstand.png (PNG copy)>]) (conclusie.tex
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 20--21
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--23
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--25
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
 
  []
 
 File: logos/HvA Internationaal.jpg Graphic file (type jpg)
 <use logos/HvA Internationaal.jpg>
-Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 27.
+Package pdftex.def Info: logos/HvA Internationaal.jpg  used on input line 11.
 (pdftex.def)             Requested size: 193.47578pt x 76.31499pt.
 File: logos/mylaps_logo.jpg Graphic file (type jpg)
 <use logos/mylaps_logo.jpg>
-Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 27.
+Package pdftex.def Info: logos/mylaps_logo.jpg  used on input line 11.
 (pdftex.def)             Requested size: 96.73788pt x 39.6638pt.
 [44])
 Overfull \hbox (70.06363pt too wide) in paragraph at lines 29--29
@@ -2169,23 +2169,23 @@ L3 programming layer <2026-01-19>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 9BDB17E41365522DE30517A480E4D044;8749.
+(rerunfilecheck)             Checksum: 134D8254C793D2480BC89DA3871D2D84;8658.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 47994 strings out of 467866
- 1097622 string characters out of 5411549
- 2255631 words of memory out of 5000000
- 75929 multiletter control sequences out of 15000+600000
+ 48013 strings out of 467866
+ 1098231 string characters out of 5411549
+ 2256152 words of memory out of 5000000
+ 75947 multiletter control sequences out of 15000+600000
  637759 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  103i,19n,121p,1426b,2281s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\dennis.van.den.berg\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/dennis.van.den.berg/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (52 pages, 5016275 bytes).
+Output written on main.pdf (52 pages, 5253435 bytes).
 PDF statistics:
  1046 PDF objects out of 1200 (max. 8388607)
- 259 named destinations out of 1000 (max. 500000)
- 577 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 260 named destinations out of 1000 (max. 500000)
+ 579 words of extra memory for PDF output out of 10000 (max. 10000000)
 
