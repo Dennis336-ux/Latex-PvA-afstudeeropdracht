@@ -5,29 +5,38 @@ Dit hoofdstuk beschrijft het ontwerp van de softwarematige uitbreiding van het s
 
 \subsection{Globale systeemarchitectuur}
 
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/blokschema_globaal.png}
+	\caption{In de afbeelding is de globale werking van het systeem schematisch weergegeven.}
+	\label{fig:blokschema_globaal}
+\end{figure}
 
+Het sensor fusion systeem combineert twee asynchrone datastromen tot één betrouwbare positieschatting. Dit is weergegeven in figuur \ref{fig:blokschema_globaal}. Er is gekozen om de IMU uit te lezen met een frequentie van 200 Hz. Deze keuze is gebaseerd op onderzoek van Inertia Technology naar paardengang \cite{InertiaEquineGait} en studies naar IMU sample frequenties bij dynamische bewegingen \cite{Fan2025Influence}. Hieruit blijkt dat 200 Hz de fysieke beweging accuraat vastlegt, terwijl hogere frequenties geen aanzienlijke verbetering opleveren. De u-blox module levert daarentegen de positiedata op 25 Hz \cite{ublox_x20p_interface_hpg202}. \\
 
-Het sensor fusion systeem combineert twee asynchrone datastromen tot één betrouwbare positieschatting. Er is gekozen om de IMU uit te lezen met een frequentie van 200 Hz. Deze keuze is gebaseerd op onderzoek van Inertia Technology naar paardengang \cite{InertiaEquineGait} en studies naar IMU sample frequenties bij dynamische bewegingen \cite{Fan2025Influence}. Hieruit blijkt dat 200 Hz de fysieke beweging accuraat vastlegt, terwijl hogere frequenties geen aanzienlijke verbetering opleveren. De u-blox module levert daarentegen de positiedata op 25 Hz \cite{ublox_x20p_interface_hpg202}. \\
-
-Het wiskundig filter voor het samenvoegen van de datastromen staat centraal. Op basis van de vergelijking van filteralgoritmes in hoofdstuk \ref{sec:sensor_fusion} is gekozen voor een Extended Kalman Filter (EKF). Het standaard Kalman Filter valt af omdat de positiebepaling niet lineair is. Bij de positiebepaling zijn onderdelen als de snelheid en de kijkrichting noodzakelijk. Hierbij wordt het bepalen van de kijkrichting bepaald door gebruik te maken van sinus en cosinus functie die per difinitie niet lineair zijn. Het Unscented Kalman Filter en het Particle Filter kunnen deze niet-lineariteit ook verwerken, maar vereisen aanzienlijk meer complexiteit en rekenkracht. Binnen dit filter wordt de 200 Hz IMU data gebruikt voor een continue positievoorspelling (de predictiestap), waarna deze schatting wordt gecorrigeerd door de u-blox module (de updatestap). Het bewegingsmodel in dit filter is ontworpen met het idee dat het object uitsluitend beweegt in de richting waarin het georiënteerd is (\textit{heading}). Tijdens een race zal de tracker dan ook nagenoeg volledig voorwaarts bewegen. Hierdoor kan de voorwaartse versnelling, samen met de kijkrichting, direct gebruikt worden om de verplaatsing te bepalen. \\
+Het wiskundig filter voor het samenvoegen van de datastromen staat centraal. Op basis van de vergelijking van filteralgoritmes in hoofdstuk \ref{sec:sensor_fusion} is gekozen voor een Extended Kalman Filter (EKF). Het standaard Kalman Filter valt af omdat de positiebepaling niet lineair is. Bij de positiebepaling zijn onderdelen als de snelheid en de kijkrichting noodzakelijk. Hierbij wordt het bepalen van de kijkrichting bepaald door gebruik te maken van sinus en cosinus functie die per definitie niet lineair zijn. Het Unscented Kalman Filter en het Particle Filter kunnen deze niet-lineariteit ook verwerken, maar vereisen aanzienlijk meer complexiteit en rekenkracht. Binnen dit filter wordt de 200 Hz IMU data gebruikt voor een continue positievoorspelling (de predictiestap), waarna deze schatting wordt gecorrigeerd door de u-blox module (de updatestap). Het bewegingsmodel in dit filter is ontworpen met het idee dat het object uitsluitend beweegt in de richting waarin het georiënteerd is (\textit{heading}). Tijdens een race zal de tracker dan ook nagenoeg volledig voorwaarts bewegen. Hierdoor kan de voorwaartse versnelling, samen met de kijkrichting, direct gebruikt worden om de verplaatsing te bepalen. \\
 
 Deze ontwerpkeuze brengt echter het probleem met zich mee dat de gemeten versnelling in de voorwaartse as (de x-as van de IMU) zeer accuraat moet zijn. Een accelerometer meet namelijk niet alleen de bewegingsversnelling, maar ook de reactie op de zwaartekracht. Om de werkelijke voorwaartse versnelling uit de meting te halen, moet de zwaartekrachtcomponent daarom eerst worden verwijderd op basis van de oriëntatie van de sensor \cite{Woodman2007Inertial}. Wanneer de tracker niet perfect horizontaal gemonteerd is, lekt anders een deel van de zwaartekracht (1 $g$) naar de voorwaartse as, wat door het filter wordt geïnterpreteerd als een voorwaartse versnelling. Tijdens de eerste tests bleek dat deze zwaartekrachtcomponent de snelheidsschatting merkbaar verstoorde. Om dit te corrigeren is vóór het EKF een afzonderlijke zwaartekrachtcompensatie toegepast. \\
 
-Voor het bepalen van de oriëntatie die hiervoor nodig is, is gebruikgemaakt van een \textit{complementary filter}. Dit is methode om de pitch te schatten uit de accelerometer en gyroscoopdata \cite{Boe2021Complementary}, zoals beschreven in hoofdstuk \ref{sec:sensor_fusion} complementair filter. \\
+Voor het bepalen van de oriëntatie die hiervoor nodig is, is gebruikgemaakt van een \textit{complementary filter}. Dit is methode om de pitch te schatten uit de accelerometer en gyroscoopdata \cite{Boe2021Complementary}, zoals beschreven in hoofdstuk \ref{sec:sensor_fusion} complementary filter. \\
 
 De positiedata wordt standaard geleverd in lengtegraad, breedtegraad en hoogte. Om dit te gebruiken met het EKF wordt dit getransformeerd naar een lokaal \textit{East-North-Up} (ENU) coördinatenstelsel in meters. Dit stelsel maakt gebruik van een nulpunt (in dit geval de locatie waarbij de eerste RTK fix plaatsvindt) om zo in de x en y as te bepalen waar de tracker zich bevindt. \\
 
 Het ontwerp van het EKF wordt hieropvolgend uiteengezet.
 
 
-
 % ═══════════════════════════════════════════════════════════════
 \subsection{Ontwerp van het Extended Kalman Filter}
 \label{sec:ekf_ontwerp}
 
-\todo[inline]{Toevoegen van een schematische weergave van het filter}
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/blokschema_ekf.png}
+	\caption{In de afbeelding is de globale werking van het EKF uitgebeeld}
+	\label{fig:blokschema_ekf}
+\end{figure}
 
-Het EKF vormt de kern van het sensor fusion systeem. In het theoretisch kader (hoofdstuk~\ref{sec:sensor_fusion}) zijn meerdere filteralgoritmes vergeleken. Het standaard Kalman filter is afgevallen aangezien de positieverandering afhangt van rijrichting en dit is niet lineair. Het Unscented Kalman filter en het Particle filter bieden beiden een nauwkeurige benadering vergelijkbaar met het EKF, maar vereisen beiden aanzienlijk meer rekenkracht en complexiteit. In dit hoofdstuk zal uitgelegd worden hoe het filter is opgezet en welke onderdelen dit bevat.
+Het EKF vormt de kern van het sensor fusion systeem. Deze werking is globaal gevisualiseerd in figuur \ref{fig:blokschema_ekf}. In het theoretisch kader (hoofdstuk~\ref{sec:sensor_fusion}) zijn meerdere filteralgoritmes vergeleken. Het standaard Kalman filter is afgevallen aangezien de positieverandering afhangt van rijrichting en dit is niet lineair. Het Unscented Kalman filter en het Particle filter bieden beiden een nauwkeurige benadering vergelijkbaar met het EKF, maar vereisen beiden aanzienlijk meer rekenkracht en complexiteit. In dit hoofdstuk zal uitgelegd worden hoe het filter is opgezet en welke onderdelen dit bevat.
 
 \subsubsection{De state vector}
 
@@ -90,7 +99,7 @@ F = \begin{bmatrix}
 \end{equation}
 
 
-\subsubsection{De updatestap: RTK correctie}
+\subsubsection{De updatestap: RTK correction}
 
 Wanneer de u-blox module een nieuwe meting genereert (25 Hz), corrigeert de updatestap de prediction. Naast de actuele positie ($X$ en $Y$) levert het ook een direct gemeten grondsnelheid ($v$). De overige grootheden in de state vector (heading en biassen) worden niet door de GNSS bijgehouden in dit systeem. Dit gedeeltelijke zicht op de werkelijkheid wordt wiskundig vastgelegd in de observatiematrix $H$. Deze $3 \times 6$ matrix specificeert dat de eerste drie elementen van de state vector direct meetbaar zijn. Deze matrix is weergegeven in formule \ref{eq:H}.
 
@@ -112,7 +121,7 @@ Het verschil tussen deze binnen komende RTK data ($\mathbf{z} = [X, Y, v]^T$) en
 
 Hierin dient de $R$ matrix als de `measurement noise'. Dit is een $3 \times 3$ matrix waarbij de onzekerheden van de positie (x en y) en de grondsnelheid gebruikt worden om de Kalman Gain te schalen. Aangezien de u-blox module dynamisch de nauwkeurigheid van zowel de positie als de snelheid kan bijhouden, wordt dit gebruikt in de $R$ matrix.
 
-\subsubsection{Foutreductie: NIS-gebaseerde metingrejectie}
+\subsubsection{Foutreductie: Uitschieter detectie}
 
 De Kalman gain vertrouwt op de aanname dat de nauwkeurigheid die de u-blox teruggeeft correct is. In de praktijk is het echter mogelijk dat de tracker een goede nauwkeurigheid biedt, terwijl de werkelijke positie meters afwijkt. Dit is dan ook een gevolg van bijvoorbeeld multipath zoals beschreven in hoofdstuk \ref{sec:lokalisatie}. Als het filter zo een meting ongecontroleerd verwerkt, springt de positieschatting direct mee. Om dit te voorkomen wordt elke meting vooraf getoetst via de \textit{Normalized Innovation Squared} (NIS) zoals weergegeven in formule \ref{eq:NIS}.
 

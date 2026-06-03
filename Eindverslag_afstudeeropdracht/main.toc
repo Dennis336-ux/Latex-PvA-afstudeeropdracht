@@ -2,7 +2,7 @@
 \contentsline {subsection}{\numberline {1.1}Opdracht en afbakening}{6}{subsection.1.1}%
 \contentsline {section}{\numberline {2}Systeemarchitectuur van de ProRTK tracker}{8}{section.2}%
 \contentsline {subsection}{\numberline {2.1}De ProRTK tracker}{8}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Werking van het huidige systeem}{9}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.2}Werking van het systeem}{9}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Beperking van het huidige systeem}{9}{subsection.2.3}%
 \contentsline {section}{\numberline {3}Robuuste lokalisatie in complexe omgevingen}{10}{section.3}%
 \contentsline {subsection}{\numberline {3.1}GNSS}{10}{subsection.3.1}%
@@ -24,26 +24,31 @@
 \contentsline {section}{\numberline {5}Specificaties}{20}{section.5}%
 \contentsline {section}{\numberline {6}Ontwerp}{23}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Globale systeemarchitectuur}{23}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Ontwerp van het Extended Kalman Filter}{23}{subsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}De state vector}{24}{subsubsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.2}Het bewegingsmodel: de prediction}{24}{subsubsection.6.2.2}%
-\contentsline {subsubsection}{\numberline {6.2.3}De updatestap: RTK correctie}{25}{subsubsection.6.2.3}%
-\contentsline {subsubsection}{\numberline {6.2.4}Foutreductie: NIS-gebaseerde metingrejectie}{25}{subsubsection.6.2.4}%
-\contentsline {section}{\numberline {7}Implementatie}{26}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Ontwikkelomgeving en testopstelling}{26}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}IMU integratie}{26}{subsection.7.2}%
-\contentsline {subsubsection}{\numberline {7.2.1}Gyroscooop kalibratie}{27}{subsubsection.7.2.1}%
-\contentsline {subsubsection}{\numberline {7.2.2}SPI-busprobleem bij de IMU-uitlezing}{28}{subsubsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.3}Datavoorbewerking en Transformaties}{29}{subsection.7.3}%
-\contentsline {subsubsection}{\numberline {7.3.1}Zwaartekrachtcompensatie (Complementary Filter)}{30}{subsubsection.7.3.1}%
-\contentsline {section}{\numberline {8}Resultaten en validatie}{31}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Testopzet}{31}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Normale omstandigheden}{32}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}RTCM correcties uitgeschakeld}{34}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}GPS uitval}{38}{subsection.8.4}%
-\contentsline {section}{\numberline {9}Conclusie}{44}{section.9}%
-\contentsline {section}{Bronnen}{45}{section.9}%
-\contentsline {section}{\numberline {A}Begrippenlijst}{48}{appendix.A}%
-\contentsline {section}{\numberline {B}Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{51}{appendix.B}%
-\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{51}{paragraph*.46}%
-\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{51}{paragraph*.47}%
+\contentsline {subsection}{\numberline {6.2}Ontwerp van het Extended Kalman Filter}{24}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}De state vector}{25}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Het bewegingsmodel: de prediction}{25}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}De updatestap: RTK correction}{26}{subsubsection.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.4}Foutreductie: Uitschieter detectie}{26}{subsubsection.6.2.4}%
+\contentsline {section}{\numberline {7}Implementatie}{27}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Ontwikkelomgeving en testopstelling}{27}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}IMU integratie}{27}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}Gyroscoop kalibratie}{28}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.2.2}SPI-busprobleem bij de IMU-uitlezing}{29}{subsubsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.3}Datavoorbewerking en Transformaties}{30}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}Zwaartekrachtcompensatie (Complementary Filter)}{31}{subsubsection.7.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.2}Coördinaten transformatie}{31}{subsubsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.4}Realisatie van het Extended Kalman Filter}{31}{subsection.7.4}%
+\contentsline {subsubsection}{\numberline {7.4.1}Initialisatie}{31}{subsubsection.7.4.1}%
+\contentsline {subsubsection}{\numberline {7.4.2}De prediction}{32}{subsubsection.7.4.2}%
+\contentsline {subsubsection}{\numberline {7.4.3}De correction en NIS-rejectie}{32}{subsubsection.7.4.3}%
+\contentsline {section}{\numberline {8}Resultaten en validatie}{34}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Testopzet}{34}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Normale omstandigheden}{35}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}RTCM correcties uitgeschakeld}{37}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}GPS uitval}{41}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Conclusie}{47}{section.9}%
+\contentsline {section}{Bronnen}{48}{section.9}%
+\contentsline {section}{\numberline {A}Begrippenlijst}{51}{appendix.A}%
+\contentsline {section}{\numberline {B}Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{54}{appendix.B}%
+\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{54}{paragraph*.46}%
+\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{54}{paragraph*.47}%

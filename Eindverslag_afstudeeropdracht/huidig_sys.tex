@@ -60,7 +60,7 @@ De ProRTK is een herlaadbare tracker (te zien in figuur \ref{fig:tracker}) die d
 Het gehele systeem wordt aangestuurd door de nRF52832 microcontroller met een ARM Cortex-M4F processor. Deze verwerkt de data van alle aangesloten sensoren en verzorgt de draadloze communicatie via X2 Link. De positie wordt bepaald door de u-blox X20P RTK receiver. Deze module geeft elke 40 \,ms een nieuwe positiemeting terug waarbij extra informatie als de snelheid, de nauwkeurigheid en de heading (kijkrichting) teruggegeven wordt. De ASM330LHH IMU is fysiek aanwezig op de PCB en levert accelerometer- en gyroscoopdata, maar wordt in het huidige systeem niet gebruikt.
 
 
-\subsection{Werking van het huidige systeem}
+\subsection{Werking van het systeem}
 
 \begin{figure}[htbp]
     \centering
@@ -71,7 +71,7 @@ Het gehele systeem wordt aangestuurd door de nRF52832 microcontroller met een AR
 \end{figure}
 
 
-Figuur~\ref{fig:schema_tracker} geeft een overzicht van de werking van het huidige systeem. De positiebepaling is gebaseerd op de u-blox X20P RTK receiver. Deze ontvangt continu satellietsignalen van de vier grote GNSS constellaties (GPS, Galileo, GLONASS en BeiDou) via de helix antenna op de tracker. Tegelijkertijd ontvangt een opgesteld RTK basestation op een bekende locatie diezelfde satellietsignalen en berekent het verschil tussen de gemeten en de werkelijke positie. Deze correctie wordt draadloos naar de GNSS receiver in de tracker gestuurd, waardoor een nauwkeurigheid van 1 tot 2 centimeter wordt bereikt in plaats van de enkele meters die een standaard GNSS receiver haalt. De precieze werking van GNSS en RTK wordt uitgebreider behandeld in het volgende hoofdstuk. \\
+Figuur~\ref{fig:schema_tracker} geeft een overzicht van de werking van het huidige systeem. De positiebepaling is gebaseerd op de u-blox X20P RTK receiver. Deze ontvangt continu satellietsignalen van de vier grote GNSS constellaties (GPS, Galileo, GLONASS en BeiDou) via de helix antenna op de tracker. Tegelijkertijd ontvangt een opgesteld RTK base station op een bekende locatie diezelfde satellietsignalen en berekent het verschil tussen de gemeten en de werkelijke positie. Deze correctie wordt draadloos naar de GNSS receiver in de tracker gestuurd, waardoor een nauwkeurigheid van 1 tot 2 centimeter wordt bereikt in plaats van de enkele meters die een standaard GNSS receiver haalt. De precieze werking van GNSS en RTK wordt uitgebreider behandeld in het volgende hoofdstuk. \\
 
 
 De verwerkte positiedata wordt gezamenlijk met aanvullende informatie doorgegeven aan de nRF52832 microcontroller. Deze verwerkt de data en verstuurt het vervolgens via het X2 Link protocol naar de server. Hier wordt deze data gebruikt voor tijdregistratie en live tracking. \\

@@ -48,7 +48,7 @@ Voor de outputfrequentie (ODR) is een waarde van 208 Hz geconfigureerd. Dit slui
 Als laatst is de \textit{Block Data Update} (BDU) ingeschakeld om fouten bij het uitlezen van de seriële interface te voorkomen. Zoals geadviseerd door STMicroelectronics \cite{ST_AN5296} (pagina 18), garandeert dit dat de hoge en lage bytes van de outputregisters afkomstig zijn van hetzelfde meetsample.
 
 
-\subsubsection{Gyroscooop kalibratie}
+\subsubsection{Gyroscoop kalibratie}
 Wanneer de IMU goed is geconfigureerd kan gekeken worden naar het uitlezen van de data. Voor het uitlezen van de data van de accelerometer en de gyroscoop moet gekeken worden naar registers OUTX\_L\_A en OUTX\_L\_G. Deze registers bevatten meerdere 16 bit words met de waardes van de x, y en z as voor de accelerometer en de pitch, roll en yaw voor de gyroscoop. Waardes die uit deze registers verkregen zijn, zijn te zien in figuur \ref{fig:sensorwaardes}.
 
 \begin{figure}[h]
@@ -135,7 +135,115 @@ float accel_ms2 = net_ax * 9.81f;
  
 Alleen de gecompenseerde versnelling (\texttt{accel\_ms2}) gaat door naar de predictiestap van het EKF.
  
-\todo[inline]{Hier missen nog een aantal onderdelen.}
+\subsubsection{Coördinaten transformatie}
+
+
+
+
+
+\subsection{Realisatie van het Extended Kalman Filter}
+\label{subsec:ekf_realisatie}
+
+Het EKF is geïmplementeerd door middel van meerdere operaties. De matrixoperaties (vermenigvuldiging, optelling etc.) zijn als losse functies geïmplementeerd en wordt voor het overzicht in deze paragraaf niet beschreven. Het filter kent twee ingangen bestaande uit de prediction stap en de correction stappen. 
+
+\subsubsection{Initialisatie}
+
+De toestand wordt vastgelegd in een state vector met zes elementen. De covariance matrix $P$ start met de waarde één op de diagonaal bedoeld voor elk element. Deze waarde zal gedurende de werking van het systeem geupdate worden. De process noise $Q$ is per toestand afgesteld doormiddel van testen.
+
+ \newpage
+
+\begin{lstlisting}[language=C, caption={Covariance en process noise matricen van het EKF.}, label={lst:ekf_state}]
+// State vector: [X, Y, v, theta, accel_bias, gyro_bias]
+static float s_status[6][1] = {0};
+
+static float s_P[6][6] = { /* 1.0 op de diagonaal */ };
+
+// Procesruis Q (diagonaal): X, Y, v, theta, ba, bg
+static float s_Q[6][6] = { /* 1e-4, 1e-4, 1e-3, 1e-4, 1e-4, 1e-4 */ };
+\end{lstlisting}
+
+\subsubsection{De prediction}
+
+Elke 5\,ms (200\,Hz) voorspelt \texttt{ekf\_predict\_imu} de nieuwe toestand op basis van de versnelling en de yaw rate. Vervolgens wordt door middel van het bewegingsmodel (beschreven in hoofdstuk \ref{sec:ekf_ontwerp}) de state vector bijgewerkt. Vervolgens wordt de nieuwe covariance matrix berekent met $P^{-} = F\,P\,F^{T} + Q$.
+
+\begin{lstlisting}[caption={De prediction stap van het EKF (ingekort).}, label={lst:ekf_predict}]
+void ekf_predict_imu(float accel, float angular, float dt)
+{
+    float old_v     = s_status[2][0];
+    float old_theta = s_status[3][0];
+
+    // Bias verwijderen en toestand voorspellen (oude v en theta)
+    float true_accel   = accel   - s_status[4][0];
+    float true_angular = angular - s_status[5][0];
+
+    s_status[0][0] += old_v * cosf(old_theta) * dt;   // X
+    s_status[1][0] += old_v * sinf(old_theta) * dt;   // Y
+    s_status[2][0] += true_accel   * dt;              // v
+    s_status[3][0] += true_angular * dt;              // theta
+
+    // Jacobiaan F (formule uit hoofdstuk 8)
+    float F[6][6] = {
+        {1, 0,  cosf(old_theta)*dt, -old_v*sinf(old_theta)*dt, 0, 0},
+        {0, 1,  sinf(old_theta)*dt,  old_v*cosf(old_theta)*dt, 0, 0},
+        {0, 0,  1, 0, -dt, 0},
+        {0, 0,  0, 1, 0, -dt},
+        {0, 0,  0, 0, 1, 0},
+        {0, 0,  0, 0, 0, 1}
+    };
+
+    // P = F * P * F^T + Q
+    matrix_trans(6, 6, F, F_T);
+    matrix_mult(6, 6, 6, F, s_P, temp1);
+    matrix_mult(6, 6, 6, temp1, F_T, temp2);
+    matrix_add(6, 6, temp2, s_Q, s_P);
+    matrix_symmetrize_6x6(s_P);
+}
+\end{lstlisting}
+
+Hiernaast wordt de snelheid begrensd om zo foutieve berekeningen of metingen op te vangen zodat het filter niet verstoord wordt. Dit wordt bovendien ook gedaan met de kijkrichting door deze te limiteren tot het interval $[-\pi, \pi]$. Hierdoor zal de kijkrichting nooit oplopen tot waardes boven en onder de 180 graden.
+
+\subsubsection{De correction en NIS-rejectie}
+
+Nadat de binnenkomende positie data is omgezet naar het ENU stelsel, wordt het verwerkt door \texttt{ekf\_update\_gnss}.
+
+Zodra een nieuwe GNSS-positie binnenkomt, wordt deze eerst naar het ENU-stelsel omgezet (zie paragraaf~\ref{subsec:coord_transform}) en daarna verwerkt door \texttt{ekf\_update\_gnss}. De measurement noise $R$ wordt per meting opgebouwd uit de positiecovariantie van de u-blox (UBX-NAV-COV), inclusief de kruisterm, en geschaald op basis van de RTK-status (een hogere weging bij Float of geen fix). Voordat de meting wordt verwerkt, wordt deze getoetst via de Normalized Innovation Squared; bij overschrijding van de drempelwaarde van 9{,}21 (chi-kwadraat, 2 vrijheidsgraden, 99\,\%) wordt de meting verworpen en behoudt het filter zijn eigen predictie.
+
+\begin{lstlisting}[caption={De GNSS-update met NIS-gebaseerde metingrejectie (ingekort).}, label={lst:ekf_update}, basicstyle=\ttfamily\scriptsize, breaklines=true, frame=single]
+void ekf_update_gnss(float gps_x, float gps_y, float r_ee, float r_nn, float r_en)
+{
+    // Innovatie: y = z - H*x
+    float error_y[2][1];
+    error_y[0][0] = gps_x - s_status[0][0];
+    error_y[1][0] = gps_y - s_status[1][0];
+
+    // R uit UBX-NAV-COV (variantie oost/noord + kruisterm)
+    s_R[0][0] = r_ee; s_R[1][1] = r_nn;
+    s_R[0][1] = r_en; s_R[1][0] = r_en;
+
+    // S = H*P*H^T + R, daarna inverteren
+    matrix_mult(2, 6, 6, s_H, s_P, temp_HP);
+    matrix_mult(2, 6, 2, temp_HP, H_T, S);
+    matrix_add(2, 2, S, s_R, S);
+    matrix_inv_2x2(S, S_inv);
+
+    // NIS = y^T * S^-1 * y
+    float nis = 0.0f;
+    for (int i = 0; i < 2; i++)
+        for (int j = 0; j < 2; j++)
+            nis += error_y[i][0] * S_inv[i][j] * error_y[j][0];
+
+    if (nis > 9.210f) {
+        return;   // meting verworpen -> alleen predictie behouden
+    }
+
+    // K = P*H^T*S^-1, daarna toestand- en covariantie-update (Joseph-vorm)
+    matrix_mult(6, 6, 2, s_P, H_T, temp_PHT);
+    matrix_mult(6, 2, 2, temp_PHT, S_inv, K);
+    // ... x = x + K*y  en  P = (I-KH)P(I-KH)^T + KRK^T ...
+}
+\end{lstlisting}
+
+Voor de covariantie-update is bewust de \emph{Joseph-vorm} gebruikt in plaats van de eenvoudigere $(I-KH)P$. Deze vorm is numeriek stabieler en garandeert dat $P$ symmetrisch en positief-definiet blijft, wat op een microcontroller met beperkte floating-point precisie van belang is.
 
 
 \newpage

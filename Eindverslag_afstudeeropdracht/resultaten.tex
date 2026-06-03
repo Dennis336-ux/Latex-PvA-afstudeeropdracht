@@ -60,14 +60,14 @@ bijgehouden.
 \end{table}
 
 De tests zijn uitgevoerd onder gecontroleerde omstandigheden die niet 
-volledig representatief zijn voor gebruik in de paardensport. De bewegingen van een galoperend paard verschillen dan ook met die van een loop en autotest. De resultaten uit dit hoofdstuk gelden dan ook primair als bewijs dat het filter functioneert onder de geteste omstandigheden. Dit geeft echter een inzicht in de verwachte werking van het systeem onder de ideale omstandigheden.
+volledig representatief zijn voor gebruik in de paardensport. De bewegingen van een galopperend paard verschillen dan ook met die van een loop en autotest. De resultaten uit dit hoofdstuk gelden dan ook primair als bewijs dat het filter functioneert onder de geteste omstandigheden. Dit geeft echter een inzicht in de verwachte werking van het systeem onder de ideale omstandigheden.
 
 \newpage
 
 \subsection{Normale omstandigheden}
 
 Onder normale omstandigheden, waarbij de RTK verbinding stabiel is en 
-geen verstoringen aanwezig zijn, volgt het EKF de binnenkomende positie nauwkeurig. Dit is volgens verwachting. Bij een RTK fix met een nauwkeurigheid van 14 \,mm en een Ppos van 17 tot 19 \,mm is de RTK meting betrouwbaar genoeg voor het filter om deze sterk te volgen. De afwijking tussend de EKF en RTK positie bedraagt niet meer dan 1 \,cm wat aantoont dat het systeem goed functioneert. \\
+geen verstoringen aanwezig zijn, volgt het EKF de binnenkomende positie nauwkeurig. Dit is volgens verwachting. Bij een RTK fix met een nauwkeurigheid van 14 \,mm en een Ppos van 17 tot 19 \,mm is de RTK meting betrouwbaar genoeg voor het filter om deze sterk te volgen. De afwijking tussen de EKF en RTK positie bedraagt niet meer dan 1 \,cm wat aantoont dat het systeem goed functioneert. \\
 
 Figuur~\ref{fig:lopen_norm} toont de volledige looproute waarbij de EKF positie 
 en de ruwe RTK positie vrijwel samenvallen. Figuur~\ref{fig:lopen_norm_zoom} 
@@ -139,9 +139,9 @@ bij achteruitrijden. De u-blox receiver levert de snelheid altijd als een positi
 
 Als tweede scenario zijn de RTCM correcties uitgeschakeld, waardoor de 
 receiver verslechtert van een RTK fix naar standaard GNSS nauwkeurigheid. 
-Dit simuleert een situatie waarbij de verbinding met de basestation 
+Dit simuleert een situatie waarbij de verbinding met de base station 
 tijdelijk wegvalt, wat in de praktijk kan voorkomen bij een te grote 
-afstand tot de basestation of obstakels in de omgeving. \\
+afstand tot de base station of obstakels in de omgeving. \\
 
 Figuur~\ref{fig:lopen_rtk} toont de volledige looproute tijdens dit 
 scenario. Op meerdere momenten tijdens de route wijkt de ruwe GNSS positie af van de verwachte route doordat de RTK correcties ontbreken. Figuur~\ref{fig:lopen_rtk_sprong} toont een opvallend moment 
@@ -159,7 +159,7 @@ waarbij de ruwe positie een plotselinge zijwaartse sprong maakt. Het EKF trekt d
     \centering
     \includegraphics[width=1\textwidth]{rtk_uit_lopen_zoom.png}
     \caption{Ingezoomd moment waarbij de ruwe GNSS-positie een plotselinge 
-    sprong maakt. Het EKF trekt de route logisch door maar driftt na 
+    sprong maakt. Het EKF trekt de route logisch door maar drift na 
     verloop van tijd mee met de foutieve positie.}
     \label{fig:lopen_rtk_sprong}
 \end{figure}
@@ -266,7 +266,7 @@ Om de prestaties bij signaaluitval in kaart te brengen, is voor elke uitval de a
 \end{figure}
 
 
-Tijdens de autotest treden vergelijkbare effecten op. In figuur~\ref{fig:auto_gps_rood_1} is een trajectdeel met twee gaten te zien. Figuur~\ref{fig:auto_gps_groen_1} laat zien dat het bovenste gat zeer goed wordt overbrugt, terwijl er bij het onderste gat een lichte afwijking in zowel snelheid als richting heeft plaatsgevonden.
+Tijdens de autotest treden vergelijkbare effecten op. In figuur~\ref{fig:auto_gps_rood_1} is een trajectdeel met twee gaten te zien. Figuur~\ref{fig:auto_gps_groen_1} laat zien dat het bovenste gat zeer goed wordt overbrugd, terwijl er bij het onderste gat een lichte afwijking in zowel snelheid als richting heeft plaatsgevonden.
 
 \newpage
 

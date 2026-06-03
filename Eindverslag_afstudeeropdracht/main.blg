@@ -1,19 +1,19 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'main.blg'
-[165] biber-MSWIN64:342> INFO - === 
-[233] Biber.pm:421> INFO - Reading 'main.bcf'
-[400] Biber.pm:1002> INFO - Found 40 citekeys in bib section 0
-[423] Biber.pm:4487> INFO - Processing section 0
-[436] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
-[550] bibtex.pm:1713> INFO - LaTeX decoding ...
-[594] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
-[814] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[815] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[816] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
-[816] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
-[859] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[887] bbl.pm:779> INFO - Output to main.bbl
-[888] Biber.pm:132> WARN - legacy month field 'Feb' in entry 'linearmotiontips2020yaw' is not an integer - this will probably not sort properly.
-[888] Biber.pm:132> WARN - legacy month field 'mar' in entry 'Fan2025Influence' is not an integer - this will probably not sort properly.
-[888] Biber.pm:132> WARN - legacy month field 'sep' in entry 'ST_AN5296' is not an integer - this will probably not sort properly.
-[888] Biber.pm:134> INFO - WARNINGS: 3
+[114] biber-MSWIN64:342> INFO - === 
+[151] Biber.pm:421> INFO - Reading 'main.bcf'
+[285] Biber.pm:1002> INFO - Found 40 citekeys in bib section 0
+[301] Biber.pm:4487> INFO - Processing section 0
+[311] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
+[369] bibtex.pm:1713> INFO - LaTeX decoding ...
+[415] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[598] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[599] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[599] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[599] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[638] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[657] bbl.pm:779> INFO - Output to main.bbl
+[664] Biber.pm:132> WARN - legacy month field 'Feb' in entry 'linearmotiontips2020yaw' is not an integer - this will probably not sort properly.
+[665] Biber.pm:132> WARN - legacy month field 'mar' in entry 'Fan2025Influence' is not an integer - this will probably not sort properly.
+[665] Biber.pm:132> WARN - legacy month field 'sep' in entry 'ST_AN5296' is not an integer - this will probably not sort properly.
+[665] Biber.pm:134> INFO - WARNINGS: 3

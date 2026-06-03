@@ -37,7 +37,7 @@ Door de intersectie van meerdere afstandssferen (één per satelliet) te bepalen
 Hoewel GNSS-ontvangers breed inzetbaar zijn, kent deze techniek beperkingen. Een standaard smartphone-GPS behaalt onder ideale omstandigheden een horizontale nauwkeurigheid van grofweg 4,9 meter \cite{gpsgov2026accuracy}. Voor het nauwkeurig volgen van een atleet of voertuig op een wedstrijdparcours is deze foutmarge vaak onacceptabel groot. Om dit te verhelpen wordt tegenwoordig regelmatig gebruik gemaakt van een techniek genaamd Real-Time Kinematic (RTK). 
 
 \subsection{Nauwkeurigheid via RTK}
-Om de nauwkeurigheid van GNSS te verbeteren wordt de techniek Real-Time Kinematic (RTK) gebruikt. Dit systeem bestaat uit twee ontvangers, namelijk een stationair `Base Station' op een bekende locatie en een mobiele `Rover Receiver' \cite{gpsgeometer_rtk}. De basestation berekent afwijkingen die veroorzaakt worden door clock errors en vertragingen van het satellietsignaal door de atmosfeer. Denk hierbij aan invloeden door ionen, maar ook temperatuur en luchtvochtigheid. De correcties worden in real-time naar de rover gestuurd. Doordat de basestation en rover zich in hetzelfde lokale gebied bevinden, zijn de atmosferische omstandigheden vrijwel identiek en kunnen de fouten grotendeels worden verholpen. Hiermee zou een theoretische nauwkeurigheid van minder dan 50 mm behaald moeten kunnen worden \cite{valente2020accuracy}. Er zijn twee verschillende omstandigheden waarin het systeem zich kan bevinden waarmee de huidige kwaliteit beschreven kan worden:
+Om de nauwkeurigheid van GNSS te verbeteren wordt de techniek Real-Time Kinematic (RTK) gebruikt. Dit systeem bestaat uit twee ontvangers, namelijk een stationair `Base Station' op een bekende locatie en een mobiele `Rover Receiver' \cite{gpsgeometer_rtk}. De base station berekent afwijkingen die veroorzaakt worden door clock errors en vertragingen van het satellietsignaal door de atmosfeer. Denk hierbij aan invloeden door ionen, maar ook temperatuur en luchtvochtigheid. De correcties worden in real-time naar de rover gestuurd. Doordat de base station en rover zich in hetzelfde lokale gebied bevinden, zijn de atmosferische omstandigheden vrijwel identiek en kunnen de fouten grotendeels worden verholpen. Hiermee zou een theoretische nauwkeurigheid van minder dan 50 mm behaald moeten kunnen worden \cite{valente2020accuracy}. Er zijn twee verschillende omstandigheden waarin het systeem zich kan bevinden waarmee de huidige kwaliteit beschreven kan worden:
 
 \begin{itemize}
 	\item RTK Float: De ontvanger gebruikt de fase van de satellietsignalen (draaggolven) voor de locatiebepaling, 
@@ -45,13 +45,13 @@ Om de nauwkeurigheid van GNSS te verbeteren wordt de techniek Real-Time Kinemati
 	\item RTK Fixed: De berekening is succesvol afgerond en vastgezet. De ontvanger kan nu de exacte afstand tot de satellieten bepalen, wat een typische nauwkeurigheid van 1 tot 2 cm geeft.
 \end{itemize}
 
-De correcties van de basestation worden naar de rover verstuurd via 
+De correcties van de base station worden naar de rover verstuurd via 
 het RTCM-protocol (Radio Technical Commission for Maritime Services). 
 Dit is een standaard voor het uitwisselen van 
 differentiële GNSS correcties die wordt gepubliceerd door de RTCM 
 Special Committee 104~\cite{rtcm_standard}. De u-blox receiver in de 
 ProRTK tracker ontvangt deze RTCM berichten en verwerkt ze automatisch 
-om de RTK-oplossing te berekenen. Wanneer de verbinding met de basestation wegvalt en er geen RTCM correcties meer binnenkoen, kan de ontvanger geen RTK fix mee krijgen. Hierdoor verslechtert de nauwkeurigheid naar die van standaard GNSS.
+om de RTK-oplossing te berekenen. Wanneer de verbinding met de base station wegvalt en er geen RTCM correcties meer binnenkomen, kan de ontvanger geen RTK fix mee krijgen. Hierdoor verslechtert de nauwkeurigheid naar die van standaard GNSS.
 
 De afwijkingen en gebreken worden in de hieropvolgende paragraaf beschreven.
 
@@ -162,7 +162,7 @@ Odometrie omvat alle technieken waarbij de afgelegde afstand wordt gemeten via m
 
 
 \subsubsection{Doppler radar}
-Een Doppler radar meet de snelheid van een object ten opzichte van de grond door de frequentieverschuiving van een uitgestuurd radarsignaal te analyseren. Door de radar schuin naar de grond te richten kan een nauwkeurige grondsnelheid worden bepaald. Doppler radar wordt ingezet in high-end navigatiesystemen voor luchtvaartuigen en schepen waar nauwkeurige snelheidsmeting noodzakelijk is. Net zoals bij de Stappenteller is de snelheid erg van nut, echter is het realiseren in de praktijk hiervan zeer ingewikkeld. Een betrouwbare Doppler-meting vereist een stabiele en bekende meethoek ten opzichte van het grondvlak. De dynamische bewegingen van een galoperend paard maken een stabiele mounting van een Doppler radar vrij onrealistisch. 
+Een Doppler radar meet de snelheid van een object ten opzichte van de grond door de frequentieverschuiving van een uitgestuurd radarsignaal te analyseren. Door de radar schuin naar de grond te richten kan een nauwkeurige grondsnelheid worden bepaald. Doppler radar wordt ingezet in high-end navigatiesystemen voor luchtvaartuigen en schepen waar nauwkeurige snelheidsmeting noodzakelijk is. Net zoals bij de Stappenteller is de snelheid erg van nut, echter is het realiseren in de praktijk hiervan zeer ingewikkeld. Een betrouwbare Doppler-meting vereist een stabiele en bekende meethoek ten opzichte van het grondvlak. De dynamische bewegingen van een galopperend paard maken een stabiele mounting van een Doppler radar vrij onrealistisch. 
 
 
 \subsubsection{LiDAR}
@@ -276,7 +276,7 @@ Het EKF lost dit op door het niet lineaire model op elk moment lokaal te lineari
 \end{tikzpicture}
 
 \vspace{0.5cm}
-\caption{Het kernprincipe van het Extended Kalman Filter in één dimensie. De niet-lineaire functie $f(x)$ (blauw) wordt op elk tijdstip lokaal benaderd door een raaklyn (rood gestippeld) in het huidige schattingspunt $\hat{x}_k$. De helling van die raaklyn is gelijk aan de afgeleide $f'(\hat{x}_k)$. Het standaard Kalman Filter veronderstelt dat het systeem altijd globaal lineair is; het EKF herberekent deze lokale benadering bij elke tijdstap opnieuw \cite{bar_shalom_estimation}.}
+\caption{Het kernprincipe van het Extended Kalman Filter in één dimensie. De niet-lineaire functie $f(x)$ (blauw) wordt op elk tijdstip lokaal benaderd door een raaklijn (rood gestippeld) in het huidige schattingspunt $\hat{x}_k$. De helling van die raaklijn is gelijk aan de afgeleide $f'(\hat{x}_k)$. Het standaard Kalman Filter veronderstelt dat het systeem altijd globaal lineair is; het EKF herberekent deze lokale benadering bij elke tijdstap opnieuw \cite{bar_shalom_estimation}.}
 \label{fig:ekf_linearisatie}
 \end{figure}
 
