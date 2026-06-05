@@ -7,7 +7,7 @@ Om het voordeel van sensor fusion te kunnen beoordelen, is het eerst noodzakelij
 
 \subsection{GNSS}
 
-De basis voor moderne positiebepaling wordt gevormd door Global Navigation Satellite Systems (GNSS), de overkoepelende term voor systemen zoals het Amerikaanse GPS en het Europese Galileo. Deze systemen hebben een vergelijkbare werking, maar zijn geoptimaliseerd voor de regio waarbij ze horen. Denk aan GPS voor Amerika, Galileo voor Europa, GLONASS voor Rusland, IRNSS voor India of BeiDou voor China. In de kern functioneert GNSS door middel van trilateration gecombineerd met precieze tijdmeting \cite{GNSSConstellations2026} \cite{gps_distance}. Elke satelliet zendt continu een signaal uit dat een nauwkeurig tijdstempel bevat, gebaseerd op een atoomklok aan boord. De ontvanger meet het tijdverschil tussen verzending en ontvangst en berekent hieruit de afstand tot die satelliet. 
+De basis voor moderne positiebepaling wordt gevormd door Global Navigation Satellite Systems (GNSS), de overkoepelende term voor satellietnavigatiesystemen die door verschillende landen of regio's worden beheerd. De grootste systemen zijn het Amerikaanse GPS, het Europese Galileo, het Russische GLONASS, en het Chinese BeiDou. Hoewel deze door verschillende partijen worden beheerd, bieden ze elk wereldwijde dekking. In de kern functioneert GNSS door middel van trilateratie gecombineerd met precieze tijdmeting \cite{GNSSConstellations2026} \cite{gps_distance}. Elke satelliet zendt continu een signaal uit dat een nauwkeurig tijdstempel bevat, gebaseerd op een atoomklok aan boord. De ontvanger meet het tijdverschil tussen verzending en ontvangst en berekent hieruit de afstand tot die satelliet. 
 
 \begin{table}[htbp]
     \centering
@@ -25,19 +25,19 @@ De basis voor moderne positiebepaling wordt gevormd door Global Navigation Satel
     \end{tabularx}
 \end{table}
 
-Door de intersectie van meerdere afstandssferen (één per satelliet) te bepalen, kan de positie van de ontvanger worden berekend. Figuur \ref{fig:trilateration} illustreert dit principe. Om een betrouwbare driedimensionale positie te bepalen zijn minimaal vier satellieten vereist \cite{novatel_computation}: drie voor de ruimtelijke coördinaten (breedtegraad, lengtegraad, hoogte) en één om de tijdsafwijking van de receiver clock te compenseren. Elke extra satelliet verbetert de nauwkeurigheid van de oplossing. Aangezien de afstand direct is af te leiden uit de verstreken tijd, is nauwkeurige tijdmeting en synchronisatie noodzakelijk. \newpage
+Door de intersectie van meerdere afstandssferen (één per satelliet) te bepalen, kan de positie van de ontvanger worden berekend. Figuur \ref{fig:trilateratie} illustreert dit principe. Om een betrouwbare driedimensionale positie te bepalen zijn minimaal vier satellieten vereist \cite{novatel_computation}: drie voor de ruimtelijke coördinaten (breedtegraad, lengtegraad, hoogte) en één om de tijdsafwijking van de receiver clock te compenseren. Elke extra satelliet verbetert de nauwkeurigheid van de oplossing. Aangezien de afstand direct is af te leiden uit de verstreken tijd, is nauwkeurige tijdmeting en synchronisatie noodzakelijk. \newpage
 
 \begin{figure}[htbp!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/trilateration.jpg}
-	\caption{Principe van GNSS trilateration. De positie van de ontvanger is het snijpunt van de afstandssferen van meerdere sattelieten. \cite{gis_geography}}
-	\label{fig:trilateration}
+	\caption{Principe van GNSS trilateratie. De positie van de ontvanger is het snijpunt van de afstandssferen van meerdere satellieten. \cite{gis_geography}}
+	\label{fig:trilateratie}
 \end{figure}
 
 Hoewel GNSS-ontvangers breed inzetbaar zijn, kent deze techniek beperkingen. Een standaard smartphone-GPS behaalt onder ideale omstandigheden een horizontale nauwkeurigheid van grofweg 4,9 meter \cite{gpsgov2026accuracy}. Voor het nauwkeurig volgen van een atleet of voertuig op een wedstrijdparcours is deze foutmarge vaak onacceptabel groot. Om dit te verhelpen wordt tegenwoordig regelmatig gebruik gemaakt van een techniek genaamd Real-Time Kinematic (RTK). 
 
 \subsection{Nauwkeurigheid via RTK}
-Om de nauwkeurigheid van GNSS te verbeteren wordt de techniek Real-Time Kinematic (RTK) gebruikt. Dit systeem bestaat uit twee ontvangers, namelijk een stationair `Base Station' op een bekende locatie en een mobiele `Rover Receiver' \cite{gpsgeometer_rtk}. De base station berekent afwijkingen die veroorzaakt worden door clock errors en vertragingen van het satellietsignaal door de atmosfeer. Denk hierbij aan invloeden door ionen, maar ook temperatuur en luchtvochtigheid. De correcties worden in real-time naar de rover gestuurd. Doordat de base station en rover zich in hetzelfde lokale gebied bevinden, zijn de atmosferische omstandigheden vrijwel identiek en kunnen de fouten grotendeels worden verholpen. Hiermee zou een theoretische nauwkeurigheid van minder dan 50 mm behaald moeten kunnen worden \cite{valente2020accuracy}. Er zijn twee verschillende omstandigheden waarin het systeem zich kan bevinden waarmee de huidige kwaliteit beschreven kan worden:
+Om de nauwkeurigheid van GNSS te verbeteren wordt de techniek Real-Time Kinematic (RTK) gebruikt. Dit systeem bestaat uit twee ontvangers, namelijk een stationair \textit{Base Station} op een bekende locatie en een mobiele \textit{Rover Receiver} \cite{gpsgeometer_rtk}. De base station berekent afwijkingen die veroorzaakt worden door clock errors en vertragingen van het satellietsignaal door de atmosfeer. Denk hierbij aan invloeden door ionen, maar ook temperatuur en luchtvochtigheid. De correcties worden in real-time naar de rover gestuurd. Doordat de base station en rover zich in hetzelfde lokale gebied bevinden, zijn de atmosferische omstandigheden vrijwel identiek en kunnen de fouten grotendeels worden verholpen. Hiermee zou een theoretische nauwkeurigheid van minder dan 50 mm behaald kunnen worden \cite{valente2020accuracy}. Er zijn twee verschillende omstandigheden waarin het systeem zich kan bevinden waarmee de huidige kwaliteit beschreven kan worden:
 
 \begin{itemize}
 	\item RTK Float: De ontvanger gebruikt de fase van de satellietsignalen (draaggolven) voor de locatiebepaling, 
@@ -59,12 +59,12 @@ De afwijkingen en gebreken worden in de hieropvolgende paragraaf beschreven.
 De hoge nauwkeurigheid is in de praktijk sterk afhankelijk van de omgeving. Omdat GNSS gebaseerd is op de aankomsttijd van signalen, is het systeem kwetsbaar voor signaalreflecties en blokkades \cite{NovAtelMultipath2026}. Hieronder zijn dan ook een aantal prominente fouten die relevant zijn kijkend naar GNSS:
 
 \begin{enumerate}
-	\item \textbf{Non Line of Sight (NLOS):} De directe zichtlijn naar de satelliet is geblokkeerd. Het gebruik van RTK helpt hierbij aangezien het meestal gebruik maakt van een 'base' van een zekere hoogte om zo objecten te vermijden.
+	\item \textbf{Non Line of Sight (NLOS):} De directe zichtlijn naar de satelliet is geblokkeerd, bijvoorbeeld door gebouwen of tribunes, waardoor de ontvanger het signaal niet rechtstreeks ontvangt maar alleen via een reflectie of in het geheel niet. Dit leidt tot een foutieve afstandsmeting. 
 	\item \textbf{Multipath effecten:} Het signaal weerkaatst tegen een object voordat het de antenne bereikt. Hierdoor legt het signaal een langere weg af en komt het later aan. De ontvanger interpreteert deze extra reistijd onterecht als een grotere afstand tot de satelliet, wat resulteert in een positiefout. Dit is dan ook in recent onderzoek naar robuuste lokalisatie van Yuming Yin \cite{pmc_sensorfusion} aangetoond. Hieruit blijkt dat in dergelijke situaties de maximale nauwkeurigheid niet behouden kan worden.
 	\item \textbf{Satelliet klok:} De GNSS satellieten bevatten atoomklokken die zeer nauwkeurig zijn, maar toch kunnen afwijken. Een afwijking van 10 ns kan resulteren in een fout van drie meter \cite{NovAtelGNSSerrorSources2026}. Om hiervoor te compenseren kan er zeer nauwkeurige klok informatie van een Space Based Augmentation System (SBAS) of Precise Point Positioning (PPP) service provider gedownload worden. Dit bevat correcties voor deze afwijkingen die berekend worden door de SBAS of PPP. Hiernaast is het gebruiken van RTK een goede oplossing.
 	\item \textbf{Baanafwijkingen:} Naast het feit dat de klok kan afwijken, is dit ook het geval wanneer er gekeken wordt naar het traject dat de satelliet aflegt. Hierbij is RTK een goede oplossing.
-	\item \textbf{Ionospheric delay:} De ionosfeer is een laag in de atmosfeer die zich tussen de 50 en 1000 km boven aarde bevindt. De ionen die zich hierin bevinden beïnvloeden de transmissietijd van de satelliet  signalen. Aangezien deze condities in een lokaal gebied vrij gelijk zijn, zullen zowel de receiver als de base station van de RTK een vergelijkbare vertraging meemaken. Hiervoor kan dan ook gecompenseerd worden.
-	\item \textbf{Tropospheric delay:} Dit is de laag in de atmosfeer die het dichtstbij de aarde ligt. Hierbij ontstaat vertraging door verandering in temperatuur, luchtvochtigheid en druk. Ook hier kan de RTK voor compenseren aangezien deze condities vrij constant zijn in het te meten gebied.
+	\item \textbf{Ionosferische vertraging:} De ionosfeer is een laag in de atmosfeer die zich tussen de 50 en 1000 km boven aarde bevindt. De ionen die zich hierin bevinden beïnvloeden de transmissietijd van de satelliet  signalen. Aangezien deze condities in een lokaal gebied vrij gelijk zijn, zullen zowel de ontvanger als de base station van de RTK een vergelijkbare vertraging meemaken. Hiervoor kan dan ook gecompenseerd worden.
+	\item \textbf{Troposferische vertraging:} Dit is de laag in de atmosfeer die het dichtstbij de aarde ligt. Hierbij ontstaat vertraging door verandering in temperatuur, luchtvochtigheid en druk. Ook hier kan de RTK voor compenseren aangezien deze condities vrij constant zijn in het te meten gebied.
 \end{enumerate}
 
 De multipath en NLOS effecten zijn door `Novatel', een bedrijf gespecialiseerd in GPS en GNSS apparatuur, uitgebeeld zoals te zien is in figuur \ref{fig:multipath}. Bovendien zijn de afwijkingen aangetoond in tabel \ref{tab:gnss_error_sources}. 
@@ -92,8 +92,8 @@ De multipath en NLOS effecten zijn door `Novatel', een bedrijf gespecialiseerd i
         Multipath           & $\pm 1$ m                   \\ \hline
         Satelliet klok      & $\pm 2$ m                   \\ \hline
         Baanafwijkingen     & $\pm 2.5$ m                 \\ \hline
-        Ionospheric delays  & $\pm 5$ m                   \\ \hline
-        Tropospheric delays & $\pm 0.5$ m                 \\ \hline
+        Ionosferische vertraging  & $\pm 5$ m                   \\ \hline
+        Troposferische vertraging & $\pm 0.5$ m                 \\ \hline
     \end{tabular}
 \end{table}
 
@@ -153,47 +153,60 @@ De noodzaak om deze sensoren te combineren is gebaseerd op het feit dat ze elkaa
 Hoewel de hardware van de tracker vastligt, is theoretisch onderzocht welke aanvullende sensoren de robuustheid van de positiebepaling zouden kunnen verbeteren. Dit brengt mogelijke richtingen voor vervolgonderzoek in kaart. De alternatieven worden beoordeeld op de compactheid van de tracker en de praktische omgeving van de paardensport.
 
 \subsubsection{Magnetometer}
-Een magnetometer meet de sterkte en richting van het magnetisch veld van de aarde en kan daarmee een absolute heading referentie bieden. In een 9-assige IMU is de magnetometer geïntegreerd naast de accelerometer en gyroscoop. Het grote voordeel is dat heading-drift direct kan worden gecorrigeerd zonder externe sensor. In de literatuur wordt de magnetometer dan ook regelmatig ingezet in AHRS-systemen (Attitude and Heading Reference System) voor luchtvaart en marinenavigatie \cite{bar_shalom_estimation}. \\
+Een magnetometer meet de sterkte en richting van het magnetisch veld van de aarde en kan daarmee een absolute heading referentie bieden. In een 9-assige IMU is de magnetometer geïntegreerd naast de accelerometer en gyroscoop. Het grote voordeel is dat heading-drift direct kan worden gecorrigeerd zonder externe sensor. In de literatuur wordt de magnetometer dan ook regelmatig ingezet in AHRS-systemen (Attitude and Heading Reference System) voor luchtvaart en marine navigatie \cite{bar_shalom_estimation}. \\
 
 De integratie van een magnetometer hangt echter sterk af van de omgeving. Magnetometers zijn extreem gevoelig voor magnetische interferentie die door verschillende omstandigheden veroorzaakt worden. Denk hierbij aan interne componenten op de printplaat van de tracker, zoals de batterij en de antenne, als de externe omgeving, zoals tribunes of hekwerken. Om deze foutbronnen te vermijden zou afgewogen moeten worden of het risico van deze magnetische storingen opweegt tegen de voordelen. Daarnaast vereist het toevoegen van een magnetometer een 9-assige IMU, wat een wijziging van de huidige hardware betekent. Een magnetometer valt daarmee buiten de scope van dit project en is uitsluitend relevant als optie voor vervolgonderzoek.
 
 \subsubsection{Odometrie en Distance Measuring Instruments}
-Odometrie omvat alle technieken waarbij de afgelegde afstand wordt gemeten via mechanische of optische middelen. Een Distance Measuring Instrument (DMI) kan zowel een wiel encoder als een stappenteller bedragen. De wiel encoder meet de rotaties en berekent hieruit de afgelegde afstand en snelheid. De stappenteller herkent aan de hand van de mechanische beweging wanneer een stap plaatsvindt en maakt een accurate schatting van de afgelegde afstand per stap. Deze technieken bieden een nauwkeurige snelheidsmeting die onafhankelijk is van GPS en IMU. Door de complexe en variabele bewegingen van het paard is dit echter moeilijk te realiseren.
+Odometrie omvat alle technieken waarbij de afgelegde afstand wordt gemeten via mechanische of optische middelen. Een \textit{Distance Measuring Instrument} (DMI) kan zowel een wiel encoder als een stappenteller bedragen. De wiel encoder meet de rotaties en berekent hieruit de afgelegde afstand en snelheid. De stappenteller herkent aan de hand van de mechanische beweging wanneer een stap plaatsvindt en maakt een accurate schatting van de afgelegde afstand per stap. Deze technieken bieden een nauwkeurige snelheidsmeting die onafhankelijk is van GPS en IMU. Door de complexe en variabele bewegingen van het paard is dit echter moeilijk te realiseren.
 
 
 \subsubsection{Doppler radar}
-Een Doppler radar meet de snelheid van een object ten opzichte van de grond door de frequentieverschuiving van een uitgestuurd radarsignaal te analyseren. Door de radar schuin naar de grond te richten kan een nauwkeurige grondsnelheid worden bepaald. Doppler radar wordt ingezet in high-end navigatiesystemen voor luchtvaartuigen en schepen waar nauwkeurige snelheidsmeting noodzakelijk is. Net zoals bij de Stappenteller is de snelheid erg van nut, echter is het realiseren in de praktijk hiervan zeer ingewikkeld. Een betrouwbare Doppler-meting vereist een stabiele en bekende meethoek ten opzichte van het grondvlak. De dynamische bewegingen van een galopperend paard maken een stabiele mounting van een Doppler radar vrij onrealistisch. 
+Een Doppler radar meet de snelheid van een object ten opzichte van de grond door de frequentieverschuiving van een uitgestuurd radarsignaal te analyseren. Door de radar schuin naar de grond te richten kan een nauwkeurige grondsnelheid worden bepaald. Doppler radar wordt ingezet in high-end navigatiesystemen voor luchtvaartuigen en schepen waar nauwkeurige snelheidsmeting noodzakelijk is. Net zoals bij de Stappenteller is de snelheid erg van nut, echter is het realiseren in de praktijk hiervan zeer ingewikkeld. Een betrouwbare Doppler-meting vereist een stabiele en bekende meethoek ten opzichte van het grondvlak. De dynamische bewegingen van een galopperend paard maken een stabiele montage van een Doppler radar vrij onrealistisch. 
 
 
 \subsubsection{LiDAR}
-LiDAR (Light Detection and Ranging) maakt gebruik van laser of infraroodlicht om de omgeving in kaart te brengen met hoge resolutie. Het gebruik van LiDAR (Light Detection and Ranging) wordt momenteel al op diverse manieren toegepast bij autonome voertuigen. Dit maakt het mogelijk om positiefouten te corrigeren door de omgeving, zoals stoepranden of muren, nauwkeurig in kaart te brengen. De afstand tot obstakels kan hiermee berekend worden om zo drift van het systeem te compenseren \cite{Meng2017RobustLocalization}. Ook al is dit zeer accuraat, zal dit ongeschikt zijn voor deze toepassing. Ze zijn fysiek te groot en verbruiken veel energie voor een compacte tracker.
+\textit{Light Detection and Ranging} (LiDAR) maakt gebruik van laser of infraroodlicht om de omgeving in kaart te brengen met hoge resolutie. Het gebruik van LiDAR wordt momenteel al op diverse manieren toegepast bij autonome voertuigen. Dit maakt het mogelijk om positiefouten te corrigeren door de omgeving, zoals stoepranden of muren, nauwkeurig in kaart te brengen. De afstand tot obstakels kan hiermee berekend worden om zo drift van het systeem te compenseren \cite{Meng2017RobustLocalization}. Ook al is dit zeer accuraat, zal dit ongeschikt zijn voor deze toepassing. Ze zijn fysiek te groot en verbruiken veel energie voor een compacte tracker.
 
 
 \subsubsection{Vision Aided Navigation (Camera)}
-Een belangrijk hulpmiddel kan ook fotogrammetrie zijn. Door het gebruik van een camera kunnen objecten gedetecteerd worden en zo een absolute positie bepaald worden \cite{NovAtelMultipath2026}. Wanneer een voorwerp herkend wordt, zal de verandering in achtereenopvolgende beelden een relatieve positie verschuiving in 3D aangeven. Hier komt echter hetzelfde argument naar voren als bij de LiDAR. Het systeem is te grootschalig voor de paardensport. In tabel \ref{tab:sensor_evaluatie} is een overzicht van alle besproken sensoren.
+Een belangrijk hulpmiddel kan ook fotogrammetrie zijn. Door het gebruik van een camera kunnen objecten gedetecteerd worden en zo een absolute positie bepaald worden \cite{NovAtelMultipath2026}. Wanneer een voorwerp herkend wordt, zal de verandering in achtereenvolgende beelden een relatieve positie verschuiving in 3D aangeven. Hier komt echter hetzelfde argument naar voren als bij de LiDAR. Het systeem is te grootschalig voor de paardensport. \\
+
+In tabel \ref{tab:sensor_evaluatie} is een overzicht van alle besproken sensoren.
 
 
-\begin{table}[htbp]
-    \centering
-    \caption{Overzicht van alternatieve sensortechnologieën.}
-    \label{tab:sensor_evaluatie}
-    \renewcommand{\arraystretch}{1.3} % Zorgt voor iets meer ademruimte in de vakjes
-    \begin{tabularx}{\textwidth}{|l|X|X|X|l|}
-        \hline
-        \rowcolor{green!20}
-        \textbf{Sensortechnologie} & \textbf{Verbetering} & \textbf{Foutbron} \\ \hline
-        Magnetometer (9-as IMU)    & Heading-drift correctie        & Magnetische velden (metalen obstakels)  					\\ \hline
-        Odometrie / DMI            & Snelheid, stilstand            & Complexe en variabele bewegingen       \\ \hline
-        Doppler-radar              & Grondsnelheid                  & Nee (te groot)         				 \\ \hline
-        LiDAR                      & Hoge omgevingsnauwkeurigheid   & Nee (te groot/zwaar)   				 \\ \hline
-        Camera (VAN)               & Absolute positie via landmarks & Nee (rekenkracht) 					 \\ \hline
-    \end{tabularx}
+
+Om de geschiktheid van de alternatieve sensoren te vergelijken is een criteria-afweging opgesteld zoals te zien in tabel \ref{tab:sensorafweging}. Deze afweging is om vast te stellen welke sensoren de meest realistische en effectieve oplossingen bieden.
+
+\begin{table}[h]
+\centering
+\caption{Multicriteria-afweging van de aanvullende sensoren ten opzichte van de huidige IMU. Een hogere score is gunstiger voor toepassing binnen de randvoorwaarden van de ProRTK tracker.}
+\label{tab:sensorafweging}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l c c c c c c c}
+\hline
+\textbf{Sensor}
+& \rotatebox{90}{Geen hardwarewijziging\,}
+& \rotatebox{90}{Compactheid\,}
+& \rotatebox{90}{Laag energieverbruik\,}
+& \rotatebox{90}{Lage rekenbelasting\,}
+& \rotatebox{90}{Robuust in wedstrijdomgeving\,}
+& \rotatebox{90}{Meerwaarde bij GNSS-uitval\,} \\
+\hline
+IMU (huidig)        & $++$ & $++$ & $++$ & $+$  & $+$  & $+$  \\
+Magnetometer (9-as) & $--$ & $++$ & $++$  & $+$  & $-$  & $0$  \\
+Odometrie / DMI     & $--$ & $-$  & $0$  & $+$  & $--$ & $+$  \\
+Doppler-radar       & $--$ & $-$  & $-$  & $0$  & $--$ & $+$  \\
+LiDAR               & $--$ & $--$ & $--$ & $-$  & $-$  & $++$ \\
+Camera (VAN)        & $--$ & $-$  & $-$  & $--$ & $-$  & $++$ \\
+\hline
+\end{tabular}
 \end{table}
 
 \subsection{Filteralgoritmes}
 Het combineren van meerdere sensordatastromen vereist een systeem dat omgaat met de onzekerheden van beide bronnen en optimaal gebruik maakt van de informatie. In de navigatietechniek zijn verschillende algoritmes ontwikkeld voor dit doel. In deze paragraaf worden de meest gangbare methoden besproken.
 
-\subsubsection{Complementary filter}
+\subsubsection{Complementair filter}
 
 De `complementary filter' is een eenvoudige sensor fusion techniek dat twee of meer metingen combineert voor een accurate schatting. Dit filter combineert typisch een hoogfrequente bron met een laagfrequente bron. In dit geval zou het de laagfrequente GPS signaal met de hoogfrequente IMU combineren. Dit filter is in formule \ref{eq:complementary_filter} wiskundig uitgebeeld.
 
@@ -222,7 +235,7 @@ Een veelgebruikte toepassing van de complementary filter is echter de combinatie
 Een typische waarde voor $\alpha$ is 0.95 tot 0.99, waardoor de gyroscoop de oriëntatie bepaalt bij snelle bewegingen en de accelerometer de langetermijndrift corrigeert. Voor GPS/IMU-fusie waarbij de onzekerheden sterk variëren in de tijd is echter een adaptief filter nodig. 
 
 \subsubsection{Kalman Filter}
-Het kalman Filter (KF), in 1960 bedacht door Rudolf Kálmán, is een wiskundig algoritme dat de werkelijke toestand van een systeem berekent, zelfs als de sensormetingen ruis of omgevingsnauwkeurigheden bevatten \cite{welch_kalman}. Waar de complementary filter met vaste wegingen werkt, is het Kalman Filter dynamisch. Het berekent continu de optimale balans door de meetonzekerheid van de sensoren (bevindt zich in de $R$-matrix) en de onzekerheid van het eigen rekenmodel (de process noise, vastgelegd in de $Q$-matrix) tegen elkaar af te wegen.
+Het Kalman Filter (KF), in 1960 bedacht door Rudolf Kálmán, is een wiskundig algoritme dat de werkelijke toestand van een systeem berekent, zelfs als de sensormetingen ruis of omgevingsnauwkeurigheden bevatten \cite{welch_kalman}. Waar de complementary filter met vaste wegingen werkt, is het Kalman Filter dynamisch. Het berekent continu de optimale balans door de meetonzekerheid van de sensoren (bevindt zich in de $R$-matrix) en de onzekerheid van het eigen rekenmodel (de proces noise, vastgelegd in de $Q$-matrix) tegen elkaar af te wegen.
 
 
 \begin{figure}[htbp!]
@@ -237,7 +250,7 @@ Zoals in afbeelding \ref{fig:kalman_schematic} te zien is functioneert het algor
 
 De updatestap is afhankelijk van een nieuwe absolute meting die binnenkomt, in dit geval de RTK GNSS data. Hiermee wordt de voorspelling gecorrigeerd. Het filter berekent hiervoor de Kalman Gain ($K$). Deze factor bepaalt dynamisch hoeveel gewicht er aan de nieuwe GNSS-meting wordt toegekend ten opzichte van de IMU-voorspelling. Na deze correctie neemt de onzekerheid weer af en krimpt matrix $P$. \\
 
-Hoewel het filter zeer effectief is, kent het een belangrijke beperking. Het filter is uitsluitend ontworpen voor lineaire systemen. Het bepalen van de positie en het navigeren zijn echter niet lineair. De heading wordt namelijk mede bepaald door de sinus en cosinus van de koers. 
+Hoewel het filter zeer effectief is, kent het een belangrijke beperking. Het filter is uitsluitend ontworpen voor lineaire systemen. Het bepalen van de positie en het navigeren zijn echter niet lineair. De heading wordt namelijk bepaald door de sinus en cosinus van de koers. 
 
 
 \subsubsection{Extended Kalman Filter (EKF)}

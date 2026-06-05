@@ -9,7 +9,7 @@ zich vroeger beperkte tot het vastleggen van de finish, vereisen moderne
 analyses en live tracking een continue en accurate positiebepaling van atleten 
 en voertuigen. \\
 
-MYLAPS Sports Timing speelt hierin wereldwijd een belangrijke rol. Het van 
+MYLAPS Sports Technology speelt hierin wereldwijd een belangrijke rol. Het van 
 oorsprong Nederlandse bedrijf levert al decennialang de hardware en software 
 voor duizenden evenementen, variërend van lokale hardloopwedstrijden tot de 
 Olympische Spelen en grote motorsportkampioenschappen. De kern van MYLAPS 
@@ -20,8 +20,8 @@ real-time analyse van deelnemers gedurende een gehele race. \\
 In opdracht van MYLAPS wordt in dit afstudeerproject gewerkt aan de volgende 
 generatie van deze volgsystemen, de ProRTK tracker. Deze tracker heeft primair als doel ingezet te worden bij paardenraces, maar het systeem biedt de mogelijkheid om verder gebruikt te worden bij andere disciplines, waaronder autosport. \\
 
-De tracker maakt gebruik van `Real-Time Kinematic Global Navigation Satellite 
-Systems' (RTK GNSS), waarbij de locatie tot op de centimeter nauwkeurig kan 
+De tracker maakt gebruik van \textit{Real-Time Kinematic Global Navigation Satellite 
+Systems} (RTK GNSS), waarbij de locatie tot op de centimeter nauwkeurig kan 
 worden bepaald. In de praktijk ontbreekt echter de garantie op een constant 
 betrouwbaar signaal. Signaaluitval en multipath effecten door tribunes en gebouwen kunnen leiden tot onbetrouwbare of ontbrekende positiedata. \\
 
@@ -35,7 +35,7 @@ wordt in het huidige systeem echter niet ingezet voor de positiebepaling. Hierom
 
 \subsection{Opdracht en afbakening}
 
-Dit afstudeerproject is in de kern een onderzoeksproject. Het doel is te onderzoeken óf en in welke mate de positiebepaling van de ProRTK tracker verbeterd kan worden met behulp van sensor fusion. Een belangrijke randvoorwaarde, opgegeven door de opdrachtgever, is dat de bestaande hardware niet wordt gewijzigd. De opdracht betreft een softwarematige uitbreiding op het bestaande platform. \\
+Dit afstudeerproject is in de kern een onderzoeksproject. Het doel is te onderzoeken of en in welke mate de positiebepaling van de ProRTK tracker verbeterd kan worden met behulp van sensor fusion. Een belangrijke randvoorwaarde, opgegeven door de opdrachtgever, is dat de bestaande hardware niet wordt gewijzigd. De opdracht betreft een softwarematige uitbreiding op het bestaande platform. \\
 
 Als ondersteuning voor het onderzoek naar robuustheid worden aanvullende sensoren in beschouwing genomen om zo te dienen als onderbouwing voor eventuele toekomstige aanpassingen. De afweging van aanvullende sensoren dient daarbij twee doelen: het onderbouwt waarom de aanwezige IMU binnen de gestelde randvoorwaarden de meest geschikte keuze is, en het brengt mogelijke richtingen voor toekomstige aanpassingen in kaart. Deze afweging is puur theoretisch van aard. Het onderzoek richt zich primair op paardenraces, met autosport als eventuele secundaire toepassing. Binnen de scope van de opdracht valt het afwegen van geschikte sensoren en filtertechnieken, het uitlezen en verwerken van de IMU data, en het ontwerp, de implementatie en de validatie van het sensor fusion systeem. Buiten de scope vallen hardwarematige aanpassingen, hoogtebepaling (de positiebepaling beperkt zich tot het 2D vlak) en veldtests met een rijdend paard.
 

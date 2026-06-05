@@ -7,9 +7,9 @@ Dit hoofdstuk beschrijft de implementatie van het sensor fusion systeem. De real
 
 Voor de eindgebruiker is het systeem ontworpen om draadloos firmware te ontvangen via Over The Air (OTA) updates. Voor de ontwikkeling en het testen is deze methode echter onpraktisch. Het draadloos versturen en installeren van de nieuwe firmware kost relatief veel tijd. Tijdens een ontwikkelproject, waarbij de code voortdurend wordt aangepast en opnieuw getest moet worden, vertraagt dit het proces aanzienlijk. \\
 
-Om die reden is een fysieke testopstelling gerealiseerd met behulp van een SEGGER J-Link debug probe. Deze maakt het mogelijk om firmware via een bekabelde verbinding snel te flashen. Daarnaast biedt de J-Link ondersteuning voor Real Time Transfer (RTT). Dit is een technologie van SEGGER waarmee de debugprobe data uit een buffer in het RAM van de microcontroller leest terwijl de processor blijft draaien. Hierdoor kan met lage overhead en zonder de uitvoering te onderbreken live data tussen de microcontroller en de computer worden uitgewisseld \cite{segger_rtt}. Hiermee kunnen sensorwaarden en filteruitkomsten live worden gelogd, wat in hoofdstuk \ref{sec:resultaten} wordt gebruikt om de werking van het EKF te valideren. \\
+Om die reden is een fysieke testopstelling gerealiseerd met behulp van een SEGGER J-Link debug probe. Deze maakt het mogelijk om firmware via een bekabelde verbinding snel te flashen. Daarnaast biedt de J-Link ondersteuning voor Real Time Transfer (RTT). Dit is een technologie van SEGGER waarmee de debug probe data uit een buffer in het RAM van de microcontroller leest terwijl de processor blijft draaien. Hierdoor kan met lage overhead en zonder de uitvoering te onderbreken live data tussen de microcontroller en de computer worden uitgewisseld \cite{segger_rtt}. Hiermee kunnen sensorwaarden en filteruitkomsten live worden gelogd, wat in hoofdstuk \ref{sec:resultaten} wordt gebruikt om de werking van het EKF te valideren. \\
 
-Hoewel de J-Link standaard een 20 pins JTAG-connector heeft, communiceert de microcontroller op de printplaat via de Serial Wire Debug (SWD) interface. Omdat de printplaat niet is voorzien van een fysieke debug-header, is de verbinding handmatig tot stand gebracht. De PCB bevat specifieke testpads bedoeld voor de vier SWD signalen (VCC, GND, SWDIO en SWCLK) waaraan tijdelijk 4 kabels zijn gesoldeerd. Deze staan direct in verbinding met de J-Link (zie Figuur \ref{fig:JTAG}).
+Hoewel de J-Link standaard een 20 pins JTAG-connector heeft, communiceert de microcontroller op de printplaat via de Serial Wire Debug (SWD) interface. Omdat de printplaat niet is voorzien van een fysieke debug-header, is de verbinding handmatig tot stand gebracht. De PCB bevat specifieke test pads bedoeld voor de vier SWD signalen (VCC, GND, SWDIO en SWCLK) waaraan tijdelijk 4 kabels zijn gesoldeerd. Deze staan direct in verbinding met de J-Link (zie Figuur \ref{fig:JTAG}).
 
 \begin{figure}[htbp]
     \centering
@@ -43,7 +43,7 @@ Voor de ASM330LHH IMU moeten diverse parameters worden geconfigureerd om te vold
 
 Om de beweging accuraat vast te leggen zonder clipping, is het accelerometerbereik ingesteld op $\pm$4 g. Dit geeft een veiligheidsmarge van 60\% ten opzichte van de berekende piekversnelling van 2,5 g \cite{stmicro_asm330lhh}. Voor het gyroscoopbereik is gekozen voor $\pm$500 DPS \cite{stmicro_asm330lhh}. Ten opzichte van de eerder berekende worst-case hoeksnelheid van 30 DPS op de renbaan, biedt dit een ruime marge (factor 16) voor abrupte en onverwachte bewegingen. \\
 
-Voor de outputfrequentie (ODR) is een waarde van 208 Hz geconfigureerd. Dit sluit aan bij de standaard die gehanteerd wordt in het EquiMoves systeem voor paarden \cite{InertiaEquineGait} en het onderzoek naar IMU oriëntatieschatting bij hardlopers \cite{Fan2025Influence}. De IMU beschikt bovendien over een digitale laagdoorlaatfilter die in het systeem is afgesteld op 50 Hz. Hiervoor is gekozen, omdat onderzoek concludeert dat bewegingsfrequenties bij renpaarden zich onder de 10 Hz bevinden \cite{witte2006effect}. Hiermee wordt hoogfrequente ruis gedempt, zonder het werkelijke signaal aan te tasten. \\
+Voor de outputfrequentie (ODR) is een waarde van 208 Hz geconfigureerd. Dit is de dichtsbijzijnde waarde die ingesteld kon worden vergeleken met de gestelde 200 Hz. Dit sluit aan bij de standaard die gehanteerd wordt in het EquiMoves systeem voor paarden \cite{InertiaEquineGait} en het onderzoek naar IMU oriëntatieschatting bij hardlopers \cite{Fan2025Influence}. De IMU beschikt bovendien over een digitale laagdoorlaatfilter die in het systeem is afgesteld op 50 Hz. Hiervoor is gekozen, omdat onderzoek concludeert dat bewegingsfrequenties bij renpaarden zich onder de 10 Hz bevinden \cite{witte2006effect}. Hiermee wordt hoogfrequente ruis gedempt, zonder het werkelijke signaal aan te tasten. \\
 
 Als laatst is de \textit{Block Data Update} (BDU) ingeschakeld om fouten bij het uitlezen van de seriële interface te voorkomen. Zoals geadviseerd door STMicroelectronics \cite{ST_AN5296} (pagina 18), garandeert dit dat de hoge en lage bytes van de outputregisters afkomstig zijn van hetzelfde meetsample.
 
@@ -58,7 +58,7 @@ Wanneer de IMU goed is geconfigureerd kan gekeken worden naar het uitlezen van d
     \label{fig:sensorwaardes}
 \end{figure}
 
-Hierin zijn de waardes te zien van het apparaat die stil ligt op een tafel. Hierin zijn de verschillende g-krachten op de assen te zien en die resulteren gezamenlijk tot ongeveer 1000 milli g wat overeenkomt met de zwaartekracht. Er is duidelijk een offset te zien en de waardes schommelen. Het valt ruim binnen de specificaties van de IMU aangezien de datasheet vermeldt dat het bij een zero rate level tussen de -10 en +10 dps kan zitten. De accelerometer is daarentegen vrij gelijk. Voordat de gyroscoopwaarden bruikbaar zijn voor het filter, dienen deze gekalibreerd te worden naar nul om zo de schommelingen te verminderen. Om de schommelingen te verminderen is het digitale laagdoorlaatfilter van de ASM330LHH ingeschakeld, dat zoals vermeld in tabel \ref{tab:imu_config} is afgesteld op een van 50 Hz. Dit filter dempt de hoogfrequente ruis op de gyroscoopmetingen, zonder de werkelijke bewegingsfrequenties (bij renpaarden onder de 10 Hz) aan te tasten. De resultaten hiervan zijn te zien in figuur \ref{fig:sensorwaardes_filter}.
+Hierin zijn de waardes te zien van het apparaat dat stil ligt op een tafel. Hierin zijn de verschillende g-krachten op de assen te zien en die resulteren gezamenlijk tot ongeveer 1000 milli g wat overeenkomt met de zwaartekracht. Er is duidelijk een offset te zien en de waardes schommelen. Het valt ruim binnen de specificaties van de IMU aangezien de datasheet vermeldt dat het bij een zero rate level tussen de -10 en +10 dps kan zitten. De accelerometer is daarentegen vrij gelijk. Voordat de gyroscoopwaarden bruikbaar zijn voor het filter, dienen deze gekalibreerd te worden naar nul om zo de schommelingen te verminderen. Om de schommelingen te verminderen is het digitale laagdoorlaatfilter van de ASM330LHH ingeschakeld, dat zoals vermeld in tabel \ref{tab:imu_config} is afgesteld op 50 Hz. Dit filter dempt de hoogfrequente ruis op de gyroscoopmetingen, zonder de werkelijke bewegingsfrequenties (bij renpaarden onder de 10 Hz) aan te tasten. De resultaten hiervan zijn te zien in figuur \ref{fig:sensorwaardes_filter}.
 
 \begin{figure}[h]
     \centering
@@ -137,6 +137,45 @@ Alleen de gecompenseerde versnelling (\texttt{accel\_ms2}) gaat door naar de pre
  
 \subsubsection{Coördinaten transformatie}
 
+De u-blox module geeft de positie in geografische coördinaten volgens de WGS84 standaard, oftewel in latitude, longitude en altitude. Het EKF rekent echter in een vlak coördinatenstelsel, omdat de positie en snelheid in meters worden bijgehouden. Graden zijn hiervoor ongeschikt waardoor de positiedata omgezet moet worden naar een lokaal East-North-Up (ENU) stelsel \cite{local_tangent}. Om dit te bereiken wordt de positie in twee stappen omgezet. \\
+
+Ten eerste worden de coördinaten omgezet naar Earth-Centered Earth-Fixed, een driedimensionaal Cartetisch stelsel met de oorsprong in het midden van de aarde. Dit gebeurt met formule~\ref{eq:llaecef} en \ref{eq:primevertical}, waarbij $a$ gelijk is aan de equatoriale straal ($a = 6\,378\,137$~m), $b$ gelijk is aan de polaire straal ($b = 6\,378\,137$~m) en $e$ gelijk is aan formule \ref{eq:eccentricity} \cite{geo_conversion}. Bovendien is $\theta$ gelijk aan de latitude en $\lambda$ de longitude.
+
+\begin{equation}
+    N(\theta) = \frac{a}{\sqrt{1 - e^2 \sin^2\theta}}
+    \label{eq:primevertical}
+\end{equation}
+
+\begin{equation}
+    e^2 = \frac{a^2 - b^2}{a^2} = 1 - \frac{b^2}{a^2}
+    \label{eq:eccentricity}
+\end{equation}
+
+\begin{equation}
+    \begin{aligned}
+        X &= (N + h)\cos\theta\cos\lambda \\
+        Y &= (N + h)\cos\theta\sin\lambda \\
+        Z &= \bigl(N(1 - e^2) + h\bigr)\sin\theta
+    \end{aligned}
+    \label{eq:llaecef}
+\end{equation}
+
+Vervolgens wordt deze ECEF positie omgezet naar het lokale ENU-stelsel. Het nulpunt van dit stelsel is de plek van de eerste RTK fix waarbij alle volgende posities ten opzichte van dit startpunt worden uitgedrukt. Deze omzetting wordt bereikt door formule \ref{eq:ecefenu}.
+
+\begin{equation}
+    \begin{bmatrix} E \\ N \\ U \end{bmatrix}
+    =
+    \begin{bmatrix}
+        -\sin\lambda_0 & \cos\lambda_0 & 0 \\
+        -\sin\theta_0\cos\lambda_0 & -\sin\theta_0\sin\lambda_0 & \cos\theta_0 \\
+        \cos\theta_0\cos\lambda_0 & \cos\theta_0\sin\lambda_0 & \sin\theta_0
+    \end{bmatrix}
+    \begin{bmatrix} X - X_0 \\ Y - Y_0 \\ Z - Z_0 \end{bmatrix}
+    \label{eq:ecefenu}
+\end{equation}
+
+De oostwaarde ($E$) en de noordwaarde ($N$) vormen direct de $X$- en $Y$-positie van de
+tracker in meters, en gaan zo de updatestap van het EKF in. De hoogtewaarde ($U$) wordt niet gebruikt, omdat de hoogtebepaling buiten de scope van het project valt. Na het verwerken van de data zullen deze coördinaten weer terug getransformeerd worden naar longitude en latitude aangezien dit de verwacht format is voor de MYLAPS applicaties. \\
 
 
 
@@ -148,11 +187,11 @@ Het EKF is geïmplementeerd door middel van meerdere operaties. De matrixoperati
 
 \subsubsection{Initialisatie}
 
-De toestand wordt vastgelegd in een state vector met zes elementen. De covariance matrix $P$ start met de waarde één op de diagonaal bedoeld voor elk element. Deze waarde zal gedurende de werking van het systeem geupdate worden. De process noise $Q$ is per toestand afgesteld doormiddel van testen.
+De toestand wordt vastgelegd in een state vector met zes elementen. De covariantie matrix $P$ start met de waarde één op de diagonaal bedoeld voor elk element. Deze waarde zal gedurende de werking van het systeem geupdate worden. De process noise $Q$ is per toestand afgesteld doormiddel van testen.
 
  \newpage
 
-\begin{lstlisting}[language=C, caption={Covariance en process noise matricen van het EKF.}, label={lst:ekf_state}]
+\begin{lstlisting}[language=C, caption={covariantie en process noise matricen van het EKF.}, label={lst:ekf_state}]
 // State vector: [X, Y, v, theta, accel_bias, gyro_bias]
 static float s_status[6][1] = {0};
 
@@ -164,9 +203,9 @@ static float s_Q[6][6] = { /* 1e-4, 1e-4, 1e-3, 1e-4, 1e-4, 1e-4 */ };
 
 \subsubsection{De prediction}
 
-Elke 5\,ms (200\,Hz) voorspelt \texttt{ekf\_predict\_imu} de nieuwe toestand op basis van de versnelling en de yaw rate. Vervolgens wordt door middel van het bewegingsmodel (beschreven in hoofdstuk \ref{sec:ekf_ontwerp}) de state vector bijgewerkt. Vervolgens wordt de nieuwe covariance matrix berekent met $P^{-} = F\,P\,F^{T} + Q$.
+Elke 5\,ms (200\,Hz) voorspelt \texttt{ekf\_predict\_imu} de nieuwe toestand op basis van de versnelling en de yaw rate. Vervolgens wordt door middel van het bewegingsmodel (beschreven in hoofdstuk \ref{sec:ekf_ontwerp}) de state vector bijgewerkt. Vervolgens wordt de nieuwe covariantie matrix berekent met $P^{-} = F\,P\,F^{T} + Q$.
 
-\begin{lstlisting}[caption={De prediction stap van het EKF (ingekort).}, label={lst:ekf_predict}]
+\begin{lstlisting}[language=C, caption={De prediction stap van het EKF (ingekort).}, label={lst:ekf_predict}]
 void ekf_predict_imu(float accel, float angular, float dt)
 {
     float old_v     = s_status[2][0];
@@ -181,7 +220,7 @@ void ekf_predict_imu(float accel, float angular, float dt)
     s_status[2][0] += true_accel   * dt;              // v
     s_status[3][0] += true_angular * dt;              // theta
 
-    // Jacobiaan F (formule uit hoofdstuk 8)
+    // Jacobian F (formule uit hoofdstuk 6)
     float F[6][6] = {
         {1, 0,  cosf(old_theta)*dt, -old_v*sinf(old_theta)*dt, 0, 0},
         {0, 1,  sinf(old_theta)*dt,  old_v*cosf(old_theta)*dt, 0, 0},
@@ -200,15 +239,15 @@ void ekf_predict_imu(float accel, float angular, float dt)
 }
 \end{lstlisting}
 
-Hiernaast wordt de snelheid begrensd om zo foutieve berekeningen of metingen op te vangen zodat het filter niet verstoord wordt. Dit wordt bovendien ook gedaan met de kijkrichting door deze te limiteren tot het interval $[-\pi, \pi]$. Hierdoor zal de kijkrichting nooit oplopen tot waardes boven en onder de 180 graden.
+Hiernaast wordt de snelheid begrensd op honderd kilometer per uur om zo foutieve berekeningen of metingen op te vangen zodat het filter niet verstoord wordt. Dit wordt bovendien ook gedaan met de kijkrichting door deze te limiteren tot het interval $[-\pi, \pi]$. Hierdoor zal de kijkrichting nooit oplopen tot waardes boven en onder de 180 graden. Hogere waardes dan dit is dan ook niet nodig aangezien deze alsnog dezelfde kant op wijzen.
 
-\subsubsection{De correction en NIS-rejectie}
+\subsubsection{De correction en NIS uitschieter detectie}
 
-Nadat de binnenkomende positie data is omgezet naar het ENU stelsel, wordt het verwerkt door \texttt{ekf\_update\_gnss}.
+Nadat er nieuwe positiedata binnenkomt wordt dit vervolgens verwerkt door de functie \texttt{ekf\_update\_gnss}. Hierin wordt de meetruis ($R$) dynamisch benaderd aangezien deze sterk kan variëren tijdens gebruik. De u-blox berekent intern continu de betrouwbaarheid van zijn eigen positiebepaling. Dit wordt via het \texttt{UBX-NAV-COV} bericht geleverd. Deze foutmarge is in zowel de noordelijke als oostelijke richting. Deze waarden worden per meting direct in de meetruismatrix $R$ geladen. \\
 
-Zodra een nieuwe GNSS-positie binnenkomt, wordt deze eerst naar het ENU-stelsel omgezet (zie paragraaf~\ref{subsec:coord_transform}) en daarna verwerkt door \texttt{ekf\_update\_gnss}. De measurement noise $R$ wordt per meting opgebouwd uit de positiecovariantie van de u-blox (UBX-NAV-COV), inclusief de kruisterm, en geschaald op basis van de RTK-status (een hogere weging bij Float of geen fix). Voordat de meting wordt verwerkt, wordt deze getoetst via de Normalized Innovation Squared; bij overschrijding van de drempelwaarde van 9{,}21 (chi-kwadraat, 2 vrijheidsgraden, 99\,\%) wordt de meting verworpen en behoudt het filter zijn eigen predictie.
+Om de robuustheid te verbeteren worden de uitschieters verworpen via de \textit{Normalized Innovation Squared} (NIS). Dit wordt bepaald door $NIS = y^{T} * S^{-1} * y$. Wanneer deze de drempelwaarde van 9{,}21 overschrijdt, wordt de meting verworpen. Hiermee wordt de nieuwe positie niet meegenomen en wordt zijn eigen prediction gebruikt.
 
-\begin{lstlisting}[caption={De GNSS-update met NIS-gebaseerde metingrejectie (ingekort).}, label={lst:ekf_update}, basicstyle=\ttfamily\scriptsize, breaklines=true, frame=single]
+\begin{lstlisting}[language=C, caption={De GNSS-update met dynamische R-matrix en NIS-gebaseerde metingrejectie (ingekort).}, label={lst:ekf_update}]
 void ekf_update_gnss(float gps_x, float gps_y, float r_ee, float r_nn, float r_en)
 {
     // Innovatie: y = z - H*x
@@ -216,7 +255,7 @@ void ekf_update_gnss(float gps_x, float gps_y, float r_ee, float r_nn, float r_e
     error_y[0][0] = gps_x - s_status[0][0];
     error_y[1][0] = gps_y - s_status[1][0];
 
-    // R uit UBX-NAV-COV (variantie oost/noord + kruisterm)
+    // R opbouwen uit UBX-NAV-COV (variantie oost/noord + kruisterm)
     s_R[0][0] = r_ee; s_R[1][1] = r_nn;
     s_R[0][1] = r_en; s_R[1][0] = r_en;
 
@@ -232,8 +271,9 @@ void ekf_update_gnss(float gps_x, float gps_y, float r_ee, float r_nn, float r_e
         for (int j = 0; j < 2; j++)
             nis += error_y[i][0] * S_inv[i][j] * error_y[j][0];
 
+    // Outlier detectie
     if (nis > 9.210f) {
-        return;   // meting verworpen -> alleen predictie behouden
+        return;   // Meting is te onwaarschijnlijk -> verwerp update
     }
 
     // K = P*H^T*S^-1, daarna toestand- en covariantie-update (Joseph-vorm)
@@ -243,7 +283,6 @@ void ekf_update_gnss(float gps_x, float gps_y, float r_ee, float r_nn, float r_e
 }
 \end{lstlisting}
 
-Voor de covariantie-update is bewust de \emph{Joseph-vorm} gebruikt in plaats van de eenvoudigere $(I-KH)P$. Deze vorm is numeriek stabieler en garandeert dat $P$ symmetrisch en positief-definiet blijft, wat op een microcontroller met beperkte floating-point precisie van belang is.
-
+Als de meting binnen de drempelwaarde blijft, wordt de update uitgevoerd. De kalman gain wordt berekent en de nieuwe positie wordt hiermee berekend. De status vector wordt vervolgens geupdate.
 
 \newpage

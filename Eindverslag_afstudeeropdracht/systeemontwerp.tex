@@ -22,7 +22,7 @@ Voor het bepalen van de oriëntatie die hiervoor nodig is, is gebruikgemaakt van
 
 De positiedata wordt standaard geleverd in lengtegraad, breedtegraad en hoogte. Om dit te gebruiken met het EKF wordt dit getransformeerd naar een lokaal \textit{East-North-Up} (ENU) coördinatenstelsel in meters. Dit stelsel maakt gebruik van een nulpunt (in dit geval de locatie waarbij de eerste RTK fix plaatsvindt) om zo in de x en y as te bepalen waar de tracker zich bevindt. \\
 
-Het ontwerp van het EKF wordt hieropvolgend uiteengezet.
+Het ontwerp van het EKF wordt hierop volgend uiteengezet.
 
 
 % ═══════════════════════════════════════════════════════════════
@@ -52,7 +52,7 @@ $X$ en $Y$ zijn de positie in een lokaal coördinatenstelsel in meters. Zoals ee
 De laatste twee elementen, $b_a$ en $b_g$, zijn de resterende meetafwijkingen
 van de accelerometer en gyroscoop. Alhoewel de sensor gekalibreerd wordt, blijft een resterende afwijking plaatsvinden door bijvoorbeeld mechanische belasting of opwarming. Door de `biassen' mee te nemen in de state vector kan resterende afwijking bijgestuurd worden.
 
-\subsubsection{Het bewegingsmodel: de prediction}
+\subsubsection{Het bewegingsmodel: de voorspelling}
 
 Elke 5\,ms (200 Hz) voorspelt het filter de nieuwe positie op basis van de IMU metingen. Hiervoor is gekozen voor een \textit{unicycle model}~\cite{lavalle2006planning}. Hierbij beweegt het object met snelheid $v$ vooruit in de richting $\theta$ en draait met de gemeten yaw rate $\omega$. Om de verschillende grootheden te schatten uit de state vector wordt gebruik gemaakt van de formules \ref{eq:fx} tot en met \ref{eq:fbg}.
 
@@ -65,7 +65,7 @@ Elke 5\,ms (200 Hz) voorspelt het filter de nieuwe positie op basis van de IMU m
     b_{g,k+1}    &= b_{g,k} \label{eq:fbg}
 \end{align}
 
-Naast het voorspellen van de toestand zelf, berekent het filter continu hoe zeker het is van deze voorspelling. Deze onzekerheid wordt bijgehouden in de covariantiematrix $P$ ($6 \times 6$). Omdat de IMU metingen altijd een lichte mate van ruis bevatten, neemt de onzekerheid van de schatting tijdens deze prediction stap steeds iets toe. Om deze covariance matrix te berekenen, wordt gebruikgemaakt van de standaard EKF prediction vergelijking \cite{kalmanfilter_net}, weergegeven in formule \ref{eq:P_predict}.
+Naast het voorspellen van de toestand zelf, berekent het filter continu hoe zeker het is van deze voorspelling. Deze onzekerheid wordt bijgehouden in de covariantiematrix $P$ ($6 \times 6$). Omdat de IMU metingen altijd een lichte mate van ruis bevatten, neemt de onzekerheid van de schatting tijdens deze voorspelling stap steeds iets toe. Om deze covariantie matrix te berekenen, wordt gebruikgemaakt van de standaard EKF voorspelling vergelijking \cite{kalmanfilter_net}, weergegeven in formule \ref{eq:P_predict}.
 
 
 \begin{equation}

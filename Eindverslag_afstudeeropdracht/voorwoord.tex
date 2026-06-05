@@ -1,12 +1,25 @@
 \section*{Voorwoord}
 
+Voor u ligt mijn afstudeerverslag ter afronding van mijn bacheloropleiding Elektrotechniek aan de Hogeschool van Amsterdam. Dit onderzoek naar de implementatie van een robuust positiebepalingssysteem is de afgelopen maanden uitgevoerd in opdracht van MYLAPS. \\
+
+Het was een uitdagende, maar vooral een erg leerzame periode. Het doorgronden van de theorie achter sensor fusion en het succesvol implementeren van een \textit{Extended Kalman Filter} in \textit{embedded software} voelde regelmatig als een complexe puzzel. Mede dankzij de fijne begeleiding heb ik tijdens dit project echter nieuwe vaardigheden kunnen ontwikkelen om zo tot een mooi eindresultaat te komen. \\
+
+Dit resultaat had ik niet kunnen bereiken zonder de steun van een aantal mensen. Allereerst wil ik mijn begeleider Jenson Bruins bedanken voor zijn betrokkenheid en motiverende feedback. Zijn ideeën en oplossingen hebben mij gedurende het project enorm geholpen. Bovendien heeft hij mij laten inzien dat leren van je fouten heel normaal is. \\
+
+Daarnaast wil ik Caspar Treijtel bedanken voor zijn grondige assistentie tijdens het schrijven van dit document. Dankzij zijn aandachtige en kritische blik heb ik het verslag goed kunnen verbeteren. Verder wil ik iedereen binnen het MYLAPS Innovation Center (MIC) bedanken voor de ondersteuning. \\
+
+Tot slot wil ik mijn familie en vrienden bedanken voor hun interesse, het meedenken en hun steun gedurende dit project.
 
 \newpage
 
-
-
-
 \section*{Samenvatting}
 
+Dit verslag beschrijft het onderzoek naar, en de realisatie van, een sensor fusion methode ter verbetering van de robuustheid van een trackingsysteem, uitgevoerd in opdracht van MYLAPS. Het doel van dit project was het verbeteren van de betrouwbaarheid van de positiebepaling door middel van de al beschikbare \textit{Inertial Measurement Unit} (IMU). \\
+
+De kern van het ontworpen systeem is een in C geprogrammeerd Extended Kalman Filter (EKF) dat continu de tweedimensionale positie, snelheid en kijkrichting schat. Vanwege de sterke invloed van de montagehoek van de tracker, is een complementair filter toegepast om de zwaartekrachtcomponent uit de voorwaartse versnelling te verwijderen. Bovendien reageert het systeem dynamisch op de omgevingsomstandigheden door de onzekerheid van de satellietsignalen mee te wegen en uitschieters actief te verwerpen. \\
+
+Tijdens de validatie bleek het filter succesvol in staat om tijdelijke uitval van het signaal te overbruggen. Bij een gesimuleerd signaalverlies van twee seconden wist de IMU het traject door te trekken, waarbij de positiefout grotendeels beperkt bleef van enkelen centimeters tot ongeveer 650 millimeter. Wel toonde de validatie een beperking bij abrupte veranderingen in de versnelling. Bij grote onverwachte versnellingen of vertragingen tijdens het signaalverlies heeft het systeem de neiging de verplaatsing te over- of onderschatten, wat resulteerde in fouten tot ongeveer maximaal 3900 millimeter. \\
+
+Geconcludeerd kan worden dat het ontworpen proof-of-concept succesvol functioneert en de robuustheid van de positiebepaling aanzienlijk vergroot. Ondanks drift van de IMU tijdens hoge dynamiek, biedt dit onderzoek een goede basis voor verdere ontwikkeling van de volgsystemen van MYLAPS in uitdagende omgevingen.
 
 \newpage

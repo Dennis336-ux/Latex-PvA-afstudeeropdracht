@@ -23,7 +23,7 @@ Om de context van dit onderzoek te begrijpen, is het relevant om het bestaande s
 \end{figure}
 
 
-De ProRTK is een herlaadbare tracker (te zien in figuur \ref{fig:tracker}) die draadloos communiceert met de MYLAPS server via het X2 Link protocol, een door MYLAPS ontwikkeld protocol. Het apparaat is een opvolger van voorgaande trackers die voornamelijk bedoeld zijn voor autoraces, dirt bikes, hardloopwedstrijden etc. Deze tracker zal zich voornamelijk focussen op paardenraces, maar is ook nauw verwant met de autosport. De tracker bestaat uit diverse onderdelen, waarbij de relevante hardwarecomponenten voor dit project zijn weergegeven in tabel \ref{tab:hardware}.
+De ProRTK is een herlaadbare tracker (te zien in figuur \ref{fig:tracker}) die draadloos communiceert met de MYLAPS server via het X2 Link protocol, een door MYLAPS ontwikkeld protocol. Het apparaat is een opvolger van voorgaande trackers die voornamelijk bedoeld zijn voor autoraces, crossmotoren, hardloopwedstrijden etc. Deze tracker zal zich voornamelijk focussen op paardenraces, maar is ook nauw verwant met de autosport. De tracker bestaat uit diverse onderdelen, waarbij de relevante hardwarecomponenten voor dit project zijn weergegeven in tabel \ref{tab:hardware}.
 
 
 \begin{table}[htbp]
@@ -71,7 +71,7 @@ Het gehele systeem wordt aangestuurd door de nRF52832 microcontroller met een AR
 \end{figure}
 
 
-Figuur~\ref{fig:schema_tracker} geeft een overzicht van de werking van het huidige systeem. De positiebepaling is gebaseerd op de u-blox X20P RTK receiver. Deze ontvangt continu satellietsignalen van de vier grote GNSS constellaties (GPS, Galileo, GLONASS en BeiDou) via de helix antenna op de tracker. Tegelijkertijd ontvangt een opgesteld RTK base station op een bekende locatie diezelfde satellietsignalen en berekent het verschil tussen de gemeten en de werkelijke positie. Deze correctie wordt draadloos naar de GNSS receiver in de tracker gestuurd, waardoor een nauwkeurigheid van 1 tot 2 centimeter wordt bereikt in plaats van de enkele meters die een standaard GNSS receiver haalt. De precieze werking van GNSS en RTK wordt uitgebreider behandeld in het volgende hoofdstuk. \\
+Figuur~\ref{fig:schema_tracker} geeft een overzicht van de werking van het huidige systeem. De positiebepaling is gebaseerd op de u-blox X20P RTK receiver. Deze ontvangt continu satellietsignalen van de vier grote GNSS constellaties (GPS, Galileo, GLONASS en BeiDou) via de helix antenne op de tracker. Tegelijkertijd ontvangt een opgesteld RTK base station op een bekende locatie diezelfde satellietsignalen en berekent het verschil tussen de gemeten en de werkelijke positie. Deze correctie wordt draadloos naar de GNSS receiver in de tracker gestuurd, waardoor een nauwkeurigheid van 1 tot 2 centimeter wordt bereikt in plaats van de enkele meters die een standaard GNSS receiver haalt. De precieze werking van GNSS en RTK wordt uitgebreider behandeld in het volgende hoofdstuk. \\
 
 
 De verwerkte positiedata wordt gezamenlijk met aanvullende informatie doorgegeven aan de nRF52832 microcontroller. Deze verwerkt de data en verstuurt het vervolgens via het X2 Link protocol naar de server. Hier wordt deze data gebruikt voor tijdregistratie en live tracking. \\
