@@ -3,7 +3,7 @@
 \section{Robuuste lokalisatie in complexe omgevingen}
 \label{sec:lokalisatie}
 
-Om het voordeel van sensor fusion te kunnen beoordelen, is het eerst noodzakelijk de werking en beperkingen van het huidige GNSS systeem in kaart te brengen. In dit hoofdstuk wordt de werking van RTK GNSS beschreven en worden de foutbronnen geanalyseerd die de betrouwbaarheid van de positiebepaling beperken.
+Om het voordeel van sensorfusie te kunnen beoordelen, is het eerst noodzakelijk de werking en beperkingen van het huidige GNSS systeem in kaart te brengen. In dit hoofdstuk wordt de werking van RTK GNSS beschreven en worden de foutbronnen geanalyseerd die de betrouwbaarheid van de positiebepaling beperken.
 
 \subsection{GNSS}
 
@@ -20,8 +20,8 @@ De basis voor moderne positiebepaling wordt gevormd door Global Navigation Satel
         \textbf{GNSS-constellatie} & \textbf{Beheerder} & \textbf{Aantal satellieten} & \textbf{Frequentiebanden} & \textbf{Aandachtsgebied} \\ \hline
         GPS                        & VS (DoD)           & 31 actief                   & L1, L2, L5                & Wereldwijd               \\ \hline
         Galileo                    & Europese Unie      & 30 actief                   & E1, E5a, E5b, E6          & Wereldwijd               \\ \hline
-        GLONASS                    & Rusland            & 24 actief                   & L1, L2, L3OC              & Veelal niet meer gebruikt buiten Rusland \\ \hline
-        BeiDou                     & China              & 45 actief                         & B1l, B2l, B3l             & Wereldwijd               \\ \hline
+        GLONASS                    & Rusland            & 24 actief                   & L1, L2, L3OC              & Wereldwijd \\ \hline
+        BeiDou                     & China              & 45 actief                         & B1I, B2I, B3I             & Wereldwijd               \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -41,7 +41,7 @@ Om de nauwkeurigheid van GNSS te verbeteren wordt de techniek Real-Time Kinemati
 
 \begin{itemize}
 	\item RTK Float: De ontvanger gebruikt de fase van de satellietsignalen (draaggolven) voor de locatiebepaling, 
-	maar de exacte wiskundige oplossing is nog niet definitief berekend. Hierbij wordt het exacte aantal volledige golflengtes tussen de satteliet en de ontvanger bepaald. Dit resulteert in een schatting met een typische nauwkeurigheid van 10 tot 50 cm.
+	maar de exacte wiskundige oplossing is nog niet definitief berekend. Hierbij wordt het exacte aantal volledige golflengtes tussen de satelliet en de ontvanger bepaald. Dit resulteert in een schatting met een typische nauwkeurigheid van 10 tot 50 cm.
 	\item RTK Fixed: De berekening is succesvol afgerond en vastgezet. De ontvanger kan nu de exacte afstand tot de satellieten bepalen, wat een typische nauwkeurigheid van 1 tot 2 cm geeft.
 \end{itemize}
 
@@ -97,18 +97,18 @@ De multipath en NLOS effecten zijn door `Novatel', een bedrijf gespecialiseerd i
     \end{tabular}
 \end{table}
 
-Het gebruik van RTK-GNSS biedt dan ook een grote verbetering in nauwkeurigheid, maar kent dus alsnog meerdere gebreken. Het systeem heeft moeite met zichzelf corrigeren en zal dan ook regelmatig foutieve waarden als waarheid zien. In de topsport is garantie voor nauwkeurige data noodzakelijk. Om dit op te lossen wordt gekeken naar Sensor Fusion dat in het hieropvolgende hoofdstuk beschreven wordt.
+Het gebruik van RTK-GNSS biedt dan ook een grote verbetering in nauwkeurigheid, maar kent dus alsnog meerdere gebreken. Het systeem heeft moeite met zichzelf corrigeren en zal dan ook regelmatig foutieve waarden als waarheid zien. In de topsport is garantie voor nauwkeurige data noodzakelijk. Om dit op te lossen wordt gekeken naar sensorfusie dat in het hieropvolgende hoofdstuk beschreven wordt.
 
 \newpage
 
 
-\section{Sensor Fusion}
+\section{Sensorfusie}
 \label{sec:sensor_fusion}
 
-Om de beperkingen van RTK GNSS aan te pakken, wordt in dit hoofdstuk onderzocht welke aanvullende sensoren en methoden beschikbaar zijn om de betrouwbaarheid van positiebepaling te verhogen. Sensor fusion is het combineren van de werkingen van verschillende sensoren om zo tot een geheel systeem te komen. Dit is een veelgebruikte benadering in navigatiesystemen voor robotica, luchtvaart en voertuigtoepassingen. In dit hoofdstuk worden de relevante sensoren en filteralgoritmes uiteengezet beoordeeld op geschiktheid voor dit project.
+Om de beperkingen van RTK GNSS aan te pakken, wordt in dit hoofdstuk onderzocht welke aanvullende sensoren en methoden beschikbaar zijn om de betrouwbaarheid van positiebepaling te verhogen. Sensorfusie is het combineren van de werkingen van verschillende sensoren om zo tot een geheel systeem te komen. Dit is een veelgebruikte benadering in navigatiesystemen voor robotica, luchtvaart en voertuigtoepassingen. In dit hoofdstuk worden de relevante sensoren en filteralgoritmes uiteengezet beoordeeld op geschiktheid voor dit project.
 
 \subsection{Inertial Measurement Unit (IMU)}
-Een Inertial Measurement Unit (IMU) is een sensor die de beweging van een object meet door middel van traagheid. Dit wil zeggen dat het onafhankelijk is van externe referenties zoals GPS signalen of magneetvelden (zoals vermeld in 2.3). Een typische IMU bestaat uit een accelerometer en een gyroscoop, eventueel aangevuld met een magnetometer. Binnen de huidige hardware van MYLAPS wordt momenteel gebruikgemaakt van de ASM330LHH die beschikt over de accelerometer en gyroscoop \cite{stmicro_asm330lhh}. \\
+Een IMU is een sensor die de beweging van een object meet door middel van traagheid. Dit wil zeggen dat het onafhankelijk is van externe referenties zoals GPS signalen of magneetvelden (zoals vermeld in 2.3). Een typische IMU bestaat uit een accelerometer en een gyroscoop, eventueel aangevuld met een magnetometer. Binnen de huidige hardware van MYLAPS wordt momenteel gebruikgemaakt van de ASM330LHH die beschikt over de accelerometer en gyroscoop \cite{stmicro_asm330lhh}. \\
 
 De accelerometer meet de versnelling van een object, maar neemt ook altijd de zwaartekracht mee. Als het apparaat stil ligt, meet het uitsluitend de zwaartekracht (9,81 m/s²). Door de zwaartekrachtcomponent te compenseren en de resterende versnelling eenmalig te integreren kan de snelheid worden bepaald. Een tweede integratie geeft de relatieve positieverandering. \\
 
@@ -142,7 +142,7 @@ Een overzicht van deze sensoren is te zien in tabel \ref{tab:imu_sensoren}
     \end{tabularx}
 \end{table}
 
-Een fundamenteel nadeel van een IMU is de drift. Zowel de accelerometer als de gyroscoop hebben hier last van. Elke kleine fout in de gemeten versnelling of hoeksnelheid accumuleert bij integratie. Een accelerometer bias van slechts 10 milli-g (0.098 m/s$^2$) resulteert na tien seconden al in een snelheidsfout van ongeveer 0.98 m/s en een positiefout van ongeveer 4.9 meter via dubbele integratie. Dit maakt een IMU als alleenstaande navigatiesysteem ongeschikt voor langetermijn zonder externe correctie.
+Een fundamenteel nadeel van een IMU is de drift. Zowel de accelerometer als de gyroscoop hebben hier last van. Elke kleine fout in de gemeten versnelling of hoeksnelheid accumuleert bij integratie. Een accelerometer bias van slechts 10 milli-g (0.098 m/s$^2$) resulteert na tien seconden al in een snelheidsfout van ongeveer 0.98 m/s en een positiefout van ongeveer 4.9 meter via dubbele integratie. Dit maakt een IMU als alleenstaande navigatiesysteem ongeschikt voor langetermijn zonder externe correctie. \\
 
 De noodzaak om deze sensoren te combineren is gebaseerd op het feit dat ze elkaar nuttig aanvullen. Waar de IMU op korte termijn zeer responsief is maar op lange termijn drift vertoont, biedt GNSS juist een absolute positiebepaling. Door beide systemen te combineren, ontstaat er een robuuste oplossing. De IMU blijft de positie schatten wanneer GNSS wegvalt of onbetrouwbaar is door obstakels, terwijl de GNSS metingen worden gebruikt om de drift van de IMU te corrigeren en de fouten te beperken. \\
 
@@ -158,11 +158,11 @@ Een magnetometer meet de sterkte en richting van het magnetisch veld van de aard
 De integratie van een magnetometer hangt echter sterk af van de omgeving. Magnetometers zijn extreem gevoelig voor magnetische interferentie die door verschillende omstandigheden veroorzaakt worden. Denk hierbij aan interne componenten op de printplaat van de tracker, zoals de batterij en de antenne, als de externe omgeving, zoals tribunes of hekwerken. Om deze foutbronnen te vermijden zou afgewogen moeten worden of het risico van deze magnetische storingen opweegt tegen de voordelen. Daarnaast vereist het toevoegen van een magnetometer een 9-assige IMU, wat een wijziging van de huidige hardware betekent. Een magnetometer valt daarmee buiten de scope van dit project en is uitsluitend relevant als optie voor vervolgonderzoek.
 
 \subsubsection{Odometrie en Distance Measuring Instruments}
-Odometrie omvat alle technieken waarbij de afgelegde afstand wordt gemeten via mechanische of optische middelen. Een \textit{Distance Measuring Instrument} (DMI) kan zowel een wiel encoder als een stappenteller bedragen. De wiel encoder meet de rotaties en berekent hieruit de afgelegde afstand en snelheid. De stappenteller herkent aan de hand van de mechanische beweging wanneer een stap plaatsvindt en maakt een accurate schatting van de afgelegde afstand per stap. Deze technieken bieden een nauwkeurige snelheidsmeting die onafhankelijk is van GPS en IMU. Door de complexe en variabele bewegingen van het paard is dit echter moeilijk te realiseren.
+Odometrie omvat alle technieken waarbij de afgelegde afstand wordt gemeten via mechanische of optische middelen. Een \textit{Distance Measuring Instrument} (DMI) kan zowel een wiel encoder als een stappenteller betreffen. De wiel encoder meet de rotaties en berekent hieruit de afgelegde afstand en snelheid. De stappenteller herkent aan de hand van de mechanische beweging wanneer een stap plaatsvindt en maakt een accurate schatting van de afgelegde afstand per stap. Deze technieken bieden een nauwkeurige snelheidsmeting die onafhankelijk is van GPS en IMU. Door de complexe en variabele bewegingen van het paard is dit echter moeilijk te realiseren.
 
 
 \subsubsection{Doppler radar}
-Een Doppler radar meet de snelheid van een object ten opzichte van de grond door de frequentieverschuiving van een uitgestuurd radarsignaal te analyseren. Door de radar schuin naar de grond te richten kan een nauwkeurige grondsnelheid worden bepaald. Doppler radar wordt ingezet in high-end navigatiesystemen voor luchtvaartuigen en schepen waar nauwkeurige snelheidsmeting noodzakelijk is. Net zoals bij de Stappenteller is de snelheid erg van nut, echter is het realiseren in de praktijk hiervan zeer ingewikkeld. Een betrouwbare Doppler-meting vereist een stabiele en bekende meethoek ten opzichte van het grondvlak. De dynamische bewegingen van een galopperend paard maken een stabiele montage van een Doppler radar vrij onrealistisch. 
+Een Doppler radar meet de snelheid van een object ten opzichte van de grond door de frequentieverschuiving van een uitgestuurd radarsignaal te analyseren. Door de radar schuin naar de grond te richten kan een nauwkeurige grondsnelheid worden bepaald. Doppler radar wordt ingezet in high-end navigatiesystemen voor luchtvaartuigen en schepen waar nauwkeurige snelheidsmeting noodzakelijk is. Net zoals bij de stappenteller is de snelheid erg van nut, echter is het realiseren in de praktijk hiervan zeer ingewikkeld. Een betrouwbare Doppler-meting vereist een stabiele en bekende meethoek ten opzichte van het grondvlak. De dynamische bewegingen van een galopperend paard maken een stabiele montage van een Doppler radar vrij onrealistisch. 
 
 
 \subsubsection{LiDAR}
@@ -172,11 +172,9 @@ Een Doppler radar meet de snelheid van een object ten opzichte van de grond door
 \subsubsection{Vision Aided Navigation (Camera)}
 Een belangrijk hulpmiddel kan ook fotogrammetrie zijn. Door het gebruik van een camera kunnen objecten gedetecteerd worden en zo een absolute positie bepaald worden \cite{NovAtelMultipath2026}. Wanneer een voorwerp herkend wordt, zal de verandering in achtereenvolgende beelden een relatieve positie verschuiving in 3D aangeven. Hier komt echter hetzelfde argument naar voren als bij de LiDAR. Het systeem is te grootschalig voor de paardensport. \\
 
-In tabel \ref{tab:sensor_evaluatie} is een overzicht van alle besproken sensoren.
-
-
-
 Om de geschiktheid van de alternatieve sensoren te vergelijken is een criteria-afweging opgesteld zoals te zien in tabel \ref{tab:sensorafweging}. Deze afweging is om vast te stellen welke sensoren de meest realistische en effectieve oplossingen bieden.
+
+\newpage
 
 \begin{table}[h]
 \centering
@@ -208,34 +206,33 @@ Het combineren van meerdere sensordatastromen vereist een systeem dat omgaat met
 
 \subsubsection{Complementair filter}
 
-De `complementary filter' is een eenvoudige sensor fusion techniek dat twee of meer metingen combineert voor een accurate schatting. Dit filter combineert typisch een hoogfrequente bron met een laagfrequente bron. In dit geval zou het de laagfrequente GPS signaal met de hoogfrequente IMU combineren. Dit filter is in formule \ref{eq:complementary_filter} wiskundig uitgebeeld.
+Het complementair filter is een eenvoudige sensorfusie techniek die twee of meer metingen combineert voor een accurate schatting. Dit filter combineert typisch een hoogfrequente bron met een laagfrequente bron. In dit geval zou het de laagfrequente GNSS signaal met de hoogfrequente IMU combineren. Dit filter is in formule \ref{eq:complementary_filter} wiskundig uitgebeeld.
 
 \begin{equation} 
 	\label{eq:complementary_filter}
-    x_{\text{fused}} = \alpha \cdot x_{\text{IMU}} + (1 - \alpha) \cdot x_{\text{GPS}}
+    x_{\text{fused}} = \alpha \cdot x_{\text{IMU}} + (1 - \alpha) \cdot x_{\text{GNSS}}
 \end{equation}
 
 Waarbij:
 \begin{itemize}
     \item $\alpha$ = filtercoëfficiënt ($0 < \alpha < 1$)
 	\item \textbf{Hoge $\alpha$:} IMU domineert (beter voor korte termijn)
-	\item \textbf{Lage $\alpha$:} GPS domineert (beter voor lange termijn)
+	\item \textbf{Lage $\alpha$:} GNSS domineert (beter voor lange termijn)
 \end{itemize}
 
-De complementary filter is rekenkundig eenvoudig en geschikt voor systemen met beperkte rekenkracht. Het nadeel is echter dat de filtercoëfficiënt $\alpha$ vast is en geen rekening houdt met de onzekerheden van de sensoren. Bij sterk wisselende GPS kwaliteit (bijvoorbeeld overgang van RTK Fixed naar Float) kan de vaste weging leiden tot suboptimale resultaten. \\
+Het complementair filter is rekenkundig eenvoudig en geschikt voor systemen met beperkte rekenkracht. Het nadeel is echter dat de filtercoëfficiënt $\alpha$ vast is en geen rekening houdt met de onzekerheden van de sensoren. Bij sterk wisselende GNSS kwaliteit (bijvoorbeeld overgang van RTK Fixed naar Float) kan de vaste weging leiden tot suboptimale resultaten. \\
 
-Een veelgebruikte toepassing van de complementary filter is echter de combinatie van gyroscoop en accelerometer data voor het schatten van de oriëntatie (pitch en roll), ook wel attitude estimation genoemd. De gyroscoop integreert de hoeksnelheid naar een oriëntatieschatting en reageert nauwkeurig op snelle bewegingen. Dit brengt echter fouten door oplopende integratiedrift. De accelerometer meet alle krachten die op het object werken waardoor meer dan alleen de zwaartekrachts vector gemeten wordt. Elke kleine kracht wordt meegenomen in het meetmodel. Het geeft echter een absolute referentie. De complementary filter benut deze karakteristieken door ze te combineren. Formule \ref{eq:comp_filter_code} laat dit overzichtelijk zien \cite{pieterjan_complementary}.
+Een veelgebruikte toepassing van het complementair filter is echter de combinatie van gyroscoop en accelerometer data voor het schatten van de oriëntatie (pitch en roll), ook wel attitude estimation genoemd. De gyroscoop integreert de hoeksnelheid naar een oriëntatieschatting en reageert nauwkeurig op snelle bewegingen. Dit brengt echter fouten door oplopende integratiedrift. De accelerometer meet alle krachten die op het object werken waardoor meer dan alleen de zwaartekrachts vector gemeten wordt. Elke kleine kracht wordt meegenomen in het meetmodel. Het geeft echter een absolute referentie. Het complementair filter benut deze karakteristieken door ze te combineren. Formule \ref{eq:comp_filter_code} laat dit overzichtelijk zien \cite{pieterjan_complementary}.
 
 \begin{equation} \label{eq:comp_filter_code}
     \mathit{angle} = 0.98 \cdot (\mathit{angle} + \mathit{gyrData} \cdot dt) + 0.02 \cdot (\mathit{accData})
 \end{equation}
 \vspace{0.1cm}
 
-
-Een typische waarde voor $\alpha$ is 0.95 tot 0.99, waardoor de gyroscoop de oriëntatie bepaalt bij snelle bewegingen en de accelerometer de langetermijndrift corrigeert. Voor GPS/IMU-fusie waarbij de onzekerheden sterk variëren in de tijd is echter een adaptief filter nodig. 
+Een typische waarde voor $\alpha$ is 0.95 tot 0.99, waardoor de gyroscoop de oriëntatie bepaalt bij snelle bewegingen en de accelerometer de langetermijndrift corrigeert. Voor GNSS/IMU-fusie waarbij de onzekerheden sterk variëren in de tijd is echter een adaptief filter nodig. 
 
 \subsubsection{Kalman Filter}
-Het Kalman Filter (KF), in 1960 bedacht door Rudolf Kálmán, is een wiskundig algoritme dat de werkelijke toestand van een systeem berekent, zelfs als de sensormetingen ruis of omgevingsnauwkeurigheden bevatten \cite{welch_kalman}. Waar de complementary filter met vaste wegingen werkt, is het Kalman Filter dynamisch. Het berekent continu de optimale balans door de meetonzekerheid van de sensoren (bevindt zich in de $R$-matrix) en de onzekerheid van het eigen rekenmodel (de proces noise, vastgelegd in de $Q$-matrix) tegen elkaar af te wegen.
+Het Kalman Filter (KF), in 1960 bedacht door Rudolf Kálmán, is een wiskundig algoritme dat de werkelijke toestand van een systeem berekent, zelfs als de sensormetingen ruis of omgevingsnauwkeurigheden bevatten \cite{welch_kalman}. Waar het complementair filter met vaste wegingen werkt, is het Kalman Filter dynamisch. Het berekent continu de optimale balans door de meetonzekerheid van de sensoren (bevindt zich in de $R$-matrix) en de onzekerheid van het eigen rekenmodel (de proces noise, vastgelegd in de $Q$-matrix) tegen elkaar af te wegen.
 
 
 \begin{figure}[htbp!]
@@ -246,7 +243,7 @@ Het Kalman Filter (KF), in 1960 bedacht door Rudolf Kálmán, is een wiskundig a
 \end{figure}
 
 
-Zoals in afbeelding \ref{fig:kalman_schematic} te zien is functioneert het algoritme in een cyclus. Hierbij staan twee stappen centraal: de voorspelling stap en de updatestap. Het filter voorspelt de nieuwe positie en oriëntatie op basis van het systeemmodel (in dit project de integratie van de IMU data). Omdat de IMU na verloop van tijd drift opbouwt, neemt de onzekerheid van deze schatting tijdens het voorspellen toe. In de wiskunde van het filter wordt dit aangetoond met een covariantiematrix $P$ die groter wordt. \\
+Zoals in figuur \ref{fig:kalman_schematic} te zien is functioneert het algoritme in een cyclus. Hierbij staan twee stappen centraal: de voorspelling (prediction) stap en de updatestap (correction). Het filter voorspelt de nieuwe positie en oriëntatie op basis van het systeemmodel (in dit project de integratie van de IMU data). Omdat de IMU na verloop van tijd drift opbouwt, neemt de onzekerheid van deze schatting tijdens het voorspellen toe. In de wiskunde van het filter wordt dit aangetoond met een covariantiematrix $P$ die groter wordt. \\
 
 De updatestap is afhankelijk van een nieuwe absolute meting die binnenkomt, in dit geval de RTK GNSS data. Hiermee wordt de voorspelling gecorrigeerd. Het filter berekent hiervoor de Kalman Gain ($K$). Deze factor bepaalt dynamisch hoeveel gewicht er aan de nieuwe GNSS-meting wordt toegekend ten opzichte van de IMU-voorspelling. Na deze correctie neemt de onzekerheid weer af en krimpt matrix $P$. \\
 
@@ -293,7 +290,7 @@ Het EKF lost dit op door het niet lineaire model op elk moment lokaal te lineari
 \label{fig:ekf_linearisatie}
 \end{figure}
 
-In meerdere dimensies tegelijk wordt dit gedaan met behulp van een zogenoemde Jacobian matrix. Dit is een tabel van alle partiële afgeleiden die beschrijft hoe elke toestandsvariabele (positie, snelheid, richting) de andere beïnvloedt bij een kleine verandering. 
+In meerdere dimensies tegelijk wordt dit gedaan met behulp van een zogenoemde Jacobiaan matrix. Dit is een tabel van alle partiële afgeleiden die beschrijft hoe elke toestandsvariabele (positie, snelheid, richting) de andere beïnvloedt bij een kleine verandering. 
 Een partiële afgeleide is in essentie dezelfde helling als hierboven beschreven, maar dan berekend voor één variabele tegelijk terwijl de rest constant wordt gehouden. Voor een systeem met drie toestandsvariabelen $x$, $v$ en $\theta$ ziet de Jacobiaan-matrix $F$ er schematisch uit zoals beschreven in formule \ref{eq:jacobiaan}.
 
 \begin{equation}
@@ -309,9 +306,9 @@ F = \frac{\partial f}{\partial \mathbf{x}} =
 \label{eq:jacobiaan}
 \end{equation}
 
-Elke rij beschrijft hoe één variabele verandert als gevolg van een kleine verandering in elk van de variabelen. De Jacobiaan is maakt dus gebruik van meer dimensies om dezelfde raaklijn te beschrijven uit figuur \ref{fig:ekf_linearisatie}. Het EKF herberekent deze matrix bij elke tijdstap opnieuw op basis van de toestandsschatting op dat moment. Vervolgens kunnen de kalman vergelijkingen toegepast worden. \\
+Elke rij beschrijft hoe één variabele verandert als gevolg van een kleine verandering in elk van de variabelen. De Jacobiaan maakt dus gebruik van meer dimensies om dezelfde raaklijn te beschrijven uit figuur \ref{fig:ekf_linearisatie}. Het EKF herberekent deze matrix bij elke tijdstap opnieuw op basis van de toestandsschatting op dat moment. Vervolgens kunnen de kalman vergelijkingen toegepast worden. \\
 
-Deze aanpak maakt het EKF een zeer geschikte toepassing voor positiebepaling. Deze methode heeft echter een belangrijke randvoorwaarde. Het filter benaderd de werkelijkheid, waardoor er altijd een minuscule afwijking ontstaat. Zolang de toestandsschatting dicht bij de werkelijkheid blijft, is deze fout verwaarloosbaar klein. 
+Deze aanpak maakt het EKF een zeer geschikte toepassing voor positiebepaling. Deze methode heeft echter een belangrijke randvoorwaarde. Het filter benadert de werkelijkheid, waardoor er altijd een minuscule afwijking ontstaat. Zolang de toestandsschatting dicht bij de werkelijkheid blijft, is deze fout verwaarloosbaar klein. 
 
 
 \subsubsection{Unscented Kalman Filter (UKF) en Particle Filter}
@@ -323,7 +320,7 @@ honderden tot duizenden willekeurig verspreide deeltjes om de onzekerheid in de 
 
 \begin{table}[htbp]
     \centering
-    \caption{Beschrijving van filteralgoritmen voor sensor fusion, gerangschikt 
+    \caption{Beschrijving van filteralgoritmen voor sensorfusie, gerangschikt 
     naar complexiteit en toepassingsgebied}
     \label{tab:filteralgoritmen}
     \renewcommand{\arraystretch}{1.3}
@@ -334,7 +331,7 @@ honderden tot duizenden willekeurig verspreide deeltjes om de onzekerheid in de 
         \textbf{Lineariteit} & 
         \textbf{Rekencomplexiteit} & 
         \textbf{Toepassing} \\ \hline
-        Complementary filter & 
+        Complementair filter & 
         Ja & 
         Laag & 
         Eenvoudige IMU attitude \\ \hline
@@ -345,7 +342,7 @@ honderden tot duizenden willekeurig verspreide deeltjes om de onzekerheid in de 
         Extended Kalman Filter & 
         Nee (lin. benadering) & 
         Gemiddeld & 
-        GPS/IMU navigatie \\ \hline
+        GNSS/IMU navigatie \\ \hline
         Unscented Kalman Filter & 
         Nee (exactere benadering) & 
         Gemiddeld & 

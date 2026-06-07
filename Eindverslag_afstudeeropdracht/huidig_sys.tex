@@ -81,11 +81,11 @@ Zoals te zien in het schema is de ASM330LHH IMU wel fysiek aanwezig op de PCB, m
 
 \subsection{Beperking van het huidige systeem}
 
-Enkel het gebruik van de GNSS module vormt de kern van het probleem. De receiver is namelijk kwetsbaar voor verstoringen in bijvoorbeeld de omgeving. De signalen kunnen worden geblokkeerd of gereflecteerd door verschillende objecten voordat ze de antenna bereiken.  Deze omstandigheden kunnen resulteren in een foutieve positie. Hiernaast kan de kwaliteit van het signaal verslechteren of zelfs volledig wegvallen. \\
+Enkel het gebruik van de GNSS module vormt de kern van het probleem. De receiver is namelijk kwetsbaar voor verstoringen in bijvoorbeeld de omgeving. De signalen kunnen worden geblokkeerd of gereflecteerd door verschillende objecten voordat ze de antenne bereiken.  Deze omstandigheden kunnen resulteren in een foutieve positie. Hiernaast kan de kwaliteit van het signaal verslechteren of zelfs volledig wegvallen. \\
 
 Wanneer dit soort verstoringen optreden, heeft het huidige systeem geen enkel mechanisme om dit te detecteren of op te vangen. De gerapporteerde positie springt direct mee met de foutieve meting, of valt volledig weg. In een wedstrijdomgeving waarbij de uitslag afhangt van centimeter nauwkeurigheid is dit niet acceptabel. \\
 
-Tegelijkertijd bevat de tracker al een IMU die in principe geschikt is om de positiebepaling te ondersteunen wanneer het signaal onbetrouwbaar is. Door de data van beide sensoren te combineren (sensor fusion) zou het systeem robuuster kunnen worden. \\
+Tegelijkertijd bevat de tracker al een IMU die in principe geschikt is om de positiebepaling te ondersteunen wanneer het signaal onbetrouwbaar is. Door de data van beide sensoren te combineren (sensorfusie) zou het systeem robuuster kunnen worden. \\
 
 Om te bepalen of deze combinatie daadwerkelijk verbetering oplevert, is in het volgende hoofdstuk een theoretisch kader opgesteld over de werking van GNSS en RTK, de huidige beperkingen, de IMU en methoden om beide te combineren. \\
 

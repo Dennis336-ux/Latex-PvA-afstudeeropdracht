@@ -10,6 +10,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1}Inleiding}{6}{section.1}\protected@file@percent }
 \newlabel{sec:inleiding}{{1}{6}{Inleiding}{section.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Opdracht en afbakening}{6}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Leeswijzer}{7}{subsection.1.2}\protected@file@percent }
 \abx@aux@cite{0}{nordic_nrf52832_ps}
 \abx@aux@segm{0}{0}{nordic_nrf52832_ps}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Systeemarchitectuur van de ProRTK tracker}{8}{section.2}\protected@file@percent }
@@ -71,8 +72,8 @@
 \abx@aux@segm{0}{0}{stmicro_asm330lhh}
 \abx@aux@cite{0}{linearmotiontips2020yaw}
 \abx@aux@segm{0}{0}{linearmotiontips2020yaw}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Sensor Fusion}{14}{section.4}\protected@file@percent }
-\newlabel{sec:sensor_fusion}{{4}{14}{Sensor Fusion}{section.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Sensorfusie}{14}{section.4}\protected@file@percent }
+\newlabel{sec:sensor_fusion}{{4}{14}{Sensorfusie}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Inertial Measurement Unit (IMU)}{14}{subsection.4.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces De verschillende bewegingsdynamieken die een object ondervind zijn uitgedrukt in de pitch, roll en yaw \blx@tocontentsinit {0}\cite {linearmotiontips2020yaw}.}}{14}{figure.caption.9}\protected@file@percent }
 \newlabel{fig:oriëntatie}{{6}{14}{De verschillende bewegingsdynamieken die een object ondervind zijn uitgedrukt in de pitch, roll en yaw \cite {linearmotiontips2020yaw}}{figure.caption.9}{}}
@@ -90,36 +91,36 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}Doppler radar}{16}{subsubsection.4.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.4}LiDAR}{16}{subsubsection.4.2.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.5}Vision Aided Navigation (Camera)}{16}{subsubsection.4.2.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Filteralgoritmes}{16}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Complementair filter}{16}{subsubsection.4.3.1}\protected@file@percent }
-\newlabel{eq:complementary_filter}{{1}{16}{Complementair filter}{equation.1}{}}
 \abx@aux@cite{0}{pieterjan_complementary}
 \abx@aux@segm{0}{0}{pieterjan_complementary}
-\abx@aux@cite{0}{welch_kalman}
-\abx@aux@segm{0}{0}{welch_kalman}
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Multicriteria-afweging van de aanvullende sensoren ten opzichte van de huidige IMU. Een hogere score is gunstiger voor toepassing binnen de randvoorwaarden van de ProRTK tracker.}}{17}{table.caption.11}\protected@file@percent }
 \newlabel{tab:sensorafweging}{{5}{17}{Multicriteria-afweging van de aanvullende sensoren ten opzichte van de huidige IMU. Een hogere score is gunstiger voor toepassing binnen de randvoorwaarden van de ProRTK tracker}{table.caption.11}{}}
-\newlabel{eq:comp_filter_code}{{2}{17}{Complementair filter}{equation.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Kalman Filter}{17}{subsubsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Filteralgoritmes}{17}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Complementair filter}{17}{subsubsection.4.3.1}\protected@file@percent }
+\newlabel{eq:complementary_filter}{{1}{17}{Complementair filter}{equation.1}{}}
+\abx@aux@cite{0}{welch_kalman}
+\abx@aux@segm{0}{0}{welch_kalman}
+\newlabel{eq:comp_filter_code}{{2}{18}{Complementair filter}{equation.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Kalman Filter}{18}{subsubsection.4.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces In de afbeelding is de globale werking van een kalman filter schematisch weergegeven. Hierbij wordt de gehele cyclus elke tijdsstap doorlopen.}}{18}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:kalman_schematic}{{7}{18}{In de afbeelding is de globale werking van een kalman filter schematisch weergegeven. Hierbij wordt de gehele cyclus elke tijdsstap doorlopen}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}Extended Kalman Filter (EKF)}{18}{subsubsection.4.3.3}\protected@file@percent }
 \abx@aux@cite{0}{vectornav_ekf}
 \abx@aux@segm{0}{0}{vectornav_ekf}
 \abx@aux@cite{0}{bar_shalom_estimation}
 \abx@aux@segm{0}{0}{bar_shalom_estimation}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces In de afbeelding is de globale werking van een kalman filter schematisch weergegeven. Hierbij wordt de gehele cyclus elke tijdsstap doorlopen.}}{18}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:kalman_schematic}{{7}{18}{In de afbeelding is de globale werking van een kalman filter schematisch weergegeven. Hierbij wordt de gehele cyclus elke tijdsstap doorlopen}{figure.caption.12}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}Extended Kalman Filter (EKF)}{18}{subsubsection.4.3.3}\protected@file@percent }
-\newlabel{eq:jacobiaan}{{3}{18}{Extended Kalman Filter (EKF)}{equation.3}{}}
 \abx@aux@cite{0}{wan_merwe_ukf}
 \abx@aux@segm{0}{0}{wan_merwe_ukf}
 \abx@aux@cite{0}{bar_shalom_estimation}
 \abx@aux@segm{0}{0}{bar_shalom_estimation}
-\abx@aux@cite{0}{boers_particle_filter}
-\abx@aux@segm{0}{0}{boers_particle_filter}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Het kernprincipe van het Extended Kalman Filter in één dimensie. De niet-lineaire functie $f(x)$ (blauw) wordt op elk tijdstip lokaal benaderd door een raaklijn (rood gestippeld) in het huidige schattingspunt $\hat  {x}_k$. De helling van die raaklijn is gelijk aan de afgeleide $f'(\hat  {x}_k)$. Het standaard Kalman Filter veronderstelt dat het systeem altijd globaal lineair is; het EKF herberekent deze lokale benadering bij elke tijdstap opnieuw \blx@tocontentsinit {0}\cite {bar_shalom_estimation}.}}{19}{figure.caption.13}\protected@file@percent }
 \newlabel{fig:ekf_linearisatie}{{8}{19}{Het kernprincipe van het Extended Kalman Filter in één dimensie. De niet-lineaire functie $f(x)$ (blauw) wordt op elk tijdstip lokaal benaderd door een raaklijn (rood gestippeld) in het huidige schattingspunt $\hat {x}_k$. De helling van die raaklijn is gelijk aan de afgeleide $f'(\hat {x}_k)$. Het standaard Kalman Filter veronderstelt dat het systeem altijd globaal lineair is; het EKF herberekent deze lokale benadering bij elke tijdstap opnieuw \cite {bar_shalom_estimation}}{figure.caption.13}{}}
+\newlabel{eq:jacobiaan}{{3}{19}{Extended Kalman Filter (EKF)}{equation.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.4}Unscented Kalman Filter (UKF) en Particle Filter}{19}{subsubsection.4.3.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Beschrijving van filteralgoritmen voor sensor fusion, gerangschikt naar complexiteit en toepassingsgebied}}{19}{table.caption.14}\protected@file@percent }
-\newlabel{tab:filteralgoritmen}{{6}{19}{Beschrijving van filteralgoritmen voor sensor fusion, gerangschikt naar complexiteit en toepassingsgebied}{table.caption.14}{}}
+\abx@aux@cite{0}{boers_particle_filter}
+\abx@aux@segm{0}{0}{boers_particle_filter}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Beschrijving van filteralgoritmen voor sensorfusie, gerangschikt naar complexiteit en toepassingsgebied}}{20}{table.caption.14}\protected@file@percent }
+\newlabel{tab:filteralgoritmen}{{6}{20}{Beschrijving van filteralgoritmen voor sensorfusie, gerangschikt naar complexiteit en toepassingsgebied}{table.caption.14}{}}
 \abx@aux@cite{0}{jockeyclub_racehorses}
 \abx@aux@segm{0}{0}{jockeyclub_racehorses}
 \abx@aux@cite{0}{witte2006effect}
@@ -128,89 +129,91 @@
 \abx@aux@segm{0}{0}{ofstandard2024}
 \abx@aux@cite{0}{witte2006effect}
 \abx@aux@segm{0}{0}{witte2006effect}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Specificaties}{21}{section.5}\protected@file@percent }
+\newlabel{sec:specificaties}{{5}{21}{Specificaties}{section.5}{}}
+\newlabel{eq:hoeksnelheid}{{4}{21}{Specificaties}{equation.4}{}}
+\newlabel{eq:conversie}{{5}{21}{Specificaties}{equation.5}{}}
+\newlabel{eq:booglengte}{{6}{21}{Specificaties}{equation.6}{}}
+\newlabel{eq:straal}{{7}{21}{Specificaties}{equation.7}{}}
+\newlabel{eq:omega_racebaan}{{8}{21}{Specificaties}{equation.8}{}}
 \abx@aux@cite{0}{wiki_shatin}
 \abx@aux@segm{0}{0}{wiki_shatin}
 \abx@aux@cite{0}{punters_shatin}
 \abx@aux@segm{0}{0}{punters_shatin}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Specificaties}{20}{section.5}\protected@file@percent }
-\newlabel{sec:specificaties}{{5}{20}{Specificaties}{section.5}{}}
-\newlabel{eq:hoeksnelheid}{{4}{20}{Specificaties}{equation.4}{}}
-\newlabel{eq:conversie}{{5}{20}{Specificaties}{equation.5}{}}
-\newlabel{eq:booglengte}{{6}{20}{Specificaties}{equation.6}{}}
-\newlabel{eq:straal}{{7}{20}{Specificaties}{equation.7}{}}
-\newlabel{eq:omega_racebaan}{{8}{20}{Specificaties}{equation.8}{}}
-\newlabel{eq:omega_shatin}{{9}{20}{Specificaties}{equation.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Overzicht van een standaard racebaan voor paarden}}{21}{figure.caption.15}\protected@file@percent }
-\newlabel{fig:racebaan}{{9}{21}{Overzicht van een standaard racebaan voor paarden}{figure.caption.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Top down view van de Sha Tin racebaan \blx@tocontentsinit {0}\cite {punters_shatin}.}}{21}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:sha_tin}{{10}{21}{Top down view van de Sha Tin racebaan \cite {punters_shatin}}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Overzicht van een standaard racebaan voor paarden}}{22}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:racebaan}{{9}{22}{Overzicht van een standaard racebaan voor paarden}{figure.caption.15}{}}
+\newlabel{eq:omega_shatin}{{9}{22}{Specificaties}{equation.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Top down view van de Sha Tin racebaan \blx@tocontentsinit {0}\cite {punters_shatin}.}}{22}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:sha_tin}{{10}{22}{Top down view van de Sha Tin racebaan \cite {punters_shatin}}{figure.caption.16}{}}
 \abx@aux@cite{0}{jockeyclub_racehorses}
 \abx@aux@segm{0}{0}{jockeyclub_racehorses}
 \abx@aux@cite{0}{witte2006effect}
 \abx@aux@segm{0}{0}{witte2006effect}
 \abx@aux@cite{0}{li2017rtk}
 \abx@aux@segm{0}{0}{li2017rtk}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Functionele randvoorwaarden van het sensor fusion systeem.}}{22}{table.caption.17}\protected@file@percent }
-\newlabel{tab:randvoorwaarden}{{7}{22}{Functionele randvoorwaarden van het sensor fusion systeem}{table.caption.17}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Functionele randvoorwaarden van het sensorfusie systeem.}}{23}{table.caption.17}\protected@file@percent }
+\newlabel{tab:randvoorwaarden}{{7}{23}{Functionele randvoorwaarden van het sensorfusie systeem}{table.caption.17}{}}
+\abx@aux@cite{0}{li2017rtk}
+\abx@aux@segm{0}{0}{li2017rtk}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Prestatiecriteria voor de robuustheid en betrouwbaarheid van het sensorfusie systeem.}}{24}{table.caption.18}\protected@file@percent }
+\newlabel{tab:prestatiecriteria}{{8}{24}{Prestatiecriteria voor de robuustheid en betrouwbaarheid van het sensorfusie systeem}{table.caption.18}{}}
 \abx@aux@cite{0}{InertiaEquineGait}
 \abx@aux@segm{0}{0}{InertiaEquineGait}
 \abx@aux@cite{0}{Fan2025Influence}
 \abx@aux@segm{0}{0}{Fan2025Influence}
 \abx@aux@cite{0}{ublox_x20p_interface_hpg202}
 \abx@aux@segm{0}{0}{ublox_x20p_interface_hpg202}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Prestatiecriteria voor de robuustheid en betrouwbaarheid van het sensor fusion systeem.}}{23}{table.caption.18}\protected@file@percent }
-\newlabel{tab:prestatiecriteria}{{8}{23}{Prestatiecriteria voor de robuustheid en betrouwbaarheid van het sensor fusion systeem}{table.caption.18}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Ontwerp}{23}{section.6}\protected@file@percent }
-\newlabel{sec:ontwerp}{{6}{23}{Ontwerp}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Globale systeemarchitectuur}{23}{subsection.6.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces In de afbeelding is de globale werking van het systeem schematisch weergegeven.}}{23}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:blokschema_globaal}{{11}{23}{In de afbeelding is de globale werking van het systeem schematisch weergegeven}{figure.caption.19}{}}
 \abx@aux@cite{0}{Woodman2007Inertial}
 \abx@aux@segm{0}{0}{Woodman2007Inertial}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Ontwerp}{25}{section.6}\protected@file@percent }
+\newlabel{sec:ontwerp}{{6}{25}{Ontwerp}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Globale systeemarchitectuur}{25}{subsection.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces In de afbeelding is de globale werking van het systeem schematisch weergegeven.}}{25}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:blokschema_globaal}{{11}{25}{In de afbeelding is de globale werking van het systeem schematisch weergegeven}{figure.caption.19}{}}
 \abx@aux@cite{0}{Boe2021Complementary}
 \abx@aux@segm{0}{0}{Boe2021Complementary}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Ontwerp van het Extended Kalman Filter}{24}{subsection.6.2}\protected@file@percent }
-\newlabel{sec:ekf_ontwerp}{{6.2}{24}{Ontwerp van het Extended Kalman Filter}{subsection.6.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}De state vector}{24}{subsubsection.6.2.1}\protected@file@percent }
-\newlabel{eq:toestandsvector}{{10}{24}{De state vector}{equation.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces In de afbeelding is de globale werking van het EKF uitgebeeld}}{25}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:blokschema_ekf}{{12}{25}{In de afbeelding is de globale werking van het EKF uitgebeeld}{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Ontwerp van het Extended Kalman Filter}{26}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:ekf_ontwerp}{{6.2}{26}{Ontwerp van het Extended Kalman Filter}{subsection.6.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces In de afbeelding is de globale werking van het EKF uitgebeeld}}{26}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:blokschema_ekf}{{12}{26}{In de afbeelding is de globale werking van het EKF uitgebeeld}{figure.caption.20}{}}
 \abx@aux@cite{0}{lavalle2006planning}
 \abx@aux@segm{0}{0}{lavalle2006planning}
 \abx@aux@cite{0}{kalmanfilter_net}
 \abx@aux@segm{0}{0}{kalmanfilter_net}
 \abx@aux@cite{0}{bar_shalom_estimation}
 \abx@aux@segm{0}{0}{bar_shalom_estimation}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Het bewegingsmodel: de voorspelling}{26}{subsubsection.6.2.2}\protected@file@percent }
-\newlabel{eq:fx}{{11}{26}{Het bewegingsmodel: de voorspelling}{equation.11}{}}
-\newlabel{eq:fy}{{12}{26}{Het bewegingsmodel: de voorspelling}{equation.12}{}}
-\newlabel{eq:fv}{{13}{26}{Het bewegingsmodel: de voorspelling}{equation.13}{}}
-\newlabel{eq:ftheta}{{14}{26}{Het bewegingsmodel: de voorspelling}{equation.14}{}}
-\newlabel{eq:fba}{{15}{26}{Het bewegingsmodel: de voorspelling}{equation.15}{}}
-\newlabel{eq:fbg}{{16}{26}{Het bewegingsmodel: de voorspelling}{equation.16}{}}
-\newlabel{eq:P_predict}{{17}{26}{Het bewegingsmodel: de voorspelling}{equation.17}{}}
-\newlabel{eq:jacobian_F}{{18}{26}{Het bewegingsmodel: de voorspelling}{equation.18}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}De state vector}{27}{subsubsection.6.2.1}\protected@file@percent }
+\newlabel{eq:toestandsvector}{{10}{27}{De state vector}{equation.10}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Het bewegingsmodel: de voorspelling}{27}{subsubsection.6.2.2}\protected@file@percent }
+\newlabel{eq:fx}{{11}{27}{Het bewegingsmodel: de voorspelling}{equation.11}{}}
+\newlabel{eq:fy}{{12}{27}{Het bewegingsmodel: de voorspelling}{equation.12}{}}
+\newlabel{eq:fv}{{13}{27}{Het bewegingsmodel: de voorspelling}{equation.13}{}}
+\newlabel{eq:ftheta}{{14}{27}{Het bewegingsmodel: de voorspelling}{equation.14}{}}
+\newlabel{eq:fba}{{15}{27}{Het bewegingsmodel: de voorspelling}{equation.15}{}}
+\newlabel{eq:fbg}{{16}{27}{Het bewegingsmodel: de voorspelling}{equation.16}{}}
+\newlabel{eq:P_predict}{{17}{27}{Het bewegingsmodel: de voorspelling}{equation.17}{}}
 \abx@aux@cite{0}{kalmanfilter_net}
 \abx@aux@segm{0}{0}{kalmanfilter_net}
 \abx@aux@cite{0}{kalman_filter_com_nis}
 \abx@aux@segm{0}{0}{kalman_filter_com_nis}
 \abx@aux@cite{0}{medcalc_chisquare}
 \abx@aux@segm{0}{0}{medcalc_chisquare}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}De updatestap: RTK correction}{27}{subsubsection.6.2.3}\protected@file@percent }
-\newlabel{eq:H}{{19}{27}{De updatestap: RTK correction}{equation.19}{}}
-\newlabel{eq:kalman_gain}{{20}{27}{De updatestap: RTK correction}{equation.20}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.4}Foutreductie: Uitschieter detectie}{27}{subsubsection.6.2.4}\protected@file@percent }
-\newlabel{eq:NIS}{{21}{27}{Foutreductie: Uitschieter detectie}{equation.21}{}}
+\newlabel{eq:jacobian_F}{{18}{28}{Het bewegingsmodel: de voorspelling}{equation.18}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}De updatestap: RTK correction}{28}{subsubsection.6.2.3}\protected@file@percent }
+\newlabel{eq:H}{{19}{28}{De updatestap: RTK correction}{equation.19}{}}
+\newlabel{eq:kalman_gain}{{20}{28}{De updatestap: RTK correction}{equation.20}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.4}Foutreductie: Uitschieter detectie}{28}{subsubsection.6.2.4}\protected@file@percent }
+\newlabel{eq:NIS}{{21}{28}{Foutreductie: Uitschieter detectie}{equation.21}{}}
 \abx@aux@cite{0}{segger_rtt}
 \abx@aux@segm{0}{0}{segger_rtt}
 \abx@aux@cite{0}{microchip-tseg-jlink}
 \abx@aux@segm{0}{0}{microchip-tseg-jlink}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Implementatie}{28}{section.7}\protected@file@percent }
-\newlabel{sec:implementatie}{{7}{28}{Implementatie}{section.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Ontwikkelomgeving en testopstelling}{28}{subsection.7.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Pinout van de JTAG connector waarbij pinnen 1, 7, 9 en GND zijn gebruikt voor de SWD-verbinding \blx@tocontentsinit {0}\cite {microchip-tseg-jlink}.}}{28}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:JTAG}{{13}{28}{Pinout van de JTAG connector waarbij pinnen 1, 7, 9 en GND zijn gebruikt voor de SWD-verbinding \cite {microchip-tseg-jlink}}{figure.caption.21}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}IMU integratie}{28}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Implementatie}{29}{section.7}\protected@file@percent }
+\newlabel{sec:implementatie}{{7}{29}{Implementatie}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Ontwikkelomgeving en testopstelling}{29}{subsection.7.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Pinout van de JTAG connector waarbij pinnen 1, 7, 9 en GND zijn gebruikt voor de SWD-verbinding \blx@tocontentsinit {0}\cite {microchip-tseg-jlink}.}}{29}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:JTAG}{{13}{29}{Pinout van de JTAG connector waarbij pinnen 1, 7, 9 en GND zijn gebruikt voor de SWD-verbinding \cite {microchip-tseg-jlink}}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}IMU integratie}{29}{subsection.7.2}\protected@file@percent }
 \abx@aux@cite{0}{stmicro_asm330lhh}
 \abx@aux@segm{0}{0}{stmicro_asm330lhh}
 \abx@aux@cite{0}{stmicro_asm330lhh}
@@ -223,117 +226,123 @@
 \abx@aux@segm{0}{0}{witte2006effect}
 \abx@aux@cite{0}{ST_AN5296}
 \abx@aux@segm{0}{0}{ST_AN5296}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Geconfigureerde functionele parameters van de ASM330LHH IMU.}}{29}{table.caption.22}\protected@file@percent }
-\newlabel{tab:imu_config}{{9}{29}{Geconfigureerde functionele parameters van de ASM330LHH IMU}{table.caption.22}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.1}Gyroscoop kalibratie}{29}{subsubsection.7.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Gyroscoop en accelerometer waardes bij stilstand op een tafel. Hierbij laat het bovenste venster de gyroscoop draaisnelheden zien en het onderste venster de g-krachten die de accelerometer waarneemt. De zwarte lijn is bedoeld om aan te tonen wat de totale g-kracht is die zich op het apparaat bevindt}}{29}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:sensorwaardes}{{14}{29}{Gyroscoop en accelerometer waardes bij stilstand op een tafel. Hierbij laat het bovenste venster de gyroscoop draaisnelheden zien en het onderste venster de g-krachten die de accelerometer waarneemt. De zwarte lijn is bedoeld om aan te tonen wat de totale g-kracht is die zich op het apparaat bevindt}{figure.caption.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces De filter configuratie van de IMU is gebruikt voor de gyroscoop. De schommelingen zijn hierdoor aanzienlijk minder}}{30}{figure.caption.24}\protected@file@percent }
-\newlabel{fig:sensorwaardes_filter}{{15}{30}{De filter configuratie van de IMU is gebruikt voor de gyroscoop. De schommelingen zijn hierdoor aanzienlijk minder}{figure.caption.24}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces De offset van de gyroscoop waardes zijn van de metingen afgetrokken}}{30}{figure.caption.25}\protected@file@percent }
-\newlabel{fig:sensorwaardes_kalibratie}{{16}{30}{De offset van de gyroscoop waardes zijn van de metingen afgetrokken}{figure.caption.25}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.2}SPI-busprobleem bij de IMU-uitlezing}{30}{subsubsection.7.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Willekeurige grote pieken in de gyroscoop data. Dit zijn resultaten op een stilstaande tafel}}{31}{figure.caption.26}\protected@file@percent }
-\newlabel{fig:imu_pieken}{{17}{31}{Willekeurige grote pieken in de gyroscoop data. Dit zijn resultaten op een stilstaande tafel}{figure.caption.26}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Datavoorbewerking en Transformaties}{31}{subsection.7.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Geconfigureerde functionele parameters van de ASM330LHH IMU.}}{30}{table.caption.22}\protected@file@percent }
+\newlabel{tab:imu_config}{{9}{30}{Geconfigureerde functionele parameters van de ASM330LHH IMU}{table.caption.22}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.1}Gyroscoop kalibratie}{30}{subsubsection.7.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Gyroscoop en accelerometer waardes bij stilstand op een tafel. Hierbij laat het bovenste venster de gyroscoop draaisnelheden zien en het onderste venster de g-krachten die de accelerometer waarneemt. De zwarte lijn is bedoeld om aan te tonen wat de totale g-kracht is die zich op het apparaat bevindt}}{30}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:sensorwaardes}{{14}{30}{Gyroscoop en accelerometer waardes bij stilstand op een tafel. Hierbij laat het bovenste venster de gyroscoop draaisnelheden zien en het onderste venster de g-krachten die de accelerometer waarneemt. De zwarte lijn is bedoeld om aan te tonen wat de totale g-kracht is die zich op het apparaat bevindt}{figure.caption.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces De filter configuratie van de IMU is gebruikt voor de gyroscoop. De schommelingen zijn hierdoor aanzienlijk minder}}{31}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:sensorwaardes_filter}{{15}{31}{De filter configuratie van de IMU is gebruikt voor de gyroscoop. De schommelingen zijn hierdoor aanzienlijk minder}{figure.caption.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces De offset van de gyroscoop waardes zijn van de metingen afgetrokken}}{31}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:sensorwaardes_kalibratie}{{16}{31}{De offset van de gyroscoop waardes zijn van de metingen afgetrokken}{figure.caption.25}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.2}SPI-busprobleem bij de IMU-uitlezing}{32}{subsubsection.7.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Willekeurige grote pieken in de gyroscoop data. Dit zijn resultaten op een stilstaande tafel}}{32}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:imu_pieken}{{17}{32}{Willekeurige grote pieken in de gyroscoop data. Dit zijn resultaten op een stilstaande tafel}{figure.caption.26}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Datavoorbewerking en Transformaties}{32}{subsection.7.3}\protected@file@percent }
 \abx@aux@cite{0}{local_tangent}
 \abx@aux@segm{0}{0}{local_tangent}
 \abx@aux@cite{0}{geo_conversion}
 \abx@aux@segm{0}{0}{geo_conversion}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.1}Zwaartekrachtcompensatie (Complementary Filter)}{32}{subsubsection.7.3.1}\protected@file@percent }
-\newlabel{eq:accel_pitch}{{22}{32}{Zwaartekrachtcompensatie (Complementary Filter)}{equation.22}{}}
-\newlabel{lst:gravity_comp}{{1}{32}{De zwaartekrachtcompensatie berekent de hellingshoek en verwijdert de invloed hiervan uit de versnellingsmeting}{lstlisting.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}{\ignorespaces De zwaartekrachtcompensatie berekent de hellingshoek en verwijdert de invloed hiervan uit de versnellingsmeting.}}{32}{lstlisting.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.2}Coördinaten transformatie}{32}{subsubsection.7.3.2}\protected@file@percent }
-\newlabel{eq:primevertical}{{23}{32}{Coördinaten transformatie}{equation.23}{}}
-\newlabel{eq:eccentricity}{{24}{32}{Coördinaten transformatie}{equation.24}{}}
-\newlabel{eq:llaecef}{{25}{32}{Coördinaten transformatie}{equation.25}{}}
-\newlabel{eq:ecefenu}{{26}{33}{Coördinaten transformatie}{equation.26}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Realisatie van het Extended Kalman Filter}{33}{subsection.7.4}\protected@file@percent }
-\newlabel{subsec:ekf_realisatie}{{7.4}{33}{Realisatie van het Extended Kalman Filter}{subsection.7.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.4.1}Initialisatie}{33}{subsubsection.7.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.1}Zwaartekrachtcompensatie (Complementair Filter)}{33}{subsubsection.7.3.1}\protected@file@percent }
+\newlabel{eq:accel_pitch}{{22}{33}{Zwaartekrachtcompensatie (Complementair Filter)}{equation.22}{}}
+\newlabel{lst:gravity_comp}{{1}{33}{De zwaartekrachtcompensatie berekent de hellingshoek en verwijdert de invloed hiervan uit de versnellingsmeting}{lstlisting.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}{\ignorespaces De zwaartekrachtcompensatie berekent de hellingshoek en verwijdert de invloed hiervan uit de versnellingsmeting.}}{33}{lstlisting.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.2}Coördinatentransformatie}{33}{subsubsection.7.3.2}\protected@file@percent }
+\newlabel{eq:primevertical}{{23}{33}{Coördinatentransformatie}{equation.23}{}}
+\newlabel{eq:eccentricity}{{24}{33}{Coördinatentransformatie}{equation.24}{}}
+\newlabel{eq:llaecef}{{25}{33}{Coördinatentransformatie}{equation.25}{}}
+\newlabel{eq:ecefenu}{{26}{34}{Coördinatentransformatie}{equation.26}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Realisatie van het Extended Kalman Filter}{34}{subsection.7.4}\protected@file@percent }
+\newlabel{subsec:ekf_realisatie}{{7.4}{34}{Realisatie van het Extended Kalman Filter}{subsection.7.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.4.1}Initialisatie}{34}{subsubsection.7.4.1}\protected@file@percent }
 \newlabel{lst:ekf_state}{{2}{34}{covariantie en process noise matricen van het EKF}{lstlisting.2}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {2}{\ignorespaces covariantie en process noise matricen van het EKF.}}{34}{lstlisting.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {7.4.2}De prediction}{34}{subsubsection.7.4.2}\protected@file@percent }
 \newlabel{lst:ekf_predict}{{3}{34}{De prediction stap van het EKF (ingekort)}{lstlisting.3}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {3}{\ignorespaces De prediction stap van het EKF (ingekort).}}{34}{lstlisting.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.4.3}De correction en NIS uitschieter detectie}{34}{subsubsection.7.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.4.3}De correction en NIS uitschieter detectie}{35}{subsubsection.7.4.3}\protected@file@percent }
 \newlabel{lst:ekf_update}{{4}{35}{De GNSS-update met dynamische R-matrix en NIS-gebaseerde metingrejectie (ingekort)}{lstlisting.4}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {4}{\ignorespaces De GNSS-update met dynamische R-matrix en NIS-gebaseerde metingrejectie (ingekort).}}{35}{lstlisting.4}\protected@file@percent }
-\abx@aux@cite{0}{ublox_x20p_interface_hpg202}
-\abx@aux@segm{0}{0}{ublox_x20p_interface_hpg202}
 \@writefile{toc}{\contentsline {section}{\numberline {8}Resultaten en validatie}{36}{section.8}\protected@file@percent }
 \newlabel{sec:resultaten}{{8}{36}{Resultaten en validatie}{section.8}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Testopzet}{36}{subsection.8.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Gelogde grootheden tijdens de validatietests.}}{36}{table.caption.27}\protected@file@percent }
-\newlabel{tab:logvelden}{{10}{36}{Gelogde grootheden tijdens de validatietests}{table.caption.27}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Normale omstandigheden}{37}{subsection.8.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Afgelegde route met de tracker in de hand. Het EKF volgt nauwkeurig de RTK-positie.}}{37}{figure.caption.28}\protected@file@percent }
-\newlabel{fig:lopen_norm}{{18}{37}{Afgelegde route met de tracker in de hand. Het EKF volgt nauwkeurig de RTK-positie}{figure.caption.28}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Ingezoomde weergave van een deel van de looproute. De afwijking tussen EKF en RTK-positie is verwaarloosbaar klein.}}{37}{figure.caption.29}\protected@file@percent }
-\newlabel{fig:lopen_norm_zoom}{{19}{37}{Ingezoomde weergave van een deel van de looproute. De afwijking tussen EKF en RTK-positie is verwaarloosbaar klein}{figure.caption.29}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Afgelegde route met de tracker gemonteerd op de auto. Het EKF blijft ook bij hogere snelheden nauwkeurig aansluiten op de RTK-positie.}}{38}{figure.caption.30}\protected@file@percent }
-\newlabel{fig:lopen_norm_auto}{{20}{38}{Afgelegde route met de tracker gemonteerd op de auto. Het EKF blijft ook bij hogere snelheden nauwkeurig aansluiten op de RTK-positie}{figure.caption.30}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Ruwe GNSS-route met softwarematig geïnjecteerde positiesprongen van 5 meter.}}{38}{figure.caption.31}\protected@file@percent }
-\newlabel{fig:grote_sprongen}{{21}{38}{Ruwe GNSS-route met softwarematig geïnjecteerde positiesprongen van 5 meter}{figure.caption.31}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces De door het EKF gecorrigeerde route, waarbij de uitschieters succesvol zijn verworpen.}}{38}{figure.caption.31}\protected@file@percent }
-\newlabel{fig:geen_sprongen}{{22}{38}{De door het EKF gecorrigeerde route, waarbij de uitschieters succesvol zijn verworpen}{figure.caption.31}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Achteruitrijden tijdens de autotest. De EKF positie beweegt vooruit omdat de u-blox receiver geen rijrichting meelevert en het model geen achteruitrijden opvangt.}}{39}{figure.caption.32}\protected@file@percent }
-\newlabel{fig:lopen_norm_auto_achteruit}{{23}{39}{Achteruitrijden tijdens de autotest. De EKF positie beweegt vooruit omdat de u-blox receiver geen rijrichting meelevert en het model geen achteruitrijden opvangt}{figure.caption.32}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}RTCM correcties uitgeschakeld}{39}{subsection.8.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Looproute met uitgeschakelde RTCM-correcties. Op meerdere momenten wijkt de EKF-positie af van de foutieve GNSS-positie.}}{39}{figure.caption.33}\protected@file@percent }
-\newlabel{fig:lopen_rtk}{{24}{39}{Looproute met uitgeschakelde RTCM-correcties. Op meerdere momenten wijkt de EKF-positie af van de foutieve GNSS-positie}{figure.caption.33}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Ingezoomd moment waarbij de ruwe GNSS-positie een plotselinge sprong maakt. Het EKF trekt de route logisch door maar drift na verloop van tijd mee met de foutieve positie.}}{40}{figure.caption.34}\protected@file@percent }
-\newlabel{fig:lopen_rtk_sprong}{{25}{40}{Ingezoomd moment waarbij de ruwe GNSS-positie een plotselinge sprong maakt. Het EKF trekt de route logisch door maar drift na verloop van tijd mee met de foutieve positie}{figure.caption.34}{}}
-\newlabel{lst:log_outage}{{5}{40}{Log-extract dat de oplopende onzekerheid (Ppos) toont tijdens het verlies en herstel van de RTK fix}{lstlisting.5}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}{\ignorespaces Log-extract dat de oplopende onzekerheid (Ppos) toont tijdens het verlies en herstel van de RTK fix.}}{40}{lstlisting.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces Autoroute met uitgeschakelde RTCM-correcties. Het EKF wijkt op meerdere momenten af van de foutieve GNSS-positie.}}{41}{figure.caption.35}\protected@file@percent }
-\newlabel{fig:auto_rtk}{{26}{41}{Autoroute met uitgeschakelde RTCM-correcties. Het EKF wijkt op meerdere momenten af van de foutieve GNSS-positie}{figure.caption.35}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Ingezoomd moment tijdens de autotest. Het EKF trekt de route kortdurend goed door maar drift langzamerhand mee met de foutieve positie.}}{41}{figure.caption.36}\protected@file@percent }
-\newlabel{fig:auto_rtk_sprong}{{27}{41}{Ingezoomd moment tijdens de autotest. Het EKF trekt de route kortdurend goed door maar drift langzamerhand mee met de foutieve positie}{figure.caption.36}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces Recht stuk tijdens de aanvullende autotest. Het systeem presteert goed zonder zijwaartse dynamiek.}}{42}{figure.caption.37}\protected@file@percent }
-\newlabel{fig:auto_rtk_recht}{{28}{42}{Recht stuk tijdens de aanvullende autotest. Het systeem presteert goed zonder zijwaartse dynamiek}{figure.caption.37}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces Bocht tijdens de aanvullende autotest. De ruwe GNSS-positie toont een schommeling door een drempel; het EKF vlakt dit af naar een vloeiende boog doordat het model geen verticale bewegingen modelleert.}}{42}{figure.caption.38}\protected@file@percent }
-\newlabel{fig:auto_rtk_bocht}{{29}{42}{Bocht tijdens de aanvullende autotest. De ruwe GNSS-positie toont een schommeling door een drempel; het EKF vlakt dit af naar een vloeiende boog doordat het model geen verticale bewegingen modelleert}{figure.caption.38}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}GPS uitval}{43}{subsection.8.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces Looproute waarbij het satellietsignaal softwarematig periodiek voor 2 seconden is geblokkeerd.}}{44}{figure.caption.39}\protected@file@percent }
-\newlabel{fig:lopen_gps_rood}{{30}{44}{Looproute waarbij het satellietsignaal softwarematig periodiek voor 2 seconden is geblokkeerd}{figure.caption.39}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces Het EKF vult de gaten in het signaal op. Zichtbaar is een lichte positionele afwijking door drift.}}{44}{figure.caption.40}\protected@file@percent }
-\newlabel{fig:lopen_gps_groen}{{31}{44}{Het EKF vult de gaten in het signaal op. Zichtbaar is een lichte positionele afwijking door drift}{figure.caption.40}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de looptest. Elke ster vertegenwoordigt één uitval.}}{45}{figure.caption.41}\protected@file@percent }
-\newlabel{fig:lopen_afstand_uit}{{32}{45}{Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de looptest. Elke ster vertegenwoordigt één uitval}{figure.caption.41}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {33}{\ignorespaces Fragment van de autotest met twee signaalgaten.}}{46}{figure.caption.42}\protected@file@percent }
-\newlabel{fig:auto_gps_rood_1}{{33}{46}{Fragment van de autotest met twee signaalgaten}{figure.caption.42}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {34}{\ignorespaces Het EKF overbrugt de gaten, waarbij het onderste gat een lichte afwijking vertoont.}}{46}{figure.caption.43}\protected@file@percent }
-\newlabel{fig:auto_gps_groen_1}{{34}{46}{Het EKF overbrugt de gaten, waarbij het onderste gat een lichte afwijking vertoont}{figure.caption.43}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {35}{\ignorespaces Ruwe route met signaaluitval (situatie 2).}}{47}{figure.caption.44}\protected@file@percent }
-\newlabel{fig:auto_gps_rood_2}{{35}{47}{Ruwe route met signaaluitval (situatie 2)}{figure.caption.44}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {36}{\ignorespaces Door het EKF aangevulde route (situatie 2).}}{47}{figure.caption.44}\protected@file@percent }
-\newlabel{fig:auto_gps_groen_2}{{36}{47}{Door het EKF aangevulde route (situatie 2)}{figure.caption.44}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {37}{\ignorespaces Ruwe route met signaaluitval (situatie 3).}}{47}{figure.caption.45}\protected@file@percent }
-\newlabel{fig:auto_gps_rood_3}{{37}{47}{Ruwe route met signaaluitval (situatie 3)}{figure.caption.45}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {38}{\ignorespaces Door het EKF aangevulde route (situatie 3).}}{47}{figure.caption.45}\protected@file@percent }
-\newlabel{fig:auto_gps_groen_3}{{38}{47}{Door het EKF aangevulde route (situatie 3)}{figure.caption.45}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {39}{\ignorespaces Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de autotest. Elke ster vertegenwoordigt één uitval.}}{48}{figure.caption.46}\protected@file@percent }
-\newlabel{fig:uitval_afstand}{{39}{48}{Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de autotest. Elke ster vertegenwoordigt één uitval}{figure.caption.46}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusie}{49}{section.9}\protected@file@percent }
-\newlabel{sec:conclusie}{{9}{49}{Conclusie}{section.9}{}}
-\@writefile{toc}{\contentsline {section}{Bronnen}{50}{section.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Testopstelling van de autotest. Het gemaakte systeem (links) en de externe tracker (rechts) zijn beiden verbonden met dezelfde antenne.}}{36}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:testopstelling_velcro}{{18}{36}{Testopstelling van de autotest. Het gemaakte systeem (links) en de externe tracker (rechts) zijn beiden verbonden met dezelfde antenne}{figure.caption.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Directe verbinding van de tracker met de computer gebruikmakend van de J-Link debug probe.}}{36}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:testopstelling_verbinding}{{19}{36}{Directe verbinding van de tracker met de computer gebruikmakend van de J-Link debug probe}{figure.caption.27}{}}
+\abx@aux@cite{0}{ublox_x20p_interface_hpg202}
+\abx@aux@segm{0}{0}{ublox_x20p_interface_hpg202}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Gelogde grootheden tijdens de validatietests.}}{37}{table.caption.28}\protected@file@percent }
+\newlabel{tab:logvelden}{{10}{37}{Gelogde grootheden tijdens de validatietests}{table.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Normale omstandigheden}{38}{subsection.8.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Afgelegde route met de tracker in de hand. Het EKF volgt nauwkeurig de RTK-positie.}}{38}{figure.caption.29}\protected@file@percent }
+\newlabel{fig:lopen_norm}{{20}{38}{Afgelegde route met de tracker in de hand. Het EKF volgt nauwkeurig de RTK-positie}{figure.caption.29}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Ingezoomde weergave van een deel van de looproute. De afwijking tussen EKF en RTK-positie is verwaarloosbaar klein.}}{38}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:lopen_norm_zoom}{{21}{38}{Ingezoomde weergave van een deel van de looproute. De afwijking tussen EKF en RTK-positie is verwaarloosbaar klein}{figure.caption.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Afgelegde route met de tracker gemonteerd op de auto. Het EKF blijft ook bij hogere snelheden nauwkeurig aansluiten op de RTK-positie.}}{39}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:lopen_norm_auto}{{22}{39}{Afgelegde route met de tracker gemonteerd op de auto. Het EKF blijft ook bij hogere snelheden nauwkeurig aansluiten op de RTK-positie}{figure.caption.31}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Ruwe GNSS-route met softwarematig geïnjecteerde positiesprongen van 5 meter.}}{39}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:grote_sprongen}{{23}{39}{Ruwe GNSS-route met softwarematig geïnjecteerde positiesprongen van 5 meter}{figure.caption.32}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces De door het EKF gecorrigeerde route, waarbij de uitschieters succesvol zijn verworpen.}}{39}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:geen_sprongen}{{24}{39}{De door het EKF gecorrigeerde route, waarbij de uitschieters succesvol zijn verworpen}{figure.caption.32}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Achteruitrijden tijdens de autotest. De EKF positie beweegt vooruit omdat de u-blox receiver geen rijrichting meelevert en het model geen achteruitrijden opvangt.}}{40}{figure.caption.33}\protected@file@percent }
+\newlabel{fig:lopen_norm_auto_achteruit}{{25}{40}{Achteruitrijden tijdens de autotest. De EKF positie beweegt vooruit omdat de u-blox receiver geen rijrichting meelevert en het model geen achteruitrijden opvangt}{figure.caption.33}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}RTCM correcties uitgeschakeld}{40}{subsection.8.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces Looproute met uitgeschakelde RTCM-correcties. Op meerdere momenten wijkt de EKF-positie af van de foutieve GNSS-positie.}}{40}{figure.caption.34}\protected@file@percent }
+\newlabel{fig:lopen_rtk}{{26}{40}{Looproute met uitgeschakelde RTCM-correcties. Op meerdere momenten wijkt de EKF-positie af van de foutieve GNSS-positie}{figure.caption.34}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Ingezoomd moment waarbij de ruwe GNSS-positie een plotselinge sprong maakt. Het EKF trekt de route logisch door maar drift na verloop van tijd mee met de foutieve positie.}}{41}{figure.caption.35}\protected@file@percent }
+\newlabel{fig:lopen_rtk_sprong}{{27}{41}{Ingezoomd moment waarbij de ruwe GNSS-positie een plotselinge sprong maakt. Het EKF trekt de route logisch door maar drift na verloop van tijd mee met de foutieve positie}{figure.caption.35}{}}
+\newlabel{lst:log_outage}{{5}{41}{Log-extract dat de oplopende onzekerheid (Ppos) toont tijdens het verlies en herstel van de RTK fix}{lstlisting.5}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}{\ignorespaces Log-extract dat de oplopende onzekerheid (Ppos) toont tijdens het verlies en herstel van de RTK fix.}}{41}{lstlisting.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces Autoroute met uitgeschakelde RTCM-correcties. Het EKF wijkt op meerdere momenten af van de foutieve GNSS-positie.}}{42}{figure.caption.36}\protected@file@percent }
+\newlabel{fig:auto_rtk}{{28}{42}{Autoroute met uitgeschakelde RTCM-correcties. Het EKF wijkt op meerdere momenten af van de foutieve GNSS-positie}{figure.caption.36}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces Ingezoomd moment tijdens de autotest. Het EKF trekt de route kortdurend goed door maar drift langzamerhand mee met de foutieve positie.}}{42}{figure.caption.37}\protected@file@percent }
+\newlabel{fig:auto_rtk_sprong}{{29}{42}{Ingezoomd moment tijdens de autotest. Het EKF trekt de route kortdurend goed door maar drift langzamerhand mee met de foutieve positie}{figure.caption.37}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces Recht stuk tijdens de aanvullende autotest. Het systeem presteert goed zonder zijwaartse dynamiek.}}{43}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:auto_rtk_recht}{{30}{43}{Recht stuk tijdens de aanvullende autotest. Het systeem presteert goed zonder zijwaartse dynamiek}{figure.caption.38}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces Bocht tijdens de aanvullende autotest. De ruwe GNSS-positie toont een schommeling door een drempel; het EKF vlakt dit af naar een vloeiende boog doordat het model geen verticale bewegingen modelleert.}}{43}{figure.caption.39}\protected@file@percent }
+\newlabel{fig:auto_rtk_bocht}{{31}{43}{Bocht tijdens de aanvullende autotest. De ruwe GNSS-positie toont een schommeling door een drempel; het EKF vlakt dit af naar een vloeiende boog doordat het model geen verticale bewegingen modelleert}{figure.caption.39}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}GNSS uitval}{44}{subsection.8.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces Looproute waarbij het satellietsignaal softwarematig periodiek voor 2 seconden is geblokkeerd.}}{44}{figure.caption.40}\protected@file@percent }
+\newlabel{fig:lopen_gps_rood}{{32}{44}{Looproute waarbij het satellietsignaal softwarematig periodiek voor 2 seconden is geblokkeerd}{figure.caption.40}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {33}{\ignorespaces Het EKF vult de gaten in het signaal op. Zichtbaar is een lichte positionele afwijking door drift.}}{45}{figure.caption.41}\protected@file@percent }
+\newlabel{fig:lopen_gps_groen}{{33}{45}{Het EKF vult de gaten in het signaal op. Zichtbaar is een lichte positionele afwijking door drift}{figure.caption.41}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {34}{\ignorespaces Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de looptest. Elke ster vertegenwoordigt één uitval.}}{46}{figure.caption.42}\protected@file@percent }
+\newlabel{fig:lopen_afstand_uit}{{34}{46}{Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de looptest. Elke ster vertegenwoordigt één uitval}{figure.caption.42}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {35}{\ignorespaces Fragment van de autotest met twee signaalgaten.}}{47}{figure.caption.43}\protected@file@percent }
+\newlabel{fig:auto_gps_rood_1}{{35}{47}{Fragment van de autotest met twee signaalgaten}{figure.caption.43}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {36}{\ignorespaces Het EKF overbrugt de gaten, waarbij het onderste gat een lichte afwijking vertoont.}}{47}{figure.caption.44}\protected@file@percent }
+\newlabel{fig:auto_gps_groen_1}{{36}{47}{Het EKF overbrugt de gaten, waarbij het onderste gat een lichte afwijking vertoont}{figure.caption.44}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {37}{\ignorespaces Ruwe route met signaaluitval (situatie 2).}}{48}{figure.caption.45}\protected@file@percent }
+\newlabel{fig:auto_gps_rood_2}{{37}{48}{Ruwe route met signaaluitval (situatie 2)}{figure.caption.45}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {38}{\ignorespaces Door het EKF aangevulde route (situatie 2).}}{48}{figure.caption.45}\protected@file@percent }
+\newlabel{fig:auto_gps_groen_2}{{38}{48}{Door het EKF aangevulde route (situatie 2)}{figure.caption.45}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {39}{\ignorespaces Ruwe route met signaaluitval (situatie 3).}}{48}{figure.caption.46}\protected@file@percent }
+\newlabel{fig:auto_gps_rood_3}{{39}{48}{Ruwe route met signaaluitval (situatie 3)}{figure.caption.46}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {40}{\ignorespaces Door het EKF aangevulde route (situatie 3).}}{48}{figure.caption.46}\protected@file@percent }
+\newlabel{fig:auto_gps_groen_3}{{40}{48}{Door het EKF aangevulde route (situatie 3)}{figure.caption.46}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {41}{\ignorespaces Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de autotest. Elke ster vertegenwoordigt één uitval.}}{49}{figure.caption.47}\protected@file@percent }
+\newlabel{fig:uitval_afstand}{{41}{49}{Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de autotest. Elke ster vertegenwoordigt één uitval}{figure.caption.47}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusie}{50}{section.9}\protected@file@percent }
+\newlabel{sec:conclusie}{{9}{50}{Conclusie}{section.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Discussie}{51}{section.10}\protected@file@percent }
+\newlabel{sec:discussie}{{10}{51}{Discussie}{section.10}{}}
+\@writefile{toc}{\contentsline {section}{Bronnen}{52}{section.10}\protected@file@percent }
 \gdef \LT@i {\LT@entry 
     {1}{140.0374pt}\LT@entry 
     {1}{296.52756pt}}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Begrippenlijst}{53}{appendix.A}\protected@file@percent }
-\newlabel{app:begrippenlijst}{{A}{53}{Begrippenlijst}{appendix.A}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Begrippenlijst}{55}{appendix.A}\protected@file@percent }
+\newlabel{app:begrippenlijst}{{A}{55}{Begrippenlijst}{appendix.A}{}}
 \abx@aux@cite{0}{nxp2013}
 \abx@aux@segm{0}{0}{nxp2013}
-\@writefile{toc}{\contentsline {section}{\numberline {B}Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{56}{appendix.B}\protected@file@percent }
-\newlabel{app:zwaartekracht}{{B}{56}{Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{appendix.B}{}}
-\newlabel{eq:horizontaal_bijlage}{{28}{56}{Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{equation.28}{}}
-\@writefile{toc}{\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{56}{paragraph*.47}\protected@file@percent }
-\newlabel{eq:roll_matrix_bijlage}{{29}{56}{Stap 1: De roll rotatie ($R_x$)}{equation.29}{}}
-\@writefile{toc}{\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{56}{paragraph*.48}\protected@file@percent }
-\newlabel{eq:pitch_matrix_bijlage}{{30}{56}{Stap 2: De pitch rotatie ($R_y$)}{equation.30}{}}
-\newlabel{eq:accel_correctie_bijlage}{{32}{56}{Stap 2: De pitch rotatie ($R_y$)}{equation.32}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{58}{appendix.B}\protected@file@percent }
+\newlabel{app:zwaartekracht}{{B}{58}{Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{appendix.B}{}}
+\newlabel{eq:horizontaal_bijlage}{{28}{58}{Eerste uitwerking zwaartekrachtcompensatie via Euler-rotatiematrices}{equation.28}{}}
+\@writefile{toc}{\contentsline {paragraph}{Stap 1: De roll rotatie ($R_x$)}{58}{paragraph*.48}\protected@file@percent }
+\newlabel{eq:roll_matrix_bijlage}{{29}{58}{Stap 1: De roll rotatie ($R_x$)}{equation.29}{}}
+\@writefile{toc}{\contentsline {paragraph}{Stap 2: De pitch rotatie ($R_y$)}{58}{paragraph*.49}\protected@file@percent }
+\newlabel{eq:pitch_matrix_bijlage}{{30}{58}{Stap 2: De pitch rotatie ($R_y$)}{equation.30}{}}
+\newlabel{eq:accel_correctie_bijlage}{{32}{58}{Stap 2: De pitch rotatie ($R_y$)}{equation.32}{}}
 \abx@aux@read@bbl@mdfivesum{57F10965D824F1AF974A83FBE1825332}
 \abx@aux@defaultrefcontext{0}{stmicro_asm330lhh}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{bar_shalom_estimation}{nty/global//global/global/global}
@@ -378,4 +387,4 @@
 \abx@aux@defaultrefcontext{0}{witte2006effect}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{Woodman2007Inertial}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{pmc_sensorfusion}{nty/global//global/global/global}
-\gdef \@abspage@last{57}
+\gdef \@abspage@last{59}

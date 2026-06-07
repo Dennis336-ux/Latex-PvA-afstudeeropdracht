@@ -25,24 +25,39 @@ Systems} (RTK GNSS), waarbij de locatie tot op de centimeter nauwkeurig kan
 worden bepaald. In de praktijk ontbreekt echter de garantie op een constant 
 betrouwbaar signaal. Signaaluitval en multipath effecten door tribunes en gebouwen kunnen leiden tot onbetrouwbare of ontbrekende positiedata. \\
 
-De ProRTK tracker beschikt naast de RTK GNSS ontvanger ook over een `Inertial Measurement Unit' (IMU), bestaande uit een accelerometer en een gyroscoop. Deze IMU 
-wordt in het huidige systeem echter niet ingezet voor de positiebepaling. Hierom is er vanuit MYLAPS de wens om te achterhalen of deze IMU (en eventuele aanvullende sensoren), door middel van sensorfusion (combinatie van meerdere sensordatastromen), meerwaarde kan bieden aan de huidige positiebepaling. De hoofdvraag luidt dan ook als volgt:
+De ProRTK tracker beschikt naast de RTK GNSS ontvanger ook over een IMU, bestaande uit een accelerometer en een gyroscoop. Deze IMU 
+wordt in het huidige systeem echter niet ingezet voor de positiebepaling. Hierom is er vanuit MYLAPS de wens om te achterhalen of deze IMU (en eventuele aanvullende sensoren), door middel van sensorfusie (combinatie van meerdere sensordatastromen), meerwaarde kan bieden aan de huidige positiebepaling. De hoofdvraag luidt dan ook als volgt:
 
 \begin{tcolorbox}[colback=gray!10, colframe=gray!50, title=Hoofdvraag]
-\textit{``In hoeverre kunnen sensor fusion technieken, met gebruik van de aanwezige IMU en eventueel aanvullende sensoren, op het bestaande ProRTK tracker systeem worden toegepast om de robuustheid en betrouwbaarheid van de positiebepaling te verbeteren?"}
+\textit{``In hoeverre kunnen sensorfusie technieken, met gebruik van de aanwezige IMU en eventueel aanvullende sensoren, op het bestaande ProRTK tracker systeem worden toegepast om de robuustheid en betrouwbaarheid van de positiebepaling te verbeteren?"}
 \end{tcolorbox}
+
+De begrippen \textit{robuustheid} en \textit{betrouwbaarheid} zijn op zichzelf moeilijk meetbaar. Om de hoofdvraag objectief te kunnen beantwoorden, worden deze begrippen in hoofdstuk~\ref{sec:specificaties} concreet gemaakt tot meetbare criteria.
 
 
 \subsection{Opdracht en afbakening}
 
-Dit afstudeerproject is in de kern een onderzoeksproject. Het doel is te onderzoeken of en in welke mate de positiebepaling van de ProRTK tracker verbeterd kan worden met behulp van sensor fusion. Een belangrijke randvoorwaarde, opgegeven door de opdrachtgever, is dat de bestaande hardware niet wordt gewijzigd. De opdracht betreft een softwarematige uitbreiding op het bestaande platform. \\
+Dit afstudeerproject is in de kern een onderzoeksproject. Het doel is te onderzoeken of en in welke mate de positiebepaling van de ProRTK tracker verbeterd kan worden met behulp van sensorfusie. Een belangrijke randvoorwaarde, opgegeven door de opdrachtgever, is dat de bestaande hardware niet wordt gewijzigd. De opdracht betreft een softwarematige uitbreiding op het bestaande platform. \\
 
-Als ondersteuning voor het onderzoek naar robuustheid worden aanvullende sensoren in beschouwing genomen om zo te dienen als onderbouwing voor eventuele toekomstige aanpassingen. De afweging van aanvullende sensoren dient daarbij twee doelen: het onderbouwt waarom de aanwezige IMU binnen de gestelde randvoorwaarden de meest geschikte keuze is, en het brengt mogelijke richtingen voor toekomstige aanpassingen in kaart. Deze afweging is puur theoretisch van aard. Het onderzoek richt zich primair op paardenraces, met autosport als eventuele secundaire toepassing. Binnen de scope van de opdracht valt het afwegen van geschikte sensoren en filtertechnieken, het uitlezen en verwerken van de IMU data, en het ontwerp, de implementatie en de validatie van het sensor fusion systeem. Buiten de scope vallen hardwarematige aanpassingen, hoogtebepaling (de positiebepaling beperkt zich tot het 2D vlak) en veldtests met een rijdend paard.
+Als ondersteuning voor het onderzoek naar robuustheid worden aanvullende sensoren in beschouwing genomen om zo te dienen als onderbouwing voor eventuele toekomstige aanpassingen. De afweging van aanvullende sensoren dient daarbij twee doelen. Het onderbouwt waarom de aanwezige IMU binnen de gestelde randvoorwaarden de meest geschikte keuze is, en het brengt mogelijke richtingen voor toekomstige aanpassingen in kaart. Deze afweging is puur theoretisch van aard. Het onderzoek richt zich primair op paardenraces, met autosport als eventuele secundaire toepassing. Binnen de scope van de opdracht valt het afwegen van geschikte sensoren en filtertechnieken, het uitlezen en verwerken van de IMU data, en het ontwerp, de implementatie en de validatie van het sensorfusie systeem. Buiten de scope vallen hardwarematige aanpassingen, hoogtebepaling (de positiebepaling beperkt zich tot het 2D vlak) en veldtests met een rijdend paard.
 
+Om de hoofdvraag gestructureerd te beantwoorden, is deze opgesplitst in de volgende 
+deelvragen:
 
-\subsection*{Leeswijzer}
-Om de centrale onderzoeksvraag te beantwoorden, is dit verslag opgebouwd uit meerdere hoofdstukken. In hoofdstuk \ref{sec:huidige_systeem} wordt eerst de context geschetst door het huidige systeem en de bijbehorende beperkingen te analyseren. Vervolgens vormen hoofdstuk \ref{sec:lokalisatie} en \ref{sec:sensor_fusion} het theoretisch kader, waarin de werking van RTK GNSS, de oorzaken van signaalverlies en de principes van sensor fusion worden onderzocht. \\
+\begin{enumerate}
+    \item Welke sensor en filtertechniek zijn, binnen de randvoorwaarde, het meest geschikt om de positiebepaling van de ProRTK tracker te 
+    ondersteunen?
+    \item In hoeverre behoudt het systeem onder normale omstandigheden de bestaande positienauwkeurigheid?
+    \item In welke mate kan het systeem foutieve GNSS-metingen, zoals veroorzaakt door multipath, detecteren en verwerpen?
+    \item Hoe groot is de positiefout die het systeem opbouwt tijdens een volledige 
+    GNSS-uitval?
+\end{enumerate}
 
-Op basis van deze theorie worden in hoofdstuk \ref{sec:specificaties} de randvoorwaarden vastgesteld. De technische kern van de oplossing wordt behandeld in hoofdstuk \ref{sec:ontwerp} en \ref{sec:implementatie}. Hierin wordt de architectuur en de realisatie van het ontwikkelde systeem uiteengezet. Tot slot worden de prestaties geanalyseerd in hoofdstuk \ref{sec:resultaten}, waarna het verslag wordt afgesloten met een conclusie (hoofdstuk \ref{sec:conclusie}).
+Om deze deelvragen te beantwoorden, wordt onderstaande werkwijze gehanteerd. De eerste deelvraag wordt beantwoord door middel van literatuuronderzoek. Op basis daarvan is een systeem ontworpen en in software geïmplementeerd. De overige deelvragen worden beantwoord via validatie, waarbij het systeem onder drie scenario's wordt getest. Dit zijn normale omstandigheden, het optreden van foutieve metingen en een volledige signaaluitval.
+
+\subsection{Leeswijzer}
+Om de centrale onderzoeksvraag te beantwoorden, is dit verslag opgebouwd uit meerdere hoofdstukken. In hoofdstuk \ref{sec:huidige_systeem} wordt eerst de context geschetst door het huidige systeem en de bijbehorende beperkingen te analyseren. Vervolgens vormen hoofdstuk \ref{sec:lokalisatie} en \ref{sec:sensor_fusion} het theoretisch kader, waarin de werking van RTK GNSS, de oorzaken van signaalverlies en de principes van sensorfusie worden onderzocht. \\
+
+Op basis van deze theorie worden in hoofdstuk \ref{sec:specificaties} de randvoorwaarden vastgesteld. De technische kern van de oplossing wordt behandeld in hoofdstuk \ref{sec:ontwerp} en \ref{sec:implementatie}. Hierin wordt de architectuur en de realisatie van het ontwikkelde systeem uiteengezet. Tot slot worden de prestaties geanalyseerd in hoofdstuk \ref{sec:resultaten}, waarna het verslag wordt afgesloten met een conclusie (hoofdstuk \ref{sec:conclusie}) en discussie (hoofdstuk \ref{sec:discussie}).
 
 \newpage

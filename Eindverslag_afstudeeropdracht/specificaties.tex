@@ -57,6 +57,8 @@ Bij galop op topsnelheid ($v = 17$ m/s, zoals vermeld in \cite{witte2006effect})
 
 Een grafische weergave van de baangeometrie is weergegeven in figuur \ref{fig:racebaan}.
 
+\newpage
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.85\textwidth]{racetrack_gyro.png}
@@ -113,7 +115,7 @@ functionele randvoorwaarden van het systeem.
 
 \begin{table}[htbp]
     \centering
-    \caption{Functionele randvoorwaarden van het sensor fusion systeem.}
+    \caption{Functionele randvoorwaarden van het sensorfusie systeem.}
     \label{tab:randvoorwaarden}
     \renewcommand{\arraystretch}{1.3}
     \begin{tabularx}{\textwidth}{|l|X|l|}
@@ -158,41 +160,17 @@ functionele randvoorwaarden van het systeem.
 \end{table}
 
 Naast de functionele randvoorwaarden zijn de begrippen \textit{robuustheid} en 
-\textit{betrouwbaarheid} vertaald naar meetbare prestatiecriteria. Dit is 
-noodzakelijk om in hoofdstuk~\ref{sec:resultaten} objectief te kunnen beoordelen 
-of de positiebepaling daadwerkelijk verbeterd is; zonder vooraf vastgestelde 
-grenswaarden blijft een uitspraak over verbeterde robuustheid immers subjectief. 
-In dit project wordt onder \textit{betrouwbaarheid} verstaan dat het systeem onder 
-normale omstandigheden de bestaande nauwkeurigheid behoudt en foutieve metingen 
-niet overneemt. Onder \textit{robuustheid} wordt verstaan dat het systeem bruikbare 
-posities blijft leveren tijdens verstoringen, zoals multipath of een tijdelijke 
-signaaluitval. \\
+\textit{betrouwbaarheid} vertaald naar meetbare prestatiecriteria. Dit is noodzakelijk om objectief te kunnen beoordelen of de positiebepaling daadwerkelijk verbeterd is. In dit project wordt onder \textit{betrouwbaarheid} verstaan dat het systeem onder normale omstandigheden de bestaande nauwkeurigheid behoudt en foutieve metingen niet overneemt. Onder \textit{robuustheid} wordt verstaan dat het systeem bruikbare posities blijft leveren tijdens verstoringen, zoals multipath of een tijdelijke signaaluitval. \\
 
-Voor het bepalen van realistische grenswaarden is gekeken naar wat in de literatuur 
-als haalbaar wordt beschouwd voor vergelijkbare systemen. Onderzoek naar de 
-tightly-coupled integratie van single-frequency RTK met een MEMS-IMU laat zien dat 
-de positiefout tijdens een korte GNSS-uitval beperkt blijft: tot een uitval van 15 s 
-blijft de nauwkeurigheid op submeterniveau, en bij een uitval van 5 s bedraagt de 
-horizontale RMS-fout slechts enkele centimeters~\cite{li2017rtk}. Dit sluit aan bij 
-de wens van MYLAPS om de positie tijdens een kortdurende uitval bruikbaar te houden 
-voor live tracking. Op basis van deze literatuur en de eisen die de paardensport 
-stelt, zijn de prestatiecriteria in tabel~\ref{tab:prestatiecriteria} vastgesteld. \\
+Voor het bepalen van realistische grenswaarden is gekeken naar wat in de literatuur als haalbaar wordt beschouwd voor vergelijkbare systemen, en naar de wensen vanuit MYLAPS. Onderzoek naar een \textit{tightly-coupled} integratie van RTK met een MEMS-IMU (\textit{Micro-Electro-Mechanical System}) laat zien dat de positiefout tijdens signaaluitval beperkt blijft. Bij een uitval van 15 seconden blijft de nauwkeurigheid op submeterniveau, en bij een uitval van 5 seconden enkele centimeters~\cite{li2017rtk}. Bij een tightly-coupled opzet worden de ruwe GNSS-metingen rechtstreeks met de IMU-data in één filter samengevoegd, wat de hoogste nauwkeurigheid oplevert. Het systeem in dit project gebruikt daarentegen een \textit{loosely-coupled} opzet, aangezien de bewerkte positie en snelheid door de u-blox module worden geleverd. Bovendien is de aanwezige IMU niet geoptimaliseerd voor \textit{dead reckoning} (het uitsluitend op basis van de IMU doorrekenen van de positie wanneer GNSS wegvalt). Een ruimere marge is daardoor realistisch. Het systeem wordt in dit project getoetst op een volledige signaaluitval van 2 seconden, waarvoor in overleg met MYLAPS een grens van één meter is aangenomen. Hoewel de literatuur onder ideale omstandigheden centimeternauwkeurigheid laat zien, wordt deze ruimere grens als voldoende robuust beschouwd. \\
 
-Het criterium voor nauwkeurigheidsbehoud volgt direct uit de bestaande RTK 
-Fixed-nauwkeurigheid van 1 tot 2 cm; de toevoeging van de IMU mag deze onder 
-stabiele omstandigheden niet verslechteren. Voor de uitschieterdetectie wordt een 
-foutdetectiepercentage gehanteerd: minimaal 95\% van de foutieve metingen moet 
-worden herkend en verworpen. Deze toets berust op de Normalized Innovation Squared 
-(NIS) met een betrouwbaarheidsinterval van 99\%, waarmee statistisch onwaarschijnlijke 
-metingen worden afgewezen. Voor de maximale positiefout tijdens uitval is een grens 
-van 1 m aangehouden. Aangezien een racepaard ongeveer 2,4 m lang is, houdt een 
-afwijking onder de meter de tracker op de juiste positie ten opzichte van het paard 
-voor live tracking. Bij een uitval van 2 s komt dit overeen met een gemiddelde 
-driftsnelheid van maximaal 0,5 m/s. \\
+Voor het behoud van de nauwkeurigheid wordt gekeken naar de prestaties van het systeem bij een RTK fix. Onder normale omstandigheden mag de toevoeging van de IMU de huidige nauwkeurigheid van één tot twee centimeter niet verslechteren. \\
+
+Voor het foutdetectiepercentage is in overleg met MYLAPS bepaald dat minimaal 95\% van de grove, foutieve sprongen door multipath moet worden herkend en verworpen. Deze criteria zijn samengevat in tabel~\ref{tab:prestatiecriteria}.
 
 \begin{table}[htbp]
     \centering
-    \caption{Prestatiecriteria voor de robuustheid en betrouwbaarheid van het sensor fusion systeem.}
+    \caption{Prestatiecriteria voor de robuustheid en betrouwbaarheid van het sensorfusie systeem.}
     \label{tab:prestatiecriteria}
     \renewcommand{\arraystretch}{1.3}
     \begin{tabularx}{\textwidth}{|l|X|l|}
@@ -202,31 +180,22 @@ driftsnelheid van maximaal 0,5 m/s. \\
         \hline
 
         Nauwkeurigheidsbehoud (stabiele RTK-fix) &
-        De toevoeging van de IMU mag de bestaande RTK Fixed-nauwkeurigheid 
-        (1--2 cm) niet verslechteren. &
+        In overleg met MYLAPS vastgesteld: de IMU mag de bestaande RTK 
+        Fixed-nauwkeurigheid (1--2 cm) niet verslechteren. &
         $\leq$ 2 cm \\ \hline
 
         Foutdetectiepercentage &
         Foutieve GNSS-metingen door multipath mogen de positieschatting niet 
-        meetrekken. Getoetst met softwarematig geïnjecteerde sprongen van 5 m 
-        via de NIS-toets (99\%-betrouwbaarheidsinterval). &
+        meetrekken. Getoetst met softwarematig sprongen van 5 m. &
         $\geq$ 95\% verworpen \\ \hline
 
         Maximale positiefout bij 2 s uitval &
-        Bij een volledige GNSS-uitval moet de positie bruikbaar blijven voor live 
-        tracking; een racepaard is circa 2,4 m lang. &
-        $\leq$ 1 m \\ \hline
-
-        Maximale driftsnelheid bij uitval &
-        Begrenst de gemiddelde foutopbouw zonder externe correctie en is 
-        afgeleid van de maximale positiefout over 2 s. &
-        $\leq$ 0,5 m/s \\ \hline
+        Afgeleid van submeterwaarden uit de literatuur~\cite{li2017rtk} en in 
+        overleg met MYLAPS. & $\leq$ 1 m \\ \hline
 
     \end{tabularx}
 \end{table}
 
-De functionele randvoorwaarden en de prestatiecriteria vormen samen het 
-toetsingskader waaraan het ontwikkelde systeem in hoofdstuk~\ref{sec:resultaten} 
-wordt gevalideerd.
+De randvoorwaarden en prestatiecriteria vormen samen de referentie voor het toetsen van het systeem.
 
 \newpage

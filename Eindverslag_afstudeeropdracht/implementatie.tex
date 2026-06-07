@@ -1,15 +1,15 @@
 \section{Implementatie}
 \label{sec:implementatie}
 
-Dit hoofdstuk beschrijft de implementatie van het sensor fusion systeem. De realisatie is stapsgewijs opgebouwd: de configuratie van de ontwikkelomgeving, de IMU integratie inclusief datacommunicatie, en tot slot de realisatie van het Extended Kalman Filter (EKF).
+Dit hoofdstuk beschrijft de implementatie van het sensorfusie systeem. De realisatie is stapsgewijs opgebouwd: de configuratie van de ontwikkelomgeving, de IMU integratie inclusief datacommunicatie, en tot slot de realisatie van het Extended Kalman Filter (EKF).
 
 \subsection{Ontwikkelomgeving en testopstelling}
 
-Voor de eindgebruiker is het systeem ontworpen om draadloos firmware te ontvangen via Over The Air (OTA) updates. Voor de ontwikkeling en het testen is deze methode echter onpraktisch. Het draadloos versturen en installeren van de nieuwe firmware kost relatief veel tijd. Tijdens een ontwikkelproject, waarbij de code voortdurend wordt aangepast en opnieuw getest moet worden, vertraagt dit het proces aanzienlijk. \\
+Voor de eindgebruiker is het systeem ontworpen om draadloos firmware te ontvangen via \textit{Over The Air} (OTA) updates. Voor de ontwikkeling en het testen is deze methode echter onpraktisch. Het draadloos versturen en installeren van de nieuwe firmware kost relatief veel tijd. Tijdens een ontwikkelproject, waarbij de code voortdurend wordt aangepast en opnieuw getest moet worden, vertraagt dit het proces aanzienlijk. \\
 
-Om die reden is een fysieke testopstelling gerealiseerd met behulp van een SEGGER J-Link debug probe. Deze maakt het mogelijk om firmware via een bekabelde verbinding snel te flashen. Daarnaast biedt de J-Link ondersteuning voor Real Time Transfer (RTT). Dit is een technologie van SEGGER waarmee de debug probe data uit een buffer in het RAM van de microcontroller leest terwijl de processor blijft draaien. Hierdoor kan met lage overhead en zonder de uitvoering te onderbreken live data tussen de microcontroller en de computer worden uitgewisseld \cite{segger_rtt}. Hiermee kunnen sensorwaarden en filteruitkomsten live worden gelogd, wat in hoofdstuk \ref{sec:resultaten} wordt gebruikt om de werking van het EKF te valideren. \\
+Om die reden is een fysieke testopstelling gerealiseerd met behulp van een SEGGER J-Link debug probe. Deze maakt het mogelijk om firmware via een bekabelde verbinding snel te flashen. Daarnaast biedt de J-Link ondersteuning voor \textit{Real Time Transfer} (RTT). Dit is een technologie van SEGGER waarmee de debug probe data uit een buffer in het RAM van de microcontroller leest terwijl de processor blijft draaien. Hierdoor kan met lage overhead en zonder de uitvoering te onderbreken live data tussen de microcontroller en de computer worden uitgewisseld \cite{segger_rtt}. Hiermee kunnen sensorwaarden en filteruitkomsten live worden gelogd, wat in hoofdstuk \ref{sec:resultaten} wordt gebruikt om de werking van het EKF te valideren. \\
 
-Hoewel de J-Link standaard een 20 pins JTAG-connector heeft, communiceert de microcontroller op de printplaat via de Serial Wire Debug (SWD) interface. Omdat de printplaat niet is voorzien van een fysieke debug-header, is de verbinding handmatig tot stand gebracht. De PCB bevat specifieke test pads bedoeld voor de vier SWD signalen (VCC, GND, SWDIO en SWCLK) waaraan tijdelijk 4 kabels zijn gesoldeerd. Deze staan direct in verbinding met de J-Link (zie Figuur \ref{fig:JTAG}).
+Hoewel de J-Link standaard een 20 pins JTAG-connector heeft, communiceert de microcontroller op de printplaat via de \textit{Serial Wire Debug} (SWD) interface. Omdat de printplaat niet is voorzien van een fysieke debug-header, is de verbinding handmatig tot stand gebracht. De PCB bevat specifieke test pads bedoeld voor de vier SWD signalen (VCC, GND, SWDIO en SWCLK) waaraan tijdelijk 4 kabels zijn gesoldeerd. Deze staan direct in verbinding met de J-Link (zie Figuur \ref{fig:JTAG}).
 
 \begin{figure}[htbp]
     \centering
@@ -58,7 +58,7 @@ Wanneer de IMU goed is geconfigureerd kan gekeken worden naar het uitlezen van d
     \label{fig:sensorwaardes}
 \end{figure}
 
-Hierin zijn de waardes te zien van het apparaat dat stil ligt op een tafel. Hierin zijn de verschillende g-krachten op de assen te zien en die resulteren gezamenlijk tot ongeveer 1000 milli g wat overeenkomt met de zwaartekracht. Er is duidelijk een offset te zien en de waardes schommelen. Het valt ruim binnen de specificaties van de IMU aangezien de datasheet vermeldt dat het bij een zero rate level tussen de -10 en +10 dps kan zitten. De accelerometer is daarentegen vrij gelijk. Voordat de gyroscoopwaarden bruikbaar zijn voor het filter, dienen deze gekalibreerd te worden naar nul om zo de schommelingen te verminderen. Om de schommelingen te verminderen is het digitale laagdoorlaatfilter van de ASM330LHH ingeschakeld, dat zoals vermeld in tabel \ref{tab:imu_config} is afgesteld op 50 Hz. Dit filter dempt de hoogfrequente ruis op de gyroscoopmetingen, zonder de werkelijke bewegingsfrequenties (bij renpaarden onder de 10 Hz) aan te tasten. De resultaten hiervan zijn te zien in figuur \ref{fig:sensorwaardes_filter}.
+Hierin zijn de waardes te zien van het apparaat dat stil ligt op een tafel. Hierin zijn de verschillende g-krachten op de assen te zien en die resulteren gezamenlijk tot ongeveer 1000 milli-g wat overeenkomt met de zwaartekracht. Er is duidelijk een offset te zien en de waardes schommelen. Het valt ruim binnen de specificaties van de IMU aangezien de datasheet vermeldt dat het bij een zero rate level tussen de -10 en +10 DPS kan zitten. De accelerometer is daarentegen vrij gelijk. Voordat de gyroscoopwaarden bruikbaar zijn voor het filter, dienen deze gekalibreerd te worden naar nul om zo de schommelingen te verminderen. Om de schommelingen te verminderen is het digitale laagdoorlaatfilter van de ASM330LHH ingeschakeld, dat zoals vermeld in tabel \ref{tab:imu_config} is afgesteld op 50 Hz. Dit filter dempt de hoogfrequente ruis op de gyroscoopmetingen, zonder de werkelijke bewegingsfrequenties (bij renpaarden onder de 10 Hz) aan te tasten. De resultaten hiervan zijn te zien in figuur \ref{fig:sensorwaardes_filter}.
 
 \begin{figure}[h]
     \centering
@@ -67,7 +67,7 @@ Hierin zijn de waardes te zien van het apparaat dat stil ligt op een tafel. Hier
     \label{fig:sensorwaardes_filter}
 \end{figure}
 
-Zoals te zien in de afbeelding, hebben MEMS gyroscopen (Micro-Electro-Mechanical System) een systematische meetafwijking bij stilstand, ook wel \textit{zero-rate offset} of bias genoemd. Deze offset zal accumuleren bij het bepalen van de richting als dit niet gecompenseerd wordt. Om dit te verhelpen wordt bij het opstarten een eenmalige kalibratie uitgevoerd. De eerste 400 samples worden niet gebruikt vanwege de pieken van de sensor. Vervolgens wordt een gemiddelde gebruikt van 200 opeenvolgende samples als kalibratieoffset. De berekende offset wordt bij iedere gyroscoopuitlezing afgetrokken van de ruwe sensorwaarde. Het resultaat hiervan is te zien in figuur \ref{fig:sensorwaardes_kalibratie}.
+Zoals te zien in de afbeelding, hebben MEMS gyroscopen een systematische meetafwijking bij stilstand, ook wel \textit{zero-rate offset} of bias genoemd. Deze offset zal accumuleren bij het bepalen van de richting als dit niet gecompenseerd wordt. Om dit te verhelpen wordt bij het opstarten een eenmalige kalibratie uitgevoerd. De eerste 400 samples worden niet gebruikt vanwege de pieken van de sensor. Vervolgens wordt een gemiddelde gebruikt van 200 opeenvolgende samples als kalibratieoffset. De berekende offset wordt bij iedere gyroscoopuitlezing afgetrokken van de ruwe sensorwaarde. Het resultaat hiervan is te zien in figuur \ref{fig:sensorwaardes_kalibratie}.
 
 \begin{figure}[h]
     \centering
@@ -75,6 +75,8 @@ Zoals te zien in de afbeelding, hebben MEMS gyroscopen (Micro-Electro-Mechanical
     \caption{De offset van de gyroscoop waardes zijn van de metingen afgetrokken}
     \label{fig:sensorwaardes_kalibratie}
 \end{figure}
+
+\newpage
 
 \subsubsection{SPI-busprobleem bij de IMU-uitlezing}
  
@@ -104,12 +106,12 @@ Bovendien verwacht de ASM330LHH een soort dummy overdracht voordat de daadwerkel
 \subsection{Datavoorbewerking en Transformaties}
 Voordat de ruwe sensordata het wiskundige filter (EKF) bereikt, moet deze in de software worden voorbewerkt. Dit gebeurt in twee stappen: zwaartekrachtcompensatie voor de IMU en een coördinatentransformatie voor de positiedata.
  
-\subsubsection{Zwaartekrachtcompensatie (Complementary Filter)}
+\subsubsection{Zwaartekrachtcompensatie (Complementair Filter)}
 Zoals in het ontwerp is vastgesteld, is het systeem extreem gevoelig voor een onjuiste voorwaartse versnelling. Omdat de tracker op een paard niet altijd perfect waterpas gemonteerd is, lekt een deel van de zwaartekracht ($1g$) in de voorwaartse as (x as) van de accelerometer. \\
  
 Tijdens de ontwikkelfase is in eerste instantie een methode op basis van driedimensionale Euler rotaties geprogrammeerd om het volledige assenstelsel te roteren. Dit bracht echter onjuiste resultaten, waardoor deze uitwerking gedocumenteerd is in bijlage \ref{app:zwaartekracht}.\\
  
-In de software is gekozen voor een \textit{complementary filter} dat puur de hellingshoek (pitch) schat. De variabele \texttt{accel\_pitch} wordt berekend met behulp van de \texttt{atanf}-functie. De formule maakt gebruik van de x as van de accelerometer en de gecombineerde grootte van de Y- en Z-as als referentievlak. Dit is uitgebeeld in formule \ref{eq:accel_pitch}.
+In de software is gekozen voor een complementair filter dat puur de hellingshoek (pitch) schat. De variabele \texttt{accel\_pitch} wordt berekend met behulp van de \texttt{atanf}-functie. De formule maakt gebruik van de x as van de accelerometer en de gecombineerde grootte van de Y- en Z-as als referentievlak. Dit is uitgebeeld in formule \ref{eq:accel_pitch}.
  
 \begin{equation}
     \texttt{accel\_pitch} = \arctan\!\left(\frac{-a_x}{\sqrt{a_y^2 + a_z^2}}\right)
@@ -135,11 +137,11 @@ float accel_ms2 = net_ax * 9.81f;
  
 Alleen de gecompenseerde versnelling (\texttt{accel\_ms2}) gaat door naar de predictiestap van het EKF.
  
-\subsubsection{Coördinaten transformatie}
+\subsubsection{Coördinatentransformatie}
 
 De u-blox module geeft de positie in geografische coördinaten volgens de WGS84 standaard, oftewel in latitude, longitude en altitude. Het EKF rekent echter in een vlak coördinatenstelsel, omdat de positie en snelheid in meters worden bijgehouden. Graden zijn hiervoor ongeschikt waardoor de positiedata omgezet moet worden naar een lokaal East-North-Up (ENU) stelsel \cite{local_tangent}. Om dit te bereiken wordt de positie in twee stappen omgezet. \\
 
-Ten eerste worden de coördinaten omgezet naar Earth-Centered Earth-Fixed, een driedimensionaal Cartetisch stelsel met de oorsprong in het midden van de aarde. Dit gebeurt met formule~\ref{eq:llaecef} en \ref{eq:primevertical}, waarbij $a$ gelijk is aan de equatoriale straal ($a = 6\,378\,137$~m), $b$ gelijk is aan de polaire straal ($b = 6\,378\,137$~m) en $e$ gelijk is aan formule \ref{eq:eccentricity} \cite{geo_conversion}. Bovendien is $\theta$ gelijk aan de latitude en $\lambda$ de longitude.
+Ten eerste worden de coördinaten omgezet naar \textit{Earth-Centered Earth-Fixed} (ECEF), een driedimensionaal Cartesisch stelsel met de oorsprong in het midden van de aarde. Dit gebeurt met formule \ref{eq:primevertical} en \ref{eq:llaecef}, waarbij $a$ gelijk is aan de equatoriale straal ($a = 6\,378\,137$~m), $b$ gelijk is aan de polaire straal ($b = 6\,356\,752$~m) en $e$ gelijk is aan formule \ref{eq:eccentricity} \cite{geo_conversion}. Bovendien is $\theta$ gelijk aan de latitude en $\lambda$ de longitude.
 
 \begin{equation}
     N(\theta) = \frac{a}{\sqrt{1 - e^2 \sin^2\theta}}
@@ -189,8 +191,6 @@ Het EKF is geïmplementeerd door middel van meerdere operaties. De matrixoperati
 
 De toestand wordt vastgelegd in een state vector met zes elementen. De covariantie matrix $P$ start met de waarde één op de diagonaal bedoeld voor elk element. Deze waarde zal gedurende de werking van het systeem geupdate worden. De process noise $Q$ is per toestand afgesteld doormiddel van testen.
 
- \newpage
-
 \begin{lstlisting}[language=C, caption={covariantie en process noise matricen van het EKF.}, label={lst:ekf_state}]
 // State vector: [X, Y, v, theta, accel_bias, gyro_bias]
 static float s_status[6][1] = {0};
@@ -220,7 +220,7 @@ void ekf_predict_imu(float accel, float angular, float dt)
     s_status[2][0] += true_accel   * dt;              // v
     s_status[3][0] += true_angular * dt;              // theta
 
-    // Jacobian F (formule uit hoofdstuk 6)
+    // Jacobiaan F (formule uit hoofdstuk 6)
     float F[6][6] = {
         {1, 0,  cosf(old_theta)*dt, -old_v*sinf(old_theta)*dt, 0, 0},
         {0, 1,  sinf(old_theta)*dt,  old_v*cosf(old_theta)*dt, 0, 0},

@@ -7,7 +7,7 @@ In dit hoofdstuk worden de resultaten uiteengezet om zo de werking van het gemaa
 
 De validatie van het systeem is uitgevoerd aan de hand van drie 
 testscenario's. Hieronder valt een normale werking met een stabiele RTK-verbinding, 
-uitgeschakelde RTCM correcties en volledige GPS uitval. De tests zijn uitgevoerd in een gecontroleerde omgeving 
+uitgeschakelde RTCM correcties en volledige GNSS uitval. De tests zijn uitgevoerd in een gecontroleerde omgeving 
 omdat veldtests op een wedstrijdparcours met een rijdend paard buiten 
 de scope van dit project vallen. \\
 
@@ -16,11 +16,28 @@ is de tracker fysiek in de hand gehouden bij lage snelheden en
 schommelende bewegingen. Dit brengt kleine dynamische verstoringen in 
 kaart die het filter moet kunnen verwerken. Bij de autotest is de 
 tracker met velcro aan de zijkant van de auto gemonteerd met de antenne 
-uitstekend aan de bovenkant. Hiermee worden hogere snelheden en grotere afstanden getest. Om het systeem direct te vergelijken is bij de autotest een tweede externe tracker op dezelfde antenne aangesloten, zodat beide trackers exact dezelfde satellietdata ontvangen. \\
+uitstekend aan de bovenkant. Hiermee worden hogere snelheden (tot ongeveer 50 km/u) en grotere afstanden getest. Om het systeem direct te vergelijken is bij de autotest een tweede externe tracker op dezelfde antenne aangesloten, zodat beide trackers exact dezelfde satellietdata ontvangen. Deze testopstelling is afgbeeld in figuur \ref{fig:testopstelling_velcro}.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        % Voeg angle toe. 90 draait tegen de klok in, -90 met de klok mee.
+        \includegraphics[width=\linewidth, angle=-90]{testopstelling_velcro.jpeg}
+        \caption{Testopstelling van de autotest. Het gemaakte systeem (links) en de externe tracker (rechts) zijn beiden verbonden met dezelfde antenne.}
+        \label{fig:testopstelling_velcro}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, angle=-90]{testopstelling_verbinding.jpeg}
+        \caption{Directe verbinding van de tracker met de computer gebruikmakend van de J-Link debug probe.}
+        \label{fig:testopstelling_verbinding}
+    \end{minipage}
+\end{figure}
 
 De EKF berekeningen worden uitgevoerd zodra nieuwe positie informatie 
 binnenkomt op 25\,Hz. De uitvoer wordt via RTT-logging uitgelezen met 
-de J-Link debugprobe. Tegelijkertijd wordt de ruwe RTK positie naar de 
+de J-Link debugprobe die in directe verbinding staat met de computer zoals weergegeven in figuur \ref{fig:testopstelling_verbinding}. Tegelijkertijd wordt de ruwe RTK positie van beide trackers naar de 
 MYLAPS server verstuurd voor visualisatie, zodat de ruwe positie en de 
 EKF positie direct naast elkaar beoordeeld kunnen worden. Een nadeel 
 van deze aanpak is dat voor het uitlezen van de RTT-logging altijd een 
@@ -28,6 +45,8 @@ fysieke verbinding met de J-Link nodig is. \\
 
 Tijdens alle testscenario's zijn de grootheden uit tabel~\ref{tab:logvelden} 
 bijgehouden.
+
+\newpage
 
 \begin{table}[htbp]
     \centering
@@ -52,7 +71,7 @@ bijgehouden.
               Drempelwaarde: 9{,}21 \\ \hline
         spd & Rijsnelheid (velocity) in cm/s \\ \hline
         hdg & Heading (rijrichting) van de u-blox module in graden \\ \hline
-        ba & Geschatte accelerometerbias in mG \\ \hline
+        ba & Geschatte accelerometerbias in milli-g \\ \hline
         heading & Gefilterde heading (rijrichting) van de EKF schatting in graden \\ \hline
         covEE & Onzekerheid in oost-richting vanuit de u-blox module in mm \\ \hline
         covNN & Onzekerheid in noord-richting vanuit de u-blox module in mm \\ \hline
@@ -67,7 +86,7 @@ volledig representatief zijn voor gebruik in de paardensport. De bewegingen van 
 \subsection{Normale omstandigheden}
 
 Onder normale omstandigheden, waarbij de RTK verbinding stabiel is en 
-geen verstoringen aanwezig zijn, volgt het EKF de binnenkomende positie nauwkeurig. Dit is volgens verwachting. Bij een RTK fix met een nauwkeurigheid van 14 \,mm en een Ppos van 17 tot 19 \,mm is de RTK meting betrouwbaar genoeg voor het filter om deze sterk te volgen. De afwijking tussen de EKF en RTK positie bedraagt niet meer dan 1 \,cm wat aantoont dat het systeem goed functioneert. \\
+geen verstoringen aanwezig zijn, volgt het EKF de binnenkomende positie nauwkeurig. Dit is volgens verwachting. Bij een RTK fix met een nauwkeurigheid van 14 \,mm en een Ppos van 17 tot 19 \,mm is de RTK meting betrouwbaar genoeg voor het filter om deze sterk te volgen. De afwijking tussen de EKF en RTK positie bedraagt niet meer dan 1 \,cm. Hiermee wordt voldaan aan het criterium dat de nauwkeurigheid onder stabiele omstandigheden binnen 2\,cm blijft (hoofdstuk~\ref{sec:specificaties}) \\
 
 Figuur~\ref{fig:lopen_norm} toont de volledige looproute waarbij de EKF positie 
 en de ruwe RTK positie vrijwel samenvallen. Figuur~\ref{fig:lopen_norm_zoom} 
@@ -103,7 +122,7 @@ afstanden blijft het EKF de RTK positie nauwkeurig volgen gedurende de rit.
 
 \newpage
 
-Aanvullend op de looptest is de werking van de uitschieterdetectie (NIS check) gevalideerd. Hierbij zijn softwarematige sprongen van 5 meter toegevoegd, ter simulatie van multipath fouten. Figuur \ref{fig:grote_sprongen} laat deze route met afwijkingen zien. Uit Figuur \ref{fig:geen_sprongen} blijkt dat het systeem deze onwaarschijnlijke metingen succesvol herkent en verwerpt. Het filter negeert de foute updates en trekt de route door.
+Aanvullend op de looptest is de werking van de uitschieterdetectie (NIS check) gevalideerd. Hierbij zijn softwarematige sprongen van 5 meter toegevoegd, ter simulatie van multipath fouten. Figuur \ref{fig:grote_sprongen} laat deze route met afwijkingen zien. Uit Figuur \ref{fig:geen_sprongen} blijkt dat het systeem deze onwaarschijnlijke metingen succesvol herkent en verwerpt. Het filter negeert de foute updates en trekt de route door. Alle negen sprongen zijn verworpen, waarmee wordt voldaan aan het criterium van minimaal 95\% foutdetectie (hoofdstuk~\ref{sec:specificaties}).
 
 \begin{figure}[htbp]
     \centering
@@ -138,7 +157,7 @@ bij achteruitrijden. De u-blox receiver levert de snelheid altijd als een positi
 \subsection{RTCM correcties uitgeschakeld}
 
 Als tweede scenario zijn de RTCM correcties uitgeschakeld, waardoor de 
-receiver verslechtert van een RTK fix naar standaard GNSS nauwkeurigheid. 
+ontvanger verslechtert van een RTK fix naar standaard GNSS nauwkeurigheid. 
 Dit simuleert een situatie waarbij de verbinding met de base station 
 tijdelijk wegvalt, wat in de praktijk kan voorkomen bij een te grote 
 afstand tot de base station of obstakels in de omgeving. \\
@@ -183,8 +202,9 @@ Dit proces is duidelijk terug te zien in het teruggegeven log bestand. Onderstaa
 
 Vanwege deze oplopende onzekerheid krijgt de ruwe positie geleidelijk weer meer gewicht. Hierdoor wordt het filter uiteindelijk toch gedwongen om langzaam mee te driften met de foute positie, totdat het signaal zich herstelt en de \texttt{Ppos} weer daalt. \\
 
-
 Figuur~\ref{fig:auto_rtk} laat de volledige autoroute zien met uitgeschakelde correcties. Deze resultaten zijn vergelijkbaar met de looptest. Het systeem trekt de route voor korte duur door bij plotselinge sprongen, maar begint na langere tijd mee te driften. Dit is zichtbaar in figuur~\ref{fig:auto_rtk_sprong}.
+
+\newpage
 
 \begin{figure}[htbp]
     \centering
@@ -203,7 +223,7 @@ Figuur~\ref{fig:auto_rtk} laat de volledige autoroute zien met uitgeschakelde co
     \label{fig:auto_rtk_sprong}
 \end{figure}
 
-Bij een hiervoorgaande testrit zijn ook opvallende resultaten aangetoond. Hierbij is de referentie tracker op de achterkant van de auto geplaatst vanwege het gebrek van een antenne splitter. Hierdoor is deze tracker niet volledig representatief van het correcte rijgedrag. \\
+Bij een eerdere testrit zijn ook opvallende resultaten aangetoond. Hierbij is de referentie tracker op de achterkant van de auto geplaatst vanwege het gebrek van een antenne splitter. Hierdoor is deze tracker niet volledig representatief van het correcte rijgedrag. \\
 
 Op rechte stukken presteert het systeem goed, zoals zichtbaar in 
 figuur~\ref{fig:auto_rtk_recht}. Zonder zijwaartse bewegingen kan het filter nauwkeurig schattingen maken. \\
@@ -230,15 +250,14 @@ Een opvallend resultaat is zichtbaar in figuur~\ref{fig:auto_rtk_bocht}. Tijdens
 
 \newpage
 
-\subsection{GPS uitval}
+\subsection{GNSS uitval}
 
-In het derde en meest extreme scenario wordt een volledige GPS uitval gesimuleerd. Hierbij wordt het signaal softwarematig gedurende twee seconden geblokkeerd, waarna het voor acht seconden wordt hersteld. Dit patroon herhaalt zich en simuleert zo een situatie waarbij het systeem volledig moet vertrouwen op zijn interne IMU data zonder externe hulp. \\
+In het derde en meest extreme scenario wordt een volledige GNSS uitval gesimuleerd. Hierbij wordt het signaal softwarematig gedurende twee seconden geblokkeerd, waarna het voor acht seconden wordt hersteld. Dit patroon herhaalt zich en simuleert zo een situatie waarbij het systeem volledig moet vertrouwen op zijn interne IMU data zonder externe hulp. \\
 
 Figuur~\ref{fig:lopen_gps_rood} toont de afgelegde looproute waarbij de positie op meerdere momenten ontbreekt. In figuur~\ref{fig:lopen_gps_groen} is zichtbaar hoe het systeem deze gaten opvangt. Het systeem trekt een vloeiende lijn aan de hand van de gemaakte schattingen. \\
 
 Hoewel de route logisch wordt doorgetrokken, is de schatting niet feilloos. Na de uitval is duidelijk te zien dat de afgelegde afstand licht overschat of onderschat wordt. Dit komt door een incorrecte schatting van de snelheid. Een imperfecte zwaartekrachtcompensatie zou hier de boosdoener van kunnen zijn. Daarnaast drift de gyroscoop op momenten enkele graden waardoor een kleine afwijking ontstaat van de werkelijke route. \\
 
-\newpage
 
 \begin{figure}[htbp]
     \centering
@@ -247,6 +266,8 @@ Hoewel de route logisch wordt doorgetrokken, is de schatting niet feilloos. Na d
     \label{fig:lopen_gps_rood}
 \end{figure}
 
+\newpage
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{gps_out_lopen_groen.png}
@@ -254,7 +275,7 @@ Hoewel de route logisch wordt doorgetrokken, is de schatting niet feilloos. Na d
     \label{fig:lopen_gps_groen}
 \end{figure}
 
-Om de prestaties bij signaaluitval in kaart te brengen, is voor elke uitval de afwijking bepaald. Dit is het verschil tussen de EKF schatting en de werkelijke positie op het moment dat het signaal terugkeert. Dit is namelijk de drift die het systeem heeft opgebouwd zonder externe correctie. In figuur \ref{fig:lopen_afstand_uit} is dit uiteengezet. Alhoewel er kleine schommelingen te zien zijn overschrijdt geen enkele uitval 350 mm.
+Om de prestaties bij signaaluitval in kaart te brengen, is voor elke uitval de afwijking bepaald. Dit is het verschil tussen de EKF schatting en de werkelijke positie op het moment dat het signaal terugkeert. Dit is namelijk de drift die het systeem heeft opgebouwd zonder externe correctie. In figuur \ref{fig:lopen_afstand_uit} is dit uiteengezet. Hoewel er kleine schommelingen te zien zijn, overschrijdt geen enkele uitval 350\,mm. Daarmee blijft de looptest binnen het gestelde criterium van maximaal 1\,m bij een uitval van 2 seconden (hoofdstuk~\ref{sec:specificaties}).
 
 \newpage
 
@@ -284,9 +305,10 @@ Tijdens de autotest treden vergelijkbare effecten op. In figuur~\ref{fig:auto_gp
     \label{fig:auto_gps_groen_1}
 \end{figure}
 
+\newpage
+
 Meerdere soortgelijke resultaten zijn weergegeven in figuren \ref{fig:auto_gps_rood_2} tot en met \ref{fig:auto_gps_groen_3}.
 
-\newpage
 
 \begin{figure}[htbp]
     \centering
@@ -320,7 +342,10 @@ Meerdere soortgelijke resultaten zijn weergegeven in figuren \ref{fig:auto_gps_r
     \end{minipage}
 \end{figure}
 
-Net zoals bij de looptest zijn nogmaals de afwijkingen uiteengezet. Deze waarden zijn weergegeven in figuur \ref{fig:uitval_afstand}. uit het figuur blijkt dat de afwijking sterk varieert per uitval. In het merendeel van de gevallen blijft de afwijking beperkt, van enkele millimeters tot ongeveer 650 mm. Echter in een aantal gevallen loopt de afwijking op tot enkele meters, met een maximum van ongeveer 3,9 m. Opvallend is dat de grote afwijkingen plaatsvinden op momenten dat de auto een grote versnelling of vertraging heeft. Het filter overschat of onderschat zijn positie door deze plotse verandering in snelheid waardoor de afwijking met de realiteit toeneemt. Tijdens fragmenten waarbij de auto een relatief stabiele snelheid bevat, is te zien dat de afwijkingen rond de 300 tot 650 mm bedragen. Dit is ook te herkennen in de afwijkingen van de looptest aangezien hier met een relatief stabiele snelheid het traject is afgelegd. Voor een tijdelijke uitval zijn afwijkingen onder de meter acceptabel, echter bij deze grote sprongen bevat het systeem nog ruimte voor verbetering. \\
+Net zoals bij de looptest zijn nogmaals de afwijkingen uiteengezet. Deze waarden zijn weergegeven in figuur \ref{fig:uitval_afstand}. uit het figuur blijkt dat de afwijking sterk varieert per uitval. In het merendeel van de gevallen blijft de afwijking beperkt, van enkele millimeters tot ongeveer 650 mm. In een aantal gevallen loopt de afwijking echter op tot enkele meters, met een maximum van ongeveer 3,9\,m. Opvallend is dat de grote afwijkingen plaatsvinden op momenten dat de auto een grote versnelling of vertraging heeft. Het filter overschat of onderschat zijn positie door deze plotse verandering in snelheid waardoor de afwijking met de realiteit toeneemt. Tijdens fragmenten waarbij de auto een relatief stabiele snelheid bevat, is te zien dat de afwijkingen rond de 300 tot 650 mm bedragen. Dit is ook te herkennen in de afwijkingen van de looptest aangezien hier met een relatief stabiele snelheid het traject is afgelegd. \\
+
+Hiermee voldoet het systeem voor het merendeel van de uitvallen aan het vooraf gestelde criterium van maximaal 1\,m afwijking bij een uitval van 2 seconden 
+(hoofdstuk~\ref{sec:specificaties}). Bij de uitschieters tijdens sterke versnelling of vertraging wordt deze grens echter overschreden, wat aangeeft dat het systeem op dit punt nog ruimte voor verbetering bevat.
 
 \newpage
 
@@ -330,7 +355,6 @@ Net zoals bij de looptest zijn nogmaals de afwijkingen uiteengezet. Deze waarden
     \caption{Maximale opgebouwde positie afwijking van het EKF ten opzichte van de ruwe RTK positie, gemeten vlak vóór elke correctie na een signaaluitval. Deze afwijkingen zijn representatief voor de autotest. Elke ster vertegenwoordigt één uitval.}
     \label{fig:uitval_afstand}
 \end{figure}
-
 
 
 \newpage
